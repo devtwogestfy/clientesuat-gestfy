@@ -7,12 +7,9 @@ import { Avatar, Box, Button, Grid, Typography } from '@mui/material';
 
 // third-party
 
-
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
 import SkeletonTotalOrderCard from 'ui-component/cards/Skeleton/EarningCard';
-
-
 
 // assets
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
@@ -142,13 +139,10 @@ const IncidentsCard = ({ isLoading }) => {
                             fontWeight: 500,
                             color: theme.palette.primary[200]
                           }}
-                        >
-                        
-                        </Typography>
+                        ></Typography>
                       </Grid>
                     </Grid>
                   </Grid>
-                 
                 </Grid>
               </Grid>
             </Grid>

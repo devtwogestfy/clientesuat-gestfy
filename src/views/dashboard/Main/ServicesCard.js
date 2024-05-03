@@ -159,7 +159,6 @@ const ServicesCard = ({ isLoading }) => {
                   </Grid>
                 </Grid>
               </Grid>
-             
             </Grid>
           </Box>
         </CardWrapper>

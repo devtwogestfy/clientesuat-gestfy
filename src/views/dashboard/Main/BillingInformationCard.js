@@ -159,7 +159,6 @@ const BillingInformationCard = ({ isLoading }) => {
                   </Grid>
                 </Grid>
               </Grid>
-             
             </Grid>
           </Box>
         </CardWrapper>

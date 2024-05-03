@@ -46,8 +46,8 @@ const Dashboard = () => {
       </Grid>
       <Grid item xs={12}>
         <Grid container spacing={gridSpacing}>
-         <Grid item lg={4} md={6} sm={6} xs={12}>
-           <ServicesCard isLoading={isLoading} />
+          <Grid item lg={4} md={6} sm={6} xs={12}>
+            <ServicesCard isLoading={isLoading} />
           </Grid>
           <Grid item lg={4} md={6} sm={6} xs={12}>
             <IncidentsCard isLoading={isLoading} />

@@ -78,7 +78,7 @@ const utilities = {
       url: '/utils/util-shadow',
       icon: icons.IconShadow,
       breadcrumbs: false
-    },
+    }
   ]
 };
 
