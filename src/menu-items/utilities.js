@@ -16,10 +16,10 @@ const utilities = {
   type: 'group',
   children: [
     {
-      id: 'util-typography',
+      id: 'dashboard',
       title: 'Inicio',
       type: 'item',
-      url: '/utils/util-typography',
+      url: '/main',
       icon: icons.IconHome,
       breadcrumbs: false
     },
