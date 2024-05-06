@@ -27,16 +27,28 @@ import '@fontsource/poppins/700.css';
 // style + assets
 import 'assets/scss/style.scss';
 import reportWebVitals from 'reportWebVitals';
+import {IntlProvider} from 'react-intl';
+import Spanish from './lang/es_ES.json';
+import English from './lang/en_EN.json';
 
 const container = document.getElementById('root');
 const root = createRoot(container); // createRoot(container!) if you use TypeScript
 const store = configureStore({ reducer });
+const locale = navigator.language;
 
+let lang;
+if (locale==="en") {
+   lang = English;
+} else {
+    lang = Spanish;
+}
 // ==============================|| REACT DOM RENDER  ||============================== //
 
 root.render(
   <Provider store={store}>
-    <App />
+    <IntlProvider locale ={locale} messages={Spanish}>
+      <App />
+    </IntlProvider>
   </Provider>
 );
 

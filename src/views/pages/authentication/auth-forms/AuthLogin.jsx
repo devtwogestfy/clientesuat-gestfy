@@ -32,8 +32,8 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 import Google from 'assets/images/icons/social-google.svg';
 import apiLogin from 'configuraciones/servicios/login';
-import {  useCookies } from 'react-cookie'
-
+import { useCookies } from 'react-cookie'
+import { FormattedMessage } from 'react-intl';
 
 // ============================|| FIREBASE - LOGIN ||============================ //
 
@@ -150,7 +150,9 @@ const AuthLogin = ({ ...others }) => {
             <Box sx={{ mt: 2 }}>
               <AnimateButton>
                 <Button disableElevation disabled={isSubmitting} fullWidth size="large" type="submit" variant="contained" color="secondary">
-                  Login
+                  <FormattedMessage
+                    id = "login.submit"
+                  />
                 </Button>
               </AnimateButton>
             </Box>
