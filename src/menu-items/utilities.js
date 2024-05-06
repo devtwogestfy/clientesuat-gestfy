@@ -21,7 +21,7 @@ const utilities = {
       id: 'dashboard',
       title: 'Inicio',
       type: 'item',
-      url: '/main',
+      url: '/',
       icon: icons.IconHome,
       breadcrumbs: false
     },
