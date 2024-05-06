@@ -1,12 +1,14 @@
 // assets
-import { IconPalette, IconShadow, IconWindmill, IconHome } from '@tabler/icons-react';
+import { IconHome, IconUser, IconReceipt, IconAlertTriangleFilled, IconSettings, IconFileFilled } from '@tabler/icons-react';
 
 // constant
 const icons = {
   IconHome,
-  IconPalette,
-  IconShadow,
-  IconWindmill
+  IconUser,
+  IconReceipt,
+  IconAlertTriangleFilled,
+  IconSettings,
+  IconFileFilled
 };
 
 // ==============================|| UTILITIES MENU ITEMS ||============================== //
@@ -24,26 +26,26 @@ const utilities = {
       breadcrumbs: false
     },
     {
-      id: 'util-color',
+      id: 'util-date',
       title: 'Datos',
       type: 'item',
       url: '/utils/util-color',
-      icon: icons.IconPalette,
+      icon: icons.IconUser,
       breadcrumbs: false
     },
     {
-      id: 'util-shadow',
+      id: 'util-invoices',
       title: 'Facturas',
       type: 'item',
       url: '/utils/util-shadow',
-      icon: icons.IconShadow,
+      icon: icons.IconReceipt,
       breadcrumbs: false
     },
     {
       id: 'icons',
       title: 'Incidencias',
       type: 'collapse',
-      icon: icons.IconWindmill,
+      icon: icons.IconAlertTriangleFilled,
       children: [
         {
           id: 'tabler-icons',
@@ -64,19 +66,19 @@ const utilities = {
       ]
     },
     {
-      id: 'util-color',
+      id: 'util-services',
       title: 'Servicios',
       type: 'item',
-      url: '/utils/util-color',
-      icon: icons.IconPalette,
+      url: '/utils/sample-page',
+      icon: icons.IconSettings,
       breadcrumbs: false
     },
     {
-      id: 'util-shadow',
+      id: 'util-documentation',
       title: 'Documentación',
       type: 'item',
       url: '/utils/util-shadow',
-      icon: icons.IconShadow,
+      icon: icons.IconFileFilled,
       breadcrumbs: false
     }
   ]
