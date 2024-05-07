@@ -18,6 +18,7 @@
     "menu_documents": "Documents",
     "menu_advertisements": "Advertisements"
   },
+  "dashboard.showcase_info.title" :"Billing Info",
   "dashboard": {
     "title": "Hello",
     "showcase_info": {

@@ -18,10 +18,10 @@
     "menu_documents": "Documentación",
     "menu_advertisements": "Anuncios"
   },
+  "dashboard.showcase_info.title" :"Datos de Facturación",
   "dashboard": {
     "title": "Hola",  
     "showcase_info": {
-      "title": "Datos de Facturación",
       "name": "Nombre",
       "address": "Dirección",
       "phones": "Teléfonos",

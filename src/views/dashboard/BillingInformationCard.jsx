@@ -13,10 +13,12 @@ import SkeletonEarningCard from 'ui-component/cards/Skeleton/EarningCard';
 import EarningIcon from 'assets/images/icons/earning.svg';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import GetAppTwoToneIcon from '@mui/icons-material/GetAppOutlined';
 import FileCopyTwoToneIcon from '@mui/icons-material/FileCopyOutlined';
 import PictureAsPdfTwoToneIcon from '@mui/icons-material/PictureAsPdfOutlined';
 import ArchiveTwoToneIcon from '@mui/icons-material/ArchiveOutlined';
+import { FormattedMessage } from 'react-intl';
 
 const CardWrapper = styled(MainCard)(({ theme }) => ({
   backgroundColor: theme.palette.secondary.dark,
@@ -58,7 +60,7 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
 
 const BillingInformationCard = ({ isLoading }) => {
   const theme = useTheme();
-
+  const [showData, setShowData] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
@@ -67,6 +69,10 @@ const BillingInformationCard = ({ isLoading }) => {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleToggleData = () => {
+    setShowData((prev) => !prev);
   };
 
   return (
@@ -89,7 +95,7 @@ const BillingInformationCard = ({ isLoading }) => {
                         mt: 1
                       }}
                     >
-                      <img src={EarningIcon} alt="Notification" />
+                     
                     </Avatar>
                   </Grid>
                   <Grid item>
@@ -143,7 +149,11 @@ const BillingInformationCard = ({ isLoading }) => {
               <Grid item>
                 <Grid container alignItems="center">
                   <Grid item>
-                    <Typography sx={{ fontSize: '1.7rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}> Datos de Facturación</Typography>
+                    <Typography sx={{ fontSize: '1.7rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>
+                     <FormattedMessage
+                    id = "dashboard.showcase_info.title"
+                    />
+                  </Typography>
                   </Grid>
                   <Grid item>
                     <Avatar
@@ -153,12 +163,30 @@ const BillingInformationCard = ({ isLoading }) => {
                         backgroundColor: theme.palette.secondary[200],
                         color: theme.palette.secondary.dark
                       }}
+                      onClick={handleToggleData}
                     >
-                      <ArrowUpwardIcon fontSize="inherit" sx={{ transform: 'rotate3d(1, 1, 1, 45deg)' }} />
+                       {showData ? (
+                        <ArrowDownwardIcon fontSize="inherit" sx={{ transform: 'rotate3d(1, 1, 1, 45deg)' }} />
+                      ) : (
+                        <ArrowUpwardIcon fontSize="inherit" sx={{ transform: 'rotate3d(1, 1, 1, 45deg)' }} />
+                      )}
                     </Avatar>
                   </Grid>
                 </Grid>
               </Grid>
+              {showData && (
+                <Grid item>
+                  <Typography sx={{ fontSize: '1.2rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>
+                    <b>Nombre:</b> Pedro Leal
+                  </Typography>
+                 <Typography sx={{ fontSize: '1.2rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>
+                    <b>Dirección:</b> Urb Ali Primera
+                  </Typography>
+                   <Typography sx={{ fontSize: '1.2rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>
+                    <b>Teléfonos:</b> 34444444
+                  </Typography>
+                </Grid>
+              )}
             </Grid>
           </Box>
         </CardWrapper>
