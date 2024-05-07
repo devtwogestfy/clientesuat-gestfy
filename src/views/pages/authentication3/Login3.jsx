@@ -1,33 +1,43 @@
 import { Link } from 'react-router-dom';
-
-// material-ui
-import Divider from '@mui/material/Divider';
+import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
-import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import useMediaQuery from '@mui/material/useMediaQuery';
-
-// project imports
+import { makeStyles } from '@mui/styles';
 import AuthWrapper1 from '../AuthWrapper1';
 import AuthCardWrapper from '../AuthCardWrapper';
 import AuthLogin from '../authentication/auth-forms/AuthLogin';
 import Logo from 'ui-component/Logo';
-import AuthFooter from 'ui-component/cards/AuthFooter';
 
-// ================================|| AUTH3 - LOGIN ||================================ //
+const useStyles = makeStyles((theme) => ({
+  img: {
+    width: '100%',
+    height: 'auto',
+    zIndex: -1,
+  },
+  transparentPaper: {
+    padding: theme.spacing(3),
+    width: '100%',
+    position: 'fixed',
+    top: '50%',
+    left: '40%',
+    transform: 'translate(-50%, -50%)',
+    background: 'hsla(0, 0%, 100%, 0.55)',
+    backdropFilter: 'blur(30px)',
+  },
+}));
 
 const Login = () => {
-  const downMD = useMediaQuery((theme) => theme.breakpoints.down('md'));
+  const classes = useStyles();
 
   return (
     <AuthWrapper1>
-      <Grid container direction="column" justifyContent="flex-end" sx={{ minHeight: '100vh' }}>
-        <Grid item xs={12}>
-          <Grid container justifyContent="center" alignItems="center" sx={{ minHeight: 'calc(100vh - 68px)' }}>
-            <Grid item sx={{ m: { xs: 1, sm: 3 }, mb: 0 }}>
-              <AuthCardWrapper>
+      <Grid container spacing={2}>
+        <Grid item xs={6}>
+          <Grid container justifyContent="center" alignItems="center">
+            <Grid item>
+              <AuthCardWrapper className={classes.transparentPaper}>
                 <Grid container spacing={2} alignItems="center" justifyContent="center">
-                  <Grid item sx={{ mb: 3 }}>
+                  <Grid item>
                     <Link to="#" aria-label="logo">
                       <Logo />
                     </Link>
@@ -39,6 +49,9 @@ const Login = () => {
               </AuthCardWrapper>
             </Grid>
           </Grid>
+        </Grid>
+        <Grid item xs={6}>
+          <img src="https://mdbootstrap.com/img/new/ecommerce/vertical/004.jpg" className={classes.img} alt="" />
         </Grid>
       </Grid>
     </AuthWrapper1>
