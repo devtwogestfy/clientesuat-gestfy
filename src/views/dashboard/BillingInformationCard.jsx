@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 // material-ui
 import { styled, useTheme } from '@mui/material/styles';
@@ -19,6 +19,7 @@ import FileCopyTwoToneIcon from '@mui/icons-material/FileCopyOutlined';
 import PictureAsPdfTwoToneIcon from '@mui/icons-material/PictureAsPdfOutlined';
 import ArchiveTwoToneIcon from '@mui/icons-material/ArchiveOutlined';
 import { FormattedMessage } from 'react-intl';
+import { backendAPI } from "configuraciones/app";
 
 const CardWrapper = styled(MainCard)(({ theme }) => ({
   backgroundColor: theme.palette.secondary.dark,
@@ -62,6 +63,36 @@ const BillingInformationCard = ({ isLoading }) => {
   const theme = useTheme();
   const [showData, setShowData] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [clienteInfo, setClienteInfo] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+       
+       
+        const response = new Promise((resolve, reject) => {
+          backendAPI
+            .get('/appclientes/cliente')
+            .then(function (response) {
+              const data = response.data;
+        setClienteInfo(data);
+              resolve(response);
+            })
+            .catch(function (error) {
+              reject(error.response);
+            });
+        });
+         if (!response) {
+          throw new Error('Network response was not ok');
+        }
+        
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -71,6 +102,7 @@ const BillingInformationCard = ({ isLoading }) => {
     setAnchorEl(null);
   };
 
+ 
   const handleToggleData = () => {
     setShowData((prev) => !prev);
   };
@@ -177,13 +209,13 @@ const BillingInformationCard = ({ isLoading }) => {
               {showData && (
                 <Grid item>
                   <Typography sx={{ fontSize: '1.2rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>
-                    <b>Nombre:</b> Pedro Leal
+                    <b>Nombre:</b> {clienteInfo.nombre} {clienteInfo.apellido}
                   </Typography>
                  <Typography sx={{ fontSize: '1.2rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>
-                    <b>Dirección:</b> Urb Ali Primera
+                    <b>Dirección:</b> {clienteInfo.direccion}
                   </Typography>
                    <Typography sx={{ fontSize: '1.2rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>
-                    <b>Teléfonos:</b> 34444444
+                    <b>Teléfonos:</b> {clienteInfo.tel1}
                   </Typography>
                 </Grid>
               )}
