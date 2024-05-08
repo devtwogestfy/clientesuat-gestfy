@@ -61,7 +61,7 @@ const utilities = {
       id: 'util-documentation',
       title: 'Documentación',
       type: 'item',
-      url: '/utils/util-shadow',
+      url: '/documents',
       icon: icons.IconFileFilled,
       breadcrumbs: false
     }

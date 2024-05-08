@@ -7,11 +7,7 @@ import AuthGuard from 'configuraciones/guards/AuthGuards';
 
 // dashboard routing
 const DashboardDefault = Loadable(lazy(() => import('views/dashboard')));
-
-// utilities routing
-const UtilsTypography = Loadable(lazy(() => import('views/utilities/Typography')));
-const UtilsColor = Loadable(lazy(() => import('views/utilities/Color')));
-const UtilsShadow = Loadable(lazy(() => import('views/utilities/Shadow')));
+const DocumentsPage = Loadable(lazy(() => import('views/pages/documents/DocumentsPage')));
 const InvoicesPage = Loadable(lazy(() => import('views/pages/invoices/InvoicesPage')));
 const IncidentsPage = Loadable(lazy(() => import('views/pages/incidents/IncidentsPage')));
 const ServicesPage = Loadable(lazy(() => import('views/pages/services/ServicesPage')));
@@ -39,13 +35,8 @@ const MainRoutes = {
       ]
     },
     {
-      path: 'utils',
-      children: [
-        {
-          path: 'util-typography',
-          element: <UtilsTypography />
-        }
-      ]
+      path: 'documents',
+      element: <DocumentsPage />
     },
     {
       path: 'invoices',
