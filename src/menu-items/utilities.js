@@ -37,7 +37,7 @@ const utilities = {
       id: 'util-invoices',
       title: 'Facturas',
       type: 'item',
-      url: '/utils/util-shadow',
+      url: '/invoices',
       icon: icons.IconReceipt,
       breadcrumbs: false
     },
