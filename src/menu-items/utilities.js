@@ -53,7 +53,7 @@ const utilities = {
       id: 'util-services',
       title: 'Servicios',
       type: 'item',
-      url: '/utils/sample-page',
+      url: '/services',
       icon: icons.IconSettings,
       breadcrumbs: false
     },

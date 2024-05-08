@@ -4,7 +4,6 @@ import { lazy } from 'react';
 import MainLayout from 'layout/MainLayout';
 import Loadable from 'ui-component/Loadable';
 import AuthGuard from 'configuraciones/guards/AuthGuards';
-import IncidentsPage from 'views/pages/incidents/IncidentsPage';
 
 // dashboard routing
 const DashboardDefault = Loadable(lazy(() => import('views/dashboard')));
@@ -14,7 +13,8 @@ const UtilsTypography = Loadable(lazy(() => import('views/utilities/Typography')
 const UtilsColor = Loadable(lazy(() => import('views/utilities/Color')));
 const UtilsShadow = Loadable(lazy(() => import('views/utilities/Shadow')));
 const InvoicesPage = Loadable(lazy(() => import('views/pages/invoices/InvoicesPage')));
-
+const IncidentsPage = Loadable(lazy(() => import('views/pages/incidents/IncidentsPage')));
+const ServicesPage = Loadable(lazy(() => import('views/pages/services/ServicesPage')));
 // sample page routing
 const SamplePage = Loadable(lazy(() => import('views/sample-page')));
 
@@ -48,34 +48,16 @@ const MainRoutes = {
       ]
     },
     {
-      path: 'utils',
-      children: [
-        {
-          path: 'util-color',
-          element: <UtilsColor />
-        }
-      ]
-    },
-    {
-      path: 'utils',
-      children: [
-        {
-          path: 'util-shadow',
-          element: <UtilsShadow />
-        }
-      ]
-    },
-    {
-      path: 'sample-page',
-      element: <SamplePage />
-    },
-    {
       path: 'invoices',
       element: <InvoicesPage />
     },
     {
       path: 'incidents',
       element: <IncidentsPage />
+    },
+    {
+      path: 'services',
+      element: <ServicesPage />
     }
   ]
 };
