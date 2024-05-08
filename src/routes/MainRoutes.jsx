@@ -4,6 +4,7 @@ import { lazy } from 'react';
 import MainLayout from 'layout/MainLayout';
 import Loadable from 'ui-component/Loadable';
 import AuthGuard from 'configuraciones/guards/AuthGuards';
+import IncidentsPage from 'views/pages/incidents/IncidentsPage';
 
 // dashboard routing
 const DashboardDefault = Loadable(lazy(() => import('views/dashboard')));
@@ -64,24 +65,6 @@ const MainRoutes = {
         }
       ]
     },
-    // {
-    //   path: 'icons',
-    //   children: [
-    //     {
-    //       path: 'tabler-icons',
-    //       element: <UtilsTablerIcons />
-    //     }
-    //   ]
-    // },
-    // {
-    //   path: 'icons',
-    //   children: [
-    //     {
-    //       path: 'material-icons',
-    //       element: <UtilsMaterialIcons />
-    //     }
-    //   ]
-    // },
     {
       path: 'sample-page',
       element: <SamplePage />
@@ -89,6 +72,10 @@ const MainRoutes = {
     {
       path: 'invoices',
       element: <InvoicesPage />
+    },
+    {
+      path: 'incidents',
+      element: <IncidentsPage />
     }
   ]
 };

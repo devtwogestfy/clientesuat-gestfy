@@ -44,26 +44,10 @@ const utilities = {
     {
       id: 'icons',
       title: 'Incidencias',
-      type: 'collapse',
+      type: 'item',
+      url: '/incidents',
       icon: icons.IconAlertTriangleFilled,
-      children: [
-        {
-          id: 'tabler-icons',
-          title: 'Tabler Icons',
-          type: 'item',
-          url: '/icons/tabler-icons',
-          breadcrumbs: false
-        },
-        {
-          id: 'material-icons',
-          title: 'Material Icons',
-          type: 'item',
-          external: true,
-          target: '_blank',
-          url: 'https://mui.com/material-ui/material-icons/',
-          breadcrumbs: false
-        }
-      ]
+      breadcrumbs: false
     },
     {
       id: 'util-services',
