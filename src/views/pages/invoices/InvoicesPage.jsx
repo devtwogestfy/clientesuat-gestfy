@@ -57,7 +57,7 @@ const columns = [
     valueGetter: (value, row) => `${row.firstName || ''} ${row.lastName || ''}`,
   },
   {
-    field: 'fullName',
+    field: 'import',
     headerName: 'Importe',
     description: 'This column has a value getter and is not sortable.',
     sortable: false,
@@ -65,7 +65,7 @@ const columns = [
     valueGetter: (value, row) => `${row.firstName || ''} ${row.lastName || ''}`,
   },
   {
-    field: 'fullName',
+    field: 'pending',
     headerName: 'Pendiente',
     description: 'This column has a value getter and is not sortable.',
     sortable: false,
