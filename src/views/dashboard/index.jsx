@@ -9,18 +9,30 @@ import IncidentsCard from './IncidentsCard';
 import LastestInvoicesCard from './LastestInvoicesCard';
 import PopularCard from './PopularCard';
 import ServicesCard from './ServicesCard';
-
+import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
+import CloseIcon from '@mui/icons-material/Close';
 import { gridSpacing } from 'store/constant';
 
 // assets
 import StorefrontTwoToneIcon from '@mui/icons-material/StorefrontTwoTone';
+import { Avatar, Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, Typography } from '@mui/material';
 
 // ==============================|| DEFAULT DASHBOARD ||============================== //
 
 const Dashboard = () => {
   const [isLoading, setLoading] = useState(true);
+  const [modalComponent, setModalComponent] = useState(false);
+
+  const abrirModal = () => {
+    setModalComponent(true);
+  };
+
+  const cerrarModalComponent = () => {
+    setModalComponent(false);
+  };
 
   useEffect(() => {
+    setModalComponent(false);
     setLoading(false);
   }, []);
 
@@ -49,6 +61,32 @@ const Dashboard = () => {
           </Grid>
         </Grid>
       </Grid>
+      <Dialog open={modalComponent} onClose={cerrarModalComponent} maxWidth="md" fullWidth>
+        <DialogTitle>
+          <IconButton onClick={cerrarModalComponent} sx={{ position: 'absolute', top: 0, right: 0 }}>
+            <CloseIcon />
+          </IconButton>
+          <Grid container alignItems="center" spacing={2}>
+            <Grid item>
+              <Avatar style={{ marginRight: '16px' }}>
+                <AppRegistrationIcon />
+              </Avatar>
+            </Grid>
+            <Grid item>
+              <Typography variant="h3">Registro de Productos</Typography>
+            </Grid>
+          </Grid>
+        </DialogTitle>
+        <DialogContent>
+          {/* Aquí se renderiza el formulario */}
+           
+        </DialogContent>
+        <DialogActions>
+          <Button variant="outlined" onClick={cerrarModalComponent} color="error">
+            Cancelar
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Grid>
   );
 };
