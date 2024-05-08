@@ -29,7 +29,7 @@ const utilities = {
       id: 'util-date',
       title: 'Datos',
       type: 'item',
-      url: '/utils/util-color',
+      url: '/profile',
       icon: icons.IconUser,
       breadcrumbs: false
     },

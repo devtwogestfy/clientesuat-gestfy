@@ -11,8 +11,7 @@ const DocumentsPage = Loadable(lazy(() => import('views/pages/documents/Document
 const InvoicesPage = Loadable(lazy(() => import('views/pages/invoices/InvoicesPage')));
 const IncidentsPage = Loadable(lazy(() => import('views/pages/incidents/IncidentsPage')));
 const ServicesPage = Loadable(lazy(() => import('views/pages/services/ServicesPage')));
-// sample page routing
-const SamplePage = Loadable(lazy(() => import('views/sample-page')));
+const ProfileViewPage = Loadable(lazy(() => import('views/pages/profile/profileViewPage')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -45,6 +44,10 @@ const MainRoutes = {
     {
       path: 'incidents',
       element: <IncidentsPage />
+    },
+    {
+      path: 'profile',
+      element: <ProfileViewPage />
     },
     {
       path: 'services',
