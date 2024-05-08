@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // material-ui
 import { useTheme, styled } from '@mui/material/styles';
-import { Avatar, Box, Button, Grid, Typography } from '@mui/material';
+import { Avatar, Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, IconButton, Typography } from '@mui/material';
 import Modal from '@mui/material/Modal';
 
 // project imports
@@ -13,6 +13,8 @@ import SkeletonTotalOrderCard from 'ui-component/cards/Skeleton/EarningCard';
 // assets
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import CloseIcon from '@mui/icons-material/Close';
+import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 
 const CardWrapper = styled(MainCard)(({ theme }) => ({
   backgroundColor: theme.palette.primary.dark,
@@ -68,20 +70,24 @@ const style = {
   p: 4,
 };
 
-
-// ==============================|| DASHBOARD - TOTAL ORDER LINE CHART CARD ||============================== //
-
 const LastestInvoicesCard = ({ isLoading }) => {
   const theme = useTheme();
 
   const [timeValue, setTimeValue] = useState(false);
+  const [open, setOpen] = useState(false);
   const handleChangeTime = (event, newValue) => {
     setTimeValue(newValue);
   };
 
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const openModal = () => {
+    setOpen(true);
+  };
+
+  useEffect(() => {
+    setOpen(false);
+  }, []);
 
   return (
     <>
@@ -145,7 +151,7 @@ const LastestInvoicesCard = ({ isLoading }) => {
                             color: theme.palette.primary.dark
                           }}
                         >
-                          <ArrowDownwardIcon fontSize="inherit" sx={{ transform: 'rotate3d(1, 1, 1, 45deg)' }} onClick={handleOpen} />
+                          <ArrowDownwardIcon fontSize="inherit" sx={{ transform: 'rotate3d(1, 1, 1, 45deg)' }} onClick={openModal} />
                         </Avatar>
      
                       </Grid>
@@ -164,22 +170,33 @@ const LastestInvoicesCard = ({ isLoading }) => {
               </Grid>
             </Grid>
           </Box>
-                              <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
-        </Box>
-      </Modal>
-        </CardWrapper>
+       <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
+        <DialogTitle>
+          <IconButton onClick={handleClose} sx={{ position: 'absolute', top: 0, right: 0 }}>
+            <CloseIcon />
+          </IconButton>
+          <Grid container alignItems="center" spacing={2}>
+            <Grid item>
+              <Avatar style={{ marginRight: '16px' }}>
+                <AppRegistrationIcon />
+              </Avatar>
+            </Grid>
+            <Grid item>
+              <Typography variant="h3">Registro de Productos</Typography>
+            </Grid>
+          </Grid>
+        </DialogTitle>
+        <DialogContent>
+          {/* Aquí se renderiza el formulario */}
+           
+        </DialogContent>
+        <DialogActions>
+          <Button variant="outlined" onClick={handleClose} color="error">
+            Cancelar
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </CardWrapper>
       )}
     </>
   );

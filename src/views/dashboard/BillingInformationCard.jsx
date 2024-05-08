@@ -57,8 +57,6 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
   }
 }));
 
-// ===========================|| DASHBOARD DEFAULT - EARNING CARD ||=========================== //
-
 const BillingInformationCard = ({ isLoading }) => {
   const theme = useTheme();
   const [showData, setShowData] = useState(false);
