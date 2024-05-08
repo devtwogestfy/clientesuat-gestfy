@@ -15,7 +15,16 @@ import SubCard from 'ui-component/cards/SubCard';
 import MainCard from 'ui-component/cards/MainCard';
 import SecondaryAction from 'ui-component/cards/CardSecondaryAction';
 import { gridSpacing } from 'store/constant';
-
+import { IconHome, IconUser, IconReceipt, IconAlertTriangleFilled, IconSettings, IconFileFilled } from '@tabler/icons-react';
+import Buy from 'assets/icons/glass/ic_glass_buy.png';
+const icons = {
+  IconHome,
+  IconUser,
+  IconReceipt,
+  IconAlertTriangleFilled,
+  IconSettings,
+  IconFileFilled
+};
 
 const ColorBox = ({ bgcolor, title, data, dark }) => (
   <>
@@ -66,58 +75,36 @@ const InvoicesPage = () => {
   const theme = useTheme();
 
   return (
-    <MainCard title="Color Palette" secondary={<SecondaryAction link="https://next.material-ui.com/system/palette/" />}>
-       <Grid container spacing={3}>
-        <Grid xs={12} sm={6} md={3}>
-          <AppWidgetSummary
-            title="Weekly Sales"
-            total={714000}
-            color="success"
-            icon={<img alt="icon" src="" />}
-          />
-        </Grid>
-      </Grid>
+    <MainCard>
       <Grid container spacing={gridSpacing}>
         <Grid item xs={12}>
-          <SubCard title="Secondary Color">
+          <SubCard>
             <Grid container spacing={gridSpacing}>
-              <Grid item xs={12} sm={6} md={4} lg={2}>
-                <ColorBox
-                  bgcolor="secondary.light"
-                  data={{ label: 'DeepPurple-50', color: theme.palette.secondary.light }}
-                  title="secondary.light"
-                  dark
-                />
+              <Grid item xs={12} sm={6} md={4} lg={4}>
+                <AppWidgetSummary
+                  title="Facturas"
+                  total={70}
+                  color="success"
+                  icon={<img alt="icon" src={Buy} />}
+                  />
+                </Grid>
+              <Grid item xs={12} sm={6} md={4} lg={4}>
+                <AppWidgetSummary
+                  title="Ultima Factura"
+                  total={360.58}
+                  color="info"
+                  icon={<img alt="icon" src={Buy} />}
+                  />
               </Grid>
-              <Grid item xs={12} sm={6} md={4} lg={2}>
-                <ColorBox
-                  bgcolor="secondary.200"
-                  data={{ label: 'DeepPurple-200', color: theme.palette.secondary[200] }}
-                  title="secondary[200]"
-                  dark
-                />
+               <Grid item xs={12} sm={6} md={4} lg={4}>
+                <AppWidgetSummary
+                  title="Deuda Total"
+                  total={985.39}
+                  color="warning"
+                  icon={<img alt="icon" src={Buy} />}
+                  />
               </Grid>
-              <Grid item xs={12} sm={6} md={4} lg={2}>
-                <ColorBox
-                  bgcolor="secondary.main"
-                  data={{ label: 'DeepPurple-500', color: theme.palette.secondary.main }}
-                  title="secondary.main"
-                />
-              </Grid>
-              <Grid item xs={12} sm={6} md={4} lg={2}>
-                <ColorBox
-                  bgcolor="secondary.dark"
-                  data={{ label: 'DeepPurple-600', color: theme.palette.secondary.dark }}
-                  title="secondary.dark"
-                />
-              </Grid>
-              <Grid item xs={12} sm={6} md={4} lg={2}>
-                <ColorBox
-                  bgcolor="secondary.800"
-                  data={{ label: 'DeepPurple-800', color: theme.palette.secondary[800] }}
-                  title="secondary[800]"
-                />
-              </Grid>
+              
             </Grid>
           </SubCard>
         </Grid>
