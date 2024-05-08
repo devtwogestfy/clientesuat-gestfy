@@ -7,9 +7,11 @@ export function fNumber(number) {
 }
 
 export function fCurrency(number) {
-  const format = number ? numeral(number).format('$0,0.00') : '';
+  var format = number ? numeral(number).format('0,0.00') : '';
+  format = result(format, '.00')
+  const euroSymbol = '€'; 
 
-  return result(format, '.00');
+  return format ? `${format} ${euroSymbol}` : '';
 }
 
 export function fPercent(number) {

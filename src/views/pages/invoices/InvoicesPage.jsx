@@ -18,6 +18,7 @@ import SecondaryAction from 'ui-component/cards/CardSecondaryAction';
 import { gridSpacing } from 'store/constant';
 import { IconHome, IconUser, IconReceipt, IconAlertTriangleFilled, IconSettings, IconFileFilled } from '@tabler/icons-react';
 import Buy from 'assets/icons/glass/ic_glass_buy.png';
+import EuroIcon from 'assets/icons/ic_euro.svg';
 
 const icons = {
   IconHome,
@@ -150,18 +151,18 @@ const InvoicesPage = () => {
                 </Grid>
               <Grid item xs={12} sm={6} md={4} lg={4}>
                 <AppWidgetSummary
-                  title="Ultima Factura"
+                  title="Última Factura"
                   total={360.58}
                   color="info"
-                  icon={<img alt="icon" src={Buy} />}
+                  icon={<img alt="icon" src={EuroIcon} />}
                   />
               </Grid>
                <Grid item xs={12} sm={6} md={4} lg={4}>
                 <AppWidgetSummary
                   title="Deuda Total"
-                  total={985.39}
+                  total={98539}
                   color="warning"
-                  icon={<img alt="icon" src={Buy} />}
+                  icon={<img alt="icon" src={EuroIcon} />}
                   />
               </Grid>
               

@@ -170,33 +170,33 @@ const LastestInvoicesCard = ({ isLoading }) => {
               </Grid>
             </Grid>
           </Box>
-       <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
-        <DialogTitle>
-          <IconButton onClick={handleClose} sx={{ position: 'absolute', top: 0, right: 0 }}>
-            <CloseIcon />
-          </IconButton>
-          <Grid container alignItems="center" spacing={2}>
-            <Grid item>
-              <Avatar style={{ marginRight: '16px' }}>
-                <AppRegistrationIcon />
-              </Avatar>
-            </Grid>
-            <Grid item>
-              <Typography variant="h3">Registro de Productos</Typography>
-            </Grid>
-          </Grid>
-        </DialogTitle>
-        <DialogContent>
-          {/* Aquí se renderiza el formulario */}
-           
-        </DialogContent>
-        <DialogActions>
-          <Button variant="outlined" onClick={handleClose} color="error">
-            Cancelar
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </CardWrapper>
+          <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
+            <DialogTitle>
+              <IconButton onClick={handleClose} sx={{ position: 'absolute', top: 0, right: 0 }}>
+                <CloseIcon />
+              </IconButton>
+              <Grid container alignItems="center" spacing={2}>
+                <Grid item>
+                  <Avatar style={{ marginRight: '16px' }}>
+                    <AppRegistrationIcon />
+                  </Avatar>
+                </Grid>
+                <Grid item>
+                  <Typography variant="h3">Registro de Productos</Typography>
+                </Grid>
+              </Grid>
+            </DialogTitle>
+            <DialogContent>
+              {/* Aquí se renderiza el formulario */}
+              
+            </DialogContent>
+            <DialogActions>
+              <Button variant="outlined" onClick={handleClose} color="error">
+                Cancelar
+              </Button>
+            </DialogActions>
+          </Dialog>
+        </CardWrapper>
       )}
     </>
   );
