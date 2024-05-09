@@ -1,5 +1,4 @@
-
-
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 // material-ui
@@ -19,6 +18,7 @@ import { gridSpacing } from 'store/constant';
 import { IconHome, IconUser, IconReceipt, IconAlertTriangleFilled, IconSettings, IconFileFilled } from '@tabler/icons-react';
 import Buy from 'assets/icons/glass/ic_glass_buy.png';
 import TotalServiceCard from './TotalServiceCard';
+import GetInfoService from 'configuraciones/servicios/info-client';
 
 const icons = {
   IconHome,
@@ -31,61 +31,42 @@ const icons = {
 
 const columns = [
   {
-    field: 'firstName',
-    headerName: 'Descargar',
+    field: 'detalle',
+    headerName: 'Detalle',
     width: 150,
-    editable: true,
   },
   {
-    field: 'lastName',
-    headerName: 'Fecha',
+    field: 'codigo',
+    headerName: 'Código',
     width: 150,
-    editable: true,
   },
   {
-    field: 'age',
-    headerName: 'Serie',
+    field: 'intservicio_id',
+    headerName: 'Tipo',
     type: 'number',
     width: 110,
-    editable: true,
   },
   {
-    field: 'fullName1',
-    headerName: 'Número',
-    description: 'This column has a value getter and is not sortable.',
+    field: 'nombre',
+    headerName: 'Servicio',
     sortable: false,
     width: 160,
-    valueGetter: (value, row) => `${row.firstName || ''} ${row.lastName || ''}`,
+    valueGetter: (value, row) => `${row.nombre || ''} - ${row.direccion || ''}`,
   },
   {
-    field: 'fullName2',
-    headerName: 'Importe',
-    description: 'This column has a value getter and is not sortable.',
+    field: 'estado',
+    headerName: 'Estado',
     sortable: false,
     width: 160,
-    valueGetter: (value, row) => `${row.firstName || ''} ${row.lastName || ''}`,
   },
   {
-    field: 'fullName3',
-    headerName: 'Pendiente',
-    description: 'This column has a value getter and is not sortable.',
+    field: 'opciones',
+    headerName: 'opciones',
     sortable: false,
     width: 160,
-    valueGetter: (value, row) => `${row.firstName || ''} ${row.lastName || ''}`,
   },
 ];
 
-const rows = [
-  { id: 1, lastName: 'Snow', firstName: 'Jon', age: 14 },
-  { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 31 },
-  { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 31 },
-  { id: 4, lastName: 'Stark', firstName: 'Arya', age: 11 },
-  { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-  { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-  { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-  { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-  { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-];
 
 const ColorBox = ({ bgcolor, title, data, dark }) => (
   <>
@@ -132,6 +113,55 @@ ColorBox.propTypes = {
 
 const ServicesPage = () => {
   const theme = useTheme();
+  const [data, setData] = useState([]);
+  const [phones, setPhones] = useState(0);
+  const [mobiles, setMobiles] = useState(0);
+  const [ftth, setFtth] = useState(0);
+  const [others, setOthers] = useState(0);
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+
+const infoService = GetInfoService();
+ const fetchData = async () => {
+    try {
+      const [servicesResponse, phonesResponse] = await Promise.all([
+        infoService.getServices(1, 500),
+        infoService.getPhones(1, 500)
+      ]);
+
+      const servicesData = servicesResponse.items;
+      const phonesData = phonesResponse.items;
+
+      const newData = [...servicesData, ...phonesData];
+      setData(newData);
+
+      let phonesCount = 0;
+      let mobilesCount = 0;
+      let ftthCount = 0;
+      let othersCount = 0;
+
+      newData.forEach(element => {
+        if (element.tipo === 'F') phonesCount++;
+        if (element.tipo === 'M') mobilesCount++;
+        if (!element.tipo && element.tecnologia === 1) ftthCount++;
+        if ((element.tipo && (element.tipo !== 'F' && element.tipo !== 'M')) || (!element.tipo && element.tecnologia !== 1)) othersCount++;
+      });
+
+      setPhones(phonesCount);
+      setMobiles(mobilesCount);
+      setFtth(ftthCount);
+      setOthers(othersCount);
+      setLoaded(true);
+
+      console.log(newData)
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
 
   return (
     <MainCard>
@@ -142,7 +172,7 @@ const ServicesPage = () => {
               <Grid item xs={12} sm={6} md={4} lg={3}>
                 <TotalServiceCard 
                   title="FTTH"
-                  total={100}
+                  total={ftth}
                   colorCard={ theme.palette.secondary.dark }
                   backgroundCard = { theme.palette.secondary[800] }
                   />
@@ -150,7 +180,7 @@ const ServicesPage = () => {
               <Grid item xs={12} sm={6} md={4} lg={3}>
                 <TotalServiceCard 
                   title="Fijos"
-                  total={0}
+                  total={phones}
                   colorCard={ theme.palette.primary.dark }
                   backgroundCard = { theme.palette.primary[800] }
                   />
@@ -158,7 +188,7 @@ const ServicesPage = () => {
                <Grid item xs={12} sm={6} md={4} lg={3}>
                   <TotalServiceCard 
                   title="Móviles"
-                  total={3}
+                  total={mobiles}
                   colorCard={ theme.palette.success.dark }
                   backgroundCard = { theme.palette.success.light }
                   />
@@ -166,7 +196,7 @@ const ServicesPage = () => {
                <Grid item xs={12} sm={6} md={4} lg={3}>
                  <TotalServiceCard 
                   title="Otros"
-                  total={3}
+                  total={others}
                   colorCard={ theme.palette.error.dark }
                   backgroundCard = { theme.palette.error.light }
                   />
@@ -178,7 +208,7 @@ const ServicesPage = () => {
         <Grid item xs={12}>
           <Box sx={{ height: 400, width: '100%' }}>
             <DataGrid
-              rows={rows}
+              rows={data}
               columns={columns}
               initialState={{
                 pagination: {
@@ -188,7 +218,6 @@ const ServicesPage = () => {
                 },
               }}
               pageSizeOptions={[5]}
-              checkboxSelection
               disableRowSelectionOnClick
             />
           </Box>

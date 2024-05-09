@@ -155,6 +155,42 @@ const GetInfoService = () => {
 
   }
 
+  const getPhones = async (page = 1, limit = 25, sort = '') => {
+
+     try {
+      const params = {
+        'page': page.toString(),
+        'limit': limit.toString(),
+        'sort': sort,
+      };
+
+      const response = await backendAPI.get('/portal/tels', { params });
+      const data = response.data;
+      return data;
+    } catch (error) {
+      throw new Error(error.response || 'Network request failed');
+    }
+
+  }
+
+  const getServices = async (page = 1, limit = 25, sort = '') => {
+
+     try {
+      const params = {
+        'page': page.toString(),
+        'limit': limit.toString(),
+        'sort': sort,
+      };
+
+      const response = await backendAPI.get('/portal/pservs', { params });
+      const data = response.data;
+      return data;
+    } catch (error) {
+      throw new Error(error.response || 'Network request failed');
+    }
+
+  }
+
   return {
     getCliente,
     getInvoices,
@@ -162,7 +198,9 @@ const GetInfoService = () => {
     getDataInvoices,
     getIncidentsSummary,
     getSat,
-    getTickets
+    getTickets,
+    getPhones,
+    getServices
     // Añadir el resto de métodos aquí
   };
 };

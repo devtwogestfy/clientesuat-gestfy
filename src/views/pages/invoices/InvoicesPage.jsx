@@ -66,7 +66,6 @@ const columns = [
     description: 'This column has a value getter and is not sortable.',
     sortable: false,
     width: 160,
-    //valueGetter: (value, row) => `${row.firstName || ''} ${row.lastName || ''}`,
   },
   {
     field: 'neto',
@@ -81,7 +80,6 @@ const columns = [
         </Box>
       ) 
     }
-    //valueGetter: (value, row) => `${row.firstName || ''} ${row.lastName || ''}`,
   },
   {
     field: 'cobrado',
@@ -96,7 +94,6 @@ const columns = [
         </Box>
       ) 
     }
-    //valueGetter: (value, row) => `${row.firstName || ''} ${row.lastName || ''}`,
   },
 ];
 
