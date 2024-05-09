@@ -14,7 +14,8 @@ import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import { fShortenNumber,fCurrency } from '../../../utils/format-number';
 
 const CardWrapper = styled(MainCard)(({ theme }) => ({
-  backgroundColor: theme.palette.error.dark,
+  backgroundColor: theme.palette.primary.dark,
+  color: '#fff',
   color: '#fff',
   overflow: 'hidden',
   position: 'relative',
@@ -27,7 +28,7 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
     position: 'absolute',
     width: 210,
     height: 210,
-    background: theme.palette.error.light,
+    background: theme.palette.primary[800],
     borderRadius: '50%',
     zIndex: 1,
     top: -85,
@@ -43,7 +44,7 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
     zIndex: 1,
     width: 210,
     height: 210,
-    background: theme.palette.error.light,
+    background: theme.palette.primary[800],
     borderRadius: '50%',
     top: -125,
     right: -15,
@@ -81,7 +82,7 @@ const LastInvoiceCard = ({ isLoading, title, total }) => {
                       sx={{
                         ...theme.typography.commonAvatar,
                         ...theme.typography.largeAvatar,
-                        backgroundColor: theme.palette.error.light,
+                        backgroundColor: theme.palette.primary[800],
                         color: '#fff',
                         mt: 1
                       }}

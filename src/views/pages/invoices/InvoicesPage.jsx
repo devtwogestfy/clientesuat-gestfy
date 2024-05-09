@@ -24,6 +24,7 @@ import { Badge } from '@mui/material';
 import Acciones from './Acciones';
 import NumberInvoicesCard from './NumberInvoicesCard';
 import LastInvoiceCard from './LastInvoiceCard';
+import TotalDebtCard from './TotalDebtCard';
 
 const icons = {
   IconHome,
@@ -52,14 +53,12 @@ const columns = [
     field: 'fechafactura',
     headerName: 'Fecha',
     width: 150,
-    editable: true,
   },
   {
     field: 'serie',
     headerName: 'Serie',
     type: 'number',
     width: 110,
-    editable: true,
   },
   {
     field: 'numero',
@@ -99,18 +98,6 @@ const columns = [
     }
     //valueGetter: (value, row) => `${row.firstName || ''} ${row.lastName || ''}`,
   },
-];
-
-const rows = [
-  { id: 1, lastName: 'Snow', firstName: 'Jon', age: 14 },
-  { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 31 },
-  { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 31 },
-  { id: 4, lastName: 'Stark', firstName: 'Arya', age: 11 },
-  { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-  { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-  { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-  { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-  { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
 ];
 
 const ColorBox = ({ bgcolor, title, data, dark }) => (
@@ -192,7 +179,6 @@ const InvoicesPage = () => {
     <MainCard>
       <Grid container spacing={gridSpacing}>
         <Grid item xs={12}>
-          <SubCard>
             <Grid container spacing={gridSpacing}>
               <Grid item xs={12} sm={6} md={4} lg={4}>
                 <NumberInvoicesCard  
@@ -206,14 +192,13 @@ const InvoicesPage = () => {
                 />
               </Grid>
                <Grid item xs={12} sm={6} md={4} lg={4}>
-                <LastInvoiceCard 
+                <TotalDebtCard
                   title="Deuda Total"
                   total={parseFloat(pendiente)}
                 />
               </Grid>
               
             </Grid>
-          </SubCard>
         </Grid>
         <Grid item xs={12}>
           <Box sx={{ height: 400, width: '100%' }}>
@@ -228,7 +213,6 @@ const InvoicesPage = () => {
                 },
               }}
               pageSizeOptions={[5]}
-              checkboxSelection
               disableRowSelectionOnClick
             />
           </Box>
