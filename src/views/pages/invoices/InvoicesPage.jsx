@@ -20,6 +20,9 @@ import { IconHome, IconUser, IconReceipt, IconAlertTriangleFilled, IconSettings,
 import Buy from 'assets/icons/glass/ic_glass_buy.png';
 import EuroIcon from 'assets/icons/ic_euro.svg';
 import GetInfoService from 'configuraciones/servicios/info-client';
+import { Badge } from '@mui/material';
+import Acciones from './Acciones';
+import NumberInvoicesCard from './NumberInvoicesCard';
 
 const icons = {
   IconHome,
@@ -36,6 +39,13 @@ const columns = [
     headerName: 'Descargar',
     width: 150,
     editable: true,
+    renderCell: (params)=>{
+      return  (
+        <Box sx={{width:'100%', textAlign:'center'}}>
+          <Acciones />
+        </Box>
+      ) 
+    }
   },
   {
     field: 'fechafactura',
@@ -64,6 +74,13 @@ const columns = [
     description: 'This column has a value getter and is not sortable.',
     sortable: false,
     width: 160,
+    renderCell: (params)=>{
+      return  (
+        <Box sx={{width:'100%', textAlign:'center'}}>
+          <Badge badgeContent={`$ ${params.row.neto}`} color='success'></Badge>
+        </Box>
+      ) 
+    }
     //valueGetter: (value, row) => `${row.firstName || ''} ${row.lastName || ''}`,
   },
   {
@@ -72,6 +89,13 @@ const columns = [
     description: 'This column has a value getter and is not sortable.',
     sortable: false,
     width: 160,
+    renderCell: (params)=>{
+      return  (
+        <Box sx={{width:'100%', textAlign:'center'}}>
+          <Badge badgeContent={`$ ${params.row.cobrado.toFixed(2)}`} color='error'></Badge>
+        </Box>
+      ) 
+    }
     //valueGetter: (value, row) => `${row.firstName || ''} ${row.lastName || ''}`,
   },
 ];
@@ -139,7 +163,7 @@ const InvoicesPage = () => {
   const [ultimafactura, setUltimafactura] = useState(null);
   const [pendiente, setPendiente] = useState(null);
   const [numeroFacturas, setNumeroFacturas] = useState(null);
-  const [dataInvoices, setDataInvoices] = useState(null);
+  const [dataInvoices, setDataInvoices] = useState([]);
 
   const infoService = GetInfoService();
   infoService.getInvoicesSummary().then((summaryData) => {
@@ -150,13 +174,14 @@ const InvoicesPage = () => {
     
   });
 
-    useEffect(() => {
-      const fetchData = async () => {
+    const fetchData = async () => {
         infoService.getDataInvoices().then((invoices) => {
         setDataInvoices(invoices.items)
         console.log(invoices.items)
         })
       }
+    useEffect(() => {
+  
        fetchData();
   }, []);
   
@@ -169,12 +194,7 @@ const InvoicesPage = () => {
           <SubCard>
             <Grid container spacing={gridSpacing}>
               <Grid item xs={12} sm={6} md={4} lg={4}>
-                <AppWidgetSummary
-                  title="Facturas"
-                  total={parseInt(numeroFacturas)}
-                  color="success"
-                  icon={<img alt="icon" src={Buy} />}
-                  />
+                <NumberInvoicesCard  />
                 </Grid>
               <Grid item xs={12} sm={6} md={4} lg={4}>
                 <AppWidgetSummary
