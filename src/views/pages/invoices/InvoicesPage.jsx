@@ -23,6 +23,7 @@ import GetInfoService from 'configuraciones/servicios/info-client';
 import { Badge } from '@mui/material';
 import Acciones from './Acciones';
 import NumberInvoicesCard from './NumberInvoicesCard';
+import LastInvoiceCard from './LastInvoiceCard';
 
 const icons = {
   IconHome,
@@ -194,23 +195,21 @@ const InvoicesPage = () => {
           <SubCard>
             <Grid container spacing={gridSpacing}>
               <Grid item xs={12} sm={6} md={4} lg={4}>
-                <NumberInvoicesCard  />
-                </Grid>
+                <NumberInvoicesCard  
+                  title="Facturas"
+                  total={parseInt(numeroFacturas)}/>
+              </Grid>
               <Grid item xs={12} sm={6} md={4} lg={4}>
-                <AppWidgetSummary
+                <LastInvoiceCard 
                   title="Última Factura"
-                  total={parseFloat(ultimafactura)}
-                  color="info"
-                  icon={<img alt="icon" src={EuroIcon} />}
-                  />
+                  total={parseFloat(ultimafactura)} 
+                />
               </Grid>
                <Grid item xs={12} sm={6} md={4} lg={4}>
-                <AppWidgetSummary
+                <LastInvoiceCard 
                   title="Deuda Total"
                   total={parseFloat(pendiente)}
-                  color="warning"
-                  icon={<img alt="icon" src={EuroIcon} />}
-                  />
+                />
               </Grid>
               
             </Grid>

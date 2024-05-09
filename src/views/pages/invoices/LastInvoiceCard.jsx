@@ -94,7 +94,7 @@ const LastInvoiceCard = ({ isLoading, title, total }) => {
              <Grid item sx={{ mb: 0.75 }}>
               <Grid container direction="column" alignItems="left">
                 <Grid item>
-                  <Typography sx={{ fontSize: '1.7rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.2 }}>{fShortenNumber(total)}</Typography>
+                  <Typography sx={{ fontSize: '1.7rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.2 }}>{fCurrency(total)}</Typography>
                 </Grid>
                 <Grid item>
                   <Typography sx={{ fontSize: '1.2rem', fontWeight: 500, mr: 1, mt: 0.25, mb: 0.75 }}>{title}</Typography>
