@@ -15,7 +15,7 @@ import SubCard from 'ui-component/cards/SubCard';
 import MainCard from 'ui-component/cards/MainCard';
 import SecondaryAction from 'ui-component/cards/CardSecondaryAction';
 import { gridSpacing } from 'store/constant';
-import { IconHome, IconUser, IconReceipt, IconAlertTriangleFilled, IconSettings, IconFileFilled } from '@tabler/icons-react';
+import { IconHome, IconUser, IconReceipt, IconAlertTriangleFilled, IconSettings, IconFileFilled} from '@tabler/icons-react';
 import Buy from 'assets/icons/glass/ic_glass_buy.png';
 import TotalServiceCard from './TotalServiceCard';
 import GetInfoService from 'configuraciones/servicios/info-client';
@@ -50,7 +50,7 @@ const columns = [
     field: 'nombre',
     headerName: 'Servicio',
     sortable: false,
-    width: 160,
+    width: 250,
     valueGetter: (value, row) => `${row.nombre || ''} - ${row.direccion || ''}`,
   },
   {
@@ -167,14 +167,14 @@ const infoService = GetInfoService();
     <MainCard>
       <Grid container spacing={gridSpacing}>
         <Grid item xs={12}>
-          <SubCard>
-            <Grid container spacing={gridSpacing}>
+          <Grid container spacing={gridSpacing}>
               <Grid item xs={12} sm={6} md={4} lg={3}>
                 <TotalServiceCard 
                   title="FTTH"
                   total={ftth}
                   colorCard={ theme.palette.secondary.dark }
                   backgroundCard = { theme.palette.secondary[800] }
+                  icon="router"
                   />
                 </Grid>
               <Grid item xs={12} sm={6} md={4} lg={3}>
@@ -183,6 +183,7 @@ const infoService = GetInfoService();
                   total={phones}
                   colorCard={ theme.palette.primary.dark }
                   backgroundCard = { theme.palette.primary[800] }
+                  icon="phone"
                   />
               </Grid>
                <Grid item xs={12} sm={6} md={4} lg={3}>
@@ -191,6 +192,7 @@ const infoService = GetInfoService();
                   total={mobiles}
                   colorCard={ theme.palette.success.dark }
                   backgroundCard = { theme.palette.success.light }
+                  icon="mobile"
                   />
               </Grid>
                <Grid item xs={12} sm={6} md={4} lg={3}>
@@ -199,11 +201,10 @@ const infoService = GetInfoService();
                   total={others}
                   colorCard={ theme.palette.error.dark }
                   backgroundCard = { theme.palette.error.light }
+                   icon="other"
                   />
               </Grid>
-              
-            </Grid>
-          </SubCard>
+          </Grid>
         </Grid>
         <Grid item xs={12}>
           <Box sx={{ height: 400, width: '100%' }}>

@@ -10,6 +10,10 @@ import SkeletonTotalOrderCard from 'ui-component/cards/Skeleton/EarningCard';
 
 // assets
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
+import RouterIcon from '@mui/icons-material/Router';
+import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
+import PhoneIcon from '@mui/icons-material/Phone';
+import ShareIcon from '@mui/icons-material/Share';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import { fShortenNumber,fCurrency } from '../../../utils/format-number';
 
@@ -55,7 +59,7 @@ const CardWrapper = styled(MainCard)(({ theme, backgroundcolor, backgroundcard }
   }
 }));
 
-const TotalServiceCard = ({ isLoading, title, total, colorCard, backgroundCard }) => {
+const TotalServiceCard = ({ isLoading, title, total, colorCard, backgroundCard, icon }) => {
   const theme = useTheme();
 
   const [timeValue, setTimeValue] = useState(false);
@@ -84,7 +88,16 @@ const TotalServiceCard = ({ isLoading, title, total, colorCard, backgroundCard }
                         mt: 1
                       }}
                     >
-                      <LocalMallOutlinedIcon fontSize="inherit" />
+                       {icon === 'router' ? (
+                          <RouterIcon fontSize="inherit" />
+                        ) : icon === 'phone' ? (
+                          <PhoneIcon fontSize="inherit" />
+                        ) : icon === 'mobile' ? (
+                          <PhoneIphoneIcon fontSize="inherit" />
+                        ) : (
+                          <ShareIcon fontSize="inherit" />
+                        )}
+
                     </Avatar>
                   </Grid>
                 </Grid>

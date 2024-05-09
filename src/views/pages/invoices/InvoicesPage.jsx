@@ -170,7 +170,7 @@ const InvoicesPage = () => {
        fetchData();
   }, []);
   
- console.log(dataInvoices)
+
   return (
    
     <MainCard>
