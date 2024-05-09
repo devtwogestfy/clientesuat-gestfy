@@ -1,7 +1,7 @@
 
 
 import PropTypes from 'prop-types';
-
+import { useState } from 'react';
 // material-ui
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -19,6 +19,7 @@ import { gridSpacing } from 'store/constant';
 import { IconHome, IconUser, IconReceipt, IconAlertTriangleFilled, IconSettings, IconFileFilled } from '@tabler/icons-react';
 import Buy from 'assets/icons/glass/ic_glass_buy.png';
 import EuroIcon from 'assets/icons/ic_euro.svg';
+import GetInfoService from 'configuraciones/servicios/info-client';
 
 const icons = {
   IconHome,
@@ -130,10 +131,23 @@ ColorBox.propTypes = {
   dark: PropTypes.bool
 };
 
-// ===============================|| UI COLOR ||=============================== //
+
+
 
 const InvoicesPage = () => {
   const theme = useTheme();
+  const [ultimafactura, setUltimafactura] = useState(null);
+  const [pendiente, setPendiente] = useState(null);
+  const [numeroFacturas, setNumeroFacturas] = useState(null);
+
+  const infoService = GetInfoService();
+  infoService.getInvoicesSummary().then((summaryData) => {
+ 
+    setPendiente(summaryData.pendiente)
+    setNumeroFacturas(summaryData.numerofacturas)
+    setUltimafactura(summaryData.ultimafactura)
+    
+  });
 
   return (
     <MainCard>
@@ -144,7 +158,7 @@ const InvoicesPage = () => {
               <Grid item xs={12} sm={6} md={4} lg={4}>
                 <AppWidgetSummary
                   title="Facturas"
-                  total={70}
+                  total={parseInt(numeroFacturas)}
                   color="success"
                   icon={<img alt="icon" src={Buy} />}
                   />
@@ -152,7 +166,7 @@ const InvoicesPage = () => {
               <Grid item xs={12} sm={6} md={4} lg={4}>
                 <AppWidgetSummary
                   title="Última Factura"
-                  total={360.58}
+                  total={parseFloat(ultimafactura)}
                   color="info"
                   icon={<img alt="icon" src={EuroIcon} />}
                   />
@@ -160,7 +174,7 @@ const InvoicesPage = () => {
                <Grid item xs={12} sm={6} md={4} lg={4}>
                 <AppWidgetSummary
                   title="Deuda Total"
-                  total={98539}
+                  total={parseFloat(pendiente)}
                   color="warning"
                   icon={<img alt="icon" src={EuroIcon} />}
                   />

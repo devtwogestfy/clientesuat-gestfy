@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import { backendAPI } from "configuraciones/app";
 
 const GetInfoService = () => {
-  const [apiUrl] = useState(environment.apiUrl);
+  const apiUrl = backendAPI;
 
   const request = async (action, params = {}, connectTimeout = 10000) => {
     const options = {
@@ -29,6 +30,8 @@ const GetInfoService = () => {
       throw newError;
     }
   };
+
+  
 
   const errorControl = async (response) => {
     if (response.error) {
@@ -63,11 +66,22 @@ const GetInfoService = () => {
     return request('/appclientes/facturas', params);
   };
 
-  // Añadir el resto de métodos aquí
+   const getInvoicesSummary = async () => {
+
+    try {
+      const response = await backendAPI.get('/portal/facturas/datos');
+        const data = response.data;
+        return data;
+    } catch (error) {
+        throw new Error(error.response || 'Network request failed');
+    }
+
+  };
 
   return {
     getCliente,
     getInvoices,
+    getInvoicesSummary,
     // Añadir el resto de métodos aquí
   };
 };
