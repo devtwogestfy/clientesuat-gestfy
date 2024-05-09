@@ -18,6 +18,7 @@ import SecondaryAction from 'ui-component/cards/CardSecondaryAction';
 import { gridSpacing } from 'store/constant';
 import { IconHome, IconUser, IconReceipt, IconAlertTriangleFilled, IconSettings, IconFileFilled } from '@tabler/icons-react';
 import Buy from 'assets/icons/glass/ic_glass_buy.png';
+import TotalServiceCard from './TotalServiceCard';
 
 const icons = {
   IconHome,
@@ -49,7 +50,7 @@ const columns = [
     editable: true,
   },
   {
-    field: 'fullName',
+    field: 'fullName1',
     headerName: 'Número',
     description: 'This column has a value getter and is not sortable.',
     sortable: false,
@@ -57,7 +58,7 @@ const columns = [
     valueGetter: (value, row) => `${row.firstName || ''} ${row.lastName || ''}`,
   },
   {
-    field: 'fullName',
+    field: 'fullName2',
     headerName: 'Importe',
     description: 'This column has a value getter and is not sortable.',
     sortable: false,
@@ -65,7 +66,7 @@ const columns = [
     valueGetter: (value, row) => `${row.firstName || ''} ${row.lastName || ''}`,
   },
   {
-    field: 'fullName',
+    field: 'fullName3',
     headerName: 'Pendiente',
     description: 'This column has a value getter and is not sortable.',
     sortable: false,
@@ -139,35 +140,35 @@ const ServicesPage = () => {
           <SubCard>
             <Grid container spacing={gridSpacing}>
               <Grid item xs={12} sm={6} md={4} lg={3}>
-                <AppWidgetSummary
-                  title="Incidencias"
-                  total={5}
-                  color="success"
-                  icon={<img alt="icon" src={Buy} />}
+                <TotalServiceCard 
+                  title="FTTH"
+                  total={100}
+                  colorCard={ theme.palette.secondary.dark }
+                  backgroundCard = { theme.palette.secondary[800] }
                   />
                 </Grid>
               <Grid item xs={12} sm={6} md={4} lg={3}>
-                <AppWidgetSummary
-                  title="Abiertas"
-                  total={360.58}
-                  color="info"
-                  icon={<img alt="icon" src={Buy} />}
+                <TotalServiceCard 
+                  title="Fijos"
+                  total={0}
+                  colorCard={ theme.palette.primary.dark }
+                  backgroundCard = { theme.palette.primary[800] }
                   />
               </Grid>
                <Grid item xs={12} sm={6} md={4} lg={3}>
-                <AppWidgetSummary
-                  title="Cerradas"
-                  total={985.39}
-                  color="warning"
-                  icon={<img alt="icon" src={Buy} />}
+                  <TotalServiceCard 
+                  title="Móviles"
+                  total={3}
+                  colorCard={ theme.palette.success.dark }
+                  backgroundCard = { theme.palette.success.light }
                   />
               </Grid>
                <Grid item xs={12} sm={6} md={4} lg={3}>
-                <AppWidgetSummary
-                  title="Horas"
-                  total={985.39}
-                  color="warning"
-                  icon={<img alt="icon" src={Buy} />}
+                 <TotalServiceCard 
+                  title="Otros"
+                  total={3}
+                  colorCard={ theme.palette.error.dark }
+                  backgroundCard = { theme.palette.error.light }
                   />
               </Grid>
               
