@@ -117,12 +117,23 @@ const GetInfoService = () => {
 
   };
 
+    const getSat = async () => {
+    try {
+      const response = await backendAPI.get('/portal/sat');
+        const data = response.data;
+        return data;
+    } catch (error) {
+        throw new Error(error.response || 'Network request failed');
+    }
+  }
+
   return {
     getCliente,
     getInvoices,
     getInvoicesSummary,
     getDataInvoices,
-    getIncidentsSummary
+    getIncidentsSummary,
+    getSat
     // Añadir el resto de métodos aquí
   };
 };

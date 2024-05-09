@@ -20,6 +20,8 @@ import Buy from 'assets/icons/glass/ic_glass_buy.png';
 import GetInfoService from 'configuraciones/servicios/info-client';
 import TotalIncidentsCard from './TotalIncidentsCard';
 import TotalOpenCard from './TotalOpenCard';
+import TotalCloseCard from './TotalCloseCard';
+import TotalHoursCard from './TotalHoursCard';
 
 const icons = {
   IconHome,
@@ -135,26 +137,30 @@ const IncidentsPage = () => {
   const theme = useTheme();
   const [incidents, setIncidents] = useState(null);
   const [totalOpen, setTotalOpen] = useState(null);
-  const [numeroFacturas, setNumeroFacturas] = useState(null);
+  const [totalClose, setTotalClose] = useState(null);
+  const [totalHours, setTotalHours] = useState(null);
 
   const infoService = GetInfoService();
   infoService.getIncidentsSummary().then((summaryIncident) => {
  
-     console.log(summaryIncident)
      setIncidents(summaryIncident.numeroincidencias);
      setTotalOpen(summaryIncident.abiertas);
-    /*setPendiente(summaryData.pendiente)
-    setNumeroFacturas(summaryData.numerofacturas)
-    setUltimafactura(summaryData.ultimafactura)*/
-    
+     setTotalClose(summaryIncident.cerradas);
+
   });
+
+   infoService.getSat().then((summaryHour) => {
+ 
+    setTotalHours(summaryHour.formateado);
+
+  });
+
 
   return (
     <MainCard>
       <Grid container spacing={gridSpacing}>
         <Grid item xs={12}>
-          <SubCard>
-            <Grid container spacing={gridSpacing}>
+          <Grid container spacing={gridSpacing}>
               <Grid item xs={12} sm={6} md={4} lg={3}>
                  <TotalIncidentsCard 
                   title="Incidencias"
@@ -166,24 +172,18 @@ const IncidentsPage = () => {
                   total={parseInt(totalOpen)}/>
               </Grid>
                <Grid item xs={12} sm={6} md={4} lg={3}>
-                <AppWidgetSummary
+                <TotalCloseCard
                   title="Cerradas"
-                  total={985.39}
-                  color="warning"
-                  icon={<img alt="icon" src={Buy} />}
-                  />
+                  total={parseInt(totalClose)}/>
+  
               </Grid>
                <Grid item xs={12} sm={6} md={4} lg={3}>
-                <AppWidgetSummary
+                <TotalHoursCard
                   title="Horas"
-                  total={985.39}
-                  color="warning"
-                  icon={<img alt="icon" src={Buy} />}
-                  />
+                  total={totalHours}/>
               </Grid>
               
-            </Grid>
-          </SubCard>
+          </Grid>
         </Grid>
         <Grid item xs={12}>
           <Box sx={{ height: 400, width: '100%' }}>
