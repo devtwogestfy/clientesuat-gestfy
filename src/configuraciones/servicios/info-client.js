@@ -127,13 +127,42 @@ const GetInfoService = () => {
     }
   }
 
+   const getTickets = async (page = 1, limit = 25, sort = '', from = null, end = null, state = null) => {
+
+     try {
+     
+      let filter = '[{"property": "desde", "value":"' +
+      from +
+      '"}, {"property": "hasta", "value":"' +
+      end +
+      '"}, {"property": "estado", "value":"' +
+      state +
+      '"}]';
+
+      const params = {
+        'page': page.toString(),
+        'limit': limit.toString(),
+        'sort': sort,
+        'filter': filter
+      };
+
+      const response = await backendAPI.get('/portal/ticketscli', { params });
+      const data = response.data;
+      return data;
+    } catch (error) {
+      throw new Error(error.response || 'Network request failed');
+    }
+
+  }
+
   return {
     getCliente,
     getInvoices,
     getInvoicesSummary,
     getDataInvoices,
     getIncidentsSummary,
-    getSat
+    getSat,
+    getTickets
     // Añadir el resto de métodos aquí
   };
 };

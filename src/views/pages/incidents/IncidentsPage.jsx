@@ -10,7 +10,6 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
 // project imports
-import AppWidgetSummary from './app-widget-summary';
 import SubCard from 'ui-component/cards/SubCard';
 import MainCard from 'ui-component/cards/MainCard';
 import SecondaryAction from 'ui-component/cards/CardSecondaryAction';
@@ -34,61 +33,40 @@ const icons = {
 
 const columns = [
   {
-    field: 'firstName',
-    headerName: 'Descargar',
-    width: 150,
-    editable: true,
-  },
-  {
-    field: 'lastName',
-    headerName: 'Fecha',
-    width: 150,
-    editable: true,
-  },
-  {
-    field: 'age',
-    headerName: 'Serie',
-    type: 'number',
-    width: 110,
-    editable: true,
-  },
-  {
-    field: 'fullName',
+    field: 'numero',
     headerName: 'Número',
-    description: 'This column has a value getter and is not sortable.',
-    sortable: false,
-    width: 160,
-    valueGetter: (value, row) => `${row.firstName || ''} ${row.lastName || ''}`,
+    width: 150,
   },
   {
-    field: 'fullName',
-    headerName: 'Importe',
-    description: 'This column has a value getter and is not sortable.',
-    sortable: false,
-    width: 160,
-    valueGetter: (value, row) => `${row.firstName || ''} ${row.lastName || ''}`,
+    field: 'alta',
+    headerName: 'Alta',
+    width: 150,
   },
   {
-    field: 'fullName',
-    headerName: 'Pendiente',
-    description: 'This column has a value getter and is not sortable.',
+    field: 'texto',
+    headerName: 'Descripción',
+    width: 180,
+  },
+  {
+    field: 'servicio',
+    headerName: 'Servicio',
+    sortable: false,
+    width: 250,
+  },
+  {
+    field: 'horas',
+    headerName: 'Horas',
     sortable: false,
     width: 160,
-    valueGetter: (value, row) => `${row.firstName || ''} ${row.lastName || ''}`,
+  },
+  {
+    field: 'estado_id',
+    headerName: 'Estado',
+    sortable: false,
+    width: 160,
   },
 ];
 
-const rows = [
-  { id: 1, lastName: 'Snow', firstName: 'Jon', age: 14 },
-  { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 31 },
-  { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 31 },
-  { id: 4, lastName: 'Stark', firstName: 'Arya', age: 11 },
-  { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-  { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-  { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-  { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-  { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-];
 
 const ColorBox = ({ bgcolor, title, data, dark }) => (
   <>
@@ -135,25 +113,35 @@ ColorBox.propTypes = {
 
 const IncidentsPage = () => {
   const theme = useTheme();
-  const [incidents, setIncidents] = useState(null);
+  const [totalIncidents, setTotalIncidents] = useState(null);
   const [totalOpen, setTotalOpen] = useState(null);
   const [totalClose, setTotalClose] = useState(null);
   const [totalHours, setTotalHours] = useState(null);
+  const [incidents, setIncidents] = useState([]);
 
   const infoService = GetInfoService();
   infoService.getIncidentsSummary().then((summaryIncident) => {
  
-     setIncidents(summaryIncident.numeroincidencias);
+     setTotalIncidents(summaryIncident.numeroincidencias);
      setTotalOpen(summaryIncident.abiertas);
      setTotalClose(summaryIncident.cerradas);
 
   });
 
-   infoService.getSat().then((summaryHour) => {
- 
+  infoService.getSat().then((summaryHour) => {
     setTotalHours(summaryHour.formateado);
-
   });
+  
+  const fetchData = async () => {
+    infoService.getTickets().then((dataIncidents) => {
+     setIncidents(dataIncidents.items)
+     console.log(dataIncidents)
+    })
+  }
+  
+  useEffect(() => {
+    fetchData();
+  }, []);
 
 
   return (
@@ -164,7 +152,7 @@ const IncidentsPage = () => {
               <Grid item xs={12} sm={6} md={4} lg={3}>
                  <TotalIncidentsCard 
                   title="Incidencias"
-                  total={parseInt(incidents)}/>
+                  total={parseInt(totalIncidents)}/>
                 </Grid>
               <Grid item xs={12} sm={6} md={4} lg={3}>
                <TotalOpenCard
@@ -188,7 +176,7 @@ const IncidentsPage = () => {
         <Grid item xs={12}>
           <Box sx={{ height: 400, width: '100%' }}>
             <DataGrid
-              rows={rows}
+              rows={incidents}
               columns={columns}
               initialState={{
                 pagination: {
@@ -198,7 +186,6 @@ const IncidentsPage = () => {
                 },
               }}
               pageSizeOptions={[5]}
-              checkboxSelection
               disableRowSelectionOnClick
             />
           </Box>
