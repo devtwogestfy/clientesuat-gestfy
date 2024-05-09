@@ -1,7 +1,7 @@
 
 
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 // material-ui
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -32,47 +32,47 @@ const icons = {
 
 const columns = [
   {
-    field: 'firstName',
+    field: 'id',
     headerName: 'Descargar',
     width: 150,
     editable: true,
   },
   {
-    field: 'lastName',
+    field: 'fechafactura',
     headerName: 'Fecha',
     width: 150,
     editable: true,
   },
   {
-    field: 'age',
+    field: 'serie',
     headerName: 'Serie',
     type: 'number',
     width: 110,
     editable: true,
   },
   {
-    field: 'fullName',
+    field: 'numero',
     headerName: 'Número',
     description: 'This column has a value getter and is not sortable.',
     sortable: false,
     width: 160,
-    valueGetter: (value, row) => `${row.firstName || ''} ${row.lastName || ''}`,
+    //valueGetter: (value, row) => `${row.firstName || ''} ${row.lastName || ''}`,
   },
   {
-    field: 'import',
+    field: 'neto',
     headerName: 'Importe',
     description: 'This column has a value getter and is not sortable.',
     sortable: false,
     width: 160,
-    valueGetter: (value, row) => `${row.firstName || ''} ${row.lastName || ''}`,
+    //valueGetter: (value, row) => `${row.firstName || ''} ${row.lastName || ''}`,
   },
   {
-    field: 'pending',
+    field: 'cobrado',
     headerName: 'Pendiente',
     description: 'This column has a value getter and is not sortable.',
     sortable: false,
     width: 160,
-    valueGetter: (value, row) => `${row.firstName || ''} ${row.lastName || ''}`,
+    //valueGetter: (value, row) => `${row.firstName || ''} ${row.lastName || ''}`,
   },
 ];
 
@@ -139,6 +139,7 @@ const InvoicesPage = () => {
   const [ultimafactura, setUltimafactura] = useState(null);
   const [pendiente, setPendiente] = useState(null);
   const [numeroFacturas, setNumeroFacturas] = useState(null);
+  const [dataInvoices, setDataInvoices] = useState(null);
 
   const infoService = GetInfoService();
   infoService.getInvoicesSummary().then((summaryData) => {
@@ -149,7 +150,19 @@ const InvoicesPage = () => {
     
   });
 
+    useEffect(() => {
+      const fetchData = async () => {
+        infoService.getDataInvoices().then((invoices) => {
+        setDataInvoices(invoices.items)
+        console.log(invoices.items)
+        })
+      }
+       fetchData();
+  }, []);
+  
+ console.log(dataInvoices)
   return (
+   
     <MainCard>
       <Grid container spacing={gridSpacing}>
         <Grid item xs={12}>
@@ -186,7 +199,7 @@ const InvoicesPage = () => {
         <Grid item xs={12}>
           <Box sx={{ height: 400, width: '100%' }}>
             <DataGrid
-              rows={rows}
+              rows={dataInvoices}
               columns={columns}
               initialState={{
                 pagination: {
