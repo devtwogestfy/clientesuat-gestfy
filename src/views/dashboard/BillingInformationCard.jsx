@@ -73,7 +73,7 @@ const BillingInformationCard = ({ isLoading }) => {
             .get('/appclientes/cliente')
             .then(function (response) {
               const data = response.data;
-        setClienteInfo(data);
+              setClienteInfo(data);
               resolve(response);
             })
             .catch(function (error) {
