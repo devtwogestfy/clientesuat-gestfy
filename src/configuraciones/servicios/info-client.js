@@ -105,11 +105,24 @@ const GetInfoService = () => {
     }
   };
 
+  const getIncidentsSummary = async () => {
+
+    try {
+      const response = await backendAPI.get('/portal/incidencias/datos');
+        const data = response.data;
+        return data;
+    } catch (error) {
+        throw new Error(error.response || 'Network request failed');
+    }
+
+  };
+
   return {
     getCliente,
     getInvoices,
     getInvoicesSummary,
-    getDataInvoices
+    getDataInvoices,
+    getIncidentsSummary
     // Añadir el resto de métodos aquí
   };
 };

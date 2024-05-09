@@ -1,5 +1,4 @@
-
-
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 // material-ui
@@ -18,6 +17,9 @@ import SecondaryAction from 'ui-component/cards/CardSecondaryAction';
 import { gridSpacing } from 'store/constant';
 import { IconHome, IconUser, IconReceipt, IconAlertTriangleFilled, IconSettings, IconFileFilled } from '@tabler/icons-react';
 import Buy from 'assets/icons/glass/ic_glass_buy.png';
+import GetInfoService from 'configuraciones/servicios/info-client';
+import TotalIncidentsCard from './TotalIncidentsCard';
+import TotalOpenCard from './TotalOpenCard';
 
 const icons = {
   IconHome,
@@ -131,6 +133,21 @@ ColorBox.propTypes = {
 
 const IncidentsPage = () => {
   const theme = useTheme();
+  const [incidents, setIncidents] = useState(null);
+  const [totalOpen, setTotalOpen] = useState(null);
+  const [numeroFacturas, setNumeroFacturas] = useState(null);
+
+  const infoService = GetInfoService();
+  infoService.getIncidentsSummary().then((summaryIncident) => {
+ 
+     console.log(summaryIncident)
+     setIncidents(summaryIncident.numeroincidencias);
+     setTotalOpen(summaryIncident.abiertas);
+    /*setPendiente(summaryData.pendiente)
+    setNumeroFacturas(summaryData.numerofacturas)
+    setUltimafactura(summaryData.ultimafactura)*/
+    
+  });
 
   return (
     <MainCard>
@@ -139,20 +156,14 @@ const IncidentsPage = () => {
           <SubCard>
             <Grid container spacing={gridSpacing}>
               <Grid item xs={12} sm={6} md={4} lg={3}>
-                <AppWidgetSummary
+                 <TotalIncidentsCard 
                   title="Incidencias"
-                  total={5}
-                  color="success"
-                  icon={<img alt="icon" src={Buy} />}
-                  />
+                  total={parseInt(incidents)}/>
                 </Grid>
               <Grid item xs={12} sm={6} md={4} lg={3}>
-                <AppWidgetSummary
+               <TotalOpenCard
                   title="Abiertas"
-                  total={360.58}
-                  color="info"
-                  icon={<img alt="icon" src={Buy} />}
-                  />
+                  total={parseInt(totalOpen)}/>
               </Grid>
                <Grid item xs={12} sm={6} md={4} lg={3}>
                 <AppWidgetSummary

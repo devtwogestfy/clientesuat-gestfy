@@ -55,7 +55,7 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
   }
 }));
 
-const TotalDebtCard = ({ isLoading, title, total }) => {
+const TotalOpenCard = ({ isLoading, title, total }) => {
   const theme = useTheme();
 
   const [timeValue, setTimeValue] = useState(false);
@@ -92,7 +92,7 @@ const TotalDebtCard = ({ isLoading, title, total }) => {
              <Grid item sx={{ mb: 0.75 }}>
               <Grid container direction="column" alignItems="left">
                 <Grid item>
-                  <Typography sx={{ fontSize: '1.7rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.2 }}>{fCurrency(total)}</Typography>
+                  <Typography sx={{ fontSize: '1.7rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.2 }}>{fShortenNumber(total)}</Typography>
                 </Grid>
                 <Grid item>
                   <Typography sx={{ fontSize: '1.2rem', fontWeight: 500, mr: 1, mt: 0.25, mb: 0.75 }}>{title}</Typography>
@@ -107,8 +107,8 @@ const TotalDebtCard = ({ isLoading, title, total }) => {
   );
 };
 
-TotalDebtCard.propTypes = {
+TotalOpenCard.propTypes = {
   isLoading: PropTypes.bool
 };
 
-export default TotalDebtCard;
+export default TotalOpenCard;
