@@ -17,7 +17,7 @@ const ProfileViewPage = Loadable(lazy(() => import('views/pages/profile/profileV
 
 const MainRoutes = {
     path: '/',
-    element: <MainLayout />,
+    element: <AuthGuard component={<MainLayout />}></AuthGuard>,
     children: [
         {
             path: '/',
