@@ -28,29 +28,29 @@ const MainRoutes = {
             children: [
                 {
                     path: 'default',
-                    element: <DashboardDefault />
+                    element: <AuthGuard component={<DashboardDefault />}></AuthGuard>
                 }
             ]
         },
         {
             path: 'documents',
-            element: <DocumentsPage />
+            element: <AuthGuard component={<DocumentsPage />}></AuthGuard>
         },
         {
             path: 'invoices',
-            element: <InvoicesPage />
+            element: <AuthGuard component={<InvoicesPage />}></AuthGuard>
         },
         {
             path: 'incidents',
-            element: <IncidentsPage />
+            element: <AuthGuard component={<IncidentsPage />}></AuthGuard>
         },
         {
             path: 'profile',
-            element: <ProfileViewPage />
+            element: <AuthGuard component={<ProfileViewPage />}></AuthGuard>
         },
         {
             path: 'services',
-            element: <ServicesPage />
+            element: <AuthGuard component={<ServicesPage />}></AuthGuard>
         }
     ]
 };

@@ -47,6 +47,7 @@ const ProfileSection = () => {
     const handleLogout = async () => {
         console.log('Logout');
         removeCookie('usuario');
+        navigate('/login');
     };
 
     const handleClose = (event) => {
