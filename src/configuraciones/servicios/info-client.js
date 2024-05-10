@@ -191,6 +191,28 @@ const GetInfoService = () => {
 
   }
 
+  
+  const descargarFactura = async (id) => {
+
+     try {
+     
+      const response = await backendAPI.get('/portal/factura/'+id,{responseType: 'blob', observe: 'response'});
+        let title = response.headers.get('content-disposition').split('filename=')[1].split(';')[0];
+        title = title?.substring(1,title.length-1);
+
+        console.log(response);
+        let data = {
+          file: response.data,
+          filename: title
+        }
+        return data;
+    } catch (error) {
+      console.log(error);
+      throw new Error(error.response || 'Network request failed');
+    }
+
+  }
+
   return {
     getCliente,
     getInvoices,
@@ -200,7 +222,8 @@ const GetInfoService = () => {
     getSat,
     getTickets,
     getPhones,
-    getServices
+    getServices,
+    descargarFactura
     // Añadir el resto de métodos aquí
   };
 };

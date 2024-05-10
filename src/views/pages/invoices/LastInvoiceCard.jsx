@@ -16,7 +16,6 @@ import { fShortenNumber,fCurrency } from '../../../utils/format-number';
 const CardWrapper = styled(MainCard)(({ theme }) => ({
   backgroundColor: theme.palette.primary.dark,
   color: '#fff',
-  color: '#fff',
   overflow: 'hidden',
   position: 'relative',
   '&>div': {

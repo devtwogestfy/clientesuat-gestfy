@@ -15,6 +15,7 @@ import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import CloseIcon from '@mui/icons-material/Close';
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
+import InvoicesPage from 'views/pages/invoices/InvoicesPage';
 
 const CardWrapper = styled(MainCard)(({ theme }) => ({
   backgroundColor: theme.palette.primary.dark,
@@ -170,7 +171,7 @@ const LastestInvoicesCard = ({ isLoading }) => {
               </Grid>
             </Grid>
           </Box>
-          <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
+          <Dialog open={open} onClose={handleClose} maxWidth="xl" fullWidth>
             <DialogTitle>
               <IconButton onClick={handleClose} sx={{ position: 'absolute', top: 0, right: 0 }}>
                 <CloseIcon />
@@ -188,7 +189,7 @@ const LastestInvoicesCard = ({ isLoading }) => {
             </DialogTitle>
             <DialogContent>
               {/* Aquí se renderiza el formulario */}
-              
+              <InvoicesPage></InvoicesPage>
             </DialogContent>
             <DialogActions>
               <Button variant="outlined" onClick={handleClose} color="error">

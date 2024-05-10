@@ -25,6 +25,7 @@ import Acciones from './Acciones';
 import NumberInvoicesCard from './NumberInvoicesCard';
 import LastInvoiceCard from './LastInvoiceCard';
 import TotalDebtCard from './TotalDebtCard';
+import { fDate } from 'utils/format-date';
 
 const icons = {
   IconHome,
@@ -35,67 +36,6 @@ const icons = {
   IconFileFilled
 };
 
-const columns = [
-  {
-    field: 'id',
-    headerName: 'Descargar',
-    width: 150,
-    editable: true,
-    renderCell: (params)=>{
-      return  (
-        <Box sx={{width:'100%', textAlign:'center'}}>
-          <Acciones />
-        </Box>
-      ) 
-    }
-  },
-  {
-    field: 'fechafactura',
-    headerName: 'Fecha',
-    width: 150,
-  },
-  {
-    field: 'serie',
-    headerName: 'Serie',
-    type: 'number',
-    width: 110,
-  },
-  {
-    field: 'numero',
-    headerName: 'Número',
-    description: 'This column has a value getter and is not sortable.',
-    sortable: false,
-    width: 160,
-  },
-  {
-    field: 'neto',
-    headerName: 'Importe',
-    description: 'This column has a value getter and is not sortable.',
-    sortable: false,
-    width: 160,
-    renderCell: (params)=>{
-      return  (
-        <Box sx={{width:'100%', textAlign:'center'}}>
-          <Badge badgeContent={`$ ${params.row.neto}`} color='success'></Badge>
-        </Box>
-      ) 
-    }
-  },
-  {
-    field: 'cobrado',
-    headerName: 'Pendiente',
-    description: 'This column has a value getter and is not sortable.',
-    sortable: false,
-    width: 160,
-    renderCell: (params)=>{
-      return  (
-        <Box sx={{width:'100%', textAlign:'center'}}>
-          <Badge badgeContent={`$ ${params.row.cobrado.toFixed(2)}`} color='error'></Badge>
-        </Box>
-      ) 
-    }
-  },
-];
 
 const ColorBox = ({ bgcolor, title, data, dark }) => (
   <>
@@ -165,6 +105,94 @@ const InvoicesPage = () => {
         console.log(invoices.items)
         })
       }
+
+      
+    const descargarFactura = async (id) => {
+        infoService.descargarFactura(id).then((response) => {
+          let f = blobToFile(response.file, response.filename);     
+          let fileUrl = URL.createObjectURL(f);
+        
+          const link = document.createElement('a');
+          link.setAttribute('target', '_blank');
+          link.setAttribute('href', fileUrl);
+          link.setAttribute('download', response.filename);
+          link.click();
+        })
+      }
+
+    const blobToFile = (theBlob, fileName) => { 
+      console.log(theBlob);      
+      console.log(fileName);      
+      return new File([theBlob], fileName, { lastModified: new Date().getTime(), type: theBlob.type });
+    }
+
+    // Función para asignar clases de estilo a las filas alternas
+    const getRowClassName = (params) => {
+      return params.indexRelativeToCurrentPage % 2 === 0 ? 'cebra-row' : '';
+    };
+    
+    const columns = [
+      {
+        field: 'id',
+        headerName: 'Descargar',
+        width: 150,
+        editable: true,
+        renderCell: (params)=>{
+          return  (
+            <Box sx={{width:'100%', textAlign:'center'}}>
+              <Acciones funcionOnClicDescargar={descargarFactura} factura_id={params.row.id} />
+            </Box>
+          ) 
+        }
+      },
+      {
+        field: 'fechafactura',
+        headerName: 'Fecha',
+        width: 150,
+      },
+      {
+        field: 'serie',
+        headerName: 'Serie',
+        type: 'number',
+        width: 110,
+      },
+      {
+        field: 'numero',
+        headerName: 'Número',
+        description: 'This column has a value getter and is not sortable.',
+        sortable: false,
+        width: 160,
+      },
+      {
+        field: 'neto',
+        headerName: 'Importe',
+        description: 'This column has a value getter and is not sortable.',
+        sortable: false,
+        width: 160,
+        renderCell: (params)=>{
+          return  (
+            <Box sx={{width:'100%', textAlign:'center'}}>
+              <Badge badgeContent={`$ ${params.row.neto}`} color='success'></Badge>
+            </Box>
+          ) 
+        }
+      },
+      {
+        field: 'cobrado',
+        headerName: 'Pendiente',
+        description: 'This column has a value getter and is not sortable.',
+        sortable: false,
+        width: 160,
+        renderCell: (params)=>{
+          return  (
+            <Box sx={{width:'100%', textAlign:'center'}}>
+              <Badge badgeContent={`$ ${params.row.cobrado.toFixed(2)}`} color='error'></Badge>
+            </Box>
+          ) 
+        }
+      },
+    ];
+
     useEffect(() => {
   
        fetchData();
@@ -200,6 +228,7 @@ const InvoicesPage = () => {
         <Grid item xs={12}>
           <Box sx={{ height: 400, width: '100%' }}>
             <DataGrid
+              getRowClassName={getRowClassName} // Aplicar estilos de cebra a las filas
               rows={dataInvoices}
               columns={columns}
               initialState={{

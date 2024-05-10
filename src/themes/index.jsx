@@ -16,7 +16,7 @@ import themeTypography from './typography';
 export const theme = (customization) => {
   const color = colors;
 
-  const themeOption = {
+   const themeOption = {
     colors: color,
     heading: color.grey900,
     paper: color.paper,
@@ -30,7 +30,8 @@ export const theme = (customization) => {
     divider: color.grey200,
     customization
   };
-
+ 
+ 
   const themeOptions = {
     direction: 'ltr',
     palette: themePalette(themeOption),
