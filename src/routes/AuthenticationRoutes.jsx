@@ -7,21 +7,16 @@ import UnAuthRoutes from 'configuraciones/guards/UnAuthRoutes';
 
 // login option 3 routing
 const AuthLogin3 = Loadable(lazy(() => import('views/pages/authentication3/Login3')));
-const AuthRegister3 = Loadable(lazy(() => import('views/pages/authentication3/Register3')));
-
-// ==============================|| AUTHENTICATION ROUTING ||============================== //
 
 const AuthenticationRoutes = {
-  path: '/',
-  element: <MinimalLayout />,
-  children: [
-    {
-      path: '/login',
-      element: <UnAuthRoutes component={<AuthLogin3 />}></UnAuthRoutes> 
-
-    }
-
-  ]
+    path: '/',
+    element: <MinimalLayout />,
+    children: [
+        {
+            path: '/login',
+            element: <UnAuthRoutes component={<AuthLogin3 />}></UnAuthRoutes>
+        }
+    ]
 };
 
 export default AuthenticationRoutes;
