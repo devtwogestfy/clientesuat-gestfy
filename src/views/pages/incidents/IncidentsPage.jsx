@@ -17,11 +17,20 @@ import TotalCloseCard from './TotalCloseCard';
 import TotalHoursCard from './TotalHoursCard';
 import { fDate } from 'utils/format-date';
 import StatusColor from './StatusColor';
+import ActionsButtons from './ActionsButtons';
 
 const columns = [
     {
         field: 'notas',
-        width: 50
+        headerName: '',
+        width: 50,
+        renderCell: (params) => {
+            return (
+                <Box sx={{ width: '100%', textAlign: 'center' }}>
+                    <ActionsButtons notas={params.row.notas} />
+                </Box>
+            );
+        }
     },
     {
         field: 'numero',
