@@ -1,12 +1,13 @@
 import React from 'react';
+import svg from '../../../assets/images/404.svg';
 
-const NotFoundPage = () => {
+export default function Error() {
     return (
-        <div>
-            <h1>404 - Página no encontrada</h1>
-            <p>Lo sentimos, la página que estás buscando no existe.</p>
-        </div>
+        <>
+            <div className="cont-404">
+                <img src={svg} alt="svg" />
+                <button>Back to Home</button>
+            </div>
+        </>
     );
-};
-
-export default NotFoundPage;
+}
