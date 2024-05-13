@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-
+import { IconButton } from '@mui/material';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import { DataGrid } from '@mui/x-data-grid';
@@ -18,6 +18,7 @@ import TotalHoursCard from './TotalHoursCard';
 import { fDate } from 'utils/format-date';
 import StatusColor from './StatusColor';
 import ActionsButtons from './ActionsButtons';
+import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
 
 const columns = [
     {
@@ -168,6 +169,15 @@ const IncidentsPage = () => {
                         </Grid>
                         <Grid item xs={12} sm={6} md={4} lg={3}>
                             <TotalHoursCard title="Horas" total={totalHours} />
+                        </Grid>
+                    </Grid>
+                </Grid>
+                <Grid item xs={12}>
+                    <Grid container spacing={gridSpacing}>
+                        <Grid item xs={12} sm={6} md={4} lg={3}>
+                            <IconButton backgroundColor={'info'} color={'info'} title="Nueva Incidencia">
+                                <AddCircleRoundedIcon></AddCircleRoundedIcon>
+                            </IconButton>
                         </Grid>
                     </Grid>
                 </Grid>

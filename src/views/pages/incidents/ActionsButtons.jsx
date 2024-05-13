@@ -23,8 +23,6 @@ function ActionsButtons({ notas }) {
 
     const RemoveHTMLTags = (htmlString) => {
         const cleanString = htmlString.replace(/<[^>]*>/g, '');
-
-        // Renderizar el resultado limpio
         return <>{cleanString}</>;
     };
 
@@ -42,7 +40,7 @@ function ActionsButtons({ notas }) {
                     <VisibilityRoundedIcon></VisibilityRoundedIcon>
                 </IconButton>
             </Box>
-            <Dialog open={open} onClose={handleClose} maxWidth="xl" fullWidth>
+            <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
                 <DialogTitle>
                     <IconButton onClick={handleClose} sx={{ position: 'absolute', top: 0, right: 0 }}>
                         <CloseIcon />
