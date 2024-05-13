@@ -10,7 +10,7 @@ const AuthGuard = ({ component }) => {
     useEffect(() => {
         setUsuarioAutenticado(cookies);
     }, [cookies, usuarioAutenticado]);
-    console.log(cookies);
+
     console.log(Object.keys(cookies).length);
 
     // Si usuarioAutenticado es un token válido, renderiza el componente

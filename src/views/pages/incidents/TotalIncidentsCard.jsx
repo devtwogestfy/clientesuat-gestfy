@@ -106,7 +106,9 @@ const TotalIncidentsCard = ({ isLoading, title, total }) => {
 };
 
 TotalIncidentsCard.propTypes = {
-    isLoading: PropTypes.bool
+    isLoading: PropTypes.bool,
+    title: PropTypes.string,
+    total: PropTypes.number
 };
 
 export default TotalIncidentsCard;
