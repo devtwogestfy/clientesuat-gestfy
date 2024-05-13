@@ -16,8 +16,13 @@ import TotalOpenCard from './TotalOpenCard';
 import TotalCloseCard from './TotalCloseCard';
 import TotalHoursCard from './TotalHoursCard';
 import { fDate } from 'utils/format-date';
+import StatusColor from './StatusColor';
 
 const columns = [
+    {
+        field: 'notas',
+        width: 50
+    },
     {
         field: 'numero',
         headerName: 'Número',
@@ -50,7 +55,14 @@ const columns = [
         field: 'estado_id',
         headerName: 'Estado',
         sortable: false,
-        width: 160
+        width: 160,
+        renderCell: (params) => {
+            return (
+                <Box sx={{ width: '100%', textAlign: 'center' }}>
+                    <StatusColor estado_id={params.row.estado_id} />
+                </Box>
+            );
+        }
     }
 ];
 
