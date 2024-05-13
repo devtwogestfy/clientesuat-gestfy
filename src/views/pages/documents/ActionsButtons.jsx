@@ -5,7 +5,7 @@ import ArrowCircleDownIcon from '@mui/icons-material/ArrowCircleDown';
 
 // Definición del componente Funcional
 // eslint-disable-next-line react/prop-types
-function Acciones({ funcionOnClicDescargar, factura_id }) {
+function ActionsButtons({ funcionOnClicDescargar, factura_id }) {
     // Renderizado del componente
     return (
         <Box sx={{ width: '100%', textAlign: 'center' }}>
@@ -23,4 +23,4 @@ function Acciones({ funcionOnClicDescargar, factura_id }) {
     );
 }
 
-export default Acciones;
+export default ActionsButtons;

@@ -10,52 +10,8 @@ import Typography from '@mui/material/Typography';
 import MainCard from 'ui-component/cards/MainCard';
 import { gridSpacing } from 'store/constant';
 import GetInfoService from 'configuraciones/servicios/info-client';
-
-const columns = [
-    {
-        field: 'firstName',
-        headerName: 'Descargar',
-        width: 150,
-        editable: true
-    },
-    {
-        field: 'lastName',
-        headerName: 'Fecha',
-        width: 150,
-        editable: true
-    },
-    {
-        field: 'age',
-        headerName: 'Serie',
-        type: 'number',
-        width: 110,
-        editable: true
-    },
-    {
-        field: 'fullName1',
-        headerName: 'Número',
-        description: 'This column has a value getter and is not sortable.',
-        sortable: false,
-        width: 160,
-        valueGetter: (value, row) => `${row.firstName || ''} ${row.lastName || ''}`
-    },
-    {
-        field: 'fullName2',
-        headerName: 'Importe',
-        description: 'This column has a value getter and is not sortable.',
-        sortable: false,
-        width: 160,
-        valueGetter: (value, row) => `${row.firstName || ''} ${row.lastName || ''}`
-    },
-    {
-        field: 'fullName3',
-        headerName: 'Pendiente',
-        description: 'This column has a value getter and is not sortable.',
-        sortable: false,
-        width: 160,
-        valueGetter: (value, row) => `${row.firstName || ''} ${row.lastName || ''}`
-    }
-];
+import ActionsButtons from './ActionsButtons';
+import { fDate } from 'utils/format-date';
 
 const ColorBox = ({ bgcolor, title, data, dark }) => (
     <>
@@ -109,11 +65,60 @@ const DocumentsPage = () => {
         const fetchData = async () => {
             infoService.getDocuments().then((documents) => {
                 setDataDocuments(documents.items);
-                console.log(documents.items);
             });
         };
         fetchData();
     }, []);
+
+    const columns = [
+        {
+            field: 'alta',
+            headerName: 'Fecha',
+            width: 500,
+            valueGetter: (value, row) => `${fDate(row.alta) || ''}`
+        },
+        {
+            field: 'nombre',
+            headerName: 'Nombre',
+            width: 500
+        },
+        {
+            field: 'age',
+            headerName: 'Descargar Original',
+            type: 'number',
+            width: 110,
+            renderCell: (params) => {
+                return (
+                    <Box sx={{ width: '100%', textAlign: 'center' }}>
+                        <ActionsButtons funcionOnClicDescargar={descargarFactura} factura_id={params.row.id} />
+                    </Box>
+                );
+            }
+        }
+    ];
+
+    const descargarFactura = async (id) => {
+        infoService.downloadDocument(id).then((response) => {
+            let f = blobToFile(response.file, response.filename);
+            let fileUrl = URL.createObjectURL(f);
+
+            const link = document.createElement('a');
+            link.setAttribute('target', '_blank');
+            link.setAttribute('href', fileUrl);
+            link.setAttribute('download', response.filename);
+            link.click();
+        });
+    };
+
+    const blobToFile = (theBlob, fileName) => {
+        console.log(theBlob);
+        console.log(fileName);
+        return new File([theBlob], fileName, { lastModified: new Date().getTime(), type: theBlob.type });
+    };
+
+    const getRowClassName = (params) => {
+        return params.indexRelativeToCurrentPage % 2 === 0 ? 'cebra-row' : '';
+    };
 
     return (
         <MainCard>
@@ -121,6 +126,7 @@ const DocumentsPage = () => {
                 <Grid item xs={12}>
                     <Box sx={{ height: 400, width: '100%' }}>
                         <DataGrid
+                            getRowClassName={getRowClassName}
                             rows={dataDocuments}
                             columns={columns}
                             initialState={{
@@ -131,7 +137,6 @@ const DocumentsPage = () => {
                                 }
                             }}
                             pageSizeOptions={[5]}
-                            checkboxSelection
                             disableRowSelectionOnClick
                         />
                     </Box>
