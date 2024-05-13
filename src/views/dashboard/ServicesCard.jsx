@@ -84,6 +84,7 @@ const ServicesCard = ({ isLoading }) => {
                                                 ...theme.typography.commonAvatar,
                                                 ...theme.typography.largeAvatar,
                                                 backgroundColor: theme.palette.warning.main,
+                                                color: '#fff',
                                                 mt: 1
                                             }}
                                         >

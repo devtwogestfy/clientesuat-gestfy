@@ -127,6 +127,10 @@ const IncidentsPage = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    const getRowClassName = (params) => {
+        return params.indexRelativeToCurrentPage % 2 === 0 ? 'cebra-row' : '';
+    };
+
     return (
         <MainCard>
             <Grid container spacing={gridSpacing}>
@@ -149,6 +153,7 @@ const IncidentsPage = () => {
                 <Grid item xs={12}>
                     <Box sx={{ height: 400, width: '100%' }}>
                         <DataGrid
+                            getRowClassName={getRowClassName}
                             rows={incidents}
                             columns={columns}
                             initialState={{
