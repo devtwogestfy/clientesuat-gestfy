@@ -41,17 +41,17 @@ function SummaryInfo({ total, title, isNumber, color, icon }) {
                             {fCurrency(total)}
                         </Typography>
                     ) : icon === 'receipt' ? (
-                        <ReceiptLongIcon sx={{color: theme.palette.primary.light}} />
+                        <ReceiptLongIcon sx={{ color: theme.palette.primary.light }} />
                     ) : icon === 'router' ? (
-                        <RouterIcon sx={{color: theme.palette.primary.light}} />
+                        <RouterIcon sx={{ color: theme.palette.primary.light }} />
                     ) : icon === 'phone' ? (
-                        <PhoneIcon sx={{color: theme.palette.primary.light}} />
+                        <PhoneIcon sx={{ color: theme.palette.primary.light }} />
                     ) : icon === 'mobile' ? (
-                        <PhoneIphoneIcon sx={{color: theme.palette.primary.light}} />
+                        <PhoneIphoneIcon sx={{ color: theme.palette.primary.light }} />
                     ) : icon === 'other' ? (
-                        <ShareIcon sx={{color: theme.palette.primary.light}} />
+                        <ShareIcon sx={{ color: theme.palette.primary.light }} />
                     ) : icon === 'alert' ? (
-                        <IconAlertTriangleFilled sx={{color: theme.palette.primary.light}} />
+                        <IconAlertTriangleFilled sx={{ color: theme.palette.primary.light }} />
                     ) : (
                         ''
                     )}
