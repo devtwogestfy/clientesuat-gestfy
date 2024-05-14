@@ -42,31 +42,61 @@ const BajajAreaChartCard = () => {
         }
     };
     console.log(data);
-    console.log(chartData.series);
+     const months = data.map(item => item.mes);
+    const series = [{
+      name: 'Suma',
+      data: data.map(item => parseFloat(item.suma)),
+    }];
+
+    const options = {
+        type: 'area',
+        height: 95,
+        options: {
+            chart: {
+                id: 'support-chart',
+                sparkline: {
+                    enabled: true
+                }
+            },
+            labels: months,
+            dataLabels: {
+                enabled: false
+            },
+            stroke: {
+                curve: 'smooth',
+                width: 1
+            },
+            xaxis: {
+              type: 'datetime',
+            },
+            yaxis: {
+              opposite: true
+            },
+            legend: {
+              horizontalAlign: 'left'
+            },
+            tooltip: {
+                fixed: {
+                    enabled: false
+                },
+                x: {
+                    show: true
+                },
+                y: {
+                    title: {
+                        months
+                    }
+                },
+                marker: {
+                    show: false
+                }
+            }
+        }
+    };
+
     return (
         <Card sx={{ bgcolor: 'secondary.light' }}>
-            <Grid container sx={{ p: 2, pb: 0, color: '#fff' }}>
-                <Grid item xs={12}>
-                    <Grid container alignItems="center" justifyContent="space-between">
-                        <Grid item>
-                            <Typography variant="subtitle1" sx={{ color: 'secondary.dark' }}>
-                                Bajaj Finery
-                            </Typography>
-                        </Grid>
-                        <Grid item>
-                            <Typography variant="h4" sx={{ color: 'grey.800' }}>
-                                $1839.00
-                            </Typography>
-                        </Grid>
-                    </Grid>
-                </Grid>
-                <Grid item xs={12}>
-                    <Typography variant="subtitle2" sx={{ color: 'grey.800' }}>
-                        10% Profit
-                    </Typography>
-                </Grid>
-            </Grid>
-            <Chart options={chartOptions} series={chartData.series} type="area" height={180} />
+            <Chart options={options} series={series} type="area" height={180} />
         </Card>
     );
 };
