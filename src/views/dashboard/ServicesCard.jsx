@@ -57,15 +57,67 @@ const ServicesCard = ({ isLoading }) => {
     const theme = useTheme();
 
     const [open, setOpen] = useState(false);
+    const [phones, setPhones] = useState(0);
+    const [mobiles, setMobiles] = useState(0);
+    const [ftth, setFtth] = useState(0);
+    const [others, setOthers] = useState(0);
 
+    useEffect(() => {
+        setOpen(false);
+        fetchData();
+    }, []);
+
+    const fetchData = async () => {
+        try {
+            const [servicesResponse, phonesResponse] = await Promise.all([
+                GetInfoService().getServices(1, 500),
+                GetInfoService().getPhones(1, 500)
+            ]);
+
+            const servicesData = servicesResponse.items;
+            const phonesData = phonesResponse.items;
+            //console.log(servicesData, phonesData);
+            const newData = [...servicesData, ...phonesData];
+            let phonesCount = 0;
+            let mobilesCount = 0;
+            let ftthCount = 0;
+            let othersCount = 0;
+
+            const updatedData = newData.map((element) => {
+               
+
+                if (element.tipo === 'F') {
+                    phonesCount++;
+                } else if (element.tipo === 'M') {
+                    mobilesCount++;
+                    updatedElement.tipo = 'Movil';
+                } else if (!element.tipo && element.tecnologia === 1) {
+                    ftthCount++;
+                    updatedElement.tipo = 'FTTH';
+                } else if ((element.tipo && element.tipo !== 'F' && element.tipo !== 'M') || (!element.tipo && element.tecnologia !== 1)) {
+                    othersCount++;
+                    updatedElement.tipo = 'Wimax';
+                }
+
+                return updatedElement;
+            });
+
+            setData(updatedData);
+            //setData(newData);
+            //console.log(newData);
+
+            setPhones(phonesCount);
+            setMobiles(mobilesCount);
+            setFtth(ftthCount);
+            setOthers(othersCount);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
     const openModal = () => {
         setOpen(true);
     };
     const handleClose = () => setOpen(false);
-
-    useEffect(() => {
-        setOpen(false);
-    }, []);
 
     return (
         <>
