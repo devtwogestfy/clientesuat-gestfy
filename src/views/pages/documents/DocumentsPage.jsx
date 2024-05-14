@@ -12,6 +12,7 @@ import { gridSpacing } from 'store/constant';
 import GetInfoService from 'configuraciones/servicios/info-client';
 import ActionsButtons from './ActionsButtons';
 import { fDate } from 'utils/format-date';
+import TablaSinRegistros from 'views/utilities/tables/sinRegistros';
 
 const ColorBox = ({ bgcolor, title, data, dark }) => (
     <>
@@ -129,6 +130,7 @@ const DocumentsPage = () => {
                             getRowClassName={getRowClassName}
                             rows={dataDocuments}
                             columns={columns}
+                            slots={{ noRowsOverlay: TablaSinRegistros }}
                             initialState={{
                                 pagination: {
                                     paginationModel: {

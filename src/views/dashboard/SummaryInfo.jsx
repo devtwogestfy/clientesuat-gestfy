@@ -1,4 +1,4 @@
-import { Avatar, Typography } from '@mui/material';
+import { Avatar, Stack, Typography } from '@mui/material';
 import React from 'react';
 import { Badge } from '@mui/material';
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
@@ -24,40 +24,40 @@ function SummaryInfo({ total, title, isNumber, color, icon }) {
                 : '';
 
     return (
-        <Avatar
-            variant="rounded"
-            sx={{
-                ...theme.typography.commonAvatar,
-                ...theme.typography.largeAvatar,
-                backgroundColor: backgroundcolor,
-                color: '#fff',
-                mt: 1
-            }}
-        >
-            {isNumber ? (
-                <Typography title={title} sx={{ fontSize: '0.7rem', fontWeight: 900 }}>
-                    {fCurrency(total)}
-                </Typography>
-            ) : (
-                <Badge badgeContent={total} color={color} title={title}>
-                    {icon === 'receipt' ? (
-                        <ReceiptLongIcon color="#fff" />
+        <Stack spacing={2} direction="row">
+            <Badge badgeContent={total} color={total ? 'primary' : 'error'} title={title}>
+                <Avatar
+                    variant="rounded"
+                    sx={{
+                        ...theme.typography.commonAvatar,
+                        ...theme.typography.largeAvatar,
+                        backgroundColor: backgroundcolor,
+                        color: '#fff',
+                        mt: 1
+                    }}
+                >
+                    {isNumber ? (
+                        <Typography title={title} sx={{ fontSize: '0.7rem', fontWeight: 900 }}>
+                            {fCurrency(total)}
+                        </Typography>
+                    ) : icon === 'receipt' ? (
+                        <ReceiptLongIcon sx={{color: theme.palette.primary.light}} />
                     ) : icon === 'router' ? (
-                        <RouterIcon color="#fff" />
+                        <RouterIcon sx={{color: theme.palette.primary.light}} />
                     ) : icon === 'phone' ? (
-                        <PhoneIcon color="#fff" />
+                        <PhoneIcon sx={{color: theme.palette.primary.light}} />
                     ) : icon === 'mobile' ? (
-                        <PhoneIphoneIcon color="#fff" />
+                        <PhoneIphoneIcon sx={{color: theme.palette.primary.light}} />
                     ) : icon === 'other' ? (
-                        <ShareIcon color="#fff" />
+                        <ShareIcon sx={{color: theme.palette.primary.light}} />
                     ) : icon === 'alert' ? (
-                        <IconAlertTriangleFilled color="#fff" />
+                        <IconAlertTriangleFilled sx={{color: theme.palette.primary.light}} />
                     ) : (
                         ''
                     )}
-                </Badge>
-            )}
-        </Avatar>
+                </Avatar>
+            </Badge>
+        </Stack>
     );
 }
 
