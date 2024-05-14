@@ -48,6 +48,7 @@ const BajajAreaChartCard = () => {
                 enabled: true
             }
         },
+
         dataLabels: {
             enabled: false
         },
@@ -57,9 +58,6 @@ const BajajAreaChartCard = () => {
         },
         xaxis: {
             categories: months
-        },
-        yaxis: {
-            opposite: true
         },
         legend: {
             horizontalAlign: 'left'
