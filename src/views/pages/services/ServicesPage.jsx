@@ -16,12 +16,20 @@ import { gridSpacing } from 'store/constant';
 import TotalServiceCard from './TotalServiceCard';
 import GetInfoService from 'configuraciones/servicios/info-client';
 import StatusColor from './StatusColor';
+import ActionsButtons from './ActionsButtons';
 
 const columns = [
     {
         field: 'detalle',
         headerName: 'Detalle',
-        width: 150
+        width: 200,
+        renderCell: (params) => {
+            return (
+                <Box sx={{ width: '100%', textAlign: 'center' }}>
+                    <ActionsButtons service_id={params.row.id} />
+                </Box>
+            );
+        }
     },
     {
         field: 'codigo',
@@ -41,8 +49,8 @@ const columns = [
         field: 'nombre',
         headerName: 'Servicio',
         sortable: false,
-        width: 250,
-        valueGetter: (value, row) => `${row.nombre || ''} - ${row.direccion || ''}`
+        width: 400,
+        valueGetter: (value, row) => `${row.nombre || ''} ${row.direccion ? '-' + row.direccion : ''}`
     },
     {
         field: 'estado',
@@ -156,7 +164,7 @@ const ServicesPage = () => {
 
             setData(updatedData);
             //setData(newData);
-            console.log(newData);
+            //console.log(newData);
 
             setPhones(phonesCount);
             setMobiles(mobilesCount);

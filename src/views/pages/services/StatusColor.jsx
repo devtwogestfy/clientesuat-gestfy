@@ -22,9 +22,9 @@ function StatusColor({ estado_id }) {
             : estado_id == 1
               ? 'BAJA TEMP.'
               : estado_id == 2
-                ? 'E. PENDIENTE'
+                ? 'PENDIENTE'
                 : estado_id == 3
-                  ? 'E. BAJA'
+                  ? 'BAJA'
                   : estado_id == 4
                     ? 'IMPAGO'
                     : '';

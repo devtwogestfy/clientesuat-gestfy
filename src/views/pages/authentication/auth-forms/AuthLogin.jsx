@@ -62,7 +62,7 @@ const AuthLogin = ({ ...others }) => {
             // eslint-disable-next-line no-unused-vars
             .catch((error) => {
                 setOpenAlert(true);
-                /*console.log(error);*/
+                console.log(error);
             });
     }
 
