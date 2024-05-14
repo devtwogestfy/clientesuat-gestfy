@@ -72,16 +72,16 @@ const LastestInvoicesCard = ({ isLoading }) => {
         setOpen(false);
     }, []);
 
-    const [ultimafactura, setUltimafactura] = useState(null);
-    const [pendiente, setPendiente] = useState(null);
+    //const [ultimafactura, setUltimafactura] = useState(null);
+    //const [pendiente, setPendiente] = useState(null);
     const [numeroFacturas, setNumeroFacturas] = useState(null);
 
     GetInfoService()
         .getInvoicesSummary()
         .then((summaryData) => {
-            setPendiente(summaryData.pendiente);
+            //setPendiente(summaryData.pendiente);
             setNumeroFacturas(summaryData.numerofacturas);
-            setUltimafactura(summaryData.ultimafactura);
+            //setUltimafactura(summaryData.ultimafactura);
         });
 
     return (
@@ -97,12 +97,8 @@ const LastestInvoicesCard = ({ isLoading }) => {
                                     <Grid item>
                                         <SummaryInfo total={numeroFacturas} title="Facturas" />
                                     </Grid>
-                                    <Grid item>
-                                        <SummaryInfo total={pendiente} title="Última Factura" isNumber />
-                                    </Grid>
-                                    <Grid item>
-                                        <SummaryInfo total={ultimafactura} title="Deuda Total" isNumber />
-                                    </Grid>
+                                    <Grid item></Grid>
+                                    <Grid item></Grid>
                                 </Grid>
                             </Grid>
                             <Grid item sx={{ mb: 0.75 }}>
