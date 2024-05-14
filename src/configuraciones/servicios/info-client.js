@@ -227,6 +227,23 @@ const GetInfoService = () => {
         }
     };
 
+    const getBilling = async (page = 1, limit = 25, sort = '') => {
+        try {
+            const params = {
+                page: page.toString(),
+                limit: limit.toString(),
+                sort: sort
+            };
+
+            const response = await backendAPI.get('/portal/facturacion', { params });
+            const data = response.data;
+
+            return data;
+        } catch (error) {
+            throw new Error(error.response || 'Network request failed');
+        }
+    };
+
     return {
         getCliente,
         getInvoices,
@@ -239,7 +256,8 @@ const GetInfoService = () => {
         getServices,
         descargarFactura,
         getDocuments,
-        downloadDocument
+        downloadDocument,
+        getBilling
     };
 };
 
