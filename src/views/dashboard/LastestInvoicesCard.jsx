@@ -95,7 +95,7 @@ const LastestInvoicesCard = ({ isLoading }) => {
                             <Grid item>
                                 <Grid container spacing={3}>
                                     <Grid item>
-                                        <SummaryInfo total={numeroFacturas} title="Facturas" />
+                                        <SummaryInfo total={numeroFacturas} title="Facturas" color="primary" icon="receipt" />
                                     </Grid>
                                     <Grid item></Grid>
                                     <Grid item></Grid>

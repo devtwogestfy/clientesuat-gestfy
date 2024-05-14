@@ -11,9 +11,10 @@ import SkeletonEarningCard from 'ui-component/cards/Skeleton/EarningCard';
 
 // assets
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
-import SettingsIcon from '@mui/icons-material/Settings';
 import CloseIcon from '@mui/icons-material/Close';
 import ServicesPage from 'views/pages/services/ServicesPage';
+import GetInfoService from 'configuraciones/servicios/info-client';
+import SummaryInfo from './SummaryInfo';
 
 const CardWrapper = styled(MainCard)(({ theme }) => ({
     backgroundColor: theme.palette.warning.dark,
@@ -57,6 +58,7 @@ const ServicesCard = ({ isLoading }) => {
     const theme = useTheme();
 
     const [open, setOpen] = useState(false);
+    const [, setData] = useState([]);
     const [phones, setPhones] = useState(0);
     const [mobiles, setMobiles] = useState(0);
     const [ftth, setFtth] = useState(0);
@@ -76,35 +78,22 @@ const ServicesCard = ({ isLoading }) => {
 
             const servicesData = servicesResponse.items;
             const phonesData = phonesResponse.items;
-            //console.log(servicesData, phonesData);
+
             const newData = [...servicesData, ...phonesData];
+            setData(newData);
+
             let phonesCount = 0;
             let mobilesCount = 0;
             let ftthCount = 0;
             let othersCount = 0;
 
-            const updatedData = newData.map((element) => {
-               
-
-                if (element.tipo === 'F') {
-                    phonesCount++;
-                } else if (element.tipo === 'M') {
-                    mobilesCount++;
-                    updatedElement.tipo = 'Movil';
-                } else if (!element.tipo && element.tecnologia === 1) {
-                    ftthCount++;
-                    updatedElement.tipo = 'FTTH';
-                } else if ((element.tipo && element.tipo !== 'F' && element.tipo !== 'M') || (!element.tipo && element.tecnologia !== 1)) {
+            newData.forEach((element) => {
+                if (element.tipo === 'F') phonesCount++;
+                if (element.tipo === 'M') mobilesCount++;
+                if (!element.tipo && element.tecnologia === 1) ftthCount++;
+                if ((element.tipo && element.tipo !== 'F' && element.tipo !== 'M') || (!element.tipo && element.tecnologia !== 1))
                     othersCount++;
-                    updatedElement.tipo = 'Wimax';
-                }
-
-                return updatedElement;
             });
-
-            setData(updatedData);
-            //setData(newData);
-            //console.log(newData);
 
             setPhones(phonesCount);
             setMobiles(mobilesCount);
@@ -128,20 +117,18 @@ const ServicesCard = ({ isLoading }) => {
                     <Box sx={{ p: 2.25 }}>
                         <Grid container direction="column">
                             <Grid item>
-                                <Grid container justifyContent="space-between">
+                                <Grid container spacing={2}>
                                     <Grid item>
-                                        <Avatar
-                                            variant="rounded"
-                                            sx={{
-                                                ...theme.typography.commonAvatar,
-                                                ...theme.typography.largeAvatar,
-                                                backgroundColor: theme.palette.warning.main,
-                                                color: '#fff',
-                                                mt: 1
-                                            }}
-                                        >
-                                            <SettingsIcon />
-                                        </Avatar>
+                                        <SummaryInfo total={ftth.toString()} title="FTTH" color="warning" icon="router" />
+                                    </Grid>
+                                    <Grid item>
+                                        <SummaryInfo total={phones.toString()} title="Fijos" color="warning" icon="phone" />
+                                    </Grid>
+                                    <Grid item>
+                                        <SummaryInfo total={mobiles.toString()} title="Móviles" color="warning" icon="mobile" />
+                                    </Grid>
+                                    <Grid item>
+                                        <SummaryInfo total={others.toString()} title="Otros" color="warning" icon="other" />
                                     </Grid>
                                 </Grid>
                             </Grid>
