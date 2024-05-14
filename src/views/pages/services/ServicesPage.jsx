@@ -15,6 +15,7 @@ import MainCard from 'ui-component/cards/MainCard';
 import { gridSpacing } from 'store/constant';
 import TotalServiceCard from './TotalServiceCard';
 import GetInfoService from 'configuraciones/servicios/info-client';
+import StatusColor from './StatusColor';
 
 const columns = [
     {
@@ -44,7 +45,14 @@ const columns = [
         field: 'estado',
         headerName: 'Estado',
         sortable: false,
-        width: 160
+        width: 160,
+        renderCell: (params) => {
+            return (
+                <Box sx={{ width: '100%', textAlign: 'center' }}>
+                    <StatusColor estado_id={params.row.estado} />
+                </Box>
+            );
+        }
     },
     {
         field: 'opciones',
@@ -119,7 +127,7 @@ const ServicesPage = () => {
 
             const newData = [...servicesData, ...phonesData];
             setData(newData);
-
+            console.log(newData)
             let phonesCount = 0;
             let mobilesCount = 0;
             let ftthCount = 0;
