@@ -6,6 +6,7 @@ import RouterIcon from '@mui/icons-material/Router';
 import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
 import PhoneIcon from '@mui/icons-material/Phone';
 import ShareIcon from '@mui/icons-material/Share';
+import { IconAlertTriangleFilled } from '@tabler/icons-react';
 import { useTheme } from '@mui/material/styles';
 import { fCurrency } from 'utils/format-number';
 
@@ -13,7 +14,14 @@ import { fCurrency } from 'utils/format-number';
 function SummaryInfo({ total, title, isNumber, color, icon }) {
     const theme = useTheme();
 
-    const backgroundcolor = color === 'primary' ? theme.palette.primary[800] : color === 'warning' ? theme.palette.warning.main : '';
+    const backgroundcolor =
+        color === 'primary'
+            ? theme.palette.primary[800]
+            : color === 'warning'
+              ? theme.palette.warning.main
+              : color === 'success'
+                ? theme.palette.success.light
+                : '';
 
     return (
         <Avatar
@@ -42,6 +50,8 @@ function SummaryInfo({ total, title, isNumber, color, icon }) {
                         <PhoneIphoneIcon color="#fff" />
                     ) : icon === 'other' ? (
                         <ShareIcon color="#fff" />
+                    ) : icon === 'alert' ? (
+                        <IconAlertTriangleFilled color="#fff" />
                     ) : (
                         ''
                     )}

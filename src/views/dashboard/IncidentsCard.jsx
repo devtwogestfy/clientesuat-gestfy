@@ -12,10 +12,11 @@ import MainCard from 'ui-component/cards/MainCard';
 import SkeletonTotalOrderCard from 'ui-component/cards/Skeleton/EarningCard';
 
 // assets
-import { IconAlertTriangleFilled } from '@tabler/icons-react';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import CloseIcon from '@mui/icons-material/Close';
 import IncidentsPage from 'views/pages/incidents/IncidentsPage';
+import SummaryInfo from './SummaryInfo';
+import GetInfoService from 'configuraciones/servicios/info-client';
 
 const CardWrapper = styled(MainCard)(({ theme }) => ({
     backgroundColor: theme.palette.success.dark,
@@ -64,6 +65,9 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
 const IncidentsCard = ({ isLoading }) => {
     const theme = useTheme();
     const [open, setOpen] = useState(false);
+    const [totalIncidents, setTotalIncidents] = useState(null);
+    const [totalOpen, setTotalOpen] = useState(null);
+    const [totalClose, setTotalClose] = useState(null);
 
     const openModal = () => {
         setOpen(true);
@@ -74,6 +78,14 @@ const IncidentsCard = ({ isLoading }) => {
         setOpen(false);
     }, []);
 
+    GetInfoService()
+        .getIncidentsSummary()
+        .then((summaryIncident) => {
+            setTotalIncidents(summaryIncident.numeroincidencias);
+            setTotalOpen(summaryIncident.abiertas);
+            setTotalClose(summaryIncident.cerradas);
+        });
+
     return (
         <>
             {isLoading ? (
@@ -83,20 +95,15 @@ const IncidentsCard = ({ isLoading }) => {
                     <Box sx={{ p: 2.25 }}>
                         <Grid container direction="column">
                             <Grid item>
-                                <Grid container justifyContent="space-between">
+                                <Grid container spacing={2}>
                                     <Grid item>
-                                        <Avatar
-                                            variant="rounded"
-                                            sx={{
-                                                ...theme.typography.commonAvatar,
-                                                ...theme.typography.largeAvatar,
-                                                backgroundColor: theme.palette.success.main,
-                                                color: '#fff',
-                                                mt: 1
-                                            }}
-                                        >
-                                            <IconAlertTriangleFilled fontSize="inherit" />
-                                        </Avatar>
+                                        <SummaryInfo color="success" title="Incidentes" total={totalIncidents} icon="alert" />
+                                    </Grid>
+                                    <Grid item>
+                                        <SummaryInfo color="success" title="Abierta" total={totalOpen} icon="alert" />
+                                    </Grid>
+                                    <Grid item>
+                                        <SummaryInfo color="success" title="Cerrada" total={totalClose} icon="alert" />
                                     </Grid>
                                 </Grid>
                             </Grid>
