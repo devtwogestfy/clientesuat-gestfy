@@ -32,7 +32,10 @@ const columns = [
         field: 'intservicio_id',
         headerName: 'Tipo',
         type: 'number',
-        width: 110
+        width: 110,
+        renderCell: (params) => {
+            return <Box sx={{ width: '100%', textAlign: 'center' }}>{params.row.tipo}</Box>;
+        }
     },
     {
         field: 'nombre',
@@ -124,29 +127,41 @@ const ServicesPage = () => {
 
             const servicesData = servicesResponse.items;
             const phonesData = phonesResponse.items;
-
+            //console.log(servicesData, phonesData);
             const newData = [...servicesData, ...phonesData];
-            setData(newData);
-            console.log(newData)
             let phonesCount = 0;
             let mobilesCount = 0;
             let ftthCount = 0;
             let othersCount = 0;
 
-            newData.forEach((element) => {
-                if (element.tipo === 'F') phonesCount++;
-                if (element.tipo === 'M') mobilesCount++;
-                if (!element.tipo && element.tecnologia === 1) ftthCount++;
-                if ((element.tipo && element.tipo !== 'F' && element.tipo !== 'M') || (!element.tipo && element.tecnologia !== 1))
+            const updatedData = newData.map((element) => {
+                let updatedElement = { ...element }; // Creamos una copia del elemento actual
+
+                if (element.tipo === 'F') {
+                    phonesCount++;
+                    updatedElement.tipo = 'Fijo';
+                } else if (element.tipo === 'M') {
+                    mobilesCount++;
+                    updatedElement.tipo = 'Movil';
+                } else if (!element.tipo && element.tecnologia === 1) {
+                    ftthCount++;
+                    updatedElement.tipo = 'FTTH';
+                } else if ((element.tipo && element.tipo !== 'F' && element.tipo !== 'M') || (!element.tipo && element.tecnologia !== 1)) {
                     othersCount++;
+                    updatedElement.tipo = 'Wimax';
+                }
+
+                return updatedElement;
             });
+
+            setData(updatedData);
+            //setData(newData);
+            console.log(newData);
 
             setPhones(phonesCount);
             setMobiles(mobilesCount);
             setFtth(ftthCount);
             setOthers(othersCount);
-
-            console.log(newData);
         } catch (error) {
             console.error('Error fetching data:', error);
         }

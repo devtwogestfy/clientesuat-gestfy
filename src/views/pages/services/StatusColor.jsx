@@ -4,7 +4,6 @@ import { Badge } from '@mui/material';
 // Definición del componente Funcional
 // eslint-disable-next-line react/prop-types
 function StatusColor({ estado_id }) {
-    console.log(estado_id);
     const color =
         estado_id == 0
             ? 'success'
