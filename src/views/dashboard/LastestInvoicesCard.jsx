@@ -10,10 +10,11 @@ import MainCard from 'ui-component/cards/MainCard';
 import SkeletonTotalOrderCard from 'ui-component/cards/Skeleton/EarningCard';
 
 // assets
-import { IconReceipt } from '@tabler/icons-react';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import CloseIcon from '@mui/icons-material/Close';
 import InvoicesPage from 'views/pages/invoices/InvoicesPage';
+import SummaryInfo from './SummaryInfo';
+import GetInfoService from 'configuraciones/servicios/info-client';
 
 const CardWrapper = styled(MainCard)(({ theme }) => ({
     backgroundColor: theme.palette.primary.dark,
@@ -71,6 +72,18 @@ const LastestInvoicesCard = ({ isLoading }) => {
         setOpen(false);
     }, []);
 
+    const [ultimafactura, setUltimafactura] = useState(null);
+    const [pendiente, setPendiente] = useState(null);
+    const [numeroFacturas, setNumeroFacturas] = useState(null);
+
+    GetInfoService()
+        .getInvoicesSummary()
+        .then((summaryData) => {
+            setPendiente(summaryData.pendiente);
+            setNumeroFacturas(summaryData.numerofacturas);
+            setUltimafactura(summaryData.ultimafactura);
+        });
+
     return (
         <>
             {isLoading ? (
@@ -80,20 +93,15 @@ const LastestInvoicesCard = ({ isLoading }) => {
                     <Box sx={{ p: 2.25 }}>
                         <Grid container direction="column">
                             <Grid item>
-                                <Grid container justifyContent="space-between">
+                                <Grid container spacing={3}>
                                     <Grid item>
-                                        <Avatar
-                                            variant="rounded"
-                                            sx={{
-                                                ...theme.typography.commonAvatar,
-                                                ...theme.typography.largeAvatar,
-                                                backgroundColor: theme.palette.primary[800],
-                                                color: '#fff',
-                                                mt: 1
-                                            }}
-                                        >
-                                            <IconReceipt fontSize="inherit" />
-                                        </Avatar>
+                                        <SummaryInfo total={numeroFacturas} title="Facturas" />
+                                    </Grid>
+                                    <Grid item>
+                                        <SummaryInfo total={pendiente} title="Última Factura" isNumber />
+                                    </Grid>
+                                    <Grid item>
+                                        <SummaryInfo total={ultimafactura} title="Deuda Total" isNumber />
                                     </Grid>
                                 </Grid>
                             </Grid>
