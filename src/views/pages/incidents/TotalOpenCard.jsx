@@ -8,7 +8,7 @@ import MainCard from 'ui-component/cards/MainCard';
 import SkeletonTotalOrderCard from 'ui-component/cards/Skeleton/EarningCard';
 
 // assets
-import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
+import { IconAlertTriangleFilled } from '@tabler/icons-react';
 import { fShortenNumber } from '../../../utils/format-number';
 
 const CardWrapper = styled(MainCard)(({ theme }) => ({
@@ -77,7 +77,7 @@ const TotalOpenCard = ({ isLoading, title, total }) => {
                                                 mt: 1
                                             }}
                                         >
-                                            <LocalMallOutlinedIcon fontSize="inherit" />
+                                            <IconAlertTriangleFilled fontSize="inherit" />
                                         </Avatar>
                                     </Grid>
                                 </Grid>
