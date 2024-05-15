@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { IconButton } from '@mui/material';
 import Box from '@mui/material/Box';
@@ -7,6 +7,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import Grid from '@mui/material/Grid';
 import {
     Alert,
+    Autocomplete,
     Button,
     Dialog,
     DialogActions,
@@ -18,7 +19,6 @@ import {
     Popper,
     Fade
 } from '@mui/material';
-import MenuItem from '@mui/material/MenuItem';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
@@ -34,6 +34,7 @@ import ActionsButtons from './ActionsButtons';
 import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
 import CloseIcon from '@mui/icons-material/Close';
 import PostInfoService from 'configuraciones/servicios/post-info-client';
+import MenuItem from '@mui/material/MenuItem';
 
 const columns = [
     {
@@ -41,6 +42,7 @@ const columns = [
         headerName: '',
         width: 50,
         renderCell: (params) => {
+            console.log(params)
             return (
                 <Box sx={{ width: '100%', textAlign: 'center' }}>
                     <ActionsButtons notas={params.row.notas} />
@@ -141,11 +143,12 @@ const IncidentsPage = () => {
     const [totalHours, setTotalHours] = useState(null);
     const [incidents, setIncidents] = useState([]);
     const [open, setOpen] = useState(false);
-    const [selectedOption, setSelectedOption] = useState([]);
+    const [selectedOption, setSelectedOption] = useState(null);
     const [description, setDescription] = useState('');
     const [services, setServices] = useState([]);
     const [isAlertSuccess, setIsAlertSuccess] = useState(false);
-    const anchorRef = useRef(null);
+    const [errors, setErrors] = useState({});
+
     const openCreateModal = () => {
         setOpen(true);
     };
@@ -169,7 +172,6 @@ const IncidentsPage = () => {
 
     const fetchData = async () => {
         infoService.getTickets().then((dataIncidents) => {
-            console.log(dataIncidents);
             setIncidents(dataIncidents.items);
         });
 
@@ -193,16 +195,28 @@ const IncidentsPage = () => {
             texto: description
         };
 
-        postInfoService.createIncident(parameters).then((response) => {
-            console.log(response);
-        });
-        setOpen(false);
-        fetchData();
-        setIsAlertSuccess(true); // Mostrar la alerta
-            setTimeout(() => {
-                setIsAlertSuccess(false); // Ocultar la alerta después de un tiempo
-            }, 3000);
-            setOpen(false);
+        const newErrors = {};
+        console.log(selectedOption);
+        if (selectedOption === null) {
+            newErrors.service = 'El servicio es obligatorio.';
+        }
+        if (description.length < 25) {
+            newErrors.description = 'La descripción debe tener al menos 25 caracteres.';
+        }
+        if (Object.keys(newErrors).length === 0) {
+            postInfoService.createIncident(parameters).then((response) => {
+                console.log(response);
+                setOpen(false);
+                fetchData();
+                setIsAlertSuccess(true); // Mostrar la alerta
+                setTimeout(() => {
+                    setIsAlertSuccess(false); // Ocultar la alerta después de un tiempo
+                }, 3000);
+                setOpen(false);
+            });
+        } else {
+            setErrors(newErrors);
+        }
     };
 
     return (
@@ -255,7 +269,7 @@ const IncidentsPage = () => {
                             disableRowSelectionOnClick
                         />
                     </Box>
-                    <Popper open={isAlertSuccess} anchorEl={anchorRef.current} transition>
+                    <Popper open={isAlertSuccess} transition>
                         {({ TransitionProps }) => (
                             <Fade {...TransitionProps} timeout={350}>
                                 <Stack sx={{ width: '100%' }} spacing={2}>
@@ -267,33 +281,50 @@ const IncidentsPage = () => {
                         )}
                     </Popper>
                     <Dialog open={open} onClose={handleModalClose} maxWidth="md" fullWidth>
-                        <DialogTitle>
+                        <DialogTitle style={{ backgroundColor: '#4527a0' }}>
                             <IconButton onClick={handleModalClose} sx={{ position: 'absolute', top: 0, right: 0 }}>
                                 <CloseIcon />
                             </IconButton>
                             <Grid container alignItems="center" spacing={2}>
                                 <Grid item>
-                                    <Typography variant="h3">Nueva Incidencia</Typography>
+                                    <Typography variant="h3" color={'#fff'}>
+                                        Nueva Incidencia
+                                    </Typography>
                                 </Grid>
                             </Grid>
                         </DialogTitle>
                         <DialogContent>
-                            <Grid container spacing={2}>
+                            <Grid container spacing={2} sx={{ padding: 3 }}>
                                 <Grid item xs={12}>
                                     {/* ComboBox */}
-                                    <TextField
-                                        select
-                                        label="Seleccionar opción"
-                                        variant="outlined"
-                                        fullWidth
-                                        onChange={(event) => setSelectedOption(event.target.value)}
-                                    >
-                                        {services.map((option) => (
-                                            <MenuItem key={option.id} value={option.id}>
-                                                {option.nombre}
-                                            </MenuItem>
-                                        ))}
-                                    </TextField>
+
+                                    <Autocomplete
+                                        disablePortal
+                                        id="combo-box-demo"
+                                        onChange={(event, value) => {
+                                            setSelectedOption(value.id);
+                                            if (value.id) {
+                                                setErrors((prevErrors) => ({ ...prevErrors, service: '' }));
+                                            }
+                                        }}
+                                        sx={{ width: '100%' }}
+                                        options={services.map((option) => ({ id: option.id, label: option.nombre }))}
+                                        renderInput={(params) => (
+                                            <TextField
+                                                {...params}
+                                                label="Servicio"
+                                                {...(errors.service && { error: errors.service })}
+                                                helperText={errors.service}
+                                            />
+                                        )}
+                                        renderOption={(props, option) => {
+                                            return (
+                                                <MenuItem {...props} key={option.id}>
+                                                    {option.label}
+                                                </MenuItem>
+                                            );
+                                        }}
+                                    />
                                 </Grid>
                                 <Grid item xs={12}>
                                     {/* TextBox */}
@@ -304,7 +335,14 @@ const IncidentsPage = () => {
                                         rows={4}
                                         fullWidth
                                         value={description}
-                                        onChange={(event) => setDescription(event.target.value)}
+                                        onChange={(event) => {
+                                            setDescription(event.target.value);
+                                            if (event.target.value.length >= 25) {
+                                                setErrors((prevErrors) => ({ ...prevErrors, description: '' }));
+                                            }
+                                        }}
+                                        error={Boolean(errors.description)}
+                                        helperText={errors.description}
                                     />
                                 </Grid>
                             </Grid>

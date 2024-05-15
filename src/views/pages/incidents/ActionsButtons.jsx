@@ -5,6 +5,7 @@ import React from 'react';
 import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, Typography } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+import ColorsTimeline from './ColorsTimeline';
 
 // Definición del componente Funcional
 // eslint-disable-next-line react/prop-types
@@ -20,11 +21,6 @@ function ActionsButtons({ notas }) {
     useEffect(() => {
         setOpen(false);
     }, []);
-
-    const RemoveHTMLTags = (htmlString) => {
-        const cleanString = htmlString.replace(/<[^>]*>/g, '');
-        return <>{cleanString}</>;
-    };
 
     return (
         <>
@@ -51,7 +47,9 @@ function ActionsButtons({ notas }) {
                         </Grid>
                     </Grid>
                 </DialogTitle>
-                <DialogContent>{RemoveHTMLTags(notas)}</DialogContent>
+                <DialogContent>
+                    <ColorsTimeline notas={notas} />
+                </DialogContent>
                 <DialogActions>
                     <Button variant="outlined" onClick={handleClose} color="error">
                         Cerrar
