@@ -1,11 +1,23 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { IconButton } from '@mui/material';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import { DataGrid } from '@mui/x-data-grid';
 import Grid from '@mui/material/Grid';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, Typography } from '@mui/material';
+import {
+    Alert,
+    Button,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+    Stack,
+    TextField,
+    Typography,
+    Popper,
+    Fade
+} from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 
 // project imports
@@ -130,8 +142,10 @@ const IncidentsPage = () => {
     const [incidents, setIncidents] = useState([]);
     const [open, setOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState([]);
-    const [description, setDescription] = useState(null);
+    const [description, setDescription] = useState('');
     const [services, setServices] = useState([]);
+    const [isAlertSuccess, setIsAlertSuccess] = useState(false);
+    const anchorRef = useRef(null);
     const openCreateModal = () => {
         setOpen(true);
     };
@@ -184,6 +198,11 @@ const IncidentsPage = () => {
         });
         setOpen(false);
         fetchData();
+        setIsAlertSuccess(true); // Mostrar la alerta
+            setTimeout(() => {
+                setIsAlertSuccess(false); // Ocultar la alerta después de un tiempo
+            }, 3000);
+            setOpen(false);
     };
 
     return (
@@ -236,6 +255,17 @@ const IncidentsPage = () => {
                             disableRowSelectionOnClick
                         />
                     </Box>
+                    <Popper open={isAlertSuccess} anchorEl={anchorRef.current} transition>
+                        {({ TransitionProps }) => (
+                            <Fade {...TransitionProps} timeout={350}>
+                                <Stack sx={{ width: '100%' }} spacing={2}>
+                                    <Alert variant="filled" severity="success">
+                                        Incidencia creada con éxito.
+                                    </Alert>
+                                </Stack>
+                            </Fade>
+                        )}
+                    </Popper>
                     <Dialog open={open} onClose={handleModalClose} maxWidth="md" fullWidth>
                         <DialogTitle>
                             <IconButton onClick={handleModalClose} sx={{ position: 'absolute', top: 0, right: 0 }}>
@@ -257,7 +287,6 @@ const IncidentsPage = () => {
                                         variant="outlined"
                                         fullWidth
                                         onChange={(event) => setSelectedOption(event.target.value)}
-                                        name="service"
                                     >
                                         {services.map((option) => (
                                             <MenuItem key={option.id} value={option.id}>
