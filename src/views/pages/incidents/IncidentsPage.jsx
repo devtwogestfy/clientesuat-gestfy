@@ -21,6 +21,7 @@ import StatusColor from './StatusColor';
 import ActionsButtons from './ActionsButtons';
 import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
 import CloseIcon from '@mui/icons-material/Close';
+import PostInfoService from 'configuraciones/servicios/post-info-client';
 
 const columns = [
     {
@@ -128,9 +129,9 @@ const IncidentsPage = () => {
     const [totalHours, setTotalHours] = useState(null);
     const [incidents, setIncidents] = useState([]);
     const [open, setOpen] = useState(false);
-    const [, setSelectedOption] = useState([]);
+    const [selectedOption, setSelectedOption] = useState([]);
     const [description, setDescription] = useState(null);
-
+    const [services, setServices] = useState([]);
     const openCreateModal = () => {
         setOpen(true);
     };
@@ -141,6 +142,7 @@ const IncidentsPage = () => {
     }, []);
 
     const infoService = GetInfoService();
+    const postInfoService = PostInfoService();
     infoService.getIncidentsSummary().then((summaryIncident) => {
         setTotalIncidents(summaryIncident.numeroincidencias);
         setTotalOpen(summaryIncident.abiertas);
@@ -153,8 +155,12 @@ const IncidentsPage = () => {
 
     const fetchData = async () => {
         infoService.getTickets().then((dataIncidents) => {
-            setIncidents(dataIncidents.items);
             console.log(dataIncidents);
+            setIncidents(dataIncidents.items);
+        });
+
+        infoService.getServicesList(1, 25).then((dataServices) => {
+            setServices(dataServices.items);
         });
     };
 
@@ -167,25 +173,18 @@ const IncidentsPage = () => {
         return params.indexRelativeToCurrentPage % 2 === 0 ? 'cebra-row' : '';
     };
 
-    const options = [
-        {
-          label: "Apple",
-          value: "apple",
-        },
-        {
-          label: "Mango",
-          value: "mango",
-        },
-        {
-          label: "Banana",
-          value: "banana",
-        },
-        {
-          label: "Pineapple",
-          value: "pineapple",
-        },
-      ];
-     
+    const handleCreateIncident = () => {
+        const parameters = {
+            servicio_id: selectedOption,
+            texto: description
+        };
+
+        postInfoService.createIncident(parameters).then((response) => {
+            console.log(response);
+        });
+        setOpen(false);
+    };
+
     return (
         <MainCard>
             <Grid container spacing={gridSpacing}>
@@ -257,11 +256,12 @@ const IncidentsPage = () => {
                                         variant="outlined"
                                         fullWidth
                                         onChange={(event) => setSelectedOption(event.target.value)}
+                                        name="service"
                                     >
-                                        {options.map((option) => (
-                                            <MenuItem key={option.value} value={option.value}>
-                                            {option.label}
-                                        </MenuItem>
+                                        {services.map((option) => (
+                                            <MenuItem key={option.id} value={option.id}>
+                                                {option.nombre}
+                                            </MenuItem>
                                         ))}
                                     </TextField>
                                 </Grid>
@@ -280,6 +280,9 @@ const IncidentsPage = () => {
                             </Grid>
                         </DialogContent>
                         <DialogActions>
+                            <Button variant="outlined" onClick={handleCreateIncident} color="primary">
+                                Enviar
+                            </Button>
                             <Button variant="outlined" onClick={handleModalClose} color="error">
                                 Cerrar
                             </Button>

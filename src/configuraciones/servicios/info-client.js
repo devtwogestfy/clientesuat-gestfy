@@ -244,6 +244,22 @@ const GetInfoService = () => {
         }
     };
 
+    const getServicesList = async (page = 1, limit = 25, sort = '') => {
+        try {
+            const params = {
+                page: page.toString(),
+                limit: limit.toString(),
+                sort: sort
+            };
+
+            const response = await backendAPI.get('/portal/servicios', { params });
+            const data = response.data;
+            return data;
+        } catch (error) {
+            throw new Error(error.response || 'Network request failed');
+        }
+    };
+
     return {
         getCliente,
         getInvoices,
@@ -257,7 +273,8 @@ const GetInfoService = () => {
         descargarFactura,
         getDocuments,
         downloadDocument,
-        getBilling
+        getBilling,
+        getServicesList
     };
 };
 
