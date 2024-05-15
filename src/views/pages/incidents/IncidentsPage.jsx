@@ -5,7 +5,8 @@ import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import { DataGrid } from '@mui/x-data-grid';
 import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, Typography } from '@mui/material';
+import MenuItem from '@mui/material/MenuItem';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
@@ -19,6 +20,7 @@ import { fDate } from 'utils/format-date';
 import StatusColor from './StatusColor';
 import ActionsButtons from './ActionsButtons';
 import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
+import CloseIcon from '@mui/icons-material/Close';
 
 const columns = [
     {
@@ -125,6 +127,18 @@ const IncidentsPage = () => {
     const [totalClose, setTotalClose] = useState(null);
     const [totalHours, setTotalHours] = useState(null);
     const [incidents, setIncidents] = useState([]);
+    const [open, setOpen] = useState(false);
+    const [, setSelectedOption] = useState([]);
+    const [description, setDescription] = useState(null);
+
+    const openCreateModal = () => {
+        setOpen(true);
+    };
+    const handleModalClose = () => setOpen(false);
+
+    useEffect(() => {
+        setOpen(false);
+    }, []);
 
     const infoService = GetInfoService();
     infoService.getIncidentsSummary().then((summaryIncident) => {
@@ -153,6 +167,25 @@ const IncidentsPage = () => {
         return params.indexRelativeToCurrentPage % 2 === 0 ? 'cebra-row' : '';
     };
 
+    const options = [
+        {
+          label: "Apple",
+          value: "apple",
+        },
+        {
+          label: "Mango",
+          value: "mango",
+        },
+        {
+          label: "Banana",
+          value: "banana",
+        },
+        {
+          label: "Pineapple",
+          value: "pineapple",
+        },
+      ];
+     
     return (
         <MainCard>
             <Grid container spacing={gridSpacing}>
@@ -175,7 +208,12 @@ const IncidentsPage = () => {
                 <Grid item xs={12}>
                     <Grid container spacing={gridSpacing}>
                         <Grid item xs={12} sm={6} md={4} lg={3}>
-                            <IconButton backgroundColor={'info'} color={'info'} title="Nueva Incidencia">
+                            <IconButton
+                                title="Nueva Incidencia"
+                                onClick={() => {
+                                    openCreateModal();
+                                }}
+                            >
                                 <AddCircleRoundedIcon></AddCircleRoundedIcon>
                             </IconButton>
                         </Grid>
@@ -198,6 +236,55 @@ const IncidentsPage = () => {
                             disableRowSelectionOnClick
                         />
                     </Box>
+                    <Dialog open={open} onClose={handleModalClose} maxWidth="md" fullWidth>
+                        <DialogTitle>
+                            <IconButton onClick={handleModalClose} sx={{ position: 'absolute', top: 0, right: 0 }}>
+                                <CloseIcon />
+                            </IconButton>
+                            <Grid container alignItems="center" spacing={2}>
+                                <Grid item>
+                                    <Typography variant="h3">Nueva Incidencia</Typography>
+                                </Grid>
+                            </Grid>
+                        </DialogTitle>
+                        <DialogContent>
+                            <Grid container spacing={2}>
+                                <Grid item xs={12}>
+                                    {/* ComboBox */}
+                                    <TextField
+                                        select
+                                        label="Seleccionar opción"
+                                        variant="outlined"
+                                        fullWidth
+                                        onChange={(event) => setSelectedOption(event.target.value)}
+                                    >
+                                        {options.map((option) => (
+                                            <MenuItem key={option.value} value={option.value}>
+                                            {option.label}
+                                        </MenuItem>
+                                        ))}
+                                    </TextField>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    {/* TextBox */}
+                                    <TextField
+                                        label="Descripción"
+                                        variant="outlined"
+                                        multiline
+                                        rows={4}
+                                        fullWidth
+                                        value={description}
+                                        onChange={(event) => setDescription(event.target.value)}
+                                    />
+                                </Grid>
+                            </Grid>
+                        </DialogContent>
+                        <DialogActions>
+                            <Button variant="outlined" onClick={handleModalClose} color="error">
+                                Cerrar
+                            </Button>
+                        </DialogActions>
+                    </Dialog>
                 </Grid>
             </Grid>
         </MainCard>

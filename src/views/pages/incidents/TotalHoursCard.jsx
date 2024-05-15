@@ -106,7 +106,7 @@ const TotalHoursCard = ({ isLoading, title, total }) => {
 TotalHoursCard.propTypes = {
     isLoading: PropTypes.bool,
     title: PropTypes.string,
-    total: PropTypes.number
+    total: PropTypes.string
 };
 
 export default TotalHoursCard;
