@@ -42,7 +42,6 @@ const columns = [
         headerName: '',
         width: 50,
         renderCell: (params) => {
-            console.log(params)
             return (
                 <Box sx={{ width: '100%', textAlign: 'center' }}>
                     <ActionsButtons notas={params.row.notas} />
