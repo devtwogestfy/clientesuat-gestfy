@@ -26,7 +26,7 @@ const columns = [
         renderCell: (params) => {
             return (
                 <Box sx={{ width: '100%', textAlign: 'center' }}>
-                    <ActionsButtons service_id={params.row.id} />
+                    <ActionsButtons service_id={params.row.id} tipo={params.row.tipo} />
                 </Box>
             );
         }
@@ -164,7 +164,7 @@ const ServicesPage = () => {
 
             setData(updatedData);
             //setData(newData);
-            //console.log(newData);
+            console.log(updatedData);
 
             setPhones(phonesCount);
             setMobiles(mobilesCount);

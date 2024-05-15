@@ -87,7 +87,7 @@ const TotalIncidentsCard = ({ isLoading, title, total }) => {
                                 <Grid container direction="column" alignItems="left">
                                     <Grid item>
                                         <Typography sx={{ fontSize: '1.7rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.2 }}>
-                                            {fShortenNumber(total)}
+                                            {fShortenNumber(total.toString())}
                                         </Typography>
                                     </Grid>
                                     <Grid item>
