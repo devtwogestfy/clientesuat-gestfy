@@ -183,6 +183,7 @@ const IncidentsPage = () => {
             console.log(response);
         });
         setOpen(false);
+        fetchData();
     };
 
     return (
