@@ -35,6 +35,7 @@ import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
 import CloseIcon from '@mui/icons-material/Close';
 import PostInfoService from 'configuraciones/servicios/post-info-client';
 import MenuItem from '@mui/material/MenuItem';
+import { useTheme } from '@mui/material/styles';
 
 const columns = [
     {
@@ -136,6 +137,7 @@ ColorBox.propTypes = {
 };
 
 const IncidentsPage = () => {
+    const theme = useTheme();
     const [totalIncidents, setTotalIncidents] = useState(null);
     const [totalOpen, setTotalOpen] = useState(null);
     const [totalClose, setTotalClose] = useState(null);
@@ -155,6 +157,8 @@ const IncidentsPage = () => {
 
     useEffect(() => {
         setOpen(false);
+        fetchData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const infoService = GetInfoService();
@@ -179,11 +183,6 @@ const IncidentsPage = () => {
             setServices(dataServices.items);
         });
     };
-
-    useEffect(() => {
-        fetchData();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
 
     const getRowClassName = (params) => {
         return params.indexRelativeToCurrentPage % 2 === 0 ? 'cebra-row' : '';
@@ -247,7 +246,7 @@ const IncidentsPage = () => {
                                     openCreateModal();
                                 }}
                             >
-                                <AddCircleRoundedIcon></AddCircleRoundedIcon>
+                                <AddCircleRoundedIcon sx={{ color: theme.palette.primary[800] }}></AddCircleRoundedIcon>
                             </IconButton>
                         </Grid>
                     </Grid>
