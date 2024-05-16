@@ -15,12 +15,16 @@ function ActionsButtons({ service_id, tipo }) {
         navigate('/phone-records', tipo + '-' + service_id);
     };
 
+    const handleSettingsClick = () => {
+        navigate('/router', tipo + '-' + service_id);
+    };
+
     return (
         <Box sx={{ width: '100%', textAlign: 'center' }}>
-            <IconButton aria-label="editar" color={'info'}>
+            <IconButton aria-label="editar" color={'info'} onClick={handleSettingsClick}>
                 <SettingsIcon></SettingsIcon>
             </IconButton>
-            <IconButton aria-label="editar" color={'info'} onClick={handleAddCircleClick} target="_blank">
+            <IconButton aria-label="editar" color={'info'} onClick={handleAddCircleClick}>
                 <AddCircleRoundedIcon></AddCircleRoundedIcon>
             </IconButton>
             <IconButton aria-label="editar" color={'info'}>
