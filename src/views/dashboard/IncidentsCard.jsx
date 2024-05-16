@@ -121,7 +121,7 @@ const IncidentsCard = ({ isLoading }) => {
                                                     sx={{
                                                         ...theme.typography.smallAvatar,
                                                         cursor: 'pointer',
-                                                        backgroundColor: theme.palette.success.light,
+                                                        backgroundColor: theme.palette.success.dark,
                                                         color: theme.palette.success.dark
                                                     }}
                                                 >

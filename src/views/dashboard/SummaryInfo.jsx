@@ -6,19 +6,19 @@ import RouterIcon from '@mui/icons-material/Router';
 import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
 import PhoneIcon from '@mui/icons-material/Phone';
 import ShareIcon from '@mui/icons-material/Share';
-import { IconAlertTriangleFilled } from '@tabler/icons-react';
+import ReportProblemRoundedIcon from '@mui/icons-material/ReportProblemRounded';
 import { useTheme } from '@mui/material/styles';
 import { fCurrency } from 'utils/format-number';
 
 // eslint-disable-next-line react/prop-types
 function SummaryInfo({ total, title, isNumber, color, icon }) {
     const theme = useTheme();
-
+    console.log(icon)
     const backgroundcolor =
         color === 'primary'
             ? theme.palette.primary[800]
             : color === 'warning'
-              ? theme.palette.warning.main
+              ? theme.palette.warning.light
               : color === 'success'
                 ? theme.palette.success.light
                 : '';
@@ -32,7 +32,6 @@ function SummaryInfo({ total, title, isNumber, color, icon }) {
                         ...theme.typography.commonAvatar,
                         ...theme.typography.largeAvatar,
                         backgroundColor: backgroundcolor,
-                        color: '#fff',
                         mt: 1
                     }}
                 >
@@ -43,15 +42,15 @@ function SummaryInfo({ total, title, isNumber, color, icon }) {
                     ) : icon === 'receipt' ? (
                         <ReceiptLongIcon sx={{ color: theme.palette.primary.light }} />
                     ) : icon === 'router' ? (
-                        <RouterIcon sx={{ color: theme.palette.primary.light }} />
+                        <RouterIcon sx={{ color: theme.palette.warning.dark }} />
                     ) : icon === 'phone' ? (
-                        <PhoneIcon sx={{ color: theme.palette.primary.light }} />
+                        <PhoneIcon sx={{ color: theme.palette.warning.dark }} />
                     ) : icon === 'mobile' ? (
-                        <PhoneIphoneIcon sx={{ color: theme.palette.primary.light }} />
+                        <PhoneIphoneIcon sx={{ color: theme.palette.warning.dark }} />
                     ) : icon === 'other' ? (
-                        <ShareIcon sx={{ color: theme.palette.primary.light }} />
+                        <ShareIcon sx={{ color: theme.palette.warning.dark }} />
                     ) : icon === 'alert' ? (
-                        <IconAlertTriangleFilled sx={{ color: theme.palette.primary.light }} />
+                        <ReportProblemRoundedIcon sx={{ color: theme.palette.success.dark }} />
                     ) : (
                         ''
                     )}
