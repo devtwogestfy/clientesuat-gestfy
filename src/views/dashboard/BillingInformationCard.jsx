@@ -14,7 +14,7 @@ import { IconUser } from '@tabler/icons-react';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import { FormattedMessage } from 'react-intl';
-import { backendAPI } from 'configuraciones/app';
+import GetInfoClient from 'configuraciones/servicios/client';
 
 const CardWrapper = styled(MainCard)(({ theme }) => ({
     backgroundColor: theme.palette.secondary.dark,
@@ -55,32 +55,21 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
 const BillingInformationCard = ({ isLoading }) => {
     const theme = useTheme();
     const [showData, setShowData] = useState(false);
-    const [clienteInfo, setClienteInfo] = useState(null);
+    const [clientInfo, setClientInfo] = useState(null);
 
+    const infoClient = GetInfoClient();
+    const fetchData = async () => {
+        try {
+            infoClient.getClient().then((client) => {
+                setClientInfo(client);
+            });
+        } catch (error) {
+            console.error(error);
+        }
+    };
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = new Promise((resolve, reject) => {
-                    backendAPI
-                        .get('/appclientes/cliente')
-                        .then(function (response) {
-                            const data = response.data;
-                            setClienteInfo(data);
-                            resolve(response);
-                        })
-                        .catch(function (error) {
-                            reject(error.response);
-                        });
-                });
-                if (!response) {
-                    throw new Error('Network response was not ok');
-                }
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        };
-
         fetchData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const handleToggleData = () => {
@@ -142,14 +131,22 @@ const BillingInformationCard = ({ isLoading }) => {
                             {showData && (
                                 <Grid item>
                                     <Typography sx={{ fontSize: '1.2rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>
-                                        <b>Nombre:</b> {clienteInfo.nombre} {clienteInfo.apellido}
+                                        <b>Nombre:</b> {clientInfo.nombre} {clientInfo.apellido}
                                     </Typography>
-                                    <Typography sx={{ fontSize: '1.2rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>
-                                        <b>Dirección:</b> {clienteInfo.direccion}
-                                    </Typography>
-                                    <Typography sx={{ fontSize: '1.2rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>
-                                        <b>Teléfonos:</b> {clienteInfo.tel1}
-                                    </Typography>
+                                    {clientInfo.direccion ? (
+                                        <Typography sx={{ fontSize: '1.2rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>
+                                            <b>Dirección:</b> {clientInfo.direccion}
+                                        </Typography>
+                                    ) : (
+                                        ''
+                                    )}
+                                    {clientInfo.tel1 ? (
+                                        <Typography sx={{ fontSize: '1.2rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>
+                                            <b>Teléfonos:</b> {clientInfo.tel1}
+                                        </Typography>
+                                    ) : (
+                                        ''
+                                    )}
                                 </Grid>
                             )}
                         </Grid>

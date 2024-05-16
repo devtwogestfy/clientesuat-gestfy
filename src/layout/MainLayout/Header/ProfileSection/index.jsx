@@ -31,6 +31,8 @@ import User1 from 'assets/images/users/user-round.svg';
 // assets
 import { IconLogout, IconSettings, IconUser } from '@tabler/icons-react';
 import { useCookies } from 'react-cookie';
+import GreetingComponent from './GreetingComponent';
+import GetInfoClient from 'configuraciones/servicios/client';
 // ==============================|| PROFILE MENU ||============================== //
 
 const ProfileSection = () => {
@@ -40,6 +42,23 @@ const ProfileSection = () => {
     const [selectedIndex, setSelectedIndex] = useState(-1);
     const [open, setOpen] = useState(false);
     const [, , removeCookie] = useCookies(['usuario']);
+    const [clientInfo, setClientInfo] = useState([]);
+
+    const infoClient = GetInfoClient();
+    const fetchData = async () => {
+        try {
+            infoClient.getClient().then((client) => {
+                setClientInfo(client);
+            });
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    useEffect(() => {
+        fetchData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
     /**
      * anchorRef is used on different componets and specifying one type leads to other components throwing an error
      * */
@@ -148,12 +167,13 @@ const ProfileSection = () => {
                                     <Box sx={{ p: 2, pb: 0 }}>
                                         <Stack>
                                             <Stack direction="row" spacing={0.5} alignItems="center">
-                                                <Typography variant="h4">Good Morning,</Typography>
+                                                <Typography variant="h4">
+                                                    <GreetingComponent />,
+                                                </Typography>
                                                 <Typography component="span" variant="h4" sx={{ fontWeight: 400 }}>
-                                                    Johne Doe
+                                                    {clientInfo.nombre} {clientInfo.apellido}
                                                 </Typography>
                                             </Stack>
-                                            <Typography variant="subtitle2">Project Admin</Typography>
                                         </Stack>
                                         <Divider />
                                     </Box>
