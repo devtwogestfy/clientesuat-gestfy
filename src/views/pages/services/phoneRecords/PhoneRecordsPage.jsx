@@ -23,6 +23,11 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import ActionsButtons from './ActionsButtons';
 import TablePhoneRecords from './TablePhoneRecords';
 import { useParams } from 'react-router-dom';
+import { TextField, Alert, Snackbar } from '@mui/material';
+import 'dayjs/locale/es';
+import isBetween from 'dayjs/plugin/isBetween';
+
+dayjs.extend(isBetween);
 
 const ColorBox = ({ bgcolor, title, data, dark }) => (
     <>
@@ -74,9 +79,12 @@ const PhoneRecordsPage = () => {
     const [mobiles, setMobiles] = useState(0);
     const [ftth, setFtth] = useState(0);
     const [others, setOthers] = useState(0);
-    const [value, setValue] = useState(dayjs('2022-04-17'));
+    const [startDate, setStartDate] = useState(dayjs().startOf('month'));
+    const [value, setValue] = useState(dayjs());
     const params = useParams();
     const [showInfo, setShowInfo] = useState(false);
+    const [error, setError] = useState('');
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
 
     const code = params.id;
     useEffect(() => {
@@ -86,6 +94,22 @@ const PhoneRecordsPage = () => {
             setShowInfo(false);
         }
     }, [code]);
+
+    const handleEndDateChange = (newValue) => {
+        const threeMonthsLater = startDate.add(3, 'month');
+
+        if (newValue.isAfter(threeMonthsLater)) {
+            setError('El rango no puede ser mayor de 3 meses.');
+            setSnackbarOpen(true);
+        } else {
+            setError('');
+            setValue(newValue);
+        }
+    };
+
+    const handleSnackbarClose = () => {
+        setSnackbarOpen(false);
+    };
 
     return (
         <MainCard>
@@ -127,16 +151,38 @@ const PhoneRecordsPage = () => {
                     </Grid>
                 </Grid>
                 <Grid item xs={12}>
-                    <Grid container spacing={gridSpacing}>
+                    <Grid container spacing={0}>
                         <Grid item xs={12} sm={6} md={6} lg={6}>
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <DemoContainer components={['DatePicker', 'DatePicker']}>
-                                    <DatePicker label="Uncontrolled picker" defaultValue={dayjs('2022-04-17')} />
-                                    <DatePicker label="Controlled picker" value={value} onChange={(newValue) => setValue(newValue)} />
+                                    <DatePicker
+                                        label="Fecha desde"
+                                        value={startDate}
+                                        onChange={(newValue) => setStartDate(newValue)}
+                                        format="DD/MM/YYYY"
+                                        renderInput={(params) => <TextField {...params} sx={{ margin: 0 }} />}
+                                    />
+                                    <DatePicker
+                                        label="Fecha hasta"
+                                        value={value}
+                                        onChange={handleEndDateChange}
+                                        format="DD/MM/YYYY"
+                                        renderInput={(params) => <TextField {...params} sx={{ margin: 0 }} />}
+                                    />
                                 </DemoContainer>
+                                <Snackbar
+                                    open={snackbarOpen}
+                                    autoHideDuration={6000}
+                                    onClose={handleSnackbarClose}
+                                    anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+                                >
+                                    <Alert onClose={handleSnackbarClose} severity="error" sx={{ width: '100%' }}>
+                                        {error}
+                                    </Alert>
+                                </Snackbar>
                             </LocalizationProvider>
                         </Grid>
-                        <Grid item xs={12} sm={6} md={6} lg={6}>
+                        <Grid item xs={12} sm={6} md={6} lg={6} sx={{ paddingTop: '10px', paddingRight: '15rem' }}>
                             <ActionsButtons />
                         </Grid>
                     </Grid>
