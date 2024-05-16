@@ -1,77 +1,16 @@
-/* eslint-disable react-hooks/exhaustive-deps */
+// src/views/pages/services/ServicesPage.jsx
 import { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-
-// material-ui
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
-import { DataGrid } from '@mui/x-data-grid';
 import Grid from '@mui/material/Grid';
+import PropTypes from 'prop-types';
 import Typography from '@mui/material/Typography';
-
-// project imports
 import MainCard from 'ui-component/cards/MainCard';
 import { gridSpacing } from 'store/constant';
 import TotalServiceCard from './TotalServiceCard';
 import GetInfoService from 'configuraciones/servicios/info-client';
-import StatusColor from './StatusColor';
-import ActionsButtons from './ActionsButtons';
-
-const columns = [
-    {
-        field: 'detalle',
-        headerName: 'Detalle',
-        width: 200,
-        renderCell: (params) => {
-            return (
-                <Box sx={{ width: '100%', textAlign: 'center' }}>
-                    <ActionsButtons service_id={params.row.id} tipo={params.row.tipo} />
-                </Box>
-            );
-        }
-    },
-    {
-        field: 'codigo',
-        headerName: 'Código',
-        width: 150
-    },
-    {
-        field: 'intservicio_id',
-        headerName: 'Tipo',
-        type: 'number',
-        width: 110,
-        renderCell: (params) => {
-            return <Box sx={{ width: '100%', textAlign: 'center' }}>{params.row.tipo}</Box>;
-        }
-    },
-    {
-        field: 'nombre',
-        headerName: 'Servicio',
-        sortable: false,
-        width: 400,
-        valueGetter: (value, row) => `${row.nombre || ''} ${row.direccion ? '-' + row.direccion : ''}`
-    },
-    {
-        field: 'estado',
-        headerName: 'Estado',
-        sortable: false,
-        width: 160,
-        renderCell: (params) => {
-            return (
-                <Box sx={{ width: '100%', textAlign: 'center' }}>
-                    <StatusColor estado_id={params.row.estado} />
-                </Box>
-            );
-        }
-    },
-    {
-        field: 'opciones',
-        headerName: 'opciones',
-        sortable: false,
-        width: 160
-    }
-];
+import ServicesDataGrid from './ServicesDataGrid';
 
 const ColorBox = ({ bgcolor, title, data, dark }) => (
     <>
@@ -126,6 +65,7 @@ const ServicesPage = () => {
 
     useEffect(() => {
         fetchData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const infoService = GetInfoService();
@@ -135,7 +75,6 @@ const ServicesPage = () => {
 
             const servicesData = servicesResponse.items;
             const phonesData = phonesResponse.items;
-            //console.log(servicesData, phonesData);
             const newData = [...servicesData, ...phonesData];
             let phonesCount = 0;
             let mobilesCount = 0;
@@ -143,7 +82,7 @@ const ServicesPage = () => {
             let othersCount = 0;
 
             const updatedData = newData.map((element) => {
-                let updatedElement = { ...element }; // Creamos una copia del elemento actual
+                let updatedElement = { ...element };
 
                 if (element.tipo === 'F') {
                     phonesCount++;
@@ -163,9 +102,6 @@ const ServicesPage = () => {
             });
 
             setData(updatedData);
-            //setData(newData);
-            console.log(updatedData);
-
             setPhones(phonesCount);
             setMobiles(mobilesCount);
             setFtth(ftthCount);
@@ -173,10 +109,6 @@ const ServicesPage = () => {
         } catch (error) {
             console.error('Error fetching data:', error);
         }
-    };
-
-    const getRowClassName = (params) => {
-        return params.indexRelativeToCurrentPage % 2 === 0 ? 'cebra-row' : '';
     };
 
     return (
@@ -223,22 +155,7 @@ const ServicesPage = () => {
                     </Grid>
                 </Grid>
                 <Grid item xs={12}>
-                    <Box sx={{ height: 400, width: '100%' }}>
-                        <DataGrid
-                            getRowClassName={getRowClassName}
-                            rows={data}
-                            columns={columns}
-                            initialState={{
-                                pagination: {
-                                    paginationModel: {
-                                        pageSize: 5
-                                    }
-                                }
-                            }}
-                            pageSizeOptions={[5]}
-                            disableRowSelectionOnClick
-                        />
-                    </Box>
+                    <ServicesDataGrid rows={data} />
                 </Grid>
             </Grid>
         </MainCard>
