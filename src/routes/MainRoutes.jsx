@@ -55,8 +55,13 @@ const MainRoutes = {
             element: <AuthGuard component={<ServicesPage />}></AuthGuard>
         },
         {
-            path: 'phone-records',
-            element: <AuthGuard component={<PhoneRecordsPage />}></AuthGuard>
+            path: 'services',
+            children: [
+                {
+                    path: 'phone-records/:id',
+                    element: <AuthGuard component={<PhoneRecordsPage />}></AuthGuard>
+                }
+            ]
         },
         {
             path: 'router',

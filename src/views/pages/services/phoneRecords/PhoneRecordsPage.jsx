@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 // material-ui
@@ -22,6 +22,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import ActionsButtons from './ActionsButtons';
 import TablePhoneRecords from './TablePhoneRecords';
+import { useParams } from 'react-router-dom';
 
 const ColorBox = ({ bgcolor, title, data, dark }) => (
     <>
@@ -74,29 +75,46 @@ const PhoneRecordsPage = () => {
     const [ftth, setFtth] = useState(0);
     const [others, setOthers] = useState(0);
     const [value, setValue] = useState(dayjs('2022-04-17'));
+    const params = useParams();
+    const [showInfo, setShowInfo] = useState(false);
+
+    const code = params.id;
+    useEffect(() => {
+        if (code.split('-')[0] !== 'F') {
+            setShowInfo(true);
+        } else {
+            setShowInfo(false);
+        }
+    }, [code]);
+
     return (
         <MainCard>
             <Grid container spacing={gridSpacing}>
                 <Grid item xs={12}>
                     <Grid container spacing={gridSpacing}>
-                        <Grid item xs={12} sm={6} md={4} lg={4}>
-                            <TotalServiceCard
-                                title="Total SMS"
-                                total={ftth}
-                                colorCard={theme.palette.primary.dark}
-                                backgroundCard={theme.palette.primary[800]}
-                                icon="router"
-                            />
-                        </Grid>
-                        <Grid item xs={12} sm={6} md={4} lg={4}>
-                            <TotalServiceCard
-                                title="Total Datos"
-                                total={phones}
-                                colorCard={theme.palette.warning.dark}
-                                backgroundCard={theme.palette.warning.main}
-                                icon="phone"
-                            />
-                        </Grid>
+                        {showInfo && (
+                            <>
+                                <Grid item xs={12} sm={6} md={4} lg={4}>
+                                    <TotalServiceCard
+                                        title="Total SMS"
+                                        total={ftth}
+                                        colorCard={theme.palette.primary.dark}
+                                        backgroundCard={theme.palette.primary[800]}
+                                        icon="router"
+                                        showInfo
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={6} md={4} lg={4}>
+                                    <TotalServiceCard
+                                        title="Total Datos"
+                                        total={phones}
+                                        colorCard={theme.palette.warning.dark}
+                                        backgroundCard={theme.palette.warning.main}
+                                        icon="phone"
+                                    />
+                                </Grid>
+                            </>
+                        )}
                         <Grid item xs={12} sm={6} md={4} lg={4}>
                             <TotalServiceCard
                                 title="Total Llamadas"

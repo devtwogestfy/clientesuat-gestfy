@@ -12,7 +12,7 @@ function ActionsButtons({ id, estado, tipoId, aviso, prepaid }) {
     const navigate = useNavigate();
 
     const handleAddCircleClick = () => {
-        navigate('/phone-records', id);
+        navigate('/services/phone-records/' + tipoId + '-' + id);
     };
 
     const handleSettingsClick = () => {
