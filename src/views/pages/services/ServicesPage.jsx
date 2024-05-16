@@ -83,6 +83,8 @@ const ServicesPage = () => {
 
             const updatedData = newData.map((element) => {
                 let updatedElement = { ...element };
+                updatedElement.tipoId = element.tipo;
+                updatedElement.prepaid = element.prepaid;
 
                 if (element.tipo === 'F') {
                     phonesCount++;

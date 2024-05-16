@@ -14,7 +14,13 @@ const columns = [
         renderCell: (params) => {
             return (
                 <Box sx={{ width: '100%', textAlign: 'center' }}>
-                    <ActionsButtons service_id={params.row.id} tipo={params.row.tipo} />
+                    <ActionsButtons
+                        id={params.row.id}
+                        estado={params.row.estado}
+                        tipoId={params.row.tipoId}
+                        aviso={params.row.aviso}
+                        prepaid={params.row.prepaid}
+                    />
                 </Box>
             );
         }

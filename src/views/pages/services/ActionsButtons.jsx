@@ -8,33 +8,33 @@ import PaymentsRoundedIcon from '@mui/icons-material/PaymentsRounded';
 import { useNavigate } from 'react-router-dom';
 
 // eslint-disable-next-line react/prop-types
-function ActionsButtons({ service_id, tipo }) {
+function ActionsButtons({ id, estado, tipoId, aviso, prepaid }) {
     const navigate = useNavigate();
 
     const handleAddCircleClick = () => {
-        navigate('/phone-records', tipo + '-' + service_id);
+        navigate('/phone-records', id);
     };
 
     const handleSettingsClick = () => {
-        navigate('/router', tipo + '-' + service_id);
+        navigate('/router');
     };
 
     const handlePaymentsClick = () => {
-        navigate('/prepays', tipo + '-' + service_id);
+        navigate('/prepays');
     };
 
     return (
         <Box sx={{ width: '100%', textAlign: 'center' }}>
-            <IconButton aria-label="editar" color={'info'} onClick={handleSettingsClick}>
+            <IconButton aria-label="editar" color={'info'} onClick={handleSettingsClick} disabled={!!tipoId || estado !== 0}>
                 <SettingsIcon></SettingsIcon>
             </IconButton>
-            <IconButton aria-label="editar" color={'info'} onClick={handleAddCircleClick}>
+            <IconButton aria-label="editar" color={'info'} onClick={handleAddCircleClick} disabled={!tipoId}>
                 <AddCircleRoundedIcon></AddCircleRoundedIcon>
             </IconButton>
-            <IconButton aria-label="editar" color={'info'}>
+            <IconButton aria-label="editar" color={'info'} disabled={!tipoId || aviso === '0'}>
                 <InfoRoundedIcon></InfoRoundedIcon>
             </IconButton>
-            <IconButton aria-label="editar" color={'info'} onClick={handlePaymentsClick}>
+            <IconButton aria-label="editar" color={'info'} onClick={handlePaymentsClick} disabled={prepaid != 1}>
                 <PaymentsRoundedIcon></PaymentsRoundedIcon>
             </IconButton>
         </Box>
