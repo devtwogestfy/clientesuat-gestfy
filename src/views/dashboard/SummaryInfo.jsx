@@ -13,7 +13,6 @@ import { fCurrency } from 'utils/format-number';
 // eslint-disable-next-line react/prop-types
 function SummaryInfo({ total, title, isNumber, color, icon }) {
     const theme = useTheme();
-    console.log(icon)
     const backgroundcolor =
         color === 'primary'
             ? theme.palette.primary[800]
