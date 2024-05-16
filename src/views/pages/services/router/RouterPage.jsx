@@ -221,15 +221,15 @@ const RouterPage = () => {
                                     >
                                         <FormGrid sx={{ flexGrow: 1 }}>
                                             <FormLabel htmlFor="card-ssid" required>
-                                                SSID
+                                                IP
                                             </FormLabel>
-                                            <OutlinedInput id="card-ssid" autoComplete="card-ssid" placeholder="SSID" required />
+                                            <OutlinedInput id="card-ssid" autoComplete="card-ssid" placeholder="IP" required />
                                         </FormGrid>
                                         <FormGrid sx={{ flexGrow: 1 }}>
                                             <FormLabel htmlFor="password" required>
-                                                Contraseña
+                                                Máscara
                                             </FormLabel>
-                                            <OutlinedInput id="password" autoComplete="password" placeholder="Contraseña" required />
+                                            <OutlinedInput id="password" autoComplete="password" placeholder="Máscara" required />
                                         </FormGrid>
                                     </Box>
                                     <Box
@@ -241,15 +241,15 @@ const RouterPage = () => {
                                     >
                                         <FormGrid sx={{ flexGrow: 1 }}>
                                             <FormLabel htmlFor="card-ssid" required>
-                                                SSID
+                                                DHCP Desde
                                             </FormLabel>
-                                            <OutlinedInput id="card-ssid" autoComplete="card-ssid" placeholder="SSID" required />
+                                            <OutlinedInput id="card-ssid" autoComplete="card-ssid" placeholder="DHCP Desde" required />
                                         </FormGrid>
                                         <FormGrid sx={{ flexGrow: 1 }}>
                                             <FormLabel htmlFor="password" required>
-                                                Contraseña
+                                                DHCP hasta
                                             </FormLabel>
-                                            <OutlinedInput id="password" autoComplete="password" placeholder="Contraseña" required />
+                                            <OutlinedInput id="password" autoComplete="password" placeholder=" DHCP hasta" required />
                                         </FormGrid>
                                     </Box>
 

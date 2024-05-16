@@ -79,40 +79,31 @@ const PhoneRecordsPage = () => {
             <Grid container spacing={gridSpacing}>
                 <Grid item xs={12}>
                     <Grid container spacing={gridSpacing}>
-                        <Grid item xs={12} sm={6} md={4} lg={3}>
+                        <Grid item xs={12} sm={6} md={4} lg={4}>
                             <TotalServiceCard
-                                title="FTTH"
+                                title="Total SMS"
                                 total={ftth}
-                                colorCard={theme.palette.secondary.dark}
-                                backgroundCard={theme.palette.secondary[800]}
+                                colorCard={theme.palette.primary.dark}
+                                backgroundCard={theme.palette.primary[800]}
                                 icon="router"
                             />
                         </Grid>
-                        <Grid item xs={12} sm={6} md={4} lg={3}>
+                        <Grid item xs={12} sm={6} md={4} lg={4}>
                             <TotalServiceCard
-                                title="Fijos"
+                                title="Total Datos"
                                 total={phones}
-                                colorCard={theme.palette.primary.dark}
-                                backgroundCard={theme.palette.primary[800]}
+                                colorCard={theme.palette.warning.dark}
+                                backgroundCard={theme.palette.warning.main}
                                 icon="phone"
                             />
                         </Grid>
-                        <Grid item xs={12} sm={6} md={4} lg={3}>
+                        <Grid item xs={12} sm={6} md={4} lg={4}>
                             <TotalServiceCard
-                                title="Móviles"
+                                title="Total Llamadas"
                                 total={mobiles}
                                 colorCard={theme.palette.success.dark}
                                 backgroundCard={theme.palette.success.light}
                                 icon="mobile"
-                            />
-                        </Grid>
-                        <Grid item xs={12} sm={6} md={4} lg={3}>
-                            <TotalServiceCard
-                                title="Otros"
-                                total={others}
-                                colorCard={theme.palette.error.dark}
-                                backgroundCard={theme.palette.error.light}
-                                icon="other"
                             />
                         </Grid>
                     </Grid>

@@ -19,6 +19,10 @@ function ActionsButtons({ service_id, tipo }) {
         navigate('/router', tipo + '-' + service_id);
     };
 
+    const handlePaymentsClick = () => {
+        navigate('/prepays', tipo + '-' + service_id);
+    };
+
     return (
         <Box sx={{ width: '100%', textAlign: 'center' }}>
             <IconButton aria-label="editar" color={'info'} onClick={handleSettingsClick}>
@@ -30,7 +34,7 @@ function ActionsButtons({ service_id, tipo }) {
             <IconButton aria-label="editar" color={'info'}>
                 <InfoRoundedIcon></InfoRoundedIcon>
             </IconButton>
-            <IconButton aria-label="editar" color={'info'}>
+            <IconButton aria-label="editar" color={'info'} onClick={handlePaymentsClick}>
                 <PaymentsRoundedIcon></PaymentsRoundedIcon>
             </IconButton>
         </Box>

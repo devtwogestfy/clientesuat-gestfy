@@ -14,6 +14,7 @@ const ServicesPage = Loadable(lazy(() => import('views/pages/services/ServicesPa
 const ProfileViewPage = Loadable(lazy(() => import('views/pages/profile/profileViewPage')));
 const PhoneRecordsPage = Loadable(lazy(() => import('views/pages/services/phoneRecords/PhoneRecordsPage')));
 const RouterPage = Loadable(lazy(() => import('views/pages/services/router/RouterPage')));
+const PrepaysPage = Loadable(lazy(() => import('views/pages/services/prepays/PrepaysPage')));
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
@@ -60,6 +61,10 @@ const MainRoutes = {
         {
             path: 'router',
             element: <AuthGuard component={<RouterPage />}></AuthGuard>
+        },
+        {
+            path: 'prepays',
+            element: <AuthGuard component={<PrepaysPage />}></AuthGuard>
         }
     ]
 };
