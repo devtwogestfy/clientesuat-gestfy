@@ -1,26 +1,7 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { IconButton } from '@mui/material';
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
+import { IconButton, Box, Card, Grid, Alert, Popper, Fade, Typography, Stack } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
-import Grid from '@mui/material/Grid';
-import {
-    Alert,
-    Autocomplete,
-    Button,
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogTitle,
-    Stack,
-    TextField,
-    Typography,
-    Popper,
-    Fade
-} from '@mui/material';
-
-// project imports
 import MainCard from 'ui-component/cards/MainCard';
 import { gridSpacing } from 'store/constant';
 import GetInfoService from 'configuraciones/servicios/info-client';
@@ -32,23 +13,20 @@ import { fDate } from 'utils/format-date';
 import StatusColor from './StatusColor';
 import ActionsButtons from './ActionsButtons';
 import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
-import CloseIcon from '@mui/icons-material/Close';
-import PostInfoService from 'configuraciones/servicios/post-info-client';
-import MenuItem from '@mui/material/MenuItem';
 import { useTheme } from '@mui/material/styles';
+import CreateIncidentDialog from './CreateIncidentDialog';
+import PostInfoService from 'configuraciones/servicios/post-info-client';
 
 const columns = [
     {
         field: 'notas',
         headerName: '',
         width: 50,
-        renderCell: (params) => {
-            return (
-                <Box sx={{ width: '100%', textAlign: 'center' }}>
-                    <ActionsButtons notas={params.row.notas} />
-                </Box>
-            );
-        }
+        renderCell: (params) => (
+            <Box sx={{ width: '100%', textAlign: 'center' }}>
+                <ActionsButtons notas={params.row.notas} />
+            </Box>
+        )
     },
     {
         field: 'numero',
@@ -83,13 +61,11 @@ const columns = [
         headerName: 'Estado',
         sortable: false,
         width: 160,
-        renderCell: (params) => {
-            return (
-                <Box sx={{ width: '100%', textAlign: 'center' }}>
-                    <StatusColor estado_id={params.row.estado_id} />
-                </Box>
-            );
-        }
+        renderCell: (params) => (
+            <Box sx={{ width: '100%', textAlign: 'center' }}>
+                <StatusColor estado_id={params.row.estado_id} />
+            </Box>
+        )
     }
 ];
 
@@ -240,13 +216,8 @@ const IncidentsPage = () => {
                 <Grid item xs={12}>
                     <Grid container spacing={gridSpacing}>
                         <Grid item xs={12} sm={6} md={4} lg={3}>
-                            <IconButton
-                                title="Nueva Incidencia"
-                                onClick={() => {
-                                    openCreateModal();
-                                }}
-                            >
-                                <AddCircleRoundedIcon sx={{ color: theme.palette.primary[800] }}></AddCircleRoundedIcon>
+                            <IconButton title="Nueva Incidencia" onClick={openCreateModal}>
+                                <AddCircleRoundedIcon sx={{ color: theme.palette.primary[800] }} />
                             </IconButton>
                         </Grid>
                     </Grid>
@@ -279,82 +250,18 @@ const IncidentsPage = () => {
                             </Fade>
                         )}
                     </Popper>
-                    <Dialog open={open} onClose={handleModalClose} maxWidth="md" fullWidth>
-                        <DialogTitle style={{ backgroundColor: '#4527a0' }}>
-                            <IconButton onClick={handleModalClose} sx={{ position: 'absolute', top: 0, right: 0 }}>
-                                <CloseIcon />
-                            </IconButton>
-                            <Grid container alignItems="center" spacing={2}>
-                                <Grid item>
-                                    <Typography variant="h3" color={'#fff'}>
-                                        Nueva Incidencia
-                                    </Typography>
-                                </Grid>
-                            </Grid>
-                        </DialogTitle>
-                        <DialogContent>
-                            <Grid container spacing={2} sx={{ padding: 3 }}>
-                                <Grid item xs={12}>
-                                    {/* ComboBox */}
-
-                                    <Autocomplete
-                                        disablePortal
-                                        id="combo-box-demo"
-                                        onChange={(event, value) => {
-                                            setSelectedOption(value.id);
-                                            if (value.id) {
-                                                setErrors((prevErrors) => ({ ...prevErrors, service: '' }));
-                                            }
-                                        }}
-                                        sx={{ width: '100%' }}
-                                        options={services.map((option) => ({ id: option.id, label: option.nombre }))}
-                                        renderInput={(params) => (
-                                            <TextField
-                                                {...params}
-                                                label="Servicio"
-                                                {...(errors.service && { error: errors.service })}
-                                                helperText={errors.service}
-                                            />
-                                        )}
-                                        renderOption={(props, option) => {
-                                            return (
-                                                <MenuItem {...props} key={option.id}>
-                                                    {option.label}
-                                                </MenuItem>
-                                            );
-                                        }}
-                                    />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    {/* TextBox */}
-                                    <TextField
-                                        label="Descripción"
-                                        variant="outlined"
-                                        multiline
-                                        rows={4}
-                                        fullWidth
-                                        value={description}
-                                        onChange={(event) => {
-                                            setDescription(event.target.value);
-                                            if (event.target.value.length >= 25) {
-                                                setErrors((prevErrors) => ({ ...prevErrors, description: '' }));
-                                            }
-                                        }}
-                                        error={Boolean(errors.description)}
-                                        helperText={errors.description}
-                                    />
-                                </Grid>
-                            </Grid>
-                        </DialogContent>
-                        <DialogActions>
-                            <Button variant="outlined" onClick={handleCreateIncident} color="primary">
-                                Enviar
-                            </Button>
-                            <Button variant="outlined" onClick={handleModalClose} color="error">
-                                Cerrar
-                            </Button>
-                        </DialogActions>
-                    </Dialog>
+                    <CreateIncidentDialog
+                        open={open}
+                        handleClose={handleModalClose}
+                        services={services}
+                        selectedOption={selectedOption}
+                        setSelectedOption={setSelectedOption}
+                        description={description}
+                        setDescription={setDescription}
+                        handleCreateIncident={handleCreateIncident}
+                        errors={errors}
+                        setErrors={setErrors}
+                    />
                 </Grid>
             </Grid>
         </MainCard>
