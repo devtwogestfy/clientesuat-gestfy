@@ -29,7 +29,7 @@ export default defineConfig({
         proxy: {
             // con opciones
             '/api': {
-                target: 'http://migracion.gestfy.lan/app.php',
+                target: 'http://uat.gestfy.lan/app.php',
                 changeOrigin: true,
                 rewrite: (path) => path.replace(/^\/api/, '')
             }

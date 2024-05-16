@@ -175,6 +175,7 @@ const IncidentsPage = () => {
         });
 
         infoService.getServicesList(1, 25).then((dataServices) => {
+            console.log(dataServices);
             setServices(dataServices.items);
         });
     };

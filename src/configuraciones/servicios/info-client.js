@@ -89,7 +89,7 @@ const GetInfoService = () => {
                 filter: filter
             };
 
-            const response = await backendAPI.get('/appclientes/facturas', { params });
+            const response = await backendAPI.get('/portal/facturas', { params });
             const data = response.data;
             return data;
         } catch (error) {

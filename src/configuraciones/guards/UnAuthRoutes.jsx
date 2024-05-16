@@ -10,7 +10,7 @@ const UnAuthRoutes = ({ component }) => {
     useEffect(() => {
         setUsuarioAutenticado(cookies);
     }, [cookies, usuarioAutenticado]);
-
+    console.log(cookies);
     if (Object.keys(cookies).length === 0) {
         // Aún estamos verificando la validez del token
         return <React.Fragment>{component}</React.Fragment>;
