@@ -25,6 +25,7 @@ import { useParams } from 'react-router-dom';
 import { TextField, Alert, Snackbar } from '@mui/material';
 import 'dayjs/locale/es';
 import isBetween from 'dayjs/plugin/isBetween';
+import { getGigaBytes } from 'utils/format-gb';
 
 dayjs.extend(isBetween);
 
@@ -75,7 +76,7 @@ const PhoneRecordsPage = () => {
     const theme = useTheme();
     const [data, setData] = useState([]);
     const [startDate, setStartDate] = useState(dayjs().startOf('month'));
-    const [value, setValue] = useState(dayjs());
+    const [endDate, setEndDate] = useState(dayjs());
     const params = useParams();
     const [showInfo, setShowInfo] = useState(false);
     const [error, setError] = useState('');
@@ -102,16 +103,16 @@ const PhoneRecordsPage = () => {
         }
     }, [code]);
 
-    const handleEndDateChange = (newValue) => {
+    const handleEndDateChange = (newDate) => {
         const threeMonthsLater = startDate.add(3, 'month');
 
-        if (newValue.isAfter(threeMonthsLater)) {
+        if (newDate.isAfter(threeMonthsLater)) {
             setError('El rango no puede ser mayor de 3 meses.');
             setSnackbarOpen(true);
             setIncomingCheck(true);
         } else {
             setError('');
-            setValue(newValue);
+            setEndDate(newDate);
             setIncomingCheck(false);
         }
     };
@@ -122,11 +123,13 @@ const PhoneRecordsPage = () => {
 
     const handleResetDates = () => {
         setStartDate(dayjs().startOf('month'));
-        setValue(dayjs());
+        setEndDate(dayjs());
+        setData([]);
+        setDetails({});
     };
 
     const handleDownloadData = () => {
-        alert('hi')
+        alert('hi');
     };
     const isDetailsEmpty = Object.keys(details).length === 0;
 
@@ -140,20 +143,20 @@ const PhoneRecordsPage = () => {
                                 <Grid item xs={12} sm={6} md={4} lg={4}>
                                     <TotalServiceCard
                                         title="Total SMS"
-                                        total={!isDetailsEmpty ? details.sms : '0'}
+                                        total={!isDetailsEmpty ? details.sms.toString() : '0'}
                                         colorCard={theme.palette.primary.dark}
                                         backgroundCard={theme.palette.primary[800]}
-                                        icon="router"
+                                        icon="message"
                                         showInfo
                                     />
                                 </Grid>
                                 <Grid item xs={12} sm={6} md={4} lg={4}>
                                     <TotalServiceCard
                                         title="Total Datos"
-                                        total={!isDetailsEmpty ? details.datos : '0'}
+                                        total={!isDetailsEmpty ? getGigaBytes(details.datos).toString() : '0'}
                                         colorCard={theme.palette.warning.dark}
                                         backgroundCard={theme.palette.warning.main}
-                                        icon="phone"
+                                        icon="fourg"
                                     />
                                 </Grid>
                             </>
@@ -161,10 +164,10 @@ const PhoneRecordsPage = () => {
                         <Grid item xs={12} sm={6} md={4} lg={4}>
                             <TotalServiceCard
                                 title="Total Llamadas"
-                                total={!isDetailsEmpty ? details.salientesformatted : '0'}
+                                total={!isDetailsEmpty ? details.salientesformatted.toString() : '0'}
                                 colorCard={theme.palette.success.dark}
                                 backgroundCard={theme.palette.success.light}
-                                icon="mobile"
+                                icon="phone"
                             />
                         </Grid>
                     </Grid>
@@ -183,7 +186,7 @@ const PhoneRecordsPage = () => {
                                     />
                                     <DatePicker
                                         label="Fecha hasta"
-                                        value={value}
+                                        value={endDate}
                                         onChange={handleEndDateChange}
                                         format="DD/MM/YYYY"
                                         renderInput={(params) => <TextField {...params} sx={{ margin: 0 }} />}
@@ -204,7 +207,7 @@ const PhoneRecordsPage = () => {
                         <Grid item xs={12} sm={6} md={6} lg={6} sx={{ paddingTop: '10px', paddingRight: '15rem' }}>
                             <ActionsButtons
                                 startDate={startDate}
-                                endDate={value}
+                                endDate={endDate}
                                 code={code}
                                 incomingCheck={incomingCheck}
                                 onSendData={handleChildData}

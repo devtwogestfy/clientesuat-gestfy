@@ -11,6 +11,15 @@ import GetInfoService from 'configuraciones/servicios/service';
 
 // eslint-disable-next-line react/prop-types
 function ActionsButtons({ startDate, endDate, code, incomingCheck, onSendData, onResetDates, onDownloadData }) {
+    const iconButtonStyles = {
+        backgroundColor: 'blue',
+        color: '#fff',
+        '&:hover': {
+            backgroundColor: 'darkblue'
+        },
+        margin: '2px'
+    };
+
     const handleSearchClick = () => {
         fetchData();
     };
@@ -40,49 +49,13 @@ function ActionsButtons({ startDate, endDate, code, incomingCheck, onSendData, o
 
     return (
         <Box sx={{ width: '100%', textAlign: 'center' }}>
-            <IconButton
-                aria-label="Consultar"
-                title="Consultar"
-                sx={{
-                    backgroundColor: 'blue',
-                    color: '#fff',
-                    margin: '2px',
-                    '&:hover': {
-                        backgroundColor: 'darkblue'
-                    }
-                }}
-                onClick={handleSearchClick}
-            >
+            <IconButton aria-label="Consultar" title="Consultar" sx={iconButtonStyles} onClick={handleSearchClick}>
                 <SearchRoundedIcon></SearchRoundedIcon>
             </IconButton>
-            <IconButton
-                aria-label="limpiar"
-                title="Limpiar"
-                sx={{
-                    backgroundColor: 'blue',
-                    color: '#fff',
-                    margin: '2px',
-                    '&:hover': {
-                        backgroundColor: 'darkblue'
-                    }
-                }}
-                onClick={handleResetClick}
-            >
+            <IconButton aria-label="limpiar" title="Limpiar" sx={iconButtonStyles} onClick={handleResetClick}>
                 <RestartAltRoundedIcon></RestartAltRoundedIcon>
             </IconButton>
-            <IconButton
-                aria-label="descargar"
-                title="Descargar"
-                sx={{
-                    backgroundColor: 'blue',
-                    color: '#fff',
-                    margin: '2px',
-                    '&:hover': {
-                        backgroundColor: 'darkblue'
-                    }
-                }}
-                onClick={onDownloadData}
-            >
+            <IconButton aria-label="descargar" title="Descargar" sx={iconButtonStyles} onClick={onDownloadData}>
                 <DownloadRoundedIcon></DownloadRoundedIcon>
             </IconButton>
         </Box>

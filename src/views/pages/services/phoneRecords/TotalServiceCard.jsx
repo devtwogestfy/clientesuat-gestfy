@@ -8,11 +8,9 @@ import MainCard from 'ui-component/cards/MainCard';
 import SkeletonTotalOrderCard from 'ui-component/cards/Skeleton/EarningCard';
 
 // assets
-
-import RouterIcon from '@mui/icons-material/Router';
-import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
-import PhoneIcon from '@mui/icons-material/Phone';
-import ShareIcon from '@mui/icons-material/Share';
+import PhoneRoundedIcon from '@mui/icons-material/PhoneRounded';
+import FourGMobiledataRoundedIcon from '@mui/icons-material/FourGMobiledataRounded';
+import MessageRoundedIcon from '@mui/icons-material/MessageRounded';
 
 const CardWrapper = styled(MainCard)(({ theme, backgroundcolor, backgroundcard }) => ({
     backgroundColor: backgroundcolor,
@@ -56,7 +54,14 @@ const CardWrapper = styled(MainCard)(({ theme, backgroundcolor, backgroundcard }
     }
 }));
 
+const icons = {
+    phone: PhoneRoundedIcon,
+    message: MessageRoundedIcon,
+    fourg: FourGMobiledataRoundedIcon
+};
+
 const TotalServiceCard = ({ isLoading, title, total, colorCard, backgroundCard, icon }) => {
+    const IconComponent = icons[icon] || Phone;
     const theme = useTheme();
 
     return (
@@ -80,15 +85,7 @@ const TotalServiceCard = ({ isLoading, title, total, colorCard, backgroundCard, 
                                                 mt: 1
                                             }}
                                         >
-                                            {icon === 'router' ? (
-                                                <RouterIcon fontSize="inherit" />
-                                            ) : icon === 'phone' ? (
-                                                <PhoneIcon fontSize="inherit" />
-                                            ) : icon === 'mobile' ? (
-                                                <PhoneIphoneIcon fontSize="inherit" />
-                                            ) : (
-                                                <ShareIcon fontSize="inherit" />
-                                            )}
+                                            <IconComponent fontSize="inherit" />
                                         </Avatar>
                                     </Grid>
                                 </Grid>
