@@ -103,18 +103,29 @@ const PhoneRecordsPage = () => {
         }
     }, [code]);
 
-    const handleEndDateChange = (newDate) => {
-        const threeMonthsLater = startDate.add(3, 'month');
+    const handleDateChange = (newDate, isStart) => {
+        const updatedStartDate = isStart ? newDate : startDate;
+        const updatedEndDate = !isStart ? newDate : endDate;
+        const threeMonthsLater = updatedStartDate.add(3, 'month');
 
-        if (newDate.isAfter(threeMonthsLater)) {
+        /*console.log(updatedEndDate.isAfter(threeMonthsLater));
+        console.log(
+            dayjs(updatedStartDate).format('DD/MM/YYYY'),
+            dayjs(updatedEndDate).format('DD/MM/YYYY'),
+            dayjs(threeMonthsLater).format('DD/MM/YYYY')
+        );*/
+
+        if (updatedEndDate.isAfter(threeMonthsLater)) {
             setError('El rango no puede ser mayor de 3 meses.');
             setSnackbarOpen(true);
             setIncomingCheck(true);
         } else {
             setError('');
-            setEndDate(newDate);
+            setSnackbarOpen(false);
             setIncomingCheck(false);
         }
+        setStartDate(updatedStartDate);
+        setEndDate(updatedEndDate);
     };
 
     const handleSnackbarClose = () => {
@@ -183,14 +194,14 @@ const PhoneRecordsPage = () => {
                                     <DatePicker
                                         label="Fecha desde"
                                         value={startDate}
-                                        onChange={(newValue) => setStartDate(newValue)}
+                                        onChange={(newValue) => handleDateChange(newValue, true)}
                                         format="DD/MM/YYYY"
                                         renderInput={(params) => <TextField {...params} sx={{ margin: 0 }} />}
                                     />
                                     <DatePicker
                                         label="Fecha hasta"
                                         value={endDate}
-                                        onChange={handleEndDateChange}
+                                        onChange={(newValue) => handleDateChange(newValue, false)}
                                         format="DD/MM/YYYY"
                                         renderInput={(params) => <TextField {...params} sx={{ margin: 0 }} />}
                                     />
@@ -199,7 +210,7 @@ const PhoneRecordsPage = () => {
                                     open={snackbarOpen}
                                     autoHideDuration={6000}
                                     onClose={handleSnackbarClose}
-                                    anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+                                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
                                 >
                                     <Alert onClose={handleSnackbarClose} severity="error" sx={{ width: '100%' }}>
                                         {error}
