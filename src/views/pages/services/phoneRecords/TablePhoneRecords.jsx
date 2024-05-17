@@ -29,6 +29,7 @@ export default function TablePhoneRecords({ rows }) {
                 }}
                 pageSizeOptions={[5, 10]}
                 getRowId={(row) => `${row.fecha}-${row.origen}-${row.destino}`}
+                id="phoneTable"
             />
         </div>
     );

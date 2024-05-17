@@ -26,6 +26,7 @@ import { TextField, Alert, Snackbar } from '@mui/material';
 import 'dayjs/locale/es';
 import isBetween from 'dayjs/plugin/isBetween';
 import { getGigaBytes } from 'utils/format-gb';
+import { utils, writeFile } from 'xlsx';
 
 dayjs.extend(isBetween);
 
@@ -140,7 +141,14 @@ const PhoneRecordsPage = () => {
     };
 
     const handleDownloadData = () => {
-        alert('hi');
+        const ws = utils.json_to_sheet(data);
+
+        // Crear un nuevo libro de Excel y agregar la hoja de cálculo
+        const wb = utils.book_new();
+        utils.book_append_sheet(wb, ws, 'Sheet1');
+
+        // Generar y descargar el archivo Excel
+        writeFile(wb, 'detallellamadas.xlsx');
     };
     const isDetailsEmpty = Object.keys(details).length === 0;
 
