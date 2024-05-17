@@ -60,16 +60,16 @@ const MainRoutes = {
                 {
                     path: 'phone-records/:id',
                     element: <AuthGuard component={<PhoneRecordsPage />}></AuthGuard>
+                },
+                {
+                    path: 'prepays/:id',
+                    element: <AuthGuard component={<PrepaysPage />}></AuthGuard>
                 }
             ]
         },
         {
             path: 'router',
             element: <AuthGuard component={<RouterPage />}></AuthGuard>
-        },
-        {
-            path: 'prepays',
-            element: <AuthGuard component={<PrepaysPage />}></AuthGuard>
         }
     ]
 };

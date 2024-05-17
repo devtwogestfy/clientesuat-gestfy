@@ -20,7 +20,7 @@ function ActionsButtons({ id, estado, tipoId, aviso, prepaid }) {
     };
 
     const handlePaymentsClick = () => {
-        navigate('/prepays');
+        navigate('/services/prepays/' + id);
     };
 
     return (

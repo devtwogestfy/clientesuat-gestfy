@@ -88,7 +88,6 @@ const PhoneRecordsPage = () => {
 
     const handleChildData = (data) => {
         setChildData(data);
-        console.log(childData);
         if (childData.detalle != undefined && childData.items != undefined) {
             setDetails(childData.detalle);
             setData(childData.items);
