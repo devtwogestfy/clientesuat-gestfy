@@ -60,7 +60,7 @@ const icons = {
     fourg: FourGMobiledataRoundedIcon
 };
 
-const TotalServiceCard = ({ isLoading, title, total, colorCard, backgroundCard, icon }) => {
+const TotalServiceCard = ({ isLoading, title, total, colorCard, colorIcon, backgroundCard, icon }) => {
     const IconComponent = icons[icon] || Phone;
     const theme = useTheme();
 
@@ -81,7 +81,7 @@ const TotalServiceCard = ({ isLoading, title, total, colorCard, backgroundCard, 
                                                 ...theme.typography.commonAvatar,
                                                 ...theme.typography.largeAvatar,
                                                 backgroundColor: backgroundCard,
-                                                color: '#fff',
+                                                color: colorIcon,
                                                 mt: 1
                                             }}
                                         >
@@ -118,6 +118,7 @@ TotalServiceCard.propTypes = {
     total: PropTypes.string,
     backgroundCard: PropTypes.string,
     colorCard: PropTypes.string,
+    colorIcon: PropTypes.string,
     icon: PropTypes.string
 };
 

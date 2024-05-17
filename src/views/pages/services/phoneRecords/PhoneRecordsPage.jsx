@@ -145,6 +145,7 @@ const PhoneRecordsPage = () => {
                                         title="Total SMS"
                                         total={!isDetailsEmpty ? details.sms.toString() : '0'}
                                         colorCard={theme.palette.primary.dark}
+                                        colorIcon={'#fff'}
                                         backgroundCard={theme.palette.primary[800]}
                                         icon="message"
                                         showInfo
@@ -155,7 +156,8 @@ const PhoneRecordsPage = () => {
                                         title="Total Datos"
                                         total={!isDetailsEmpty ? getGigaBytes(details.datos).toString() : '0'}
                                         colorCard={theme.palette.warning.dark}
-                                        backgroundCard={theme.palette.warning.main}
+                                        colorIcon={theme.palette.warning.dark}
+                                        backgroundCard={theme.palette.warning.light}
                                         icon="fourg"
                                     />
                                 </Grid>
@@ -166,6 +168,7 @@ const PhoneRecordsPage = () => {
                                 title="Total Llamadas"
                                 total={!isDetailsEmpty ? details.salientesformatted.toString() : '0'}
                                 colorCard={theme.palette.success.dark}
+                                colorIcon={theme.palette.success.dark}
                                 backgroundCard={theme.palette.success.light}
                                 icon="phone"
                             />
