@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
@@ -75,16 +74,24 @@ ColorBox.propTypes = {
 const PhoneRecordsPage = () => {
     const theme = useTheme();
     const [data, setData] = useState([]);
-    const [phones, setPhones] = useState(0);
-    const [mobiles, setMobiles] = useState(0);
-    const [ftth, setFtth] = useState(0);
-    const [others, setOthers] = useState(0);
     const [startDate, setStartDate] = useState(dayjs().startOf('month'));
     const [value, setValue] = useState(dayjs());
     const params = useParams();
     const [showInfo, setShowInfo] = useState(false);
     const [error, setError] = useState('');
     const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [incomingCheck, setIncomingCheck] = useState(false);
+    const [childData, setChildData] = useState({});
+    const [details, setDetails] = useState({});
+
+    const handleChildData = (data) => {
+        setChildData(data);
+        console.log(childData);
+        if (childData.detalle != undefined && childData.items != undefined) {
+            setDetails(childData.detalle);
+            setData(childData.items);
+        }
+    };
 
     const code = params.id;
     useEffect(() => {
@@ -101,16 +108,19 @@ const PhoneRecordsPage = () => {
         if (newValue.isAfter(threeMonthsLater)) {
             setError('El rango no puede ser mayor de 3 meses.');
             setSnackbarOpen(true);
+            setIncomingCheck(true);
         } else {
             setError('');
             setValue(newValue);
+            setIncomingCheck(false);
         }
     };
 
     const handleSnackbarClose = () => {
         setSnackbarOpen(false);
     };
-
+    const isDetailsEmpty = Object.keys(details).length === 0;
+    console.log(data);
     return (
         <MainCard>
             <Grid container spacing={gridSpacing}>
@@ -121,7 +131,7 @@ const PhoneRecordsPage = () => {
                                 <Grid item xs={12} sm={6} md={4} lg={4}>
                                     <TotalServiceCard
                                         title="Total SMS"
-                                        total={ftth}
+                                        total={!isDetailsEmpty ? details.sms : '0'}
                                         colorCard={theme.palette.primary.dark}
                                         backgroundCard={theme.palette.primary[800]}
                                         icon="router"
@@ -131,7 +141,7 @@ const PhoneRecordsPage = () => {
                                 <Grid item xs={12} sm={6} md={4} lg={4}>
                                     <TotalServiceCard
                                         title="Total Datos"
-                                        total={phones}
+                                        total={!isDetailsEmpty ? details.datos : '0'}
                                         colorCard={theme.palette.warning.dark}
                                         backgroundCard={theme.palette.warning.main}
                                         icon="phone"
@@ -142,7 +152,7 @@ const PhoneRecordsPage = () => {
                         <Grid item xs={12} sm={6} md={4} lg={4}>
                             <TotalServiceCard
                                 title="Total Llamadas"
-                                total={mobiles}
+                                total={!isDetailsEmpty ? details.salientesformatted : '0'}
                                 colorCard={theme.palette.success.dark}
                                 backgroundCard={theme.palette.success.light}
                                 icon="mobile"
@@ -183,13 +193,19 @@ const PhoneRecordsPage = () => {
                             </LocalizationProvider>
                         </Grid>
                         <Grid item xs={12} sm={6} md={6} lg={6} sx={{ paddingTop: '10px', paddingRight: '15rem' }}>
-                            <ActionsButtons />
+                            <ActionsButtons
+                                startDate={startDate}
+                                endDate={value}
+                                code={code}
+                                incomingCheck={incomingCheck}
+                                onSendData={handleChildData}
+                            />
                         </Grid>
                     </Grid>
                 </Grid>
                 <Grid item xs={12}>
                     <Box sx={{ height: 400, width: '100%' }}>
-                        <TablePhoneRecords />
+                        <TablePhoneRecords rows={data} />
                     </Box>
                 </Grid>
             </Grid>

@@ -118,7 +118,7 @@ const TotalServiceCard = ({ isLoading, title, total, colorCard, backgroundCard, 
 TotalServiceCard.propTypes = {
     isLoading: PropTypes.bool,
     title: PropTypes.string,
-    total: PropTypes.number,
+    total: PropTypes.string,
     backgroundCard: PropTypes.string,
     colorCard: PropTypes.string,
     icon: PropTypes.string
