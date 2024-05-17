@@ -10,7 +10,7 @@ import dayjs from 'dayjs';
 import GetInfoService from 'configuraciones/servicios/service';
 
 // eslint-disable-next-line react/prop-types
-function ActionsButtons({ startDate, endDate, code, incomingCheck, onSendData, onResetDates }) {
+function ActionsButtons({ startDate, endDate, code, incomingCheck, onSendData, onResetDates, onDownloadData }) {
     const handleSearchClick = () => {
         fetchData();
     };
@@ -81,7 +81,7 @@ function ActionsButtons({ startDate, endDate, code, incomingCheck, onSendData, o
                         backgroundColor: 'darkblue'
                     }
                 }}
-                onClick={handleSearchClick}
+                onClick={onDownloadData}
             >
                 <DownloadRoundedIcon></DownloadRoundedIcon>
             </IconButton>

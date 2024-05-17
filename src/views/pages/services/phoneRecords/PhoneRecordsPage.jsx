@@ -124,6 +124,10 @@ const PhoneRecordsPage = () => {
         setStartDate(dayjs().startOf('month'));
         setValue(dayjs());
     };
+
+    const handleDownloadData = () => {
+        alert('hi')
+    };
     const isDetailsEmpty = Object.keys(details).length === 0;
 
     return (
@@ -205,6 +209,7 @@ const PhoneRecordsPage = () => {
                                 incomingCheck={incomingCheck}
                                 onSendData={handleChildData}
                                 onResetDates={handleResetDates}
+                                onDownloadData={handleDownloadData}
                             />
                         </Grid>
                     </Grid>
