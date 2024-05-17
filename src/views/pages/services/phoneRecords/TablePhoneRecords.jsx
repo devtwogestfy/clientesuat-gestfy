@@ -3,10 +3,10 @@ import { DataGrid } from '@mui/x-data-grid';
 import PropTypes from 'prop-types';
 
 const columns = [
-    { field: 'fecha', headerName: 'Fecha', width: 70 },
+    { field: 'fecha', headerName: 'Fecha', width: 130 },
     { field: 'origen', headerName: 'Origen', width: 130 },
     { field: 'destino', headerName: 'Destino', width: 130 },
-    { field: 'zona', headerName: 'Zona', width: 70 },
+    { field: 'zona', headerName: 'Zona', width: 200 },
     { field: 'tipo', headerName: 'Tipo', width: 130 },
     { field: 'segundos', headerName: 'Unidades', width: 130 },
     { field: 'neto', headerName: 'Coste', width: 130 }

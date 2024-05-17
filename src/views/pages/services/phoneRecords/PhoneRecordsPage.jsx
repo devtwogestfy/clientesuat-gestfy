@@ -119,8 +119,13 @@ const PhoneRecordsPage = () => {
     const handleSnackbarClose = () => {
         setSnackbarOpen(false);
     };
+
+    const handleResetDates = () => {
+        setStartDate(dayjs().startOf('month'));
+        setValue(dayjs());
+    };
     const isDetailsEmpty = Object.keys(details).length === 0;
-    console.log(data);
+
     return (
         <MainCard>
             <Grid container spacing={gridSpacing}>
@@ -199,6 +204,7 @@ const PhoneRecordsPage = () => {
                                 code={code}
                                 incomingCheck={incomingCheck}
                                 onSendData={handleChildData}
+                                onResetDates={handleResetDates}
                             />
                         </Grid>
                     </Grid>

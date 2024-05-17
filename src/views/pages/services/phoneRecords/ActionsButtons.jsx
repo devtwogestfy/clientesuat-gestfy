@@ -10,7 +10,7 @@ import dayjs from 'dayjs';
 import GetInfoService from 'configuraciones/servicios/service';
 
 // eslint-disable-next-line react/prop-types
-function ActionsButtons({ startDate, endDate, code, incomingCheck, onSendData }) {
+function ActionsButtons({ startDate, endDate, code, incomingCheck, onSendData, onResetDates }) {
     const handleSearchClick = () => {
         fetchData();
     };
@@ -34,15 +34,55 @@ function ActionsButtons({ startDate, endDate, code, incomingCheck, onSendData })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    const handleResetClick = () => {
+        onResetDates();
+    };
+
     return (
         <Box sx={{ width: '100%', textAlign: 'center' }}>
-            <IconButton aria-label="Consultar" color={'info'} onClick={handleSearchClick}>
+            <IconButton
+                aria-label="Consultar"
+                title="Consultar"
+                sx={{
+                    backgroundColor: 'blue',
+                    color: '#fff',
+                    margin: '2px',
+                    '&:hover': {
+                        backgroundColor: 'darkblue'
+                    }
+                }}
+                onClick={handleSearchClick}
+            >
                 <SearchRoundedIcon></SearchRoundedIcon>
             </IconButton>
-            <IconButton aria-label="editar" color={'info'} onClick={handleSearchClick}>
+            <IconButton
+                aria-label="limpiar"
+                title="Limpiar"
+                sx={{
+                    backgroundColor: 'blue',
+                    color: '#fff',
+                    margin: '2px',
+                    '&:hover': {
+                        backgroundColor: 'darkblue'
+                    }
+                }}
+                onClick={handleResetClick}
+            >
                 <RestartAltRoundedIcon></RestartAltRoundedIcon>
             </IconButton>
-            <IconButton aria-label="editar" color={'info'} onClick={handleSearchClick}>
+            <IconButton
+                aria-label="descargar"
+                title="Descargar"
+                sx={{
+                    backgroundColor: 'blue',
+                    color: '#fff',
+                    margin: '2px',
+                    '&:hover': {
+                        backgroundColor: 'darkblue'
+                    }
+                }}
+                onClick={handleSearchClick}
+            >
                 <DownloadRoundedIcon></DownloadRoundedIcon>
             </IconButton>
         </Box>
