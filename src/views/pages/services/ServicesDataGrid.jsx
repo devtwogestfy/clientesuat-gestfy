@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import StatusColor from './StatusColor';
 import ActionsButtons from './ActionsButtons';
+import OptionsButtons from './OptionsButtons';
 
 const columns = [
     {
@@ -12,6 +13,7 @@ const columns = [
         headerName: 'Detalle',
         width: 200,
         renderCell: (params) => {
+            console.log(params);
             return (
                 <Box sx={{ width: '100%', textAlign: 'center' }}>
                     <ActionsButtons
@@ -50,7 +52,7 @@ const columns = [
         field: 'estado',
         headerName: 'Estado',
         sortable: false,
-        width: 160,
+        width: 120,
         renderCell: (params) => {
             return (
                 <Box sx={{ width: '100%', textAlign: 'center' }}>
@@ -61,9 +63,16 @@ const columns = [
     },
     {
         field: 'opciones',
-        headerName: 'opciones',
+        headerName: 'Opciones',
         sortable: false,
-        width: 160
+        width: 260,
+        renderCell: (params) => {
+            return (
+                <Box sx={{ width: '100%', textAlign: 'center' }}>
+                    <OptionsButtons element={params.row} prepaidState={params.row.prepaid} />
+                </Box>
+            );
+        }
     }
 ];
 
