@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import PropTypes from 'prop-types';
+import TableWithoutRecord from 'views/utilities/tables/withoutRecord';
 
 const columns = [
     { field: 'fecha', headerName: 'Fecha', width: 130 },
@@ -27,6 +28,7 @@ export default function TablePhoneRecords({ rows }) {
                         paginationModel: { page: 0, pageSize: 5 }
                     }
                 }}
+                slots={{ noRowsOverlay: TableWithoutRecord }}
                 pageSizeOptions={[5, 10]}
                 getRowId={(row) => `${row.fecha}-${row.origen}-${row.destino}`}
                 id="phoneTable"

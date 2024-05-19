@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import PropTypes from 'prop-types';
+import TableWithoutRecord from 'views/utilities/tables/withoutRecord';
 
 const columns = [
     { field: 'inicio', headerName: 'F. Inicio', width: 130 },
@@ -25,6 +26,7 @@ export default function PrepaysPage({ rows }) {
                 getRowClassName={getRowClassName}
                 rows={rows}
                 columns={columns}
+                slots={{ noRowsOverlay: TableWithoutRecord }}
                 initialState={{
                     pagination: {
                         paginationModel: { page: 0, pageSize: 5 }

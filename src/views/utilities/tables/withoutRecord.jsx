@@ -26,7 +26,7 @@ const StyledGridOverlay = styled('div')(({ theme }) => ({
     }
 }));
 
-export default function TablaSinRegistros() {
+export default function TableWithoutRecord() {
     return (
         <StyledGridOverlay>
             <svg style={{ flexShrink: 0 }} width="240" height="200" viewBox="0 0 184 152" aria-hidden focusable="false">
