@@ -7,6 +7,7 @@ import PrepaysDataGrid from './PrepaysDataGrid';
 import { useParams } from 'react-router-dom';
 import GetInfoService from 'configuraciones/servicios/service';
 import { useState, useEffect } from 'react';
+import BackButton from 'views/utilities/BottonBack';
 
 const PrepaysPage = () => {
     const params = useParams();
@@ -37,6 +38,9 @@ const PrepaysPage = () => {
                 </Grid>
                 <Grid item xs={12}>
                     <PrepaysDataGrid rows={data} />
+                </Grid>
+                <Grid item xs={12}>
+                    <BackButton />
                 </Grid>
             </Grid>
         </MainCard>

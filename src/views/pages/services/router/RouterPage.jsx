@@ -11,6 +11,7 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 // project imports
 import { gridSpacing } from 'store/constant';
 import { styled, useTheme } from '@mui/system';
+import BackButton from 'views/utilities/BottonBack';
 
 const FormGrid = styled('div')(() => ({
     display: 'flex',
@@ -266,7 +267,9 @@ const RouterPage = () => {
                         </Grid>
                     </Grid>
                 </Grid>
-                <Grid item xs={12}></Grid>
+                <Grid item xs={12}>
+                    <BackButton />
+                </Grid>
             </Grid>
         </>
     );

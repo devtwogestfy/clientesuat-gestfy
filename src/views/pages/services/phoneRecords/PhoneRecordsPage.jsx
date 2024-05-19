@@ -27,6 +27,7 @@ import 'dayjs/locale/es';
 import isBetween from 'dayjs/plugin/isBetween';
 import { getGigaBytes } from 'utils/format-gb';
 import { utils, writeFile } from 'xlsx';
+import BackButton from 'views/utilities/BottonBack';
 
 dayjs.extend(isBetween);
 
@@ -242,6 +243,9 @@ const PhoneRecordsPage = () => {
                     <Box sx={{ height: 400, width: '100%' }}>
                         <TablePhoneRecords rows={data} />
                     </Box>
+                </Grid>
+                <Grid item xs={12}>
+                    <BackButton />
                 </Grid>
             </Grid>
         </MainCard>
