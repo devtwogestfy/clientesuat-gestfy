@@ -5,18 +5,38 @@ import MainCard from 'ui-component/cards/MainCard';
 import { gridSpacing } from 'store/constant';
 import PrepaysDataGrid from './PrepaysDataGrid';
 import { useParams } from 'react-router-dom';
+import GetInfoService from 'configuraciones/servicios/service';
+import { useState, useEffect } from 'react';
 
 const PrepaysPage = () => {
     const params = useParams();
-    console.log(params);
+    const [data, setData] = useState([]);
+    const [title, setTitle] = useState([]);
+    const infoService = GetInfoService();
+
+    const fetchData = async () => {
+        try {
+            infoService.getPrepayments(1, 25, '', params.id).then((result) => {
+                setData(result.items);
+                setTitle(result.servicio);
+            });
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    useEffect(() => {
+        fetchData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
     return (
         <MainCard>
             <Grid container spacing={gridSpacing}>
                 <Grid item xs={12}>
-                    <Typography sx={{ fontSize: '1.2rem', fontWeight: 500 }}>Historico de prepagos del servicio:</Typography>
+                    <Typography sx={{ fontSize: '1.2rem', fontWeight: 500 }}>Historico de prepagos del servicio: {title}</Typography>
                 </Grid>
                 <Grid item xs={12}>
-                    <PrepaysDataGrid />
+                    <PrepaysDataGrid rows={data} />
                 </Grid>
             </Grid>
         </MainCard>

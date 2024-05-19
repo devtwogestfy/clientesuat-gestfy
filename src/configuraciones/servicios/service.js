@@ -26,8 +26,28 @@ const GetInfoService = () => {
         }
     };
 
+    const getPrepayments = async (page = 1, limit = 25, sort = '', servId = null) => {
+        const filter = JSON.stringify([{ property: 'servicio_id', value: servId }]);
+
+        const params = {
+            filter: filter,
+            page: page,
+            limit: limit,
+            sort: sort
+        };
+
+        try {
+            const response = await apiUrl.get(`/portal/prepay-list`, { params });
+            return response.data;
+        } catch (error) {
+            console.error('Error fetching phone record:', error);
+            throw error;
+        }
+    };
+
     return {
-        getPhoneRecord
+        getPhoneRecord,
+        getPrepayments
     };
 };
 
