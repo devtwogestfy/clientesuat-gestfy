@@ -173,7 +173,7 @@ const PhoneRecordsPage = () => {
                                 <Grid item xs={12} sm={6} md={4} lg={4}>
                                     <TotalServiceCard
                                         title="Total Datos"
-                                        total={!isDetailsEmpty ? getGigaBytes(details.datos).toString() : '0'}
+                                        total={!isDetailsEmpty ? getGigaBytes(details.datos).toString() + ' GB' : '0 GB'}
                                         colorCard={theme.palette.warning.dark}
                                         colorIcon={theme.palette.warning.dark}
                                         backgroundCard={theme.palette.warning.light}
