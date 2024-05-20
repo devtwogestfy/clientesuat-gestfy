@@ -4,16 +4,16 @@
   "login.submit" : "Iniciar Sesión",
   "login.errors.title": "Error de autenticación",
   "login.errors.message": "Nombre de usuario o contraseña inválido",
-  "layout": {
-    "menu_home": "Inicio",
-    "menu_info": "Datos",
-    "menu_invoices": "Facturas",
-    "menu_incidents": "Incidencias",
-    "menu_services": "Servicios",
-    "toolbar_title": "Portal Cliente",
-    "menu_documents": "Documentación",
-    "menu_advertisements": "Anuncios"
-  },
+  
+  "layout.menu_home":"Inicio",
+  "layout.menu_info":"Datos",
+  "layout.menu_invoices":"Facturas",
+  "layout.menu_incidents":"Incidencias",
+  "layout.menu_services":"Servicios",
+  "layout.toolbar_title":"Portal Cliente",
+  "layout.menu_documents":"Documentación",
+  "layout.menu_advertisements":"Anuncios",
+
   "dashboard.showcase_info.title" :"Datos de Facturación",
   "dashboard": {
     "title": "Hola",  

@@ -19,7 +19,7 @@ const utilities = {
     children: [
         {
             id: 'dashboard',
-            title: 'Inicio',
+            title: 'layout.menu_home',
             type: 'item',
             url: '/',
             icon: icons.IconHome,
