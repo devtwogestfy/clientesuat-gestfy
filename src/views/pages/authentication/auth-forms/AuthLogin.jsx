@@ -82,7 +82,9 @@ const AuthLogin = ({ ...others }) => {
                 {({ errors, handleBlur, isSubmitting, touched }) => (
                     <form noValidate onSubmit={iniciarSeccion} {...others}>
                         <FormControl fullWidth error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
-                            <InputLabel htmlFor="outlined-adornment-email-login">Email Address / Username</InputLabel>
+                            <InputLabel htmlFor="outlined-adornment-email-login">
+                                <FormattedMessage id="login.username_input" />
+                            </InputLabel>
                             <OutlinedInput
                                 id="outlined-adornment-email-login"
                                 type="text"
@@ -90,7 +92,7 @@ const AuthLogin = ({ ...others }) => {
                                 name="userEmail"
                                 onBlur={handleBlur}
                                 onChange={(e) => setUserEmail(e.target.value)}
-                                label="Email Address / Username"
+                                label={<FormattedMessage id="login.username_input" />}
                                 inputProps={{}}
                             />
                             {touched.email && errors.email && (
@@ -105,7 +107,9 @@ const AuthLogin = ({ ...others }) => {
                             error={Boolean(touched.password && errors.password)}
                             sx={{ ...theme.typography.customInput }}
                         >
-                            <InputLabel htmlFor="outlined-adornment-password-login">Password</InputLabel>
+                            <InputLabel htmlFor="outlined-adornment-password-login">
+                                <FormattedMessage id="login.password_input" />
+                            </InputLabel>
                             <OutlinedInput
                                 id="outlined-adornment-password-login"
                                 type={showPassword ? 'text' : 'password'}
@@ -126,7 +130,7 @@ const AuthLogin = ({ ...others }) => {
                                         </IconButton>
                                     </InputAdornment>
                                 }
-                                label="Password"
+                                label={<FormattedMessage id="login.password_input" />}
                                 inputProps={{}}
                             />
                             {touched.password && errors.password && (
@@ -158,9 +162,13 @@ const AuthLogin = ({ ...others }) => {
                         </Box>
                         {openAlert && (
                             <Dialog severity="error" open={openAlert} onClose={handleCloseAlert}>
-                                <DialogTitle>Error</DialogTitle>
+                                <DialogTitle>
+                                    <FormattedMessage id="login.errors.title" />
+                                </DialogTitle>
                                 <DialogContent>
-                                    <p>Credenciales incorrectas. Por favor, inténtalo de nuevo.</p>
+                                    <p>
+                                        <FormattedMessage id="login.errors.message" />
+                                    </p>
                                 </DialogContent>
                                 <DialogActions>
                                     <Button onClick={handleCloseAlert} color="primary">

@@ -1,13 +1,9 @@
 {
+  "login.username_input": "Usuario",
+  "login.password_input": "Contraseña",
   "login.submit" : "Iniciar Sesión",
-  "login": {
-    "username_input": "Usuario",
-    "password_input": "Contraseña",
-    "errors": {
-      "title": "Error de autenticación",
-      "message": "Nombre de usuario o contraseña inválido"
-    }
-  },
+  "login.errors.title": "Error de autenticación",
+  "login.errors.message": "Nombre de usuario o contraseña inválido",
   "layout": {
     "menu_home": "Inicio",
     "menu_info": "Datos",

@@ -1,13 +1,9 @@
 {
+  "login.username_input": "User",
+  "login.password_input": "Password",
   "login.submit" : "Login",
-  "login": {
-    "username_input": "User",
-    "password_input": "Password",
-    "errors": {
-      "title": "Authentication Error",
-      "message": "Invalid username or password"
-    }
-  },
+  "login.errors.title": "Authentication Error",
+  "login.errors.message": "Invalid username or password",
   "layout": {
     "menu_home": "Home",
     "menu_info": "Info",
