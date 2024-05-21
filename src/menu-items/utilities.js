@@ -19,7 +19,7 @@ const utilities = {
     children: [
         {
             id: 'dashboard',
-            title: 'Inicio',
+            title: 'layout.menu_home',
             type: 'item',
             url: '/',
             icon: icons.IconHome,
@@ -27,7 +27,7 @@ const utilities = {
         },
         {
             id: 'util-date',
-            title: 'Datos',
+            title: 'layout.menu_info',
             type: 'item',
             url: '/profile',
             icon: icons.IconUser,
@@ -35,7 +35,7 @@ const utilities = {
         },
         {
             id: 'util-invoices',
-            title: 'Facturas',
+            title: 'layout.menu_invoices',
             type: 'item',
             url: '/invoices',
             icon: icons.IconReceipt,
@@ -43,7 +43,7 @@ const utilities = {
         },
         {
             id: 'icons',
-            title: 'Incidencias',
+            title: 'layout.menu_incidents',
             type: 'item',
             url: '/incidents',
             icon: icons.IconAlertTriangleFilled,
@@ -51,7 +51,7 @@ const utilities = {
         },
         {
             id: 'util-services',
-            title: 'Servicios',
+            title: 'layout.menu_services',
             type: 'item',
             url: '/services',
             icon: icons.IconSettings,
@@ -59,7 +59,7 @@ const utilities = {
         },
         {
             id: 'util-documentation',
-            title: 'Documentación',
+            title: 'layout.menu_documents',
             type: 'item',
             url: '/documents',
             icon: icons.IconFileFilled,

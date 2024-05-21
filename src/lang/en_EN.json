@@ -4,16 +4,16 @@
   "login.submit" : "Login",
   "login.errors.title": "Authentication Error",
   "login.errors.message": "Invalid username or password",
-  "layout": {
-    "menu_home": "Home",
-    "menu_info": "Info",
-    "menu_invoices": "Invoices",
-    "menu_incidents": "Tickets",
-    "menu_services": "Services",
-    "toolbar_title": "Client Site",
-    "menu_documents": "Documents",
-    "menu_advertisements": "Advertisements"
-  },
+
+  "layout.menu_home":"Home",
+  "layout.menu_info":"Info",
+  "layout.menu_invoices":"Invoices",
+  "layout.menu_incidents":"Tickets",
+  "layout.menu_services":"Services",
+  "layout.toolbar_title":"Client Site",
+  "layout.menu_documents":"Documents",
+  "layout.menu_advertisements":"Advertisements",
+
   "dashboard.showcase_info.title" :"Billing Info",
   "dashboard": {
     "title": "Hello",
