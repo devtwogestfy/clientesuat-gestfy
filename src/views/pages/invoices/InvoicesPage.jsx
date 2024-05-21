@@ -18,6 +18,7 @@ import NumberInvoicesCard from './NumberInvoicesCard';
 import LastInvoiceCard from './LastInvoiceCard';
 import TotalDebtCard from './TotalDebtCard';
 import { fDate } from 'utils/format-date';
+import TableWithoutRecord from 'views/utilities/tables/withoutRecord';
 
 const ColorBox = ({ bgcolor, title, data, dark }) => (
     <>
@@ -203,6 +204,7 @@ const InvoicesPage = () => {
                             }}
                             pageSizeOptions={[5]}
                             disableRowSelectionOnClick
+                            slots={{ noRowsOverlay: TableWithoutRecord }}
                         />
                     </Box>
                 </Grid>

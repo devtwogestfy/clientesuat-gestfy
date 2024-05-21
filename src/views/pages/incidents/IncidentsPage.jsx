@@ -16,6 +16,7 @@ import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
 import { useTheme } from '@mui/material/styles';
 import CreateIncidentDialog from './CreateIncidentDialog';
 import PostInfoService from 'configuraciones/servicios/post-info-client';
+import TableWithoutRecord from 'views/utilities/tables/withoutRecord';
 
 const columns = [
     {
@@ -237,6 +238,7 @@ const IncidentsPage = () => {
                             }}
                             pageSizeOptions={[5]}
                             disableRowSelectionOnClick
+                            slots={{ noRowsOverlay: TableWithoutRecord }}
                         />
                     </Box>
                     <Popper open={isAlertSuccess} transition>

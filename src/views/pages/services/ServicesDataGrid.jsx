@@ -7,6 +7,7 @@ import Box from '@mui/material/Box';
 import StatusColor from './StatusColor';
 import ActionsButtons from './ActionsButtons';
 import OptionsButtons from './OptionsButtons';
+import TableWithoutRecord from 'views/utilities/tables/withoutRecord';
 
 const columns = [
     {
@@ -103,6 +104,7 @@ const ServicesDataGrid = ({ rows }) => {
                 }}
                 pageSizeOptions={[5]}
                 disableRowSelectionOnClick
+                slots={{ noRowsOverlay: TableWithoutRecord }}
                 sx={{
                     '& .MuiDataGrid-columnHeaders': {
                         backgroundColor: theme.palette.secondary.dark,
