@@ -13,8 +13,8 @@ function Acciones({ funcionOnClicDescargar, factura_id }) {
                 onClick={() => {
                     funcionOnClicDescargar(factura_id);
                 }}
-                aria-label="editar"
-                title="Editar"
+                aria-label="Descargar"
+                title="Descargar"
                 color={'info'}
             >
                 <ArrowCircleDownIcon></ArrowCircleDownIcon>

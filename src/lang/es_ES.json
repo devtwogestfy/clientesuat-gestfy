@@ -112,77 +112,56 @@
   "services.prepay.table.status.paid":"PAGADO",
   "services.prepay.table.status.cancelled":"CANCELADO",
 
-  "phones": {
-    "table": {
-      "date": "Fecha",
-      "source": "Origen",
-      "dest": "Destino",
-      "zone": "Zona",
-      "type": "Tipo",
-      "units": "Unidades",
-      "cost": "Coste"
-    },
-    "form": {
-      "from_date": "Fecha desde",
-      "to_date": "Fecha hasta",
-      "incoming": "Entrante"
-    },
-    "cards": {
-      "sms": "Total SMS",
-      "data": "Total Datos",
-      "calls": "Total Llamadas"
-    }
-  },
-  "incidents": {
-    "title": "Incidencias",
-    "table": {
-      "number": "Número",
-      "date": "Alta",
-      "description": "Descripción",
-      "service": "Servicio",
-      "hours": "Horas",
-      "status": "Estado",
-      "no_note": "Ninguna nota a mostrar"
-    },
-    "cards": {
-      "open": "Abiertas",
-      "closed": "Cerradas",
-      "incidents": "Incidencias",
-      "sat": "Horas (Mes)"
-    },
-    "buttons": {
-      "new": "Nueva Incidencia"
-    }
-  },
+  "phones.table.date":"Fecha",
+  "phones.table.source":"Origen",
+  "phones.table.dest":"Destino",
+  "phones.table.zone":"Zona",
+  "phones.table.type":"Tipo",
+  "phones.table.units":"Unidades",
+  "phones.table.cost":"Coste",
+  "phones.form.from_date":"Fecha desde",
+  "phones.form.to_date":"Fecha hasta",
+  "phones.form.incoming":"Entrante",
+  "phones.cards.sms":"Total SMS",
+  "phones.cards.data":"Total Datos",
+  "phones.cards.calls":"Total Llamadas",
+
+  "incidents.title":"Incidencias",
+  "incidents.table.title":"Incidencias",
+  "incidents.table.number":"Número",
+  "incidents.table.date":"Alta",
+  "incidents.table.description":"Descripción",
+  "incidents.table.service":"Servicio",
+  "incidents.table.hours":"Horas",
+  "incidents.table.status":"Estado",
+  "incidents.table.no_note":"Ninguna nota a mostrar",
+  "incidents.cards.open":"Abiertas",
+  "incidents.cards.closed":"Cerradas",
+  "incidents.cards.incidents":"Incidencias",
+  "incidents.cards.sat":"Horas (Mes)",
+  "incidents.buttons.new":"Nueva Incidencia",
+
+  "router.title":"Router",
+  "router.cards.title.wifi24":"WiFi 2.4GHz",
+  "router.cards.title.wifi5":"WiFi 5GHz",
+  "router.cards.title.lan":"LAN",
+  "router.cards.title.ports":"Redirección de Puertos",
+  "router.cards.form.ssid":"SSID",
+  "router.cards.form.password":"Contraseña",
+  "router.cards.form.ip":"IP",
+  "router.cards.form.mask":"Máscara",
+  "router.cards.form.dhcp_from":"DHCP Desde",
+  "router.cards.form.dhcp_to":"DHCP Hasta",
+  "router.cards.form.udp":"UDP",
+  "router.cards.form.tcp":"TCP",
+  "router.cards.form.udp_tcp":"UDP/TCP",
+  "router.cards.info":"Cambiar estos parámetros puede dejarle sin conectividad",
+  "router.errors.valid_ip":"Introduzca una ip válida",
+  "router.errors.valid_ssid":"SSID entre 8 y 25 caracteres",
+  "router.errors.valid_password":"Contraseña entre 8 y 25 caracteres",
+  "router.errors.valid_port":"Introduzca un puerto válido (1-65534)",
+  "router.errors.valid_protocol":"Eliga un protocolo válido",
   "router": {
-    "title": "Router",
-    "cards": {
-      "title": {
-        "wifi24": "WiFi 2.4GHz",
-        "wifi5": "WiFi 5GHz",
-        "lan": "LAN",
-        "ports": "Redirección de Puertos"
-      },
-      "form": {
-        "ssid": "SSID",
-        "password": "Contraseña",
-        "ip": "IP",
-        "mask": "Máscara",
-        "dhcp_from": "DHCP Desde",
-        "dhcp_to": "DHCP Hasta",
-        "udp": "UDP",
-        "tcp": "TCP",
-        "udp_tcp": "UDP/TCP"
-      },
-      "info": "Cambiar estos parámetros puede dejarle sin conectividad"
-    },
-    "errors": {
-      "valid_ip": "Introduzca una ip válida",
-      "valid_ssid": "SSID entre 8 y 25 caracteres ",
-      "valid_password": "Contraseña entre 8 y 25 caracteres ",
-      "valid_port": "Introduzca un puerto válido (1-65534)",
-      "valid_protocol": "Eliga un protocolo válido "
-    },
     "table": {
       "ip": "IP",
       "ext_port": "Puerto Externo",

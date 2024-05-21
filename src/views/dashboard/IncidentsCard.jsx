@@ -162,7 +162,9 @@ const IncidentsCard = ({ isLoading }) => {
                             </IconButton>
                             <Grid container alignItems="center" spacing={2}>
                                 <Grid item>
-                                    <Typography variant="h3">Incidentes</Typography>
+                                    <Typography variant="h3">
+                                        <FormattedMessage id="dashboard.showcase_incidents.title" />
+                                    </Typography>
                                 </Grid>
                             </Grid>
                         </DialogTitle>
