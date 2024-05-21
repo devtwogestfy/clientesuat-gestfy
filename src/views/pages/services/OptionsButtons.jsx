@@ -17,6 +17,7 @@ function OptionsButtons({ element, prepaidState }) {
     const [days, setDays] = useState();
     const [weeks, setWeeks] = useState();
     const [months, setMonths] = useState();
+    const [brutoEstimado, setBrutoEstimado] = useState();
 
     const buttonStyles = {
         backgroundColor: 'info.main',
@@ -66,14 +67,15 @@ function OptionsButtons({ element, prepaidState }) {
         }
 
         console.log(element);
+        calculatePrice();
     };
 
     const calculatePrice = () => {
-        let brutoDia = 0;
-        let brutoSemana = 0;
-        let brutoMes = 0;
+        let brutoDia = 1;
+        let brutoSemana = 1;
+        let brutoMes = 1;
         let calculation = days * brutoDia + weeks * brutoSemana + months * brutoMes;
-        let brutoEstimado = Math.round((calculation + Number.EPSILON) * 100) / 100;
+        setBrutoEstimado(Math.round((calculation + Number.EPSILON) * 100) / 100);
     };
 
     return (
@@ -138,6 +140,10 @@ function OptionsButtons({ element, prepaidState }) {
                     </Grid>
                 </DialogContent>
                 <DialogActions>
+                    <TextField id="outlined-read-only-input" label="Precio (Sin IVA)" defaultValue={brutoEstimado} disabled />
+                    <Button variant="outlined" onClick={handleClose} color="success">
+                        Guardar
+                    </Button>
                     <Button variant="outlined" onClick={handleClose} color="error">
                         Cancelar
                     </Button>
