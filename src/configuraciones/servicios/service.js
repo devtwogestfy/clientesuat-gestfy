@@ -46,12 +46,13 @@ const GetInfoService = () => {
     };
 
     const createPrepay = async (values) => {
+        console.log(values);
         try {
             const response = await apiUrl.post('/prepaid-gen/cliente', values);
             const data = response.data;
             return data;
         } catch (error) {
-            //console.log(error)
+            console.log(error);
             throw new Error(error.response || 'Network request failed');
         }
     };

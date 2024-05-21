@@ -12,7 +12,6 @@ import {
     Typography,
     FormControl
 } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
 // eslint-disable-next-line no-restricted-imports
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
@@ -25,6 +24,7 @@ import PropTypes from 'prop-types';
 import GetInfoService from 'configuraciones/servicios/service';
 
 function OptionsButtons({ element }) {
+    //console.log(element);
     const [open, setOpen] = useState(false);
     const [selectedDate, setSelectedDate] = useState(dayjs());
     const [days, setDays] = useState(0);
@@ -44,10 +44,13 @@ function OptionsButtons({ element }) {
         }
     };
 
-    const navigate = useNavigate();
+    const handleValidatePrepay = () => {
+        infoService.validatePrepay(id).then((response) => {
+            console.log(response);
 
-    const handleAddCircleClick = () => {
-        navigate('/services/phone-records/');
+            setTimeout(() => {}, 3000);
+            setOpen(false);
+        });
     };
 
     const handleOpenCreatePrepaid = () => {
@@ -58,11 +61,24 @@ function OptionsButtons({ element }) {
         setOpen(false);
     };
 
-    const handlePaymentsClick = () => {
-        navigate('/services/prepays/');
+    const handleCancelPrepay = () => {
+        infoService.cancelPrepay(id).then((response) => {
+            console.log(response);
+
+            setTimeout(() => {}, 3000);
+            setOpen(false);
+        });
     };
 
     const handleSavePrepaid = () => {
+        const parameters = {
+            dias: days,
+            semanas: weeks,
+            meses: months,
+            fechainstalacion: dayjs(selectedDate).format('DD/MM/YYYY'),
+            servId: element.id,
+            servPadreId: element.intservicio_id
+        };
         infoService.createPrepay(parameters).then((response) => {
             console.log(response);
 
@@ -100,16 +116,16 @@ function OptionsButtons({ element }) {
     return (
         <Box sx={{ width: '100%', textAlign: 'center' }}>
             {element.prepaid && element.prepaid === 1 && (
-                <Button aria-label="editar" onClick={handleOpenCreatePrepaid} sx={buttonStyles}>
+                <Button aria-label="create" onClick={handleOpenCreatePrepaid} sx={buttonStyles}>
                     Generar prepago
                 </Button>
             )}
             {element.prepaid && element.prepaid !== 1 && (
                 <>
-                    <Button aria-label="editar" onClick={handleAddCircleClick} sx={buttonStyles}>
+                    <Button aria-label="pay" onClick={handleValidatePrepay} sx={buttonStyles}>
                         Pagar
                     </Button>
-                    <Button aria-label="editar" onClick={handlePaymentsClick} sx={buttonStyles}>
+                    <Button aria-label="cancel" onClick={handleCancelPrepay} sx={buttonStyles}>
                         Cancelar
                     </Button>
                 </>
@@ -190,8 +206,9 @@ function OptionsButtons({ element }) {
 OptionsButtons.propTypes = {
     element: PropTypes.shape({
         id: PropTypes.number.isRequired,
-        estado: PropTypes.string.isRequired,
+        estado: PropTypes.number.isRequired,
         tipoId: PropTypes.number.isRequired,
+        intservicio_id: PropTypes.number.isRequired,
         aviso: PropTypes.string,
         prepaid: PropTypes.number,
         brutoDia: PropTypes.number,
