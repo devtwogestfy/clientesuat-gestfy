@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, IconButton, Slider, TextField, Typography } from '@mui/material';
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, IconButton, TextField, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
 // eslint-disable-next-line no-restricted-imports
@@ -8,17 +8,16 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs';
-import {
-    Unstable_NumberInput as BaseNumberInput,
-    numberInputClasses,
-  } from '@mui/base/Unstable_NumberInput';
-  import { styled } from '@mui/system';
+import NumberInputBasic from './NaturalNumberInput';
 
 // eslint-disable-next-line react/prop-types
 function OptionsButtons({ element, prepaidState }) {
     const [open, setOpen] = useState(false);
-    const [startDate, setStartDate] = useState(dayjs());
-    console.log(element);
+    const [selectedDate, setSelectedDate] = useState(dayjs());
+    const [days, setDays] = useState();
+    const [weeks, setWeeks] = useState();
+    const [months, setMonths] = useState();
+
     const buttonStyles = {
         backgroundColor: 'info.main',
         color: 'white',
@@ -49,7 +48,24 @@ function OptionsButtons({ element, prepaidState }) {
     };
 
     const handleChange = (id) => (event) => {
-       console.log(id);
+        const newValue = event.target.value;
+        if (id === 'days') {
+            setDays(newValue);
+        }
+
+        if (id === 'weeks') {
+            setWeeks(newValue);
+        }
+
+        if (id === 'months') {
+            setMonths(newValue);
+        }
+
+        if (id === 'selectedDate') {
+            setSelectedDate(newValue);
+        }
+
+        console.log(element);
     };
 
     return (
@@ -87,48 +103,28 @@ function OptionsButtons({ element, prepaidState }) {
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                                     <DemoContainer components={['DatePicker']}>
                                         <DatePicker
+                                            id="selectedDate"
                                             label="Fecha desde"
-                                            value={startDate}
-                                            onChange={(newValue) => handleDateChange(newValue, true)}
+                                            value={selectedDate}
+                                            onChange={handleChange('selectedDate')}
                                             format="DD/MM/YYYY"
-                                            renderInput={(params) => <TextField {...params} sx={{ margin: 0 }} />}
+                                            slots={{ textField: (props) => <TextField {...props} /> }}
                                         />
                                     </DemoContainer>
                                 </LocalizationProvider>
                             </Grid>
                         </Grid>
                     </Grid>
-                    <Grid item xs={12}>
-                        <Grid container spacing={0}>
+                    <Grid item xs={12} sx={{ marginTop: '10px' }}>
+                        <Grid container spacing={3}>
                             <Grid item xs={12} sm={4} md={4} lg={4}>
-                            <Slider
-                value={value}
-                onChange={handleChange}
-                valueLabelDisplay="auto"
-                aria-labelledby="range-slider"
-                min={0} // Valor mínimo
-                max={100} // Valor máximo
-            />
+                                <NumberInputBasic id="days" label="Días" value={days} onChange={handleChange('days')} />
                             </Grid>
                             <Grid item xs={12} sm={4} md={4} lg={4}>
-                            <Slider
-                value={value}
-                onChange={handleChange}
-                valueLabelDisplay="auto"
-                aria-labelledby="range-slider"
-                min={0} // Valor mínimo
-                max={100} // Valor máximo
-            />
+                                <NumberInputBasic id="weeks" label="Semanas" value={weeks} onChange={handleChange('weeks')} />
                             </Grid>
                             <Grid item xs={12} sm={4} md={4} lg={4}>
-                            <Slider
-                value=
-                onChange={handleChange}
-                valueLabelDisplay="auto"
-                aria-labelledby="range-slider"
-                min={0} // Valor mínimo
-                max={100} // Valor máximo
-            />
+                                <NumberInputBasic id="months" label="Meses" value={months} onChange={handleChange('months')} />
                             </Grid>
                         </Grid>
                     </Grid>
