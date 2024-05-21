@@ -45,9 +45,45 @@ const GetInfoService = () => {
         }
     };
 
+    const createPrepay = async (values) => {
+        try {
+            const response = await apiUrl.post('/prepaid-gen/cliente', values);
+            const data = response.data;
+            return data;
+        } catch (error) {
+            //console.log(error)
+            throw new Error(error.response || 'Network request failed');
+        }
+    };
+
+    const validatePrepay = async (id) => {
+        try {
+            const response = await apiUrl.post('/prepaid-validate/' + id);
+            const data = response.data;
+            return data;
+        } catch (error) {
+            //console.log(error)
+            throw new Error(error.response || 'Network request failed');
+        }
+    };
+
+    const cancelPrepay = async (id) => {
+        try {
+            const response = await apiUrl.put('/prepaid-cancel/' + id);
+            const data = response.data;
+            return data;
+        } catch (error) {
+            //console.log(error)
+            throw new Error(error.response || 'Network request failed');
+        }
+    };
+
     return {
         getPhoneRecord,
-        getPrepayments
+        getPrepayments,
+        createPrepay,
+        validatePrepay,
+        cancelPrepay
     };
 };
 

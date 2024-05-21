@@ -22,6 +22,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs';
 import NumberInputBasic from './NaturalNumberInput';
 import PropTypes from 'prop-types';
+import GetInfoService from 'configuraciones/servicios/service';
 
 function OptionsButtons({ element }) {
     const [open, setOpen] = useState(false);
@@ -30,6 +31,7 @@ function OptionsButtons({ element }) {
     const [weeks, setWeeks] = useState(0);
     const [months, setMonths] = useState(0);
     const [brutoEstimado, setBrutoEstimado] = useState(0);
+    const infoService = GetInfoService();
 
     const buttonStyles = {
         backgroundColor: 'info.main',
@@ -58,6 +60,15 @@ function OptionsButtons({ element }) {
 
     const handlePaymentsClick = () => {
         navigate('/services/prepays/');
+    };
+
+    const handleSavePrepaid = () => {
+        infoService.createPrepay(parameters).then((response) => {
+            console.log(response);
+
+            setTimeout(() => {}, 3000);
+            setOpen(false);
+        });
     };
 
     const handleChange = (id) => (event) => {
@@ -164,7 +175,7 @@ function OptionsButtons({ element }) {
                 </DialogContent>
                 <DialogActions>
                     <TextField id="outlined-read-only-input" label="Precio (Sin IVA)" value={brutoEstimado} disabled />
-                    <Button variant="outlined" onClick={handleClose} color="success">
+                    <Button variant="outlined" onClick={handleSavePrepaid} color="success">
                         Guardar
                     </Button>
                     <Button variant="outlined" onClick={handleClose} color="error">
