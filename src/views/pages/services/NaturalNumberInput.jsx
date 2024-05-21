@@ -33,10 +33,8 @@ NumberInputBasic.propTypes = {
     onChange: PropTypes.func
 };
 
-export default function NumberInputBasic({ id, label, value, onChange }) {
-    return (
-        <NumberInput min={0} id={id} value={value} onChange={onChange} placeholder={label} required inputProps={{ 'aria-label': label }} />
-    );
+export default function NumberInputBasic({ id, value, onChange }) {
+    return <NumberInput min={0} id={id} value={value} onChange={onChange} required />;
 }
 
 const blue = {

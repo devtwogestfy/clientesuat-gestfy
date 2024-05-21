@@ -10,8 +10,7 @@ import {
     IconButton,
     TextField,
     Typography,
-    FormControl,
-    InputLabel
+    FormControl
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
@@ -62,21 +61,19 @@ function OptionsButtons({ element }) {
     };
 
     const handleChange = (id) => (event) => {
-        const newValue = Number(event.target.value); // Ensure the value is a number
-        if (id === 'days') {
-            setDays(newValue);
-        }
-
-        if (id === 'weeks') {
-            setWeeks(newValue);
-        }
-
-        if (id === 'months') {
-            setMonths(newValue);
-        }
-
+        let newValue;
         if (id === 'selectedDate') {
+            newValue = event; // For DatePicker, event is the new date
             setSelectedDate(newValue);
+        } else {
+            newValue = Number(event.target.value); // Ensure the value is a number for numeric inputs
+            if (id === 'days') {
+                setDays(newValue);
+            } else if (id === 'weeks') {
+                setWeeks(newValue);
+            } else if (id === 'months') {
+                setMonths(newValue);
+            }
         }
         calculatePrice();
     };
@@ -140,20 +137,26 @@ function OptionsButtons({ element }) {
                         <Grid container spacing={3}>
                             <Grid item xs={12} sm={4} md={4} lg={4}>
                                 <FormControl fullWidth>
-                                    <InputLabel htmlFor="days">Días</InputLabel>
-                                    <NumberInputBasic id="days" label="Días" value={days} onChange={handleChange('days')} />
+                                    <Typography variant="body1" sx={{ marginBottom: '8px' }}>
+                                        Días
+                                    </Typography>
+                                    <NumberInputBasic id="days" value={days} onChange={handleChange('days')} />
                                 </FormControl>
                             </Grid>
                             <Grid item xs={12} sm={4} md={4} lg={4}>
                                 <FormControl fullWidth>
-                                    <InputLabel htmlFor="weeks">Semanas</InputLabel>
-                                    <NumberInputBasic id="weeks" label="Semanas" value={weeks} onChange={handleChange('weeks')} />
+                                    <Typography variant="body1" sx={{ marginBottom: '8px' }}>
+                                        Semanas
+                                    </Typography>
+                                    <NumberInputBasic id="weeks" value={weeks} onChange={handleChange('weeks')} />
                                 </FormControl>
                             </Grid>
                             <Grid item xs={12} sm={4} md={4} lg={4}>
                                 <FormControl fullWidth>
-                                    <InputLabel htmlFor="months">Meses</InputLabel>
-                                    <NumberInputBasic id="months" label="Meses" value={months} onChange={handleChange('months')} />
+                                    <Typography variant="body1" sx={{ marginBottom: '8px' }}>
+                                        Meses
+                                    </Typography>
+                                    <NumberInputBasic id="months" value={months} onChange={handleChange('months')} />
                                 </FormControl>
                             </Grid>
                         </Grid>
