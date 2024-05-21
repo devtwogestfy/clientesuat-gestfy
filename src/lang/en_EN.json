@@ -15,137 +15,103 @@
   "layout.menu_advertisements":"Advertisements",
 
   "dashboard.showcase_info.title" :"Billing Info",
-  "dashboard": {
-    "title": "Hello",
-    "showcase_info": {
-      "title": "Billing Info",
-      "name": "Name",
-      "address": "Address",
-      "phones": "Phones",
-      "cc": "IBAN"
-    },
-    "showcase_incidents": {
-      "title": "Tickets"
-    },
-    "showcase_invoices": {
-      "title": "Last Invoices",
-      "header_number": "Number",
-      "header_date": "Date",
-      "value": "Amount",
-      "pending": "Pending payment",
-      "paid": "Paid"
-    },
-    "showcase_services": "Services",
-    "contact": {
-      "title": "Contact",
-      "email": "Email",
-      "phone": "Phone",
-      "address": "Address"
-    }
-  },
-  "info": {
-    "title": "Info",
-    "form_name": "Name",
-    "form_lastName": "Last Names",
-    "form_address": "Adress",
-    "form_town": "Town",
-    "form_phone1": "Phone 1",
-    "form_phone2": "Phone 2",
-    "form_cc": "Bank CC",
-    "notice": "In case that the information shown isn't correct or it may need an update, please, contact us. Thank you",
-    "contact": "Contact",
-    "modal": {
-      "errors": {
-        "required": "Request description required",
-        "minlength": "Write a minimum description to ensure that your petition is attended correctly"
-      },
-      "title": "Write your petition",
-      "form": "Description",
-      "button": "Send"
-    }
-  },
-  "invoices": {
-    "title": "Invoices",
-    "titlePdf": "Invoice",
-    "cards": {
-      "invoices": "Invoices",
-      "last_invoice": "Last Invoice",
-      "total_debt": "Total Debt"
-    },
-    "table": {
-      "download": "Download",
-      "date": "Date",
-      "serie": "Serie",
-      "number": "Number",
-      "value": "Amount",
-      "pending": "Pending",
-      "paid": "Paid",
-      "pay": "Pay"
-    }
-  },
-  "services": {
-    "title": "Services",
-    "cards": {
-      "mobile": "Mobiles",
-      "phone": "Phones",
-      "ftth": "FTTH",
-      "wimax": "WIMAX"
-    },
-    "table": {
-      "detail": "Detail",
-      "code": "Code",
-      "type": "Type",
-      "service": "Service",
-      "prepay": {
-        "generate": "Generate prepayment",
-        "pay": "Formalize prepayment",
-        "cancel": "Cancel prepayment"
-      },
-      "options": "Options",
-      "no_services": "You don't have services"
-    },
-    "state": {
-      "0": "ACTIVE",
-      "1": "SUSPENDED",
-      "2": "PENDING",
-      "3": "CANCELLED",
-      "4": "UNPAID"
-    },
-    "type": {
-      "phone": "Phone",
-      "mobile": "Mobile",
-      "ftth": "FTTH",
-      "wimax": "Wimax",
-      "premium": "Premium Phone"
-    },
-    "prepay": {
-      "historic": "History of prepayments for service: ",
-      "dialog": {
-        "title": "Contractual Information",
-        "form": {
-          "date": "Start date of the service",
-          "dateError": "Start date of the service required",
-          "day": "Days",
-          "weeks": "Weeks",
-          "months": "Months",
-          "dayError": "Its required to set atleast one day, week or month",
-          "amount": "Price (Without tax): "
-        },
-        "outdated": "The prepayment contract its not valid anymore, please generate a new one. (You can check the current state of prepayments inside the service info)"
-      },
-      "table": {
-        "begin": "Begin Date",
-        "end": "End Date",
-        "paydate": "Payment Date",
-        "status": {
-          "title": "Status",
-          "pending": "PENDING",
-          "paid": "PAID",
-          "cancelled": "CANCELLED"
-        }
-      }
-    }
-  },
+  "dashboard.title":"Hello",
+  "dashboard.showcase_info.name" :"Name",
+  "dashboard.showcase_info.address" :"Address",
+  "dashboard.showcase_info.phones" :"Phones",
+  "dashboard.showcase_info.cc" :"IBAN",
+
+  "dashboard.showcase_incidents.title" :"Tickets",
+  "dashboard.showcase_incidents.open" :"You have: {{open}} open issues",
+  "dashboard.showcase_incidents.closed" :"You have: {{closed}} closed issues",
+  
+  "dashboard.showcase_invoices.title" : "Last Invoices",
+  "dashboard.showcase_invoices.header_number" :"Number",
+  "dashboard.showcase_invoices.header_date" : "Date",
+  "dashboard.showcase_invoices.value" :"Amount",
+  "dashboard.showcase_invoices.pending" : "Pending payment",
+  "dashboard.showcase_invoices.paid" : "Paid",
+ 
+  "dashboard.showcase_services" : "Servicios",
+  "dashboard.showcase_services.contact.title" : "Contact",
+  "dashboard.showcase_services.contact.email" :"Email",
+  "dashboard.showcase_services.contact.phone" : "Phone",
+  "dashboard.showcase_services.contact.address" :"Address",
+  
+  "info.title": "Info",
+  "info.form_name":  "Name",
+  "info.form_lastName": "Last Names",
+  "info.form_address":"Address",
+  "info.form_town": "Town",
+  "info.form_phone1":  "Phone 1",
+  "info.form_phone2": "Phone 2",
+  "info.form_cc":"Bank CC",
+  "info.notice": "In case that the information shown isn't correct or it may need an update, please, contact us. Thank you",
+  "info.contact": "Contact",
+  "info.modal.errors.required": "Request description required",
+  "info.modal.errors.minlength":"Write a minimum description to ensure that your petition is attended correctly",
+  "info.modal.title": "Write your petition",
+  "info.modal.form":  "Description",
+  "info.modal.button": "Send",
+
+  "invoices.title": "Invoices",
+  "invoices.titlePdf":  "Invoice",
+  "invoices.cards.invoices": "Invoices",
+  "invoices.cards.last_invoice":"Last Invoice",
+  "invoices.cards.total_debt": "Total Debt",
+  "services.cards.others":"Others",
+  "invoices.table.download": "Download",
+  "invoices.table.date":  "Date",
+  "invoices.table.serie": "Serie",
+  "invoices.table.number":"Number",
+  "invoices.table.value": "Amount",
+  "invoices.table.pending": "Pending",
+  "invoices.table.paid":"Paid",
+  "invoices.table.pay": "Pay",
+
+  "services.title":"Services",
+  "services.cards.mobile":"Mobiles",
+  "services.cards.phone":"Phones",
+  "services.cards.ftth":"FTTH",
+  "services.cards.wimax":"WIMAX",
+  "services.table.detail": "Detail",
+  "services.table.code":"Code",
+  "services.table.type":"Type",
+  "services.table.service":"Service",
+  "services.table.state":"Status",
+  "services.table.prepay.generate":"Generate prepayment",
+  "services.table.prepay.pay":"Formalize prepayment",
+  "services.table.prepay.cancel":"Cancel prepayment",
+  "services.table.options":"Options",
+  "services.table.no_services":"You don't have services",
+  "services.state.0":"ACTIVE",
+  "services.state.1":"SUSPENDED",
+  "services.state.2":"PENDING",
+  "services.state.3":"CANCELLED",
+  "services.state.4":"UNPAID",
+  "services.type.phone":"Phone",
+  "services.type.mobile":"Mobile",
+  "services.type.ftth":"FTTH",
+  "services.type.wimax":"Wimax",
+  "services.type.premium":"Premium Phone",
+  "services.prepay.historic":"History of prepayments for service:",
+  "services.prepay.dialog.title": "Contractual Information",
+  "services.prepay.dialog.form.date":"Start date of the service",
+  "services.prepay.dialog.form.dateError":"Start date of the service required",
+  "services.prepay.dialog.form.day":"Days",
+  "services.prepay.dialog.form.weeks":"Weeks",
+  "services.prepay.dialog.form.months":"Months",
+  "services.prepay.dialog.form.dayError":"Its required to set atleast one day, week or month",
+  "services.prepay.dialog.form.amount":"Price (Without tax):",
+  "services.prepay.dialog.outdated":"The prepayment contract its not valid anymore, please generate a new one. (You can check the current state of prepayments inside the service info)",
+  "services.prepay.table.begin": "Begin Date",
+  "services.prepay.table.end":"End Date",
+  "services.prepay.table.paydate":"Payment Date",
+  "services.prepay.table.status.title":"Status",
+  "services.prepay.table.status.pending":"PENDING",
+  "services.prepay.table.status.paid":"PAID",
+  "services.prepay.table.status.cancelled":"CANCELLED",
+ 
   "phones": {
     "table": {
       "date": "Date",

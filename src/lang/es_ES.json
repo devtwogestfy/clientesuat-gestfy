@@ -15,138 +15,103 @@
   "layout.menu_advertisements":"Anuncios",
 
   "dashboard.showcase_info.title" :"Datos de Facturación",
-  "dashboard": {
-    "title": "Hola",  
-    "showcase_info": {
-      "name": "Nombre",
-      "address": "Dirección",
-      "phones": "Teléfonos",
-      "cc": "IBAN"
-    },
-    "showcase_incidents": {
-      "title": "Incidencias",
-      "open": "Tiene: {{open}} incidencias abiertas",
-      "closed": "Tiene: {{closed}} incidencias cerradas"
-    },
-    "showcase_invoices": {
-      "title": "Última Factura",
-      "header_number": "Número",
-      "header_date": "Fecha",
-      "value": "Importe",
-      "pending": "Pendiente"
-    },
-    "showcase_services": "Servicios",
-    "contact": {
-      "title": "Datos de contacto",
-      "email": "Email",
-      "phone": "Teléfono",
-      "address": "Dirección"
-    }
-  },
-  "info": {
-    "title": "Datos",
-    "form_name": "Nombre",
-    "form_lastName": "Apellidos",
-    "form_address": "Dirección",
-    "form_town": "Población",
-    "form_phone1": "Teléfono 1",
-    "form_phone2": "Teléfono 2",
-    "form_cc": "CC Banco",
-    "notice": "En caso que los datos mostrados no fueran correctos o requieran ser actualizados, por favor, contacte con nosotros. Gracias.",
-    "contact": "Contacto",
-    "modal": {
-      "errors": {
-        "required": "Información de petición requerida",
-        "minlength": "Escriba una descripción minima para poder atender su peticion"
-      },
-      "title": "Escríbenos tu petición",
-      "form": "Descripción",
-      "button": "Enviar"
-    }
-  },
-  "invoices": {
-    "title": "Facturas",
-    "titlePdf": "Factura",
-    "cards": {
-      "invoices": "Facturas",
-      "last_invoice": "Última Factura",
-      "total_debt": "Deuda Total"
-    },
-    "table": {
-      "download": "Descargar",
-      "date": "Fecha",
-      "serie": "Serie",
-      "number": "Número",
-      "value": "Importe",
-      "pending": "Pendiente de pago",
-      "paid": "Pagado",
-      "pay": "Pagar"
-    }
-  },
-  "services": {
-    "title": "Servicios",
-    "cards": {
-      "mobile": "Móviles",
-      "phone": "Fijos",
-      "ftth": "FTTH",
-      "wimax": "Wimax"
-    },
-    "table": {
-      "detail": "Detalle",
-      "code": "Código",
-      "type": "Tipo",
-      "service": "Servicio",
-      "state": "Estado",
-      "prepay": {
-        "generate": "Generar prepago",
-        "pay": "Formalizar prepago",
-        "cancel": "Cancelar prepago"
-      },
-      "options": "Opciones",
-      "no_services": "No tienes servicios"
-    },
-    "state": {
-      "0": "ACTIVO",
-      "1": "BAJA TEMPORAL",
-      "2": "PENDIENTE",
-      "3": "BAJA",
-      "4": "IMPAGO"
-    },
-    "type": {
-      "phone": "Fijo",
-      "mobile": "Móvil",
-      "ftth": "FTTH",
-      "wimax": "Wimax",
-      "premium": "Fijo Premium"
-    },
-    "prepay": {
-      "historic": "Historico de prepagos del servicio:",
-      "dialog": {
-        "title": "Información de contratación",
-        "form": {
-          "date": "Fecha de inicio de servicio",
-          "dateError": "Fecha de instalacion requerida",
-          "day": "Días",
-          "weeks": "Weeks",
-          "months": "Months",
-          "dayError": "Almenos un dia, una semana o un mes es requerido",
-          "amount": "Precio (Sin IVA): "
-        },
-        "outdated": "La contratacion ya no es valida, porfavor genere una contratacion prepago nueva"
-      },
-      "table": {
-        "begin": " F. Inicio",
-        "end": "F. Fin",
-        "paydate": "F. Pago",
-        "status": {
-          "title": "Estado",
-          "pending": "PENDIENTE",
-          "paid": "PAGADO",
-          "cancelled": "CANCELADO"
-        }
-      }
-    }
-  },
+  "dashboard.title": "Hola",
+  "dashboard.showcase_info.name" :"Nombre",
+  "dashboard.showcase_info.address" :"Dirección",
+  "dashboard.showcase_info.phones" :"Teléfonos",
+  "dashboard.showcase_info.cc" :"IBAN",
+
+  "dashboard.showcase_incidents.title" :"Incidencias",
+  "dashboard.showcase_incidents.open" :"Tiene: {{open}} incidencias abiertas",
+  "dashboard.showcase_incidents.closed" :"Tiene: {{closed}} incidencias cerradas",
+
+  "dashboard.showcase_invoices.title" : "Última Factura",
+  "dashboard.showcase_invoices.header_number" :"Número",
+  "dashboard.showcase_invoices.header_date" : "Fecha",
+  "dashboard.showcase_invoices.value" :"Importe",
+  "dashboard.showcase_invoices.pending" : "Pendiente",
+  "dashboard.showcase_invoices.paid" : "Pagado",
+
+  "dashboard.showcase_services" : "Servicios",
+  "dashboard.showcase_services.contact.title" : "Datos de contacto",
+  "dashboard.showcase_services.contact.email" :"Email",
+  "dashboard.showcase_services.contact.phone" : "Teléfono",
+  "dashboard.showcase_services.contact.address" :"Dirección",
+
+  "info.title": "Datos",
+  "info.form_name":  "Nombre",
+  "info.form_lastName": "Apellidos",
+  "info.form_address":"Dirección",
+  "info.form_town": "Población",
+  "info.form_phone1":  "Teléfono 1",
+  "info.form_phone2": "Teléfono 2",
+  "info.form_cc":"CC Banco",
+  "info.notice": "En caso que los datos mostrados no fueran correctos o requieran ser actualizados, por favor, contacte con nosotros. Gracias.",
+  "info.contact": "Contacto",
+  "info.modal.errors.required": "Información de petición requerida",
+  "info.modal.errors.minlength":"Escriba una descripción minima para poder atender su peticion",
+  "info.modal.title": "Escríbenos tu petición",
+  "info.modal.form":  "Descripción",
+  "info.modal.button": "Enviar",
+ 
+  "invoices.title": "Facturas",
+  "invoices.titlePdf":  "Factura",
+  "invoices.cards.invoices": "Facturas",
+  "invoices.cards.last_invoice":"Última Factura",
+  "invoices.cards.total_debt": "Deuda Total",
+  "invoices.table.download": "Descargar",
+  "invoices.table.date":  "Fecha",
+  "invoices.table.serie": "Serie",
+  "invoices.table.number":"Número",
+  "invoices.table.value": "Importe",
+  "invoices.table.pending": "Pendiente de pago",
+  "invoices.table.paid":"Pagado",
+  "invoices.table.pay": "Pagar",
+
+  "services.title":"Servicios",
+  "services.cards.mobile":"Móviles",
+  "services.cards.phone":"Fijos",
+  "services.cards.ftth":"FTTH",
+  "services.cards.wimax":"Wimax",
+  "services.cards.others":"Otros",
+  "services.table.detail": "Detalle",
+  "services.table.code":"Código",
+  "services.table.type":"Tipo",
+  "services.table.service":"Servicio",
+  "services.table.state":"Estado",
+  "services.table.prepay.generate":"Generar prepago",
+  "services.table.prepay.pay":"Formalizar prepago",
+  "services.table.prepay.cancel":"Cancelar prepago",
+  "services.table.options":"Opciones",
+  "services.table.no_services":"No tienes servicios",
+  "services.state.0":"ACTIVO",
+  "services.state.1": "BAJA TEMPORAL",
+  "services.state.2":"PENDIENTE",
+  "services.state.3":"BAJA",
+  "services.state.4":"IMPAGO",
+  "services.type.phone":"Fijo",
+  "services.type.mobile": "Móvil",
+  "services.type.ftth":"FTTH",
+  "services.type.wimax":"Wimax",
+  "services.type.premium":"Fijo Premium",
+  "services.prepay.historic":"Historico de prepagos del servicio:",
+  "services.prepay.dialog.title": "Información de contratación",
+  "services.prepay.dialog.form.date":"Fecha de inicio de servicio",
+  "services.prepay.dialog.form.dateError":"Fecha de instalacion requerida",
+  "services.prepay.dialog.form.day":"Días",
+  "services.prepay.dialog.form.weeks":"Semanas",
+  "services.prepay.dialog.form.months":"Meses",
+  "services.prepay.dialog.form.dayError":"Almenos un día, una semana o un mes es requerido",
+  "services.prepay.dialog.form.amount":"Precio (Sin IVA):",
+  "services.prepay.dialog.outdated":"La contratacion ya no es valida, porfavor genere una contratacion prepago nueva",
+  "services.prepay.table.begin": "F. Inicio",
+  "services.prepay.table.end":"F. Fin",
+  "services.prepay.table.paydate":"F. Pago",
+  "services.prepay.table.status.title":"Estado",
+  "services.prepay.table.status.pending":"PENDIENTE",
+  "services.prepay.table.status.paid":"PAGADO",
+  "services.prepay.table.status.cancelled":"CANCELADO",
+
   "phones": {
     "table": {
       "date": "Fecha",

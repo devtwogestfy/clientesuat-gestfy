@@ -1,22 +1,15 @@
 import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
-
-// material-ui
 import { useTheme, styled } from '@mui/material/styles';
 import { Avatar, Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, IconButton, Typography } from '@mui/material';
-
-// third-party
-
-// project imports
 import MainCard from 'ui-component/cards/MainCard';
 import SkeletonTotalOrderCard from 'ui-component/cards/Skeleton/EarningCard';
-
-// assets
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import CloseIcon from '@mui/icons-material/Close';
 import IncidentsPage from 'views/pages/incidents/IncidentsPage';
 import SummaryInfo from './SummaryInfo';
 import GetInfoService from 'configuraciones/servicios/info-client';
+import { FormattedMessage } from 'react-intl';
 
 const CardWrapper = styled(MainCard)(({ theme }) => ({
     backgroundColor: theme.palette.success.dark,
@@ -97,13 +90,28 @@ const IncidentsCard = ({ isLoading }) => {
                             <Grid item>
                                 <Grid container spacing={2}>
                                     <Grid item>
-                                        <SummaryInfo color="success" title="Incidentes" total={totalIncidents} icon="alert" />
+                                        <SummaryInfo
+                                            color="success"
+                                            titleId="dashboard.showcase_incidents.title"
+                                            total={totalIncidents}
+                                            icon="alert"
+                                        />
                                     </Grid>
                                     <Grid item>
-                                        <SummaryInfo color="success" title="Abierta" total={totalOpen} icon="alert" />
+                                        <SummaryInfo
+                                            color="success"
+                                            titleId="dashboard.showcase_incidents.open"
+                                            total={totalOpen}
+                                            icon="alert"
+                                        />
                                     </Grid>
                                     <Grid item>
-                                        <SummaryInfo color="success" title="Cerrada" total={totalClose} icon="alert" />
+                                        <SummaryInfo
+                                            color="success"
+                                            titleId="dashboard.showcase_incidents.closed"
+                                            total={totalClose}
+                                            icon="alert"
+                                        />
                                     </Grid>
                                 </Grid>
                             </Grid>
@@ -113,7 +121,7 @@ const IncidentsCard = ({ isLoading }) => {
                                         <Grid container alignItems="center">
                                             <Grid item>
                                                 <Typography sx={{ fontSize: '1.7rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>
-                                                    Incidencias
+                                                    <FormattedMessage id="dashboard.showcase_incidents.title" />
                                                 </Typography>
                                             </Grid>
                                             <Grid item>

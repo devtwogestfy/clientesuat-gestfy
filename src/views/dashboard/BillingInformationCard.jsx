@@ -1,15 +1,9 @@
 import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
-
-// material-ui
 import { styled, useTheme } from '@mui/material/styles';
 import { Avatar, Box, Grid, Typography } from '@mui/material';
-
-// project imports
 import MainCard from 'ui-component/cards/MainCard';
 import SkeletonEarningCard from 'ui-component/cards/Skeleton/EarningCard';
-
-// assets
 import { IconUser } from '@tabler/icons-react';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
@@ -131,22 +125,23 @@ const BillingInformationCard = ({ isLoading }) => {
                             {showData && (
                                 <Grid item>
                                     <Typography sx={{ fontSize: '1.2rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>
-                                        <b>Nombre:</b> {clientInfo.nombre} {clientInfo.apellido}
+                                        <b>
+                                            <FormattedMessage id="dashboard.showcase_info.name" />:
+                                        </b>{' '}
+                                        {clientInfo ? `${clientInfo.nombre} ${clientInfo.apellido}` : '-'}
                                     </Typography>
-                                    {clientInfo.direccion ? (
-                                        <Typography sx={{ fontSize: '1.2rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>
-                                            <b>Dirección:</b> {clientInfo.direccion}
-                                        </Typography>
-                                    ) : (
-                                        ''
-                                    )}
-                                    {clientInfo.tel1 ? (
-                                        <Typography sx={{ fontSize: '1.2rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>
-                                            <b>Teléfonos:</b> {clientInfo.tel1}
-                                        </Typography>
-                                    ) : (
-                                        ''
-                                    )}
+                                    <Typography sx={{ fontSize: '1.2rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>
+                                        <b>
+                                            <FormattedMessage id="dashboard.showcase_info.address" />:
+                                        </b>{' '}
+                                        {clientInfo ? `${clientInfo.direccion}` : '-'}
+                                    </Typography>
+                                    <Typography sx={{ fontSize: '1.2rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>
+                                        <b>
+                                            <FormattedMessage id="dashboard.showcase_info.phones" />:
+                                        </b>{' '}
+                                        {clientInfo ? `${clientInfo.tel1}` : '-'}
+                                    </Typography>
                                 </Grid>
                             )}
                         </Grid>

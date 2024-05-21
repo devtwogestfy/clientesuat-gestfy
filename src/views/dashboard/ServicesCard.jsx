@@ -119,16 +119,31 @@ const ServicesCard = ({ isLoading }) => {
                             <Grid item>
                                 <Grid container spacing={2}>
                                     <Grid item>
-                                        <SummaryInfo total={ftth.toString()} title="FTTH" color="warning" icon="router" />
+                                        <SummaryInfo total={ftth.toString()} titleId="services.cards.ftth" color="warning" icon="router" />
                                     </Grid>
                                     <Grid item>
-                                        <SummaryInfo total={phones.toString()} title="Fijos" color="warning" icon="phone" />
+                                        <SummaryInfo
+                                            total={phones.toString()}
+                                            titleId="services.cards.phone"
+                                            color="warning"
+                                            icon="phone"
+                                        />
                                     </Grid>
                                     <Grid item>
-                                        <SummaryInfo total={mobiles.toString()} title="Móviles" color="warning" icon="mobile" />
+                                        <SummaryInfo
+                                            total={mobiles.toString()}
+                                            titleId="services.cards.mobile"
+                                            color="warning"
+                                            icon="mobile"
+                                        />
                                     </Grid>
                                     <Grid item>
-                                        <SummaryInfo total={others.toString()} title="Otros" color="warning" icon="other" />
+                                        <SummaryInfo
+                                            total={others.toString()}
+                                            titleId="services.cards.others"
+                                            color="warning"
+                                            icon="other"
+                                        />
                                     </Grid>
                                 </Grid>
                             </Grid>
