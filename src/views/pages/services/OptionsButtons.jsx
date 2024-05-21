@@ -68,6 +68,14 @@ function OptionsButtons({ element, prepaidState }) {
         console.log(element);
     };
 
+    const calculatePrice = () => {
+        let brutoDia = 0;
+        let brutoSemana = 0;
+        let brutoMes = 0;
+        let calculation = days * brutoDia + weeks * brutoSemana + months * brutoMes;
+        let brutoEstimado = Math.round((calculation + Number.EPSILON) * 100) / 100;
+    };
+
     return (
         <Box sx={{ width: '100%', textAlign: 'center' }}>
             {prepaidState && prepaidState === 1 && (

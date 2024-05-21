@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Unstable_NumberInput as BaseNumberInput, numberInputClasses } from '@mui/base/Unstable_NumberInput';
 import { styled } from '@mui/system';
+import PropTypes from 'prop-types';
 
 const NumberInput = React.forwardRef(function CustomNumberInput(props, ref) {
     return (
@@ -26,10 +27,10 @@ const NumberInput = React.forwardRef(function CustomNumberInput(props, ref) {
 });
 
 NumberInputBasic.propTypes = {
-    id: PropTypes.number,
+    id: PropTypes.string,
     label: PropTypes.string,
-    value: PropTypes.string,
-    onChange: PropTypes.function
+    value: PropTypes.number,
+    onChange: PropTypes.func
 };
 
 export default function NumberInputBasic({ id, label, value, onChange }) {
