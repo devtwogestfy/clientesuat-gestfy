@@ -1,6 +1,7 @@
 // src/components/ServicesDataGrid.jsx
 import React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
+import { useTheme } from '@mui/material/styles';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import StatusColor from './StatusColor';
@@ -10,10 +11,10 @@ import OptionsButtons from './OptionsButtons';
 const columns = [
     {
         field: 'detalle',
+        headerClassName: 'MuiDataGrid-columnHeaders',
         headerName: 'Detalle',
         width: 200,
         renderCell: (params) => {
-            console.log(params);
             return (
                 <Box sx={{ width: '100%', textAlign: 'center' }}>
                     <ActionsButtons
@@ -29,11 +30,13 @@ const columns = [
     },
     {
         field: 'codigo',
+        headerClassName: 'MuiDataGrid-columnHeaders',
         headerName: 'Código',
         width: 150
     },
     {
         field: 'intservicio_id',
+        headerClassName: 'MuiDataGrid-columnHeaders',
         headerName: 'Tipo',
         type: 'number',
         width: 110,
@@ -43,6 +46,7 @@ const columns = [
     },
     {
         field: 'nombre',
+        headerClassName: 'MuiDataGrid-columnHeaders',
         headerName: 'Servicio',
         sortable: false,
         width: 400,
@@ -50,6 +54,7 @@ const columns = [
     },
     {
         field: 'estado',
+        headerClassName: 'MuiDataGrid-columnHeaders',
         headerName: 'Estado',
         sortable: false,
         width: 120,
@@ -63,13 +68,14 @@ const columns = [
     },
     {
         field: 'opciones',
+        headerClassName: 'MuiDataGrid-columnHeaders',
         headerName: 'Opciones',
         sortable: false,
         width: 260,
         renderCell: (params) => {
             return (
                 <Box sx={{ width: '100%', textAlign: 'center' }}>
-                    <OptionsButtons element={params.row} prepaidState={params.row.prepaid} />
+                    <OptionsButtons element={params.row} />
                 </Box>
             );
         }
@@ -77,6 +83,7 @@ const columns = [
 ];
 
 const ServicesDataGrid = ({ rows }) => {
+    const theme = useTheme();
     const getRowClassName = (params) => {
         return params.indexRelativeToCurrentPage % 2 === 0 ? 'cebra-row' : '';
     };
@@ -96,6 +103,12 @@ const ServicesDataGrid = ({ rows }) => {
                 }}
                 pageSizeOptions={[5]}
                 disableRowSelectionOnClick
+                sx={{
+                    '& .MuiDataGrid-columnHeaders': {
+                        backgroundColor: theme.palette.secondary.dark,
+                        color: '#fff'
+                    }
+                }}
             />
         </Box>
     );

@@ -1,5 +1,18 @@
 import React, { useState } from 'react';
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, IconButton, TextField, Typography } from '@mui/material';
+import {
+    Box,
+    Button,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+    Grid,
+    IconButton,
+    TextField,
+    Typography,
+    FormControl,
+    InputLabel
+} from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
 // eslint-disable-next-line no-restricted-imports
@@ -9,15 +22,15 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs';
 import NumberInputBasic from './NaturalNumberInput';
+import PropTypes from 'prop-types';
 
-// eslint-disable-next-line react/prop-types
-function OptionsButtons({ element, prepaidState }) {
+function OptionsButtons({ element }) {
     const [open, setOpen] = useState(false);
     const [selectedDate, setSelectedDate] = useState(dayjs());
-    const [days, setDays] = useState();
-    const [weeks, setWeeks] = useState();
-    const [months, setMonths] = useState();
-    const [brutoEstimado, setBrutoEstimado] = useState();
+    const [days, setDays] = useState(0);
+    const [weeks, setWeeks] = useState(0);
+    const [months, setMonths] = useState(0);
+    const [brutoEstimado, setBrutoEstimado] = useState(0);
 
     const buttonStyles = {
         backgroundColor: 'info.main',
@@ -49,7 +62,7 @@ function OptionsButtons({ element, prepaidState }) {
     };
 
     const handleChange = (id) => (event) => {
-        const newValue = event.target.value;
+        const newValue = Number(event.target.value); // Ensure the value is a number
         if (id === 'days') {
             setDays(newValue);
         }
@@ -65,27 +78,25 @@ function OptionsButtons({ element, prepaidState }) {
         if (id === 'selectedDate') {
             setSelectedDate(newValue);
         }
-
-        console.log(element);
         calculatePrice();
     };
 
     const calculatePrice = () => {
-        let brutoDia = 1;
-        let brutoSemana = 1;
-        let brutoMes = 1;
-        let calculation = days * brutoDia + weeks * brutoSemana + months * brutoMes;
+        let brutoDia = element.brutoDia ? element.brutoDia : 1;
+        let brutoSemana = element.brutoSemana ? element.brutoSemana : 1;
+        let brutoMes = element.brutoMes ? element.brutoMes : 1;
+        let calculation = (days || 0) * brutoDia + (weeks || 0) * brutoSemana + (months || 0) * brutoMes;
         setBrutoEstimado(Math.round((calculation + Number.EPSILON) * 100) / 100);
     };
 
     return (
         <Box sx={{ width: '100%', textAlign: 'center' }}>
-            {prepaidState && prepaidState === 1 && (
+            {element.prepaid && element.prepaid === 1 && (
                 <Button aria-label="editar" onClick={handleOpenCreatePrepaid} sx={buttonStyles}>
                     Generar prepago
                 </Button>
             )}
-            {prepaidState && prepaidState != 1 && (
+            {element.prepaid && element.prepaid !== 1 && (
                 <>
                     <Button aria-label="editar" onClick={handleAddCircleClick} sx={buttonStyles}>
                         Pagar
@@ -128,19 +139,28 @@ function OptionsButtons({ element, prepaidState }) {
                     <Grid item xs={12} sx={{ marginTop: '10px' }}>
                         <Grid container spacing={3}>
                             <Grid item xs={12} sm={4} md={4} lg={4}>
-                                <NumberInputBasic id="days" label="Días" value={days} onChange={handleChange('days')} />
+                                <FormControl fullWidth>
+                                    <InputLabel htmlFor="days">Días</InputLabel>
+                                    <NumberInputBasic id="days" label="Días" value={days} onChange={handleChange('days')} />
+                                </FormControl>
                             </Grid>
                             <Grid item xs={12} sm={4} md={4} lg={4}>
-                                <NumberInputBasic id="weeks" label="Semanas" value={weeks} onChange={handleChange('weeks')} />
+                                <FormControl fullWidth>
+                                    <InputLabel htmlFor="weeks">Semanas</InputLabel>
+                                    <NumberInputBasic id="weeks" label="Semanas" value={weeks} onChange={handleChange('weeks')} />
+                                </FormControl>
                             </Grid>
                             <Grid item xs={12} sm={4} md={4} lg={4}>
-                                <NumberInputBasic id="months" label="Meses" value={months} onChange={handleChange('months')} />
+                                <FormControl fullWidth>
+                                    <InputLabel htmlFor="months">Meses</InputLabel>
+                                    <NumberInputBasic id="months" label="Meses" value={months} onChange={handleChange('months')} />
+                                </FormControl>
                             </Grid>
                         </Grid>
                     </Grid>
                 </DialogContent>
                 <DialogActions>
-                    <TextField id="outlined-read-only-input" label="Precio (Sin IVA)" defaultValue={brutoEstimado} disabled />
+                    <TextField id="outlined-read-only-input" label="Precio (Sin IVA)" value={brutoEstimado} disabled />
                     <Button variant="outlined" onClick={handleClose} color="success">
                         Guardar
                     </Button>
@@ -152,5 +172,18 @@ function OptionsButtons({ element, prepaidState }) {
         </Box>
     );
 }
+
+OptionsButtons.propTypes = {
+    element: PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        estado: PropTypes.string.isRequired,
+        tipoId: PropTypes.number.isRequired,
+        aviso: PropTypes.string,
+        prepaid: PropTypes.number,
+        brutoDia: PropTypes.number,
+        brutoSemana: PropTypes.number,
+        brutoMes: PropTypes.number
+    }).isRequired
+};
 
 export default OptionsButtons;
