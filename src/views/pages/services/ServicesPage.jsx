@@ -112,7 +112,7 @@ const ServicesPage = () => {
             console.error('Error fetching data:', error);
         }
     };
-    console.log(data);
+
     return (
         <MainCard>
             <Grid container spacing={gridSpacing}>
@@ -157,7 +157,7 @@ const ServicesPage = () => {
                     </Grid>
                 </Grid>
                 <Grid item xs={12}>
-                    <ServicesDataGrid rows={data} />
+                    <ServicesDataGrid rows={data} fetchData={fetchData} />
                 </Grid>
             </Grid>
         </MainCard>

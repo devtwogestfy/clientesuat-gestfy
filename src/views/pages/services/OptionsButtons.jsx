@@ -22,10 +22,15 @@ import dayjs from 'dayjs';
 import NumberInputBasic from './NaturalNumberInput';
 import PropTypes from 'prop-types';
 import GetInfoService from 'configuraciones/servicios/service';
+import CancelPrepayDialog from './CancelPrepayDialog';
+import CancelPrepayPopper from './CancelPrepayPopper';
 
 function OptionsButtons({ element }) {
     //console.log(element);
     const [open, setOpen] = useState(false);
+    const [openCancel, setOpenCancel] = useState(false);
+    const [openPopperCancel, setOpenPopperCancel] = useState(false);
+    const [contentModal, setContentModal] = useState('');
     const [selectedDate, setSelectedDate] = useState(dayjs());
     const [days, setDays] = useState(0);
     const [weeks, setWeeks] = useState(0);
@@ -51,14 +56,25 @@ function OptionsButtons({ element }) {
     };
 
     const handleCancelPrepay = () => {
-        infoService.cancelPrepay(id).then((response) => {
-            console.log(response);
-
-            setTimeout(() => {}, 3000);
-            setOpen(false);
-        });
+        setOpenCancel(true);
     };
 
+    const handleCloseCancel = () => {
+        setOpenCancel(false);
+    };
+
+    const handleCancelSendPrepay = () => {
+        const id = element.id;
+        infoService.cancelPrepay(id).then((response) => {
+            setOpenPopperCancel(true);
+            setContentModal(response);
+            setTimeout(() => {
+                setOpenPopperCancel(false);
+                setContentModal('');
+            }, 3000);
+            setOpenCancel(false);
+        });
+    };
     const handleSavePrepaid = () => {
         const parameters = {
             dias: days,
@@ -97,9 +113,9 @@ function OptionsButtons({ element }) {
     };
 
     const calculatePrice = () => {
-        let brutoDia = element.brutoDia ? element.brutoDia : 1;
-        let brutoSemana = element.brutoSemana ? element.brutoSemana : 1;
-        let brutoMes = element.brutoMes ? element.brutoMes : 1;
+        let brutoDia = element.brutoDia ? parseFloat(element.brutoDia) : 1;
+        let brutoSemana = element.brutoSemana ? parseFloat(element.brutoSemana) : 1;
+        let brutoMes = element.brutoMes ? parseFloat(element.brutoMes) : 1;
         let calculation = (days || 0) * brutoDia + (weeks || 0) * brutoSemana + (months || 0) * brutoMes;
         setBrutoEstimado(Math.round((calculation + Number.EPSILON) * 100) / 100);
     };
@@ -192,6 +208,13 @@ function OptionsButtons({ element }) {
                     </Button>
                 </DialogActions>
             </Dialog>
+
+            <CancelPrepayDialog
+                openCancel={openCancel}
+                handleCloseCancel={handleCloseCancel}
+                handleCancelSendPrepay={handleCancelSendPrepay}
+            />
+            <CancelPrepayPopper openPopperCancel={openPopperCancel} contentModal={contentModal} />
         </Box>
     );
 }
@@ -200,15 +223,15 @@ OptionsButtons.propTypes = {
     element: PropTypes.shape({
         id: PropTypes.number.isRequired,
         estado: PropTypes.number.isRequired,
-        tipoId: PropTypes.number.isRequired,
-        intservicio_id: PropTypes.number.isRequired,
+        tipoId: PropTypes.string,
+        intservicio_id: PropTypes.number,
         aviso: PropTypes.string,
         prepaid: PropTypes.number,
         prepaidState: PropTypes.number,
         prepaidActive: PropTypes.number,
-        brutoDia: PropTypes.number,
-        brutoSemana: PropTypes.number,
-        brutoMes: PropTypes.number
+        brutoDia: PropTypes.string,
+        brutoSemana: PropTypes.string,
+        brutoMes: PropTypes.string
     }).isRequired
 };
 
