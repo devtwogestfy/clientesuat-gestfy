@@ -168,6 +168,7 @@
   "router.table.protocol":"Protocolo",
   "router.buttons.add":"Agregar",
   "router.buttons.delete":"Borrar",
+  "router.buttons.save":"Guardar",
   "router.buttons.qr24":"QR 2.4GHz",
   "router.buttons.qr5":"QR 5GHz",
 

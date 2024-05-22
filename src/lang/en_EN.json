@@ -112,91 +112,66 @@
   "services.prepay.table.status.paid":"PAID",
   "services.prepay.table.status.cancelled":"CANCELLED",
  
-  "phones": {
-    "table": {
-      "date": "Date",
-      "source": "Source",
-      "dest": "Destination",
-      "zone": "Zone",
-      "type": "Type",
-      "units": "Units",
-      "cost": "Cost"
-    },
-    "form": {
-      "from_date": "From",
-      "to_date": "Until",
-      "incoming": "Incoming"
-    },
-    "cards": {
-      "sms": "Total SMS",
-      "data": "Total Data",
-      "calls": "Total Calls"
-    }
-  },
-  "incidents": {
-    "title": "Tickets",
-    "table": {
-      "number": "Number",
-      "date": "Date",
-      "description": "Descirption",
-      "service": "Service",
-      "hours": "Hours",
-      "status": "Status",
-      "no_note": "No notes to show"
-    },
-    "cards": {
-      "open": "Open",
-      "closed": "Closed",
-      "incidents": "Tickets",
-      "sat": "Hours (Month)"
-    },
-    "buttons": {
-      "new": "New Ticket"
-    }
-  },
-  "router": {
-    "title": "Router",
-    "cards": {
-      "title": {
-        "wifi24": "WiFi 2.4GHz",
-        "wifi5": "WiFi 5GHz",
-        "lan": "LAN",
-        "ports": "Port Redirection"
-      },
-      "form": {
-        "ssid": "SSID",
-        "password": "Password",
-        "ip": "IP",
-        "mask": "Mask",
-        "dhcp_from": "DHCP From",
-        "dhcp_to": "DHCP To",
-        "udp": "UDP",
-        "tcp": "TCP",
-        "udp_tcp": "UDP/TCP"
-      },
-      "info": "Making changes in this parameters, may leave you without connectivity"
-    },
-    "errors": {
-      "valid_ip": "Enter a valid ip",
-      "valid_ssid": "SSID between 8 y 25 characters",
-      "valid_password": "Password between 8 y 25 characters",
-      "valid_port": "Enter a valid port (1-65534)",
-      "valid_protocol": "Choose a valid protocol"
-    },
-    "table": {
-      "ip": "IP",
-      "ext_port": "Outer Port",
-      "int_port": "Inside Port",
-      "protocol": "Protocol"
-    },
-    "buttons": {
-      "add": "Add",
-      "delete": "Delete",
-      "save": "Save",
-      "qr24": "QR 2.4GHz",
-      "qr5": "QR 5GHz"
-    }
-  },
+  "phones.table.date":"Date",
+  "phones.table.source":"Source",
+  "phones.table.dest":"Destination",
+  "phones.table.zone":"Zone",
+  "phones.table.type":"Type",
+  "phones.table.units":"Units",
+  "phones.table.cost":"Cost",
+  "phones.form.from_date":"From",
+  "phones.form.to_date":"Until",
+  "phones.form.incoming":"Incoming",
+  "phones.cards.sms":"Total SMS",
+  "phones.cards.data":"Total Data",
+  "phones.cards.calls":"Total Calls",
+
+  "incidents.title":"Tickets",
+  "incidents.table.title":"Tickets",
+  "incidents.table.number":"Number",
+  "incidents.table.date":"Date",
+  "incidents.table.description":"Descirption",
+  "incidents.table.service":"Service",
+  "incidents.table.hours":"Hours",
+  "incidents.table.status":"Status",
+  "incidents.table.no_note":"No notes to show",
+  "incidents.cards.open":"Open",
+  "incidents.cards.closed":"Closed",
+  "incidents.cards.incidents":"Tickets",
+  "incidents.cards.sat":"Hours (Month)",
+  "incidents.buttons.new":"New Ticket",
+
+  "router.title":"Router",
+  "router.cards.title.wifi24":"WiFi 2.4GHz",
+  "router.cards.title.wifi5":"WiFi 5GHz",
+  "router.cards.title.lan":"LAN",
+  "router.cards.title.ports":"Port Redirection",
+  "router.cards.form.ssid":"SSID",
+  "router.cards.form.password":"Password",
+  "router.cards.form.ip":"IP",
+  "router.cards.form.mask":"Mask",
+  "router.cards.form.dhcp_from":"DHCP From",
+  "router.cards.form.dhcp_to":"DHCP To",
+  "router.cards.form.udp":"UDP",
+  "router.cards.form.tcp":"TCP",
+  "router.cards.form.udp_tcp":"UDP/TCP",
+  "router.cards.info":"Making changes in this parameters, may leave you without connectivity",
+  "router.errors.valid_ip":"Enter a valid ip",
+  "router.errors.valid_ssid":"SSID between 8 y 25 characters",
+  "router.errors.valid_password":"Password between 8 y 25 characters",
+  "router.errors.valid_port":"Enter a valid port (1-65534)",
+  "router.errors.valid_protocol":"Choose a valid protocol",
+
+  "router.table.ip":"IP",
+  "router.table.ext_port":"Outer Port",
+  "router.table.int_port":"Inside Port",
+  "router.table.protocol":"Protocol",
+  "router.buttons.add":"Add",
+  "router.buttons.delete":"Delete",
+  "router.buttons.save":"Save",
+  "router.buttons.qr24":"QR 2.4GHz",
+  "router.buttons.qr5":"QR 5GHz",
+
   "dialogs": {
     "dates": "The dates can't have more than 3 months in between",
     "qr": {
