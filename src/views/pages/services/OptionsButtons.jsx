@@ -25,7 +25,7 @@ import GetInfoService from 'configuraciones/servicios/service';
 import CancelPrepayDialog from './CancelPrepayDialog';
 import CancelPrepayPopper from './CancelPrepayPopper';
 
-function OptionsButtons({ element }) {
+function OptionsButtons({ element, updateData }) {
     //console.log(element);
     const [open, setOpen] = useState(false);
     const [openCancel, setOpenCancel] = useState(false);
@@ -68,6 +68,7 @@ function OptionsButtons({ element }) {
         infoService.cancelPrepay(id).then((response) => {
             setOpenPopperCancel(true);
             setContentModal(response);
+            updateData();
             setTimeout(() => {
                 setOpenPopperCancel(false);
                 setContentModal('');
@@ -85,9 +86,14 @@ function OptionsButtons({ element }) {
             servPadreId: element.intservicio_id
         };
         infoService.createPrepay(parameters).then((response) => {
+            setOpenPopperCancel(true);
+            setContentModal('Generado exitosamente');
             console.log(response);
-
-            setTimeout(() => {}, 3000);
+            updateData();
+            setTimeout(() => {
+                setOpenPopperCancel(false);
+                setContentModal('');
+            }, 3000);
             setOpen(false);
         });
     };
@@ -232,7 +238,8 @@ OptionsButtons.propTypes = {
         brutoDia: PropTypes.string,
         brutoSemana: PropTypes.string,
         brutoMes: PropTypes.string
-    }).isRequired
+    }).isRequired,
+    updateData: PropTypes.func.isRequired
 };
 
 export default OptionsButtons;

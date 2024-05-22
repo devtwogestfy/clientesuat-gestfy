@@ -1,59 +1,12 @@
 // src/views/pages/services/ServicesPage.jsx
 import { useState, useEffect } from 'react';
 import { useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
 import Grid from '@mui/material/Grid';
-import PropTypes from 'prop-types';
-import Typography from '@mui/material/Typography';
 import MainCard from 'ui-component/cards/MainCard';
 import { gridSpacing } from 'store/constant';
 import TotalServiceCard from './TotalServiceCard';
 import GetInfoService from 'configuraciones/servicios/info-client';
 import ServicesDataGrid from './ServicesDataGrid';
-
-const ColorBox = ({ bgcolor, title, data, dark }) => (
-    <>
-        <Card sx={{ mb: 3 }}>
-            <Box
-                sx={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    py: 4.5,
-                    bgcolor,
-                    color: dark ? 'grey.800' : '#ffffff'
-                }}
-            >
-                {title && (
-                    <Typography variant="subtitle1" color="inherit">
-                        {title}
-                    </Typography>
-                )}
-                {!title && <Box sx={{ p: 1.15 }} />}
-            </Box>
-        </Card>
-        {data && (
-            <Grid container justifyContent="space-between" alignItems="center">
-                <Grid item>
-                    <Typography variant="subtitle2">{data.label}</Typography>
-                </Grid>
-                <Grid item>
-                    <Typography variant="subtitle1" sx={{ textTransform: 'uppercase' }}>
-                        {data.color}
-                    </Typography>
-                </Grid>
-            </Grid>
-        )}
-    </>
-);
-
-ColorBox.propTypes = {
-    bgcolor: PropTypes.string,
-    title: PropTypes.string,
-    data: PropTypes.object.isRequired,
-    dark: PropTypes.bool
-};
 
 const ServicesPage = () => {
     const theme = useTheme();
@@ -67,6 +20,10 @@ const ServicesPage = () => {
         fetchData();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    const updateData = () => {
+        fetchData();
+    };
 
     const infoService = GetInfoService();
     const fetchData = async () => {
@@ -157,7 +114,7 @@ const ServicesPage = () => {
                     </Grid>
                 </Grid>
                 <Grid item xs={12}>
-                    <ServicesDataGrid rows={data} fetchData={fetchData} />
+                    <ServicesDataGrid rows={data} updateData={updateData} />
                 </Grid>
             </Grid>
         </MainCard>
