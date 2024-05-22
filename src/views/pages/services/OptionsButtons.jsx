@@ -138,10 +138,10 @@ function OptionsButtons({ element, updateData }) {
                     (element.prepaidState === 1 && (
                         <>
                             <Button aria-label="pay" onClick={handleValidatePrepay} variant="contained">
-                                Pagar
+                                Formalizar prepago
                             </Button>
                             <Button aria-label="cancel" onClick={handleCancelPrepay} variant="contained">
-                                Cancelar
+                                Cancelar prepago
                             </Button>
                         </>
                     )))}
@@ -168,6 +168,7 @@ function OptionsButtons({ element, updateData }) {
                                             value={selectedDate}
                                             onChange={handleChange('selectedDate')}
                                             format="DD/MM/YYYY"
+                                            fullWidth
                                             slots={{ textField: (props) => <TextField {...props} /> }}
                                         />
                                     </DemoContainer>
@@ -175,41 +176,32 @@ function OptionsButtons({ element, updateData }) {
                             </Grid>
                         </Grid>
                     </Grid>
-                    <Grid item xs={12} sx={{ marginTop: '10px' }}>
+                    <Grid item xs={12} sx={{ marginTop: '20px' }}>
                         <Grid container spacing={3}>
                             <Grid item xs={12} sm={4} md={4} lg={4}>
                                 <FormControl fullWidth>
-                                    <Typography variant="body1" sx={{ marginBottom: '8px' }}>
-                                        Días
-                                    </Typography>
-                                    <NumberInputBasic id="days" value={days} onChange={handleChange('days')} />
+                                    <NumberInputBasic label="Días" id="days" value={days} onChange={handleChange('days')} />
                                 </FormControl>
                             </Grid>
                             <Grid item xs={12} sm={4} md={4} lg={4}>
                                 <FormControl fullWidth>
-                                    <Typography variant="body1" sx={{ marginBottom: '8px' }}>
-                                        Semanas
-                                    </Typography>
-                                    <NumberInputBasic id="weeks" value={weeks} onChange={handleChange('weeks')} />
+                                    <NumberInputBasic label="Semanas" id="weeks" value={weeks} onChange={handleChange('weeks')} />
                                 </FormControl>
                             </Grid>
                             <Grid item xs={12} sm={4} md={4} lg={4}>
                                 <FormControl fullWidth>
-                                    <Typography variant="body1" sx={{ marginBottom: '8px' }}>
-                                        Meses
-                                    </Typography>
-                                    <NumberInputBasic id="months" value={months} onChange={handleChange('months')} />
+                                    <NumberInputBasic label="Meses" id="months" value={months} onChange={handleChange('months')} />
                                 </FormControl>
                             </Grid>
                         </Grid>
                     </Grid>
                 </DialogContent>
                 <DialogActions>
-                    <TextField id="outlined-read-only-input" label="Precio (Sin IVA)" value={brutoEstimado} disabled />
-                    <Button variant="outlined" onClick={handleSavePrepaid} color="success">
+                    <p style={{ marginRight: 'auto', marginLeft: '20px' }}>Precio (Sin IVA): {brutoEstimado} €</p>
+                    <Button variant="contained" onClick={handleSavePrepaid} color="success">
                         Guardar
                     </Button>
-                    <Button variant="outlined" onClick={handleClose} color="error">
+                    <Button variant="contained" onClick={handleClose} color="error">
                         Cancelar
                     </Button>
                 </DialogActions>
