@@ -33,17 +33,6 @@ function OptionsButtons({ element }) {
     const [brutoEstimado, setBrutoEstimado] = useState(0);
     const infoService = GetInfoService();
 
-    const buttonStyles = {
-        backgroundColor: 'info.main',
-        color: 'white',
-        width: 120,
-        height: 30,
-        margin: '2px',
-        '&:hover': {
-            backgroundColor: 'info.dark'
-        }
-    };
-
     const handleValidatePrepay = () => {
         infoService.validatePrepay(id).then((response) => {
             console.log(response);
@@ -75,7 +64,7 @@ function OptionsButtons({ element }) {
             dias: days,
             semanas: weeks,
             meses: months,
-            fechainstalacion: dayjs(selectedDate).format('DD/MM/YYYY'),
+            fechainstalacion: dayjs(selectedDate).format('DD-MM-YYYY'),
             servId: element.id,
             servPadreId: element.intservicio_id
         };
@@ -94,12 +83,14 @@ function OptionsButtons({ element }) {
             setSelectedDate(newValue);
         } else {
             newValue = Number(event.target.value); // Ensure the value is a number for numeric inputs
-            if (id === 'days') {
-                setDays(newValue);
-            } else if (id === 'weeks') {
-                setWeeks(newValue);
-            } else if (id === 'months') {
-                setMonths(newValue);
+            if (newValue >= 0) {
+                if (id === 'days') {
+                    setDays(newValue);
+                } else if (id === 'weeks') {
+                    setWeeks(newValue);
+                } else if (id === 'months') {
+                    setMonths(newValue);
+                }
             }
         }
         calculatePrice();
@@ -116,16 +107,16 @@ function OptionsButtons({ element }) {
     return (
         <Box sx={{ width: '100%', textAlign: 'center' }}>
             {element.prepaid && element.prepaid === 1 && (
-                <Button aria-label="create" onClick={handleOpenCreatePrepaid} sx={buttonStyles}>
+                <Button aria-label="create" onClick={handleOpenCreatePrepaid} variant="contained">
                     Generar prepago
                 </Button>
             )}
             {element.prepaid && element.prepaid !== 1 && (
                 <>
-                    <Button aria-label="pay" onClick={handleValidatePrepay} sx={buttonStyles}>
+                    <Button aria-label="pay" onClick={handleValidatePrepay} variant="contained">
                         Pagar
                     </Button>
-                    <Button aria-label="cancel" onClick={handleCancelPrepay} sx={buttonStyles}>
+                    <Button aria-label="cancel" onClick={handleCancelPrepay} variant="contained">
                         Cancelar
                     </Button>
                 </>

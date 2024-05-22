@@ -192,64 +192,49 @@
   "dialogs.buttons.no":"No",
   "dialogs.info.title":"Información",
   "dialogs.info.new_version":"Nueva versión disponible, por favor recargue la página.",
-  "dialogs": {
-    "snacks": {
-      "put_router": "Información de router actualizada correctamente",
-      "post_incident": "Incidencia creada correctamente"
-    },
-    "errors": {
-      "router1": "Los datos han sido enviados al router, este se configurará la próxima vez que este online.",
-      "router2": "Ha habido un problema actualizando la configuración de su router. Contacte con soporte técnico.",
-      "router3": "Ha habido un problema actualizando la configuración de su router. Contacte con soporte técnico.",
-      "router4": "Ha ocurrido un error. Por favor, vuelva a intentarlo y si el problema persiste, contacte con soporte técnico.",
-      "noeditable": "El equipo actualmente no puede configurarse, intentelo mas tarde. Si el problema persiste contacte con soporte técnico",
-      "mustpay": "Para proceder, primero debe pagar la factura número: {{param}}",
-      "invoice_already_payed": "Ha ocurrido un error. Por favor, vuelva a intentarlo y si el problema persiste, contacte con soporte técnico.",
-      "form_error": "Hay un error en el formulario. Compruebe que los campos estan correctos e intentelo denuevo",
-      "form_error24": "Por favor, revise los datos en la sección Wifi 2.4Ghz. Ambos campos son obligatorios y la contraseña debe tener una longitud mínima de 8 caracteres",
-      "form_error5": "Por favor, revise los datos en la sección Wifi 5Ghz. Ambos campos son obligatorios y la contraseña debe tener una longitud mínima de 8 caracteres",
-      "form_error_lan": "Por favor, revise los datos de la sección LAN. Todos los campos son obligatorios y deben ser direcciones IP validas",
-      "default": "Ha ocurrido un error. Por favor, vuelva a intentarlo y si el problema persiste, contacte con soporte técnico."
-    },
-    "online_payments": {
-      "redirection": "Va a ser redirigido a la plataforma de pago. Para continuar eliga un metodo de pago."
-    },
-    "loading": "Cargando...",
-    "exit": "Pulse atrás otra vez para salir.",
-    "permision_notice": "Aviso",
-    "storage_permision_text": "Para descargar el documento, debe permitir el uso de los servicios de almacenamiento.",
-    "call_customer_service": "¿Desea llamar al servicio técnico?",
-    "drag_update": "Arrastra para actualizar",
-    "updating": "Updating..."
-  },
-  "documents": {
-    "title": "Documentación",
-    "table": {
-      "date": "Fecha",
-      "name": "Nombre",
-      "signed_req": "Firma requerida",
-      "signed": "Firmado",
-      "download_og": "Descargar original",
-      "download_signed": "Descargar firmado"
-    },
-    "downloading": "Descargando Documento...",
-    "errors": {
-      "writeDocumentTitle": "Error al descargar el documento",
-      "writeDocumentText": "Ha ocurrido un error al descargar el documento. Por favor, vuelva a intentarlo y si el problema persiste, contacte con soporte técnico.",
-      "readDocumentTitle": "Error al descargar el documento",
-      "readDocumentText": "Ha ocurrido un error al descargar el documento. Por favor, vuelva a intentarlo y si el problema persiste, contacte con soporte técnico."
-    }
-  },
-  "filters": {
-    "all": "Todos",
-    "payment_status": "Estado Pago",
-    "price": "Precio",
-    "order": "Ordenar"
-  },
-  "advertisements": {
-    "title": "Anuncios",
-    "button": {
-      "show_more": "Ver Más"
-    }
-  }
+  "dialogs.snacks.put_router":"Información de router actualizada correctamente",
+  "dialogs.snacks.post_incident":"Incidencia creada correctamente",
+  "dialogs.errors.router1":"Los datos han sido enviados al router, este se configurará la próxima vez que este online.",
+  "dialogs.errors.router2":"Ha habido un problema actualizando la configuración de su router. Contacte con soporte técnico.",
+  "dialogs.errors.router3":"Ha habido un problema actualizando la configuración de su router. Contacte con soporte técnico.",
+  "dialogs.errors.router4":"Ha ocurrido un error. Por favor, vuelva a intentarlo y si el problema persiste, contacte con soporte técnico.",
+  "dialogs.errors.noeditable":"El equipo actualmente no puede configurarse, intentelo mas tarde. Si el problema persiste contacte con soporte técnico.",
+  "dialogs.errors.mustpay":"Para proceder, primero debe pagar la factura número: {{param}}",
+  "dialogs.errors.invoice_already_payed":"Ha ocurrido un error. Por favor, vuelva a intentarlo y si el problema persiste, contacte con soporte técnico.",
+  "dialogs.errors.form_error":"Hay un error en el formulario. Compruebe que los campos estan correctos e intentelo de nuevo.",
+  "dialogs.errors.form_error24":"Por favor, revise los datos en la sección Wifi 2.4Ghz. Ambos campos son obligatorios y la contraseña debe tener una longitud mínima de 8 caracteres",
+  "dialogs.errors.form_error5":"Por favor, revise los datos en la sección Wifi 5Ghz. Ambos campos son obligatorios y la contraseña debe tener una longitud mínima de 8 caracteres",
+  "dialogs.errors.form_error_lan":"Por favor, revise los datos de la sección LAN. Todos los campos son obligatorios y deben ser direcciones IP validas.",
+  "dialogs.errors.default":"Ha ocurrido un error. Por favor, vuelva a intentarlo y si el problema persiste, contacte con soporte técnico.",
+  "dialogs.online_payments.redirection":"Va a ser redirigido a la plataforma de pago. Para continuar eliga un metodo de pago.",
+  "dialogs.loading": "Cargando...",
+  "dialogs.exit": "Pulse atrás otra vez para salir.",
+  "dialogs.permision_notice": "Aviso",
+  "dialogs.storage_permision_text": "Para descargar el documento, debe permitir el uso de los servicios de almacenamiento.",
+  "dialogs.call_customer_service": "¿Desea llamar al servicio técnico?",
+  "dialogs.drag_update": "Arrastra para actualizar",
+  "dialogs.updating": "Updating...",
+
+  "documents.title":"Documentación",
+  "documents.table.date":"Fecha",
+  "documents.table.name":"Nombre",
+  "documents.table.signed_req":"Firma requerida",
+  "documents.table.signed":"Firmado",
+  "documents.table.title":"Documentación",
+  "documents.download_og":"Descargar original",
+  "documents.download_signed": "Descargar firmado",
+  "documents.downloading":"Descargando Documento...",
+  "documents.error.writeDocumentTitle":"",
+  "documents.error.writeDocumentText":"Ha ocurrido un error al descargar el documento. Por favor, vuelva a intentarlo y si el problema persiste, contacte con soporte técnico.",
+  "documents.error.readDocumentTitle":"Error al descargar el documento",
+  "documents.error.readDocumentText":"Ha ocurrido un error al descargar el documento. Por favor, vuelva a intentarlo y si el problema persiste, contacte con soporte técnico.",
+ 
+  "filters.all":"Todos",
+  "filters.payment_status":"Estado Pago",
+  "filters.price":"Precio",
+  "filters.order":"Ordenar",
+
+  "advertisements.title":"Anuncios",
+  "advertisements.button.show_more":"Ver Más"
+
 }
