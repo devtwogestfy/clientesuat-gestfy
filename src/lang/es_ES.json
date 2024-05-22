@@ -161,55 +161,38 @@
   "router.errors.valid_password":"Contraseña entre 8 y 25 caracteres",
   "router.errors.valid_port":"Introduzca un puerto válido (1-65534)",
   "router.errors.valid_protocol":"Eliga un protocolo válido",
-  "router": {
-    "table": {
-      "ip": "IP",
-      "ext_port": "Puerto Externo",
-      "int_port": "Puerto Interno",
-      "protocol": "Protocolo"
-    },
-    "buttons": {
-      "add": "Agregar",
-      "delete": "Borrar",
-      "save": "Guardar",
-      "qr24": "QR 2.4GHz",
-      "qr5": "QR 5GHz"
-    }
-  },
+
+  "router.table.ip":"IP",
+  "router.table.ext_port":"Puerto Externo",
+  "router.table.int_port":"Puerto Interno",
+  "router.table.protocol":"Protocolo",
+  "router.buttons.add":"Agregar",
+  "router.buttons.delete":"Borrar",
+  "router.buttons.qr24":"QR 2.4GHz",
+  "router.buttons.qr5":"QR 5GHz",
+
+  "dialogs.dates":"Las fechas no puede tener mas de 3 meses entre si",
+  "dialogs.qr.title5":"QR de red WiFi 5GHz",
+  "dialogs.qr.title24":"QR de red WiFi 2.4GHz",
+  "dialogs.qr.error5":"Los datos de la red WiFi 5GHz están incompletos",
+  "dialogs.qr.error24":"Los datos de la red WiFi 2.4GHz están incompletos",
+  "dialogs.title.terms_conditions":"Términos y Condiciones",
+  "dialogs.new_incident.title":"Nueva Incidencia",
+  "dialogs.new_incident.service":"Elige un Servicio",
+  "dialogs.new_incident.errors.service_required":"Elegir un servicio es requerido",
+  "dialogs.new_incident.errors.description_required":"Una descripcion de la incidencia es requerida",
+  "dialogs.new_incident.errors.description_minlength":"Escriba una descrición minima de la incidencia para poder atenderla correctamente",
+  "dialogs.buttons.accept":"Aceptar",
+  "dialogs.buttons.cancel":"Cancelar",
+  "dialogs.buttons.reset":"Restablecer",
+  "dialogs.buttons.send":"Enviar",
+  "dialogs.buttons.card":"Tarjeta",
+  "dialogs.buttons.bizum":"Bizum",
+  "dialogs.buttons.yes":"Sí",
+  "dialogs.buttons.no":"No",
+  "dialogs.info.title":"Información",
+  "dialogs.info.new_version":"Nueva versión disponible, por favor recargue la página.",
   "dialogs": {
-    "dates": "Las fechas no puede tener mas de 3 meses entre si",
-    "qr": {
-      "title5": "QR de red WiFi 5GHz",
-      "title24": "QR de red WiFi 2.4GHz",
-      "error5": "Los datos de la red WiFi 5GHz están incompletos",
-      "error24": "Los datos de la red WiFi 2.4GHz están incompletos"
-    },
-    "title": {
-      "terms_conditions": "Términos y Condiciones"
-    },
-    "new_incident": {
-      "title": "Nueva Incidencia",
-      "service": "Elige un Servicio",
-      "errors": {
-        "service_required": "Elegir un servicio es requerido",
-        "description_required": "Una descripcion de la incidencia es requerida",
-        "description_minlength": "Escriba una descrición minima de la incidencia para poder atenderla correctamente"
-      }
-    },
-    "buttons": {
-      "accept": "Aceptar",
-      "cancel": "Cancelar",
-      "reset": "Restablecer",
-      "send": "Enviar",
-      "card": "Tarjeta",
-      "bizum": "Bizum",
-      "yes": "Sí",
-      "no": "No"
-    },
-    "info": {
-      "title": "Información",
-      "new_version": "Nueva versión disponible, por favor recargue la página."
-    },
     "snacks": {
       "put_router": "Información de router actualizada correctamente",
       "post_incident": "Incidencia creada correctamente"
