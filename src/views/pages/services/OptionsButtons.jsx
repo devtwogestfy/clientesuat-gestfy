@@ -79,10 +79,10 @@ function OptionsButtons({ element }) {
     const handleChange = (id) => (event) => {
         let newValue;
         if (id === 'selectedDate') {
-            newValue = event; // For DatePicker, event is the new date
+            newValue = event;
             setSelectedDate(newValue);
         } else {
-            newValue = Number(event.target.value); // Ensure the value is a number for numeric inputs
+            newValue = Number(event.target.value);
             if (newValue >= 0) {
                 if (id === 'days') {
                     setDays(newValue);
@@ -106,21 +106,23 @@ function OptionsButtons({ element }) {
 
     return (
         <Box sx={{ width: '100%', textAlign: 'center' }}>
-            {element.prepaid && element.prepaid === 1 && (
-                <Button aria-label="create" onClick={handleOpenCreatePrepaid} variant="contained">
-                    Generar prepago
-                </Button>
-            )}
-            {element.prepaid && element.prepaid !== 1 && (
-                <>
-                    <Button aria-label="pay" onClick={handleValidatePrepay} variant="contained">
-                        Pagar
+            {element.prepaid === 1 &&
+                element.prepaidActive === 1 &&
+                (((!element.prepaidState || element.prepaidState !== 1) && (
+                    <Button aria-label="create" onClick={handleOpenCreatePrepaid} variant="contained">
+                        Generar prepago
                     </Button>
-                    <Button aria-label="cancel" onClick={handleCancelPrepay} variant="contained">
-                        Cancelar
-                    </Button>
-                </>
-            )}
+                )) ||
+                    (element.prepaidState === 1 && (
+                        <>
+                            <Button aria-label="pay" onClick={handleValidatePrepay} variant="contained">
+                                Pagar
+                            </Button>
+                            <Button aria-label="cancel" onClick={handleCancelPrepay} variant="contained">
+                                Cancelar
+                            </Button>
+                        </>
+                    )))}
             <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
                 <DialogTitle>
                     <IconButton onClick={handleClose} sx={{ position: 'absolute', top: 0, right: 0 }}>
@@ -202,6 +204,8 @@ OptionsButtons.propTypes = {
         intservicio_id: PropTypes.number.isRequired,
         aviso: PropTypes.string,
         prepaid: PropTypes.number,
+        prepaidState: PropTypes.number,
+        prepaidActive: PropTypes.number,
         brutoDia: PropTypes.number,
         brutoSemana: PropTypes.number,
         brutoMes: PropTypes.number
