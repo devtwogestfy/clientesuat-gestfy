@@ -8,6 +8,7 @@ import StatusColor from './StatusColor';
 import ActionsButtons from './ActionsButtons';
 import OptionsButtons from './OptionsButtons';
 import TableWithoutRecord from 'views/utilities/tables/withoutRecord';
+import { FormattedMessage } from 'react-intl';
 
 const ServicesDataGrid = ({ rows, updateData }) => {
     const theme = useTheme();
@@ -21,6 +22,7 @@ const ServicesDataGrid = ({ rows, updateData }) => {
             headerClassName: 'MuiDataGrid-columnHeaders',
             headerName: 'Detalle',
             width: 200,
+            renderHeader: () => <FormattedMessage id="services.table.detail" />,
             renderCell: (params) => {
                 return (
                     <Box sx={{ width: '100%', textAlign: 'center' }}>
@@ -39,6 +41,7 @@ const ServicesDataGrid = ({ rows, updateData }) => {
             field: 'codigo',
             headerClassName: 'MuiDataGrid-columnHeaders',
             headerName: 'Código',
+            renderHeader: () => <FormattedMessage id="services.table.code" />,
             width: 150
         },
         {
@@ -47,6 +50,7 @@ const ServicesDataGrid = ({ rows, updateData }) => {
             headerName: 'Tipo',
             type: 'number',
             width: 110,
+            renderHeader: () => <FormattedMessage id="services.table.type" />,
             renderCell: (params) => {
                 return <Box sx={{ width: '100%', textAlign: 'center' }}>{params.row.tipo}</Box>;
             }
@@ -57,6 +61,7 @@ const ServicesDataGrid = ({ rows, updateData }) => {
             headerName: 'Servicio',
             sortable: false,
             width: 400,
+            renderHeader: () => <FormattedMessage id="services.table.service" />,
             valueGetter: (value, row) => `${row.nombre || ''} ${row.direccion ? '-' + row.direccion : ''}`
         },
         {
@@ -65,6 +70,7 @@ const ServicesDataGrid = ({ rows, updateData }) => {
             headerName: 'Estado',
             sortable: false,
             width: 120,
+            renderHeader: () => <FormattedMessage id="services.table.state" />,
             renderCell: (params) => {
                 return (
                     <Box sx={{ width: '100%', textAlign: 'center' }}>
@@ -78,7 +84,8 @@ const ServicesDataGrid = ({ rows, updateData }) => {
             headerClassName: 'MuiDataGrid-columnHeaders',
             headerName: 'Opciones',
             sortable: false,
-            width: 260,
+            width: 400,
+            renderHeader: () => <FormattedMessage id="services.table.options" />,
             renderCell: (params) => {
                 return (
                     <Box sx={{ width: '100%', textAlign: 'center' }}>

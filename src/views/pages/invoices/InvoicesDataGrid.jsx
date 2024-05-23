@@ -92,7 +92,7 @@ const InvoicesDataGrid = ({ rows, downloadInvoice }) => {
             renderCell: () => {
                 return (
                     <Button variant="contained" color="primary">
-                        Pagar
+                        <FormattedMessage id="invoices.table.pay" />
                     </Button>
                 );
             }
