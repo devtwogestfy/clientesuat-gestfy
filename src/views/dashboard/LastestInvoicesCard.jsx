@@ -15,6 +15,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import InvoicesPage from 'views/pages/invoices/InvoicesPage';
 import SummaryInfo from './SummaryInfo';
 import GetInfoService from 'configuraciones/servicios/info-client';
+import { FormattedMessage } from 'react-intl';
 
 const CardWrapper = styled(MainCard)(({ theme }) => ({
     backgroundColor: theme.palette.primary.dark,
@@ -107,7 +108,7 @@ const LastestInvoicesCard = ({ isLoading }) => {
                                         <Grid container alignItems="center">
                                             <Grid item>
                                                 <Typography sx={{ fontSize: '1.7rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>
-                                                    Últimas Facturas
+                                                    <FormattedMessage id="dashboard.showcase_invoices.title" />
                                                 </Typography>
                                             </Grid>
                                             <Grid item>

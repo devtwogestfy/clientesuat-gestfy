@@ -25,7 +25,7 @@
   "dashboard.showcase_incidents.open" :"Tiene: {{open}} incidencias abiertas",
   "dashboard.showcase_incidents.closed" :"Tiene: {{closed}} incidencias cerradas",
 
-  "dashboard.showcase_invoices.title" : "Última Factura",
+  "dashboard.showcase_invoices.title" : "Últimas Facturas",
   "dashboard.showcase_invoices.header_number" :"Número",
   "dashboard.showcase_invoices.header_date" : "Fecha",
   "dashboard.showcase_invoices.value" :"Importe",

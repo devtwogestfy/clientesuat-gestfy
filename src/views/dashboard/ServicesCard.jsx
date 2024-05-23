@@ -1,20 +1,15 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
-
-// material-ui
 import { styled, useTheme } from '@mui/material/styles';
 import { Avatar, Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, IconButton, Typography } from '@mui/material';
-
-// project imports
 import MainCard from 'ui-component/cards/MainCard';
 import SkeletonEarningCard from 'ui-component/cards/Skeleton/EarningCard';
-
-// assets
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import CloseIcon from '@mui/icons-material/Close';
 import ServicesPage from 'views/pages/services/ServicesPage';
 import GetInfoService from 'configuraciones/servicios/info-client';
 import SummaryInfo from './SummaryInfo';
+import { FormattedMessage } from 'react-intl';
 
 const CardWrapper = styled(MainCard)(({ theme }) => ({
     backgroundColor: theme.palette.warning.dark,
@@ -51,8 +46,6 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
         }
     }
 }));
-
-// ===========================|| DASHBOARD DEFAULT - EARNING CARD ||=========================== //
 
 const ServicesCard = ({ isLoading }) => {
     const theme = useTheme();
@@ -151,7 +144,7 @@ const ServicesCard = ({ isLoading }) => {
                                 <Grid container alignItems="center">
                                     <Grid item>
                                         <Typography sx={{ fontSize: '1.7rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>
-                                            Servicios
+                                            <FormattedMessage id="dashboard.showcase_services" />
                                         </Typography>
                                     </Grid>
                                     <Grid item>
@@ -181,17 +174,18 @@ const ServicesCard = ({ isLoading }) => {
                             </IconButton>
                             <Grid container alignItems="center" spacing={2}>
                                 <Grid item>
-                                    <Typography variant="h3">Servicios</Typography>
+                                    <Typography variant="h3">
+                                        <FormattedMessage id="dashboard.showcase_services" />
+                                    </Typography>
                                 </Grid>
                             </Grid>
                         </DialogTitle>
                         <DialogContent>
-                            {/* Aquí se renderiza el formulario */}
                             <ServicesPage></ServicesPage>
                         </DialogContent>
                         <DialogActions>
                             <Button variant="outlined" onClick={handleClose} color="error">
-                                Cancelar
+                                <FormattedMessage id="dialogs.buttons.cancel" />
                             </Button>
                         </DialogActions>
                     </Dialog>

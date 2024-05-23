@@ -98,20 +98,10 @@ const IncidentsCard = ({ isLoading }) => {
                                         />
                                     </Grid>
                                     <Grid item>
-                                        <SummaryInfo
-                                            color="success"
-                                            titleId="dashboard.showcase_incidents.open"
-                                            total={totalOpen}
-                                            icon="alert"
-                                        />
+                                        <SummaryInfo color="success" titleId="incidents.cards.open" total={totalOpen} icon="alert" />
                                     </Grid>
                                     <Grid item>
-                                        <SummaryInfo
-                                            color="success"
-                                            titleId="dashboard.showcase_incidents.closed"
-                                            total={totalClose}
-                                            icon="alert"
-                                        />
+                                        <SummaryInfo color="success" titleId="incidents.cards.closed" total={totalClose} icon="alert" />
                                     </Grid>
                                 </Grid>
                             </Grid>
