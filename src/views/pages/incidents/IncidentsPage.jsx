@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { IconButton, Box, Card, Grid, Alert, Popper, Fade, Typography, Stack } from '@mui/material';
-import { DataGrid } from '@mui/x-data-grid';
+import { IconButton, Grid, Alert, Popper, Fade, Stack } from '@mui/material';
 import MainCard from 'ui-component/cards/MainCard';
 import { gridSpacing } from 'store/constant';
 import GetInfoService from 'configuraciones/servicios/info-client';
@@ -9,109 +7,11 @@ import TotalIncidentsCard from './TotalIncidentsCard';
 import TotalOpenCard from './TotalOpenCard';
 import TotalCloseCard from './TotalCloseCard';
 import TotalHoursCard from './TotalHoursCard';
-import { fDate } from 'utils/format-date';
-import StatusColor from './StatusColor';
-import ActionsButtons from './ActionsButtons';
 import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
 import { useTheme } from '@mui/material/styles';
 import CreateIncidentDialog from './CreateIncidentDialog';
 import PostInfoService from 'configuraciones/servicios/post-info-client';
-import TableWithoutRecord from 'views/utilities/tables/withoutRecord';
-
-const columns = [
-    {
-        field: 'notas',
-        headerName: '',
-        width: 50,
-        renderCell: (params) => (
-            <Box sx={{ width: '100%', textAlign: 'center' }}>
-                <ActionsButtons notas={params.row.notas} />
-            </Box>
-        )
-    },
-    {
-        field: 'numero',
-        headerName: 'Número',
-        width: 150
-    },
-    {
-        field: 'alta',
-        headerName: 'Alta',
-        width: 150,
-        valueGetter: (value, row) => `${fDate(row.alta) || ''}`
-    },
-    {
-        field: 'texto',
-        headerName: 'Descripción',
-        width: 180
-    },
-    {
-        field: 'servicio',
-        headerName: 'Servicio',
-        sortable: false,
-        width: 250
-    },
-    {
-        field: 'horas',
-        headerName: 'Horas',
-        sortable: false,
-        width: 160
-    },
-    {
-        field: 'estado_id',
-        headerName: 'Estado',
-        sortable: false,
-        width: 160,
-        renderCell: (params) => (
-            <Box sx={{ width: '100%', textAlign: 'center' }}>
-                <StatusColor estado_id={params.row.estado_id} />
-            </Box>
-        )
-    }
-];
-
-const ColorBox = ({ bgcolor, title, data, dark }) => (
-    <>
-        <Card sx={{ mb: 3 }}>
-            <Box
-                sx={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    py: 4.5,
-                    bgcolor,
-                    color: dark ? 'grey.800' : '#ffffff'
-                }}
-            >
-                {title && (
-                    <Typography variant="subtitle1" color="inherit">
-                        {title}
-                    </Typography>
-                )}
-                {!title && <Box sx={{ p: 1.15 }} />}
-            </Box>
-        </Card>
-        {data && (
-            <Grid container justifyContent="space-between" alignItems="center">
-                <Grid item>
-                    <Typography variant="subtitle2">{data.label}</Typography>
-                </Grid>
-                <Grid item>
-                    <Typography variant="subtitle1" sx={{ textTransform: 'uppercase' }}>
-                        {data.color}
-                    </Typography>
-                </Grid>
-            </Grid>
-        )}
-    </>
-);
-
-ColorBox.propTypes = {
-    bgcolor: PropTypes.string,
-    title: PropTypes.string,
-    data: PropTypes.object.isRequired,
-    dark: PropTypes.bool
-};
+import IncidentsDataGrid from './IncidentsDataGrid';
 
 const IncidentsPage = () => {
     const theme = useTheme();
@@ -159,10 +59,6 @@ const IncidentsPage = () => {
             console.log(dataServices);
             setServices(dataServices.items);
         });
-    };
-
-    const getRowClassName = (params) => {
-        return params.indexRelativeToCurrentPage % 2 === 0 ? 'cebra-row' : '';
     };
 
     const handleCreateIncident = () => {
@@ -224,23 +120,7 @@ const IncidentsPage = () => {
                     </Grid>
                 </Grid>
                 <Grid item xs={12}>
-                    <Box sx={{ height: 400, width: '100%' }}>
-                        <DataGrid
-                            getRowClassName={getRowClassName}
-                            rows={incidents}
-                            columns={columns}
-                            initialState={{
-                                pagination: {
-                                    paginationModel: {
-                                        pageSize: 5
-                                    }
-                                }
-                            }}
-                            pageSizeOptions={[5]}
-                            disableRowSelectionOnClick
-                            slots={{ noRowsOverlay: TableWithoutRecord }}
-                        />
-                    </Box>
+                    <IncidentsDataGrid rows={incidents} />
                     <Popper open={isAlertSuccess} transition>
                         {({ TransitionProps }) => (
                             <Fade {...TransitionProps} timeout={350}>

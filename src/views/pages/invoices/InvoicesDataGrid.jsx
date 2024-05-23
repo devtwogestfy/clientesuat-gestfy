@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTheme } from '@mui/material/styles';
 import { DataGrid } from '@mui/x-data-grid';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
@@ -9,6 +10,7 @@ import { Badge, Button } from '@mui/material';
 import { fDate } from 'utils/format-date';
 
 const InvoicesDataGrid = ({ rows, downloadInvoice }) => {
+    const theme = useTheme();
     const getRowClassName = (params) => {
         return params.indexRelativeToCurrentPage % 2 === 0 ? 'cebra-row' : '';
     };
@@ -17,6 +19,7 @@ const InvoicesDataGrid = ({ rows, downloadInvoice }) => {
         {
             field: 'id',
             headerName: 'Download',
+            headerClassName: 'MuiDataGrid-columnHeaders',
             width: 150,
             renderHeader: () => <FormattedMessage id="invoices.table.download" />,
             renderCell: (params) => {
@@ -30,6 +33,7 @@ const InvoicesDataGrid = ({ rows, downloadInvoice }) => {
         {
             field: 'fechafactura',
             headerName: 'Date',
+            headerClassName: 'MuiDataGrid-columnHeaders',
             width: 150,
             renderHeader: () => <FormattedMessage id="invoices.table.date" />,
             valueGetter: (value, row) => `${fDate(row.fechafactura) || ''}`
@@ -37,6 +41,7 @@ const InvoicesDataGrid = ({ rows, downloadInvoice }) => {
         {
             field: 'serie',
             headerName: 'Serie',
+            headerClassName: 'MuiDataGrid-columnHeaders',
             type: 'number',
             width: 110,
             renderHeader: () => <FormattedMessage id="invoices.table.serie" />
@@ -44,6 +49,7 @@ const InvoicesDataGrid = ({ rows, downloadInvoice }) => {
         {
             field: 'numero',
             headerName: 'Number',
+            headerClassName: 'MuiDataGrid-columnHeaders',
             sortable: false,
             width: 160,
             renderHeader: () => <FormattedMessage id="invoices.table.number" />
@@ -51,6 +57,7 @@ const InvoicesDataGrid = ({ rows, downloadInvoice }) => {
         {
             field: 'neto',
             headerName: 'Value',
+            headerClassName: 'MuiDataGrid-columnHeaders',
             sortable: false,
             width: 160,
             renderHeader: () => <FormattedMessage id="invoices.table.value" />,
@@ -65,6 +72,7 @@ const InvoicesDataGrid = ({ rows, downloadInvoice }) => {
         {
             field: 'cobrado',
             headerName: 'Pending',
+            headerClassName: 'MuiDataGrid-columnHeaders',
             sortable: false,
             width: 160,
             renderHeader: () => <FormattedMessage id="invoices.table.pending" />,
@@ -79,6 +87,7 @@ const InvoicesDataGrid = ({ rows, downloadInvoice }) => {
         {
             field: 'download',
             headerName: '',
+            headerClassName: 'MuiDataGrid-columnHeaders',
             width: 160,
             renderCell: () => {
                 return (
@@ -106,6 +115,12 @@ const InvoicesDataGrid = ({ rows, downloadInvoice }) => {
                 pageSizeOptions={[5]}
                 disableRowSelectionOnClick
                 slots={{ noRowsOverlay: TableWithoutRecord }}
+                sx={{
+                    '& .MuiDataGrid-columnHeaders': {
+                        backgroundColor: theme.palette.secondary.dark,
+                        color: '#fff'
+                    }
+                }}
             />
         </Box>
     );
