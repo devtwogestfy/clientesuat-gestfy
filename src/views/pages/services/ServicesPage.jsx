@@ -69,7 +69,7 @@ const ServicesPage = () => {
             console.error('Error fetching data:', error);
         }
     };
-    //console.log(data);
+    console.log(data);
     return (
         <MainCard>
             <Grid container spacing={gridSpacing}>

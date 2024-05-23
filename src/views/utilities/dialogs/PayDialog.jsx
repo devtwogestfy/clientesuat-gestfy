@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useNavigate } from 'react-router-dom';
 import { Dialog, DialogContent, Grid, Typography } from '@mui/material';
 import { FormattedMessage } from 'react-intl';
 import IconButton from '@mui/material/IconButton';
@@ -9,11 +8,6 @@ import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
 import CancelIcon from '@mui/icons-material/Cancel';
 
 const PayDialog = ({ openPay, handleClosePay }) => {
-    const navigate = useNavigate();
-
-    const handlePaymentsClick = () => {
-        navigate('/services/prepays/');
-    };
     return (
         <Dialog open={openPay} onClose={handleClosePay} maxWidth="sm" fullWidth>
             <DialogContent>
@@ -25,7 +19,7 @@ const PayDialog = ({ openPay, handleClosePay }) => {
                     </Grid>
                     <Grid item container direction="row" justify="center" margin={1}>
                         <Grid item xs={4}>
-                            <IconButton color="primary" onClick={handlePaymentsClick} sx={{ width: '80%' }}>
+                            <IconButton color="primary" onClick={handleClosePay} sx={{ width: '80%' }}>
                                 <CreditCardIcon fontSize="large" />
                             </IconButton>
                             <Typography variant="body2">

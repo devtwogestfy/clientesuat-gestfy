@@ -40,16 +40,22 @@ function OptionsButtons({ element, updateData }) {
     const [weeks, setWeeks] = useState(0);
     const [months, setMonths] = useState(0);
     const [brutoEstimado, setBrutoEstimado] = useState(0);
+    const [proformaId, setProformaId] = useState(0);
     const infoService = GetInfoService();
 
-    const handleValidatePrepay = () => {
-        setOpenPay(true);
-        /*infoService.validatePrepay(id).then((response) => {
+    const handleFormalizePrepay = () => {
+        const id = element.id;
+        infoService.validatePrepay(id).then((response) => {
             console.log(response);
-
-            setTimeout(() => {}, 3000);
-            setOpen(false);
-        });*/
+            //setOpenPay(true);
+            if (response === 'ko') {
+                //setAlertMessage('services.prepay.dialog.outdated');
+                setOpenAlertDialog(true);
+            } else {
+                //setAlertMessage('dialogs.online_payments.redirection');
+                setOpenPay(true);
+            }
+        });
     };
 
     const handleOpenCreatePrepaid = () => {
@@ -68,8 +74,51 @@ function OptionsButtons({ element, updateData }) {
         setOpenCancel(false);
     };
 
-    const handleClosePay = () => {
+    const handleClosePay = (submit) => {
         setOpenPay(false);
+        console.log(proformaId);
+        if (submit) {
+            const data = infoService.startPurchasePrepaid(147, location.href, submit).then((response) => {
+                console.log(response);
+                return response;
+            });
+            console.log(data);
+            //setLoading(true);
+
+            // Crear y enviar formulario
+            /*const form = document.createElement('form');
+            form.action = data.url;
+            form.method = 'POST';
+            form.target = '_self';
+            form.style.display = 'none';
+
+            const input1 = document.createElement('input');
+            input1.type = 'hidden';
+            input1.name = 'Ds_SignatureVersion';
+            input1.value = data.signatureVersion;
+
+            const input2 = document.createElement('input');
+            input2.type = 'hidden';
+            input2.name = 'Ds_MerchantParameters';
+            input2.value = data.merchantParams;
+
+            const input3 = document.createElement('input');
+            input3.type = 'hidden';
+            input3.name = 'Ds_Signature';
+            input3.value = data.signature;
+
+            const submitInput = document.createElement('input');
+            submitInput.type = 'submit';
+
+            form.appendChild(input1);
+            form.appendChild(input2);
+            form.appendChild(input3);
+            form.appendChild(submitInput);
+            document.body.appendChild(form);
+            submitInput.click();
+
+            form.remove();¨*/
+        }
     };
 
     const handleCancelSendPrepay = () => {
@@ -97,7 +146,9 @@ function OptionsButtons({ element, updateData }) {
         infoService.createPrepay(parameters).then((response) => {
             setOpenPopperCancel(true);
             setContentModal('Generado exitosamente');
-            console.log(response);
+            setProformaId(response.proformaId);
+            console.log(response.proformaId);
+            console.log(proformaId);
             updateData();
             setTimeout(() => {
                 setOpenPopperCancel(false);
@@ -148,7 +199,7 @@ function OptionsButtons({ element, updateData }) {
                 )) ||
                     (element.prepaidState === 1 && (
                         <>
-                            <Button aria-label="pay" onClick={handleValidatePrepay} variant="contained">
+                            <Button aria-label="pay" onClick={handleFormalizePrepay} variant="contained">
                                 Formalizar prepago
                             </Button>
                             <Button aria-label="cancel" onClick={handleCancelPrepay} variant="contained">

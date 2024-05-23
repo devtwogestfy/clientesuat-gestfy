@@ -59,11 +59,12 @@ const GetInfoService = () => {
 
     const validatePrepay = async (id) => {
         try {
+            console.log(id);
             const response = await apiUrl.post('/prepaid-validate/' + id);
             const data = response.data;
             return data;
         } catch (error) {
-            //console.log(error)
+            console.log(error);
             throw new Error(error.response || 'Network request failed');
         }
     };
@@ -79,12 +80,29 @@ const GetInfoService = () => {
         }
     };
 
+    const startPurchasePrepaid = async (factId = null, url = '', type = '', action = '') => {
+        const params = {
+            url: url,
+            type: type,
+            action: action
+        };
+
+        try {
+            const response = await apiUrl.post(`/portal-payment-prepay/${factId}`, { params });
+            return response.data;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    };
+
     return {
         getPhoneRecord,
         getPrepayments,
         createPrepay,
         validatePrepay,
-        cancelPrepay
+        cancelPrepay,
+        startPurchasePrepaid
     };
 };
 
