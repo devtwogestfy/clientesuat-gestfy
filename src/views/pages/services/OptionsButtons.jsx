@@ -109,6 +109,7 @@ function OptionsButtons({ element, updateData }) {
 
     const handleChange = (id) => (event) => {
         let newValue;
+        console.log(id, event);
         if (id === 'selectedDate') {
             newValue = event;
             setSelectedDate(newValue);
@@ -214,8 +215,11 @@ function OptionsButtons({ element, updateData }) {
                                             disablePortal
                                             id="combo-box-demo"
                                             onChange={(event, value) => {
-                                                setDays(value.id);
-                                                handleChange('days');
+                                                console.log(value);
+                                                if (value) {
+                                                    setDays(value.id);
+                                                    handleChange('days');
+                                                }
                                             }}
                                             sx={{ width: '100%' }}
                                             options={optionsServices.map((option) => ({ id: option.id, label: option.nombre }))}
