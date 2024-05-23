@@ -24,11 +24,13 @@ import PropTypes from 'prop-types';
 import GetInfoService from 'configuraciones/servicios/service';
 import CancelPrepayDialog from './CancelPrepayDialog';
 import CancelPrepayPopper from './CancelPrepayPopper';
+import PayDialog from './../../utilities/dialogs/PayDialog';
 
 function OptionsButtons({ element, updateData }) {
     //console.log(element);
     const [open, setOpen] = useState(false);
     const [openCancel, setOpenCancel] = useState(false);
+    const [openPay, setOpenPay] = useState(false);
     const [openPopperCancel, setOpenPopperCancel] = useState(false);
     const [contentModal, setContentModal] = useState('');
     const [selectedDate, setSelectedDate] = useState(dayjs());
@@ -39,12 +41,13 @@ function OptionsButtons({ element, updateData }) {
     const infoService = GetInfoService();
 
     const handleValidatePrepay = () => {
-        infoService.validatePrepay(id).then((response) => {
+        setOpenPay(true);
+        /*infoService.validatePrepay(id).then((response) => {
             console.log(response);
 
             setTimeout(() => {}, 3000);
             setOpen(false);
-        });
+        });*/
     };
 
     const handleOpenCreatePrepaid = () => {
@@ -61,6 +64,10 @@ function OptionsButtons({ element, updateData }) {
 
     const handleCloseCancel = () => {
         setOpenCancel(false);
+    };
+
+    const handleClosePay = () => {
+        setOpenPay(false);
     };
 
     const handleCancelSendPrepay = () => {
@@ -212,6 +219,7 @@ function OptionsButtons({ element, updateData }) {
                 handleCloseCancel={handleCloseCancel}
                 handleCancelSendPrepay={handleCancelSendPrepay}
             />
+            <PayDialog openPay={openPay} handleClosePay={handleClosePay} />
             <CancelPrepayPopper openPopperCancel={openPopperCancel} contentModal={contentModal} />
         </Box>
     );
