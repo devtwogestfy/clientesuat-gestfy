@@ -109,7 +109,6 @@ function OptionsButtons({ element, updateData }) {
 
     const handleChange = (id) => (event) => {
         let newValue;
-        console.log(id, event);
         if (id === 'selectedDate') {
             newValue = event;
             setSelectedDate(newValue);
@@ -136,7 +135,7 @@ function OptionsButtons({ element, updateData }) {
         setBrutoEstimado(Math.round((calculation + Number.EPSILON) * 100) / 100);
     };
 
-    const optionsServices = [{ id: 30, nombre: 'Quince días' }];
+    const optionsServices = [{ value: 30, nombre: 'Quince días' }];
 
     return (
         <Box sx={{ width: '100%', textAlign: 'center' }}>
@@ -214,19 +213,13 @@ function OptionsButtons({ element, updateData }) {
                                         <Autocomplete
                                             disablePortal
                                             id="combo-box-demo"
-                                            onChange={(event, value) => {
-                                                console.log(value);
-                                                if (value) {
-                                                    setDays(value.id);
-                                                    handleChange('days');
-                                                }
-                                            }}
+                                            onChange={handleChange('days')}
                                             sx={{ width: '100%' }}
-                                            options={optionsServices.map((option) => ({ id: option.id, label: option.nombre }))}
+                                            options={optionsServices.map((option) => ({ id: option.value, label: option.nombre }))}
                                             renderInput={(params) => <TextField {...params} label="Elige una opción" />}
                                             renderOption={(props, option) => {
                                                 return (
-                                                    <MenuItem {...props} key={option.id}>
+                                                    <MenuItem {...props} key={option.id} value={option.id}>
                                                         {option.label}
                                                     </MenuItem>
                                                 );
