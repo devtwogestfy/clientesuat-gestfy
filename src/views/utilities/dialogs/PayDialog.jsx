@@ -1,8 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
-import { Dialog, DialogContent, Grid, Typography, Button } from '@mui/material';
+import { Dialog, DialogContent, Grid, Typography } from '@mui/material';
 import { FormattedMessage } from 'react-intl';
+import IconButton from '@mui/material/IconButton';
+import CreditCardIcon from '@mui/icons-material/CreditCard';
+import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
+import CancelIcon from '@mui/icons-material/Cancel';
 
 const PayDialog = ({ openPay, handleClosePay }) => {
     const navigate = useNavigate();
@@ -18,19 +22,28 @@ const PayDialog = ({ openPay, handleClosePay }) => {
                     </Grid>
                     <Grid item container direction="row" justify="center" margin={1}>
                         <Grid item xs={4}>
-                            <Button variant="contained" color="primary" onClick={handleClosePay} sx={{ width: '80%' }}>
-                                <FormattedMessage id="dialogs.buttons.send" />
-                            </Button>
+                            <IconButton color="primary" onClick={handleClosePay} sx={{ width: '80%' }}>
+                                <CreditCardIcon fontSize="large" />
+                            </IconButton>
+                            <Typography variant="body2">
+                                <FormattedMessage id="dialogs.buttons.card" />
+                            </Typography>
                         </Grid>
                         <Grid item xs={4}>
-                            <Button variant="contained" color="error" onClick={handleClosePay} sx={{ width: '80%' }}>
-                                <FormattedMessage id="dialogs.buttons.cancel" />
-                            </Button>
+                            <IconButton color="primary" onClick={handleClosePay} sx={{ width: '80%' }}>
+                                <PhoneIphoneIcon fontSize="large" />
+                            </IconButton>
+                            <Typography variant="body2">
+                                <FormattedMessage id="dialogs.buttons.bizum" />
+                            </Typography>
                         </Grid>
                         <Grid item xs={4}>
-                            <Button variant="contained" color="error" onClick={handleClosePay} sx={{ width: '80%' }}>
+                            <IconButton color="error" onClick={handleClosePay} sx={{ width: '80%' }}>
+                                <CancelIcon fontSize="large" />
+                            </IconButton>
+                            <Typography variant="body2">
                                 <FormattedMessage id="dialogs.buttons.cancel" />
-                            </Button>
+                            </Typography>
                         </Grid>
                     </Grid>
                 </Grid>
