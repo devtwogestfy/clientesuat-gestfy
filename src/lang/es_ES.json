@@ -195,6 +195,8 @@
   "dialogs.info.new_version":"Nueva versión disponible, por favor recargue la página.",
   "dialogs.snacks.put_router":"Información de router actualizada correctamente",
   "dialogs.snacks.post_incident":"Incidencia creada correctamente",
+  "dialogs.errors.documentTitle":"Error al descargar el documento.",
+  "dialogs.errors.documentText":"Se ha producido un error al descargar el documento. Si el problema persiste, póngase en contacto con el servicio de atención al cliente.",
   "dialogs.errors.router1":"Los datos han sido enviados al router, este se configurará la próxima vez que este online.",
   "dialogs.errors.router2":"Ha habido un problema actualizando la configuración de su router. Contacte con soporte técnico.",
   "dialogs.errors.router3":"Ha habido un problema actualizando la configuración de su router. Contacte con soporte técnico.",
@@ -228,7 +230,7 @@
   "documents.download_og":"Descargar original",
   "documents.download_signed": "Descargar firmado",
   "documents.downloading":"Descargando Documento...",
-  "documents.error.writeDocumentTitle":"",
+  "documents.error.writeDocumentTitle":"Error al descargar el documento",
   "documents.error.writeDocumentText":"Ha ocurrido un error al descargar el documento. Por favor, vuelva a intentarlo y si el problema persiste, contacte con soporte técnico.",
   "documents.error.readDocumentTitle":"Error al descargar el documento",
   "documents.error.readDocumentText":"Ha ocurrido un error al descargar el documento. Por favor, vuelva a intentarlo y si el problema persiste, contacte con soporte técnico.",
@@ -239,6 +241,8 @@
   "filters.order":"Ordenar",
 
   "advertisements.title":"Anuncios",
-  "advertisements.button.show_more":"Ver Más"
+  "advertisements.button.show_more":"Ver Más",
+
+  "errors.base":"Se ha producido un error, consulte al servicio técnico."
 
 }

@@ -172,94 +172,77 @@
   "router.buttons.qr24":"QR 2.4GHz",
   "router.buttons.qr5":"QR 5GHz",
 
-  "dialogs": {
-    "dates": "The dates can't have more than 3 months in between",
-    "qr": {
-      "title5": "WiFi 5GHz network QR",
-      "title24": "WiFi 2.4GHz network QR",
-      "error5": "The 5GHz WiFi network data is incomplete",
-      "error24": "The 2.4GHz WiFi network data is incomplete"
-    },
-    "title": {
-      "terms_conditions": "Terms and Conditions"
-    },
-    "new_incident": {
-      "title": "New Ticket",
-      "service": "Choose a Service",
-      "errors": {
-        "service_required": "Choosing a service is required",
-        "description_required": "A description for the ticket is required",
-        "description_minlength": "Write a minimum description of the ticket so it can be attendend correctly"
-      }
-    },
-    "snacks": {
-      "put_router": "Información de router actualizada correctamente",
-      "post_incident": "Incidencia creada correctamente"
-    },
-    "buttons": {
-      "accept": "Accept",
-      "cancel": "Cancel",
-      "reset": "Reset",
-      "send": "Send",
-      "card": "Tarjeta",
-      "bizum": "Bizum",
-      "yes": "Yes",
-      "no": "No"
-    },
-    "info": {
-      "title": "Information",
-      "new_version": "New version availbale, please reload the page."
-    },
-    "errors": {
-      "documentTitle": "Error downloading the document",
-      "documentText": "An error occurred while downloading the document. Please try again, if the problem persist, contact with customer service.",
-      "router1": "The configuration has been sent to the router, this will be configured the next time is online.",
-      "router2": "There has been a problem while updating the configuration of the router. Please contact with customer service",
-      "router3": "There has been a problem while updating the configuration of the router. Please contact with customer service",
-      "router4": "There has been an error. Please try again, if the problem persist, contact with customer service.",
-      "mustpay": "To proceed, you need to pay invoice number: {{param}}",
-      "invoice_already_payed": "There has been an error. Please try again, if the problem persist, contact with customer service.",
-      "noeditable": "The router cant be configured at this moment, please try again and if the problem persist, contact with customer service",
-      "form_error": "There's an error on the form. Check the inputs and try it again",
-      "form_error24": "Please review the 2.4Ghz Wifi section. Both fields are mandatory and must be, at least,  8 characters long.",
-      "form_error5": "Please review the 5Ghz Wifi section. Both fields are mandatory and must be, at least,  8 characters long.",
-      "form_error_lan": "Please review LAN Section. All fields are mandatory and must be valid ip addresses.",
-      "default": "There has been an error. Please try again, if the problem persist, contact with customer service."
-    },
-    "online_payments": {
-      "redirection": "You are going to be redirected to the payment platform. To proceed select a payment method."
-    },
-    "loading": "Loading...",
-    "exit": "Press back again to exit.",
-    "permision_notice": "Notice",
-    "storage_permision_text": "To download the document, you must allow the use of storage services.",
-    "call_customer_service": "Would you like to call for service?",
-    "drag_update": "Drag to update",
-    "updating": "Updating..."
-  },
-  "documents": {
-    "title": "Documents",
-    "downloading": "Downloading Document...",
-    "errors": {
-      "writeDocumentTitle": "Error downloading the document",
-      "writeDocumentText": "An error occurred while downloading the document. Please try again, if the problem persist, contact with customer service.",
-      "readDocumentTitle": "Error downloading the document",
-      "readDocumentText": "An error occurred while downloading the document. Please try again, if the problem persist, contact with customer service."
-    }
-  },
-  "filters": {
-    "all": "All",
-    "payment_status": "Payment Status",
-    "price": "Price",
-    "order": "Order"
-  },
-  "advertisements": {
-    "title": "Advertisements",
-    "button": {
-      "show_more": "Show More"
-    }
-  },
-  "errors": {
-    "base": "An error has occurred, please consult technical support."
-  }
+  "dialogs.dates":"The dates can't have more than 3 months in between",
+  "dialogs.qr.title5":"WiFi 5GHz network QR",
+  "dialogs.qr.title24":"WiFi 2.4GHz network QRz",
+  "dialogs.qr.error5":"The 5GHz WiFi network data is incomplete",
+  "dialogs.qr.error24":"The 2.4GHz WiFi network data is incomplete",
+  "dialogs.title.terms_conditions":"Terms and Conditions",
+  "dialogs.new_incident.title":"New Ticket",
+  "dialogs.new_incident.service":"Choose a Service",
+  "dialogs.new_incident.errors.service_required":"Choosing a service is required",
+  "dialogs.new_incident.errors.description_required":"A description for the ticket is required",
+  "dialogs.new_incident.errors.description_minlength":"Write a minimum description of the ticket so it can be attendend correctly",
+  "dialogs.buttons.accept":"Accept",
+  "dialogs.buttons.cancel":"Cancel",
+  "dialogs.buttons.reset":"Reset",
+  "dialogs.buttons.send":"Send",
+  "dialogs.buttons.card":"Card",
+  "dialogs.buttons.bizum":"Bizum",
+  "dialogs.buttons.yes":"Yes",
+  "dialogs.buttons.no":"No",
+  "dialogs.info.title":"Information",
+  "dialogs.info.new_version":"New version availbale, please reload the page.",
+  "dialogs.snacks.put_router":"Router information updated correctly",
+  "dialogs.snacks.post_incident":"Successfully created incident",
+  "dialogs.errors.documentTitle":"Error downloading the document",
+  "dialogs.errors.documentText":"An error occurred while downloading the document. Please try again, if the problem persist, contact with customer service.",
+  "dialogs.errors.router1":"The configuration has been sent to the router, this will be configured the next time is online.",
+  "dialogs.errors.router2":"There has been a problem while updating the configuration of the router. Please contact with customer service.",
+  "dialogs.errors.router3":"There has been a problem while updating the configuration of the router. Please contact with customer service.",
+  "dialogs.errors.router4":"There has been an error. Please try again, if the problem persist, contact with customer service.",
+  "dialogs.errors.noeditable":"The router cant be configured at this moment, please try again and if the problem persist, contact with customer service.",
+  "dialogs.errors.mustpay":"To proceed, you need to pay invoice number: {{param}}",
+  "dialogs.errors.invoice_already_payed":"There has been an error. Please try again, if the problem persist, contact with customer service.",
+  "dialogs.errors.form_error":"There's an error on the form. Check the inputs and try it again.",
+  "dialogs.errors.form_error24":"Please review the 2.4Ghz Wifi section. Both fields are mandatory and must be, at least,  8 characters long.",
+  "dialogs.errors.form_error5":"Please review the 5Ghz Wifi section. Both fields are mandatory and must be, at least,  8 characters long.",
+  "dialogs.errors.form_error_lan":"Please review LAN Section. All fields are mandatory and must be valid ip addresses.",
+  "dialogs.errors.default":"There has been an error. Please try again, if the problem persist, contact with customer service.",
+  "dialogs.online_payments.redirection":"You are going to be redirected to the payment platform. To proceed select a payment method.",
+  "dialogs.online_payments.cancelprepay": "Are you sure you want to cancel the prepaid order?",
+  "dialogs.online_payments.successful": "The payment has been successfully registered. Invoice information will be updated shortly.",
+  "dialogs.online_payments.unsuccessful": "Payment could not be completed.",
+  "dialogs.loading": "Loading...",
+  "dialogs.exit": "Press back again to exit.",
+  "dialogs.permision_notice": "Notice",
+  "dialogs.storage_permision_text": "To download the document, you must allow the use of storage services.",
+  "dialogs.call_customer_service": "Would you like to call for service?",
+  "dialogs.drag_update": "Drag to update",
+  "dialogs.updating": "Updating...",
+
+  "documents.title":"Documents",
+  "documents.table.date":"Date",
+  "documents.table.name":"Name",
+  "documents.table.signed_req":"Signature required",
+  "documents.table.signed":"Signed",
+  "documents.table.title":"Documentation",
+  "documents.download_og":"Download original",
+  "documents.download_signed": "Download signed",
+  "documents.downloading":"Downloading Document...",
+  "documents.error.writeDocumentTitle":"Error downloading the document",
+  "documents.error.writeDocumentText":"An error occurred while downloading the document. Please try again, if the problem persist, contact with customer service.",
+  "documents.error.readDocumentTitle":"Error downloading the document",
+  "documents.error.readDocumentText":"An error occurred while downloading the document. Please try again, if the problem persist, contact with customer service.",
+ 
+  "filters.all":"All",
+  "filters.payment_status":"Payment Status",
+  "filters.price":"Price",
+  "filters.order":"Order",
+
+  "advertisements.title":"Advertisements",
+  "advertisements.button.show_more":"Show More",
+
+  "errors.base":"An error has occurred, please consult technical support."
+
 }
