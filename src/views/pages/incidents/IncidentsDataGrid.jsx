@@ -7,6 +7,8 @@ import { fDate } from 'utils/format-date';
 import StatusColor from './StatusColor';
 import ActionsButtons from './ActionsButtons';
 import { Box } from '@mui/material';
+import { FormattedMessage } from 'react-intl';
+
 const columns = [
     {
         field: 'notas',
@@ -23,19 +25,22 @@ const columns = [
         field: 'numero',
         headerName: 'Número',
         headerClassName: 'MuiDataGrid-columnHeaders',
-        width: 150
+        width: 150,
+        renderHeader: () => <FormattedMessage id="incidents.table.number" />
     },
     {
         field: 'alta',
         headerName: 'Alta',
         headerClassName: 'MuiDataGrid-columnHeaders',
         width: 150,
+        renderHeader: () => <FormattedMessage id="incidents.table.date" />,
         valueGetter: (value, row) => `${fDate(row.alta) || ''}`
     },
     {
         field: 'texto',
         headerName: 'Descripción',
         headerClassName: 'MuiDataGrid-columnHeaders',
+        renderHeader: () => <FormattedMessage id="incidents.table.description" />,
         width: 180
     },
     {
@@ -43,6 +48,7 @@ const columns = [
         headerName: 'Servicio',
         headerClassName: 'MuiDataGrid-columnHeaders',
         sortable: false,
+        renderHeader: () => <FormattedMessage id="incidents.table.service" />,
         width: 250
     },
     {
@@ -50,6 +56,7 @@ const columns = [
         headerName: 'Horas',
         headerClassName: 'MuiDataGrid-columnHeaders',
         sortable: false,
+        renderHeader: () => <FormattedMessage id="incidents.table.hours" />,
         width: 160
     },
     {
@@ -58,6 +65,7 @@ const columns = [
         headerClassName: 'MuiDataGrid-columnHeaders',
         sortable: false,
         width: 160,
+        renderHeader: () => <FormattedMessage id="incidents.table.status" />,
         renderCell: (params) => (
             <Box sx={{ width: '100%', textAlign: 'center' }}>
                 <StatusColor estado_id={params.row.estado_id} />

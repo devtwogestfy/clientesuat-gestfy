@@ -14,6 +14,7 @@
   "layout.menu_documents":"Documentación",
   "layout.menu_advertisements":"Anuncios",
 
+  "dashboard.showcase_graph.title" :"Facturación",
   "dashboard.showcase_info.title" :"Datos de Facturación",
   "dashboard.title": "Hola",
   "dashboard.showcase_info.name" :"Nombre",

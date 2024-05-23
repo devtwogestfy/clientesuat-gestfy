@@ -83,22 +83,13 @@ const BajajAreaChartCard = () => {
             <Grid container sx={{ p: 2, pb: 0, color: '#fff' }}>
                 <Grid item xs={12}>
                     <Grid container alignItems="center" justifyContent="space-between">
-                        <Grid item>
-                            <Typography variant="subtitle1" sx={{ color: 'secondary.dark' }}>
-                                Bajaj Finery
-                            </Typography>
-                        </Grid>
+                        <Grid item></Grid>
                         <Grid item>
                             <Typography variant="h4" sx={{ color: 'grey.800' }}>
                                 $1839.00
                             </Typography>
                         </Grid>
                     </Grid>
-                </Grid>
-                <Grid item xs={12}>
-                    <Typography variant="subtitle2" sx={{ color: 'grey.800' }}>
-                        10% Profit
-                    </Typography>
                 </Grid>
             </Grid>
             <Chart options={options} series={series} type="area" height={95} />

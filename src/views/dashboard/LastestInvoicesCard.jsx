@@ -73,16 +73,12 @@ const LastestInvoicesCard = ({ isLoading }) => {
         setOpen(false);
     }, []);
 
-    //const [ultimafactura, setUltimafactura] = useState(null);
-    //const [pendiente, setPendiente] = useState(null);
     const [numeroFacturas, setNumeroFacturas] = useState(null);
 
     GetInfoService()
         .getInvoicesSummary()
         .then((summaryData) => {
-            //setPendiente(summaryData.pendiente);
             setNumeroFacturas(summaryData.numerofacturas);
-            //setUltimafactura(summaryData.ultimafactura);
         });
 
     return (

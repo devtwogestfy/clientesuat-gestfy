@@ -14,6 +14,7 @@
   "layout.menu_documents":"Documents",
   "layout.menu_advertisements":"Advertisements",
 
+  "dashboard.showcase_graph.title" :"Billing",
   "dashboard.showcase_info.title" :"Billing Info",
   "dashboard.title":"Hello",
   "dashboard.showcase_info.name" :"Name",

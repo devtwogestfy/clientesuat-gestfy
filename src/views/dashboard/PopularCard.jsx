@@ -11,6 +11,7 @@ import BajajAreaChartCard from './BajajAreaChartCard';
 import MainCard from 'ui-component/cards/MainCard';
 import SkeletonPopularCard from 'ui-component/cards/Skeleton/PopularCard';
 import { gridSpacing } from 'store/constant';
+import { FormattedMessage } from 'react-intl';
 
 const PopularCard = ({ isLoading }) => {
     return (
@@ -24,7 +25,9 @@ const PopularCard = ({ isLoading }) => {
                             <Grid item xs={12}>
                                 <Grid container alignContent="center" justifyContent="space-between">
                                     <Grid item>
-                                        <Typography variant="h4">Facturación</Typography>
+                                        <Typography variant="h4">
+                                            <FormattedMessage id="dashboard.showcase_graph.title" />
+                                        </Typography>
                                     </Grid>
                                 </Grid>
                             </Grid>

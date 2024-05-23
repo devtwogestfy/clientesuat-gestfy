@@ -128,19 +128,19 @@ const BillingInformationCard = ({ isLoading }) => {
                                         <b>
                                             <FormattedMessage id="dashboard.showcase_info.name" />:
                                         </b>{' '}
-                                        {clientInfo ? `${clientInfo.nombre} ${clientInfo.apellido}` : '-'}
+                                        {clientInfo && clientInfo ? `${clientInfo.nombre} ${clientInfo.apellido}` : '-'}
                                     </Typography>
                                     <Typography sx={{ fontSize: '1.2rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>
                                         <b>
                                             <FormattedMessage id="dashboard.showcase_info.address" />:
                                         </b>{' '}
-                                        {clientInfo ? `${clientInfo.direccion}` : '-'}
+                                        {clientInfo && clientInfo.direccion ? `${clientInfo.direccion}` : '-'}
                                     </Typography>
                                     <Typography sx={{ fontSize: '1.2rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>
                                         <b>
                                             <FormattedMessage id="dashboard.showcase_info.phones" />:
                                         </b>{' '}
-                                        {clientInfo ? `${clientInfo.tel1}` : '-'}
+                                        {clientInfo && clientInfo.tel1 ? `${clientInfo.tel1}` : '-'}
                                     </Typography>
                                 </Grid>
                             )}

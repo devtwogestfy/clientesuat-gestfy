@@ -1,5 +1,6 @@
 import { IconButton } from '@mui/material';
 import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { Box } from '@mui/system';
 import React from 'react';
 import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
@@ -7,10 +8,7 @@ import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, Typogr
 import CloseIcon from '@mui/icons-material/Close';
 import ColorsTimeline from './ColorsTimeline';
 
-// Definición del componente Funcional
-// eslint-disable-next-line react/prop-types
 function ActionsButtons({ notas }) {
-    // Renderizado del componente
     const [open, setOpen] = useState(false);
 
     const openModal = () => {
@@ -59,5 +57,9 @@ function ActionsButtons({ notas }) {
         </>
     );
 }
+
+ActionsButtons.propTypes = {
+    notas: PropTypes.string
+};
 
 export default ActionsButtons;
