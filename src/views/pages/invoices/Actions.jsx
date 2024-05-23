@@ -2,11 +2,9 @@ import { IconButton } from '@mui/material';
 import { Box } from '@mui/system';
 import React from 'react';
 import ArrowCircleDownIcon from '@mui/icons-material/ArrowCircleDown';
+import PropTypes from 'prop-types';
 
-// Definición del componente Funcional
-// eslint-disable-next-line react/prop-types
-function Acciones({ funcionOnClicDescargar, factura_id }) {
-    // Renderizado del componente
+function Actions({ funcionOnClicDescargar, factura_id }) {
     return (
         <Box sx={{ width: '100%', textAlign: 'center' }}>
             <IconButton
@@ -23,4 +21,8 @@ function Acciones({ funcionOnClicDescargar, factura_id }) {
     );
 }
 
-export default Acciones;
+Actions.propTypes = {
+    funcionOnClicDescargar: PropTypes.func.isRequired,
+    factura_id: PropTypes.number.isRequired
+};
+export default Actions;

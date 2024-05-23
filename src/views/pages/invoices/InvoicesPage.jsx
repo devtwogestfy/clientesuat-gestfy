@@ -1,22 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react';
-// material-ui
-import Box from '@mui/material/Box';
-import { DataGrid } from '@mui/x-data-grid';
 import Grid from '@mui/material/Grid';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
 import { gridSpacing } from 'store/constant';
 import GetInfoService from 'configuraciones/servicios/info-client';
-import { Badge } from '@mui/material';
-import Acciones from './Acciones';
 import NumberInvoicesCard from './NumberInvoicesCard';
 import LastInvoiceCard from './LastInvoiceCard';
 import TotalDebtCard from './TotalDebtCard';
-import { fDate } from 'utils/format-date';
-import TableWithoutRecord from 'views/utilities/tables/withoutRecord';
-import { FormattedMessage } from 'react-intl';
+import InvoicesDataGrid from './InvoicesDataGrid';
 
 const InvoicesPage = () => {
     const [ultimafactura, setUltimafactura] = useState(null);
@@ -25,21 +18,31 @@ const InvoicesPage = () => {
     const [dataInvoices, setDataInvoices] = useState([]);
 
     const infoService = GetInfoService();
-    infoService.getInvoicesSummary().then((summaryData) => {
-        setPendiente(summaryData.pendiente);
-        setNumeroFacturas(summaryData.numerofacturas);
-        setUltimafactura(summaryData.ultimafactura);
-    });
+
+    const fetchSummaryData = async () => {
+        try {
+            const summaryData = await infoService.getInvoicesSummary();
+            setPendiente(summaryData.pendiente);
+            setNumeroFacturas(summaryData.numerofacturas);
+            setUltimafactura(summaryData.ultimafactura);
+        } catch (error) {
+            console.error('Error fetching summary data:', error);
+        }
+    };
 
     const fetchData = async () => {
-        infoService.getDataInvoices().then((invoices) => {
+        try {
+            const invoices = await infoService.getDataInvoices();
             setDataInvoices(invoices.items);
             console.log(invoices.items);
-        });
+        } catch (error) {
+            console.error('Error fetching invoices data:', error);
+        }
     };
 
     const descargarFactura = async (id) => {
-        infoService.descargarFactura(id).then((response) => {
+        try {
+            const response = await infoService.descargarFactura(id);
             let f = blobToFile(response.file, response.filename);
             let fileUrl = URL.createObjectURL(f);
 
@@ -48,7 +51,9 @@ const InvoicesPage = () => {
             link.setAttribute('href', fileUrl);
             link.setAttribute('download', response.filename);
             link.click();
-        });
+        } catch (error) {
+            console.error('Error downloading invoice:', error);
+        }
     };
 
     const blobToFile = (theBlob, fileName) => {
@@ -57,74 +62,21 @@ const InvoicesPage = () => {
         return new File([theBlob], fileName, { lastModified: new Date().getTime(), type: theBlob.type });
     };
 
-    // Función para asignar clases de estilo a las filas alternas
-    const getRowClassName = (params) => {
-        return params.indexRelativeToCurrentPage % 2 === 0 ? 'cebra-row' : '';
-    };
-
-    const columns = [
-        {
-            field: 'id',
-            headerName: <FormattedMessage id="invoices.table.download" />,
-            width: 150,
-            renderCell: (params) => {
-                return (
-                    <Box sx={{ width: '100%', textAlign: 'center' }}>
-                        <Acciones funcionOnClicDescargar={descargarFactura} factura_id={params.row.id} />
-                    </Box>
-                );
-            }
-        },
-        {
-            field: 'fechafactura',
-            headerName: <FormattedMessage id="invoices.table.date" />,
-            width: 150,
-            valueGetter: (value, row) => `${fDate(row.fechafactura) || ''}`
-        },
-        {
-            field: 'serie',
-            headerName: <FormattedMessage id="invoices.table.serie" />,
-            type: 'number',
-            width: 110
-        },
-        {
-            field: 'numero',
-            headerName: <FormattedMessage id="invoices.table.number" />,
-            description: 'This column has a value getter and is not sortable.',
-            sortable: false,
-            width: 160
-        },
-        {
-            field: 'neto',
-            headerName: <FormattedMessage id="invoices.table.value" />,
-            description: 'This column has a value getter and is not sortable.',
-            sortable: false,
-            width: 160,
-            renderCell: (params) => {
-                return (
-                    <Box sx={{ width: '100%', textAlign: 'center' }}>
-                        <Badge badgeContent={`$ ${params.row.neto}`} color="success"></Badge>
-                    </Box>
-                );
-            }
-        },
-        {
-            field: 'cobrado',
-            headerName: <FormattedMessage id="invoices.table.pending" />,
-            sortable: false,
-            width: 160,
-            renderCell: (params) => {
-                return (
-                    <Box sx={{ width: '100%', textAlign: 'center' }}>
-                        <Badge badgeContent={`$ ${params.row.cobrado.toFixed(2)}`} color="error"></Badge>
-                    </Box>
-                );
-            }
-        }
-    ];
-
     useEffect(() => {
-        fetchData();
+        let isMounted = true; // bandera para evitar actualizaciones en componentes desmontados
+
+        const loadData = async () => {
+            if (isMounted) {
+                await fetchSummaryData();
+                await fetchData();
+            }
+        };
+
+        loadData();
+
+        return () => {
+            isMounted = false; // se desmonta el componente, se evita actualización del estado
+        };
     }, []);
 
     return (
@@ -144,23 +96,7 @@ const InvoicesPage = () => {
                     </Grid>
                 </Grid>
                 <Grid item xs={12}>
-                    <Box sx={{ height: 400, width: '100%' }}>
-                        <DataGrid
-                            getRowClassName={getRowClassName} // Aplicar estilos de cebra a las filas
-                            rows={dataInvoices}
-                            columns={columns}
-                            initialState={{
-                                pagination: {
-                                    paginationModel: {
-                                        pageSize: 5
-                                    }
-                                }
-                            }}
-                            pageSizeOptions={[5]}
-                            disableRowSelectionOnClick
-                            slots={{ noRowsOverlay: TableWithoutRecord }}
-                        />
-                    </Box>
+                    <InvoicesDataGrid rows={dataInvoices} downloadInvoice={descargarFactura} />
                 </Grid>
             </Grid>
         </MainCard>
