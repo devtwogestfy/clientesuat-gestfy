@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {
+    Autocomplete,
     Box,
     Button,
     Dialog,
@@ -8,6 +9,7 @@ import {
     DialogTitle,
     Grid,
     IconButton,
+    MenuItem,
     TextField,
     Typography,
     FormControl
@@ -133,6 +135,8 @@ function OptionsButtons({ element, updateData }) {
         setBrutoEstimado(Math.round((calculation + Number.EPSILON) * 100) / 100);
     };
 
+    const optionsServices = [{ id: 30, nombre: 'Quince días' }];
+
     return (
         <Box sx={{ width: '100%', textAlign: 'center' }}>
             {element.prepaid === 1 &&
@@ -184,23 +188,49 @@ function OptionsButtons({ element, updateData }) {
                         </Grid>
                     </Grid>
                     <Grid item xs={12} sx={{ marginTop: '20px' }}>
-                        <Grid container spacing={3}>
-                            <Grid item xs={12} sm={4} md={4} lg={4}>
-                                <FormControl fullWidth>
-                                    <NumberInputBasic label="Días" id="days" value={days} onChange={handleChange('days')} />
-                                </FormControl>
+                        {(element.tecnologia === 0 && (
+                            <Grid container spacing={3}>
+                                <Grid item xs={12} sm={4} md={4} lg={4}>
+                                    <FormControl fullWidth>
+                                        <NumberInputBasic label="Días" id="days" value={days} onChange={handleChange('days')} />
+                                    </FormControl>
+                                </Grid>
+                                <Grid item xs={12} sm={4} md={4} lg={4}>
+                                    <FormControl fullWidth>
+                                        <NumberInputBasic label="Semanas" id="weeks" value={weeks} onChange={handleChange('weeks')} />
+                                    </FormControl>
+                                </Grid>
+                                <Grid item xs={12} sm={4} md={4} lg={4}>
+                                    <FormControl fullWidth>
+                                        <NumberInputBasic label="Meses" id="months" value={months} onChange={handleChange('months')} />
+                                    </FormControl>
+                                </Grid>
                             </Grid>
-                            <Grid item xs={12} sm={4} md={4} lg={4}>
-                                <FormControl fullWidth>
-                                    <NumberInputBasic label="Semanas" id="weeks" value={weeks} onChange={handleChange('weeks')} />
-                                </FormControl>
-                            </Grid>
-                            <Grid item xs={12} sm={4} md={4} lg={4}>
-                                <FormControl fullWidth>
-                                    <NumberInputBasic label="Meses" id="months" value={months} onChange={handleChange('months')} />
-                                </FormControl>
-                            </Grid>
-                        </Grid>
+                        )) ||
+                            (element.tecnologia === 1 && (
+                                <Grid item xs={12} sm={12} md={12} lg={12}>
+                                    <FormControl fullWidth>
+                                        <Autocomplete
+                                            disablePortal
+                                            id="combo-box-demo"
+                                            onChange={(event, value) => {
+                                                setDays(value.id);
+                                                handleChange('days');
+                                            }}
+                                            sx={{ width: '100%' }}
+                                            options={optionsServices.map((option) => ({ id: option.id, label: option.nombre }))}
+                                            renderInput={(params) => <TextField {...params} label="Elige una opción" />}
+                                            renderOption={(props, option) => {
+                                                return (
+                                                    <MenuItem {...props} key={option.id}>
+                                                        {option.label}
+                                                    </MenuItem>
+                                                );
+                                            }}
+                                        />
+                                    </FormControl>
+                                </Grid>
+                            ))}
                     </Grid>
                 </DialogContent>
                 <DialogActions>
@@ -235,6 +265,7 @@ OptionsButtons.propTypes = {
         prepaid: PropTypes.number,
         prepaidState: PropTypes.number,
         prepaidActive: PropTypes.number,
+        tecnologia: PropTypes.number,
         brutoDia: PropTypes.string,
         brutoSemana: PropTypes.string,
         brutoMes: PropTypes.string

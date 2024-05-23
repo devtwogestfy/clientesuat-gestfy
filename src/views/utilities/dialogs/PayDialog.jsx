@@ -10,7 +10,10 @@ import CancelIcon from '@mui/icons-material/Cancel';
 
 const PayDialog = ({ openPay, handleClosePay }) => {
     const navigate = useNavigate();
-    console.log(navigate);
+
+    const handlePaymentsClick = () => {
+        navigate('/services/prepays/');
+    };
     return (
         <Dialog open={openPay} onClose={handleClosePay} maxWidth="sm" fullWidth>
             <DialogContent>
@@ -22,7 +25,7 @@ const PayDialog = ({ openPay, handleClosePay }) => {
                     </Grid>
                     <Grid item container direction="row" justify="center" margin={1}>
                         <Grid item xs={4}>
-                            <IconButton color="primary" onClick={handleClosePay} sx={{ width: '80%' }}>
+                            <IconButton color="primary" onClick={handlePaymentsClick} sx={{ width: '80%' }}>
                                 <CreditCardIcon fontSize="large" />
                             </IconButton>
                             <Typography variant="body2">
