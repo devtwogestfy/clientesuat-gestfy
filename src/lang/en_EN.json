@@ -244,6 +244,7 @@
   "advertisements.title":"Advertisements",
   "advertisements.button.show_more":"Show More",
 
-  "errors.base":"An error has occurred, please consult technical support."
+  "errors.base":"An error has occurred, please consult technical support.",
+  "table.empty":"There are no records"
 
 }

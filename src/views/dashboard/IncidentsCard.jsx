@@ -159,12 +159,11 @@ const IncidentsCard = ({ isLoading }) => {
                             </Grid>
                         </DialogTitle>
                         <DialogContent>
-                            {/* Aquí se renderiza el formulario */}
                             <IncidentsPage></IncidentsPage>
                         </DialogContent>
                         <DialogActions>
                             <Button variant="outlined" onClick={handleClose} color="error">
-                                Cancelar
+                                <FormattedMessage id="dialogs.buttons.cancel" />
                             </Button>
                         </DialogActions>
                     </Dialog>

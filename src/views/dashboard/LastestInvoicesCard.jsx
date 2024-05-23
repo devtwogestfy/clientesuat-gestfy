@@ -145,17 +145,18 @@ const LastestInvoicesCard = ({ isLoading }) => {
                             </IconButton>
                             <Grid container alignItems="center" spacing={2}>
                                 <Grid item>
-                                    <Typography variant="h3">Facturas</Typography>
+                                    <Typography variant="h3">
+                                        <FormattedMessage id="invoices.title" />
+                                    </Typography>
                                 </Grid>
                             </Grid>
                         </DialogTitle>
                         <DialogContent>
-                            {/* Aquí se renderiza el formulario */}
                             <InvoicesPage></InvoicesPage>
                         </DialogContent>
                         <DialogActions>
                             <Button variant="outlined" onClick={handleClose} color="error">
-                                Cancelar
+                                <FormattedMessage id="dialogs.buttons.cancel" />
                             </Button>
                         </DialogActions>
                     </Dialog>

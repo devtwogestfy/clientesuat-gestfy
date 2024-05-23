@@ -27,7 +27,7 @@ import GetInfoService from 'configuraciones/servicios/service';
 import CancelPrepayDialog from './CancelPrepayDialog';
 import CancelPrepayPopper from './CancelPrepayPopper';
 import PayDialog from './../../utilities/dialogs/PayDialog';
-
+import { FormattedMessage } from 'react-intl';
 function OptionsButtons({ element, updateData }) {
     //console.log(element);
     const [open, setOpen] = useState(false);
@@ -194,16 +194,16 @@ function OptionsButtons({ element, updateData }) {
                 element.prepaidActive === 1 &&
                 (((!element.prepaidState || element.prepaidState !== 1) && (
                     <Button aria-label="create" onClick={handleOpenCreatePrepaid} variant="contained">
-                        Generar prepago
+                        <FormattedMessage id="services.table.prepay.generate" />
                     </Button>
                 )) ||
                     (element.prepaidState === 1 && (
                         <>
                             <Button aria-label="pay" onClick={handleFormalizePrepay} variant="contained">
-                                Formalizar prepago
+                                <FormattedMessage id="services.table.prepay.pay" />
                             </Button>
                             <Button aria-label="cancel" onClick={handleCancelPrepay} variant="contained">
-                                Cancelar prepago
+                                <FormattedMessage id="services.table.prepay.cancel" />
                             </Button>
                         </>
                     )))}
@@ -214,7 +214,9 @@ function OptionsButtons({ element, updateData }) {
                     </IconButton>
                     <Grid container alignItems="center" spacing={2}>
                         <Grid item>
-                            <Typography variant="h3">Información de Contratación</Typography>
+                            <Typography variant="h3">
+                                <FormattedMessage id="services.prepay.dialog.title" />
+                            </Typography>
                         </Grid>
                     </Grid>
                 </DialogTitle>
@@ -284,10 +286,10 @@ function OptionsButtons({ element, updateData }) {
                 <DialogActions>
                     <p style={{ marginRight: 'auto', marginLeft: '20px' }}>Precio (Sin IVA): {brutoEstimado} €</p>
                     <Button variant="contained" onClick={handleSavePrepaid} color="success">
-                        Guardar
+                        <FormattedMessage id="dialogs.buttons.accept" />
                     </Button>
                     <Button variant="contained" onClick={handleClose} color="error">
-                        Cancelar
+                        <FormattedMessage id="dialogs.buttons.cancel" />
                     </Button>
                 </DialogActions>
             </Dialog>

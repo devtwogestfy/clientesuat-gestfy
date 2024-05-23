@@ -95,7 +95,7 @@
   "services.type.ftth":"FTTH",
   "services.type.wimax":"Wimax",
   "services.type.premium":"Fijo Premium",
-  "services.prepay.historic":"Historico de prepagos del servicio:",
+  "services.prepay.historic":"Histórico de prepagos del servicio:",
   "services.prepay.dialog.title": "Información de contratación",
   "services.prepay.dialog.form.date":"Fecha de inicio de servicio",
   "services.prepay.dialog.form.dateError":"Fecha de instalacion requerida",
@@ -244,6 +244,6 @@
   "advertisements.title":"Anuncios",
   "advertisements.button.show_more":"Ver Más",
 
-  "errors.base":"Se ha producido un error, consulte al servicio técnico."
-
+  "errors.base":"Se ha producido un error, consulte al servicio técnico.",
+  "table.empty":"No hay registros"
 }

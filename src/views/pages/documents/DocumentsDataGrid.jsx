@@ -21,14 +21,14 @@ const DocumentsDataGrid = ({ rows, downloadInvoice }) => {
             headerClassName: 'MuiDataGrid-columnHeaders',
             width: 500,
             valueGetter: (value, row) => `${fDate(row.alta) || ''}`,
-            renderHeader: () => <FormattedMessage id="invoices.table.download" />
+            renderHeader: () => <FormattedMessage id="documents.table.date" />
         },
         {
             field: 'nombre',
             headerName: 'Nombre',
             headerClassName: 'MuiDataGrid-columnHeaders',
             width: 150,
-            renderHeader: () => <FormattedMessage id="invoices.table.date" />,
+            renderHeader: () => <FormattedMessage id="documents.table.name" />,
             valueGetter: (value, row) => `${fDate(row.fechafactura) || ''}`
         },
         {
@@ -36,7 +36,7 @@ const DocumentsDataGrid = ({ rows, downloadInvoice }) => {
             headerName: 'Serie',
             headerClassName: 'MuiDataGrid-columnHeaders',
             width: 300,
-            renderHeader: () => <FormattedMessage id="invoices.table.serie" />,
+            renderHeader: () => <FormattedMessage id="documents.download_og" />,
             renderCell: (params) => {
                 return (
                     <Box sx={{ width: '100%', textAlign: 'center' }}>
