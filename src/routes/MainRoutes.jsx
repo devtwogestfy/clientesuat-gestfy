@@ -64,12 +64,12 @@ const MainRoutes = {
                 {
                     path: 'prepays/:id',
                     element: <AuthGuard component={<PrepaysPage />}></AuthGuard>
+                },
+                {
+                    path: 'router/:id',
+                    element: <AuthGuard component={<RouterPage />}></AuthGuard>
                 }
             ]
-        },
-        {
-            path: 'router',
-            element: <AuthGuard component={<RouterPage />}></AuthGuard>
         }
     ]
 };

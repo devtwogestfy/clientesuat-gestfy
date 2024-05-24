@@ -16,7 +16,7 @@ function ActionsButtons({ id, estado, tipoId, aviso, prepaid }) {
     };
 
     const handleSettingsClick = () => {
-        navigate('/router');
+        navigate('/services/router/' + id);
     };
 
     const handlePaymentsClick = () => {

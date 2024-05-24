@@ -6,8 +6,12 @@ import FormularioWifi5G from './formularioWifi5G';
 import FormularioLan from './formularioLan';
 import FormularioPuertos from './formularioPuertos';
 import GetInfoService from 'configuraciones/servicios/service';
+import BackButton from 'views/utilities/BottonBack';
+import { useParams } from 'react-router-dom';
+import { portValidator } from 'utils/portValidator';
 
 const RouterPage = () => {
+    const params = useParams();
     const [wifi24Data, setWifi24Data] = useState({});
     const [wifi5Data, setWifi5Data] = useState({});
     const [lanData, setLanData] = useState({});
@@ -69,7 +73,7 @@ const RouterPage = () => {
         };
 
         infoService
-            .updateRouterConfig(body, id)
+            .updateRouterConfig(body, params.id)
             .then((res) => {
                 console.log(res);
             })
@@ -104,6 +108,9 @@ const RouterPage = () => {
                             <FormularioPuertos funcionPuertos={updateData}></FormularioPuertos>
                         </Grid>
                     </Grid>
+                </Grid>
+                <Grid item xs={12}>
+                    <BackButton />
                 </Grid>
             </Grid>
         </>
