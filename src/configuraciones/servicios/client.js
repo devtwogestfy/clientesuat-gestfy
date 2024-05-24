@@ -9,7 +9,8 @@ const GetInfoClient = () => {
             const data = response.data;
             return data;
         } catch (error) {
-            throw new Error(error.response || 'Network request failed');
+            console.log(error);
+            //throw new Error(error.response || 'Network request failed');
         }
     };
 

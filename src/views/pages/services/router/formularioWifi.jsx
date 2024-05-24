@@ -1,4 +1,5 @@
 import { Button, Stack, CardContent, FormControl, InputAdornment, InputLabel, OutlinedInput } from '@mui/material';
+import PropTypes from 'prop-types';
 import React from 'react';
 import MainCard from 'ui-component/cards/MainCard';
 import WifiIcon from '@mui/icons-material/Wifi';
@@ -6,7 +7,7 @@ import CardSecondaryAction from 'ui-component/cards/CardSecondaryAction';
 import SaveIcon from '@mui/icons-material/Save';
 import QrCodeIcon from '@mui/icons-material/QrCode';
 
-function FormularioWifi() {
+function FormularioWifi({ updateData }) {
     return (
         <MainCard
             content={false}
@@ -15,6 +16,7 @@ function FormularioWifi() {
                     <WifiIcon /> WiFi 2.4GHz
                 </>
             }
+            onClick={updateData}
             secondary={<CardSecondaryAction title="Actualizar" color="primary" icon={<SaveIcon fontSize="small" />} />}
         >
             <CardContent>
@@ -36,4 +38,7 @@ function FormularioWifi() {
     );
 }
 
+FormularioWifi.propTypes = {
+    updateData: PropTypes.func
+};
 export default FormularioWifi;

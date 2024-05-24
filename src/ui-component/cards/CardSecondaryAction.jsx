@@ -66,7 +66,7 @@ CardSecondaryAction.propTypes = {
     icon: PropTypes.node,
     link: PropTypes.string,
     title: PropTypes.string,
-    funcionOnClick: PropTypes.funtion
+    funcionOnClick: PropTypes.func
 };
 
 export default CardSecondaryAction;
