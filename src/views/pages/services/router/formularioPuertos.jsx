@@ -26,7 +26,7 @@ function FormularioPuertos({ funcionPuertos }) {
     };
 
     const ActualizarData = () => {
-        funcionPuertos(rows);
+        funcionPuertos('ports', rows);
     };
 
     return (

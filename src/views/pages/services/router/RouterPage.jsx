@@ -5,12 +5,14 @@ import FormularioWifi from './formularioWifi';
 import FormularioWifi5G from './formularioWifi5G';
 import FormularioLan from './formularioLan';
 import FormularioPuertos from './formularioPuertos';
+import GetInfoService from 'configuraciones/servicios/service';
 
 const RouterPage = () => {
     const [wifi24Data, setWifi24Data] = useState({});
     const [wifi5Data, setWifi5Data] = useState({});
     const [lanData, setLanData] = useState({});
     const [portsData, setPortsData] = useState({});
+    const infoService = GetInfoService();
 
     const updateData = (type, data) => {
         console.log('========================');
@@ -66,7 +68,8 @@ const RouterPage = () => {
             ports: portsData.ports
         };
 
-        PostInfoService.updateRouterConfig(body, id)
+        infoService
+            .updateRouterConfig(body, id)
             .then((res) => {
                 console.log(res);
             })

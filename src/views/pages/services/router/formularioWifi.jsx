@@ -19,7 +19,7 @@ function FormularioWifi({ updateData }) {
     };
 
     const handleSubmit = () => {
-        updateData({ ssid, password });
+        updateData('wifi24', { ssid, password });
     };
 
     return (

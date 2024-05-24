@@ -29,7 +29,7 @@ function FormularioLan({ updateData }) {
     };
 
     const handleSubmit = () => {
-        updateData({ ip, dhcpDesde, mascara, dhcpHasta });
+        updateData('lan', { ip, dhcpDesde, mascara, dhcpHasta });
     };
 
     return (
