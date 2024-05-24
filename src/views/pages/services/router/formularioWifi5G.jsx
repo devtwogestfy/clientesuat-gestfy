@@ -20,7 +20,7 @@ function FormularioWifi5G({ updateData }) {
     };
 
     const handleSubmit = () => {
-        updateData({ ssid, password });
+        updateData('wifi5', { ssid, password });
     };
     return (
         <MainCard

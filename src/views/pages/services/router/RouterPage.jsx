@@ -1,4 +1,4 @@
-// material-ui
+import React, { useState } from 'react';
 import Grid from '@mui/material/Grid';
 import { gridSpacing } from 'store/constant';
 import FormularioWifi from './formularioWifi';
@@ -7,10 +7,76 @@ import FormularioLan from './formularioLan';
 import FormularioPuertos from './formularioPuertos';
 
 const RouterPage = () => {
-    const updateData = (data) => {
+    const [wifi24Data, setWifi24Data] = useState({});
+    const [wifi5Data, setWifi5Data] = useState({});
+    const [lanData, setLanData] = useState({});
+    const [portsData, setPortsData] = useState({});
+
+    const updateData = (type, data) => {
         console.log('========================');
         console.log(data);
         console.log('========================');
+        switch (type) {
+            case 'wifi24':
+                setWifi24Data(data);
+                break;
+            case 'wifi5':
+                setWifi5Data(data);
+                break;
+            case 'lan':
+                setLanData(data);
+                break;
+            case 'ports':
+                setPortsData(data);
+                break;
+            default:
+                break;
+        }
+
+        handleSubmit();
+    };
+
+    const handleSubmit = () => {
+        if ((wifi24Data.ssid && !wifi24Data.password) || (!wifi24Data.ssid && wifi24Data.password) || !wifi24Data.valid) {
+            return;
+        }
+
+        if ((wifi5Data.ssid && !wifi5Data.password) || (!wifi5Data.ssid && wifi5Data.password) || !wifi5Data.valid) {
+            return;
+        }
+
+        if (
+            (lanData.ip && (!lanData.mask || !lanData.dhcpStart || !lanData.dhcpEnd)) ||
+            (lanData.mask && (!lanData.ip || !lanData.dhcpStart || !lanData.dhcpEnd)) ||
+            (lanData.dhcpStart && (!lanData.ip || !lanData.mask || !lanData.dhcpEnd)) ||
+            (lanData.dhcpEnd && (!lanData.ip || !lanData.mask || !lanData.dhcpStart)) ||
+            !lanData.valid
+        ) {
+            return;
+        }
+
+        if (!portsData.valid) {
+            return;
+        }
+
+        const body = {
+            wifi24: wifi24Data,
+            wifi5: wifi5Data,
+            lan: lanData,
+            ports: portsData.ports
+        };
+
+        PostInfoService.updateRouterConfig(body, id)
+            .then((res) => {
+                console.log(res);
+            })
+            .catch((error) => {
+                console.log(error);
+                DialogService.openDialog(0);
+            })
+            .finally(() => {
+                openSnack('dialogs.snacks.put_router');
+            });
     };
 
     return (
