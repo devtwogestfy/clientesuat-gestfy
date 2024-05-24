@@ -2,15 +2,59 @@ import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import PropTypes from 'prop-types';
 import TableWithoutRecord from 'views/utilities/tables/withoutRecord';
+import { useTheme } from '@mui/material/styles';
+import { FormattedMessage } from 'react-intl';
 
 const columns = [
-    { field: 'fecha', headerName: 'Fecha', width: 130 },
-    { field: 'origen', headerName: 'Origen', width: 130 },
-    { field: 'destino', headerName: 'Destino', width: 130 },
-    { field: 'zona', headerName: 'Zona', width: 200 },
-    { field: 'tipo', headerName: 'Tipo', width: 130 },
-    { field: 'segundos', headerName: 'Unidades', width: 130 },
-    { field: 'neto', headerName: 'Coste', width: 130 }
+    {
+        field: 'fecha',
+        headerClassName: 'MuiDataGrid-columnHeaders',
+        headerName: 'Fecha',
+        renderHeader: () => <FormattedMessage id="phones.table.date" />,
+        width: 130
+    },
+    {
+        field: 'origen',
+        headerClassName: 'MuiDataGrid-columnHeaders',
+        headerName: 'Origen',
+        renderHeader: () => <FormattedMessage id="phones.table.source" />,
+        width: 130
+    },
+    {
+        field: 'destino',
+        headerClassName: 'MuiDataGrid-columnHeaders',
+        headerName: 'Destino',
+        renderHeader: () => <FormattedMessage id="phones.table.dest" />,
+        width: 130
+    },
+    {
+        field: 'zona',
+        headerClassName: 'MuiDataGrid-columnHeaders',
+        headerName: 'Zona',
+        renderHeader: () => <FormattedMessage id="phones.table.zone" />,
+        width: 200
+    },
+    {
+        field: 'tipo',
+        headerClassName: 'MuiDataGrid-columnHeaders',
+        headerName: 'Tipo',
+        renderHeader: () => <FormattedMessage id="phones.table.type" />,
+        width: 130
+    },
+    {
+        field: 'segundos',
+        headerClassName: 'MuiDataGrid-columnHeaders',
+        headerName: 'Unidades',
+        renderHeader: () => <FormattedMessage id="phones.table.units" />,
+        width: 130
+    },
+    {
+        field: 'neto',
+        headerClassName: 'MuiDataGrid-columnHeaders',
+        headerName: 'Coste',
+        renderHeader: () => <FormattedMessage id="phones.table.cost" />,
+        width: 130
+    }
 ];
 
 TablePhoneRecords.propTypes = {
@@ -18,6 +62,7 @@ TablePhoneRecords.propTypes = {
 };
 
 export default function TablePhoneRecords({ rows }) {
+    const theme = useTheme();
     return (
         <div style={{ height: 400, width: '100%' }}>
             <DataGrid
@@ -32,6 +77,12 @@ export default function TablePhoneRecords({ rows }) {
                 pageSizeOptions={[5, 10]}
                 getRowId={(row) => `${row.fecha}-${row.origen}-${row.destino}`}
                 id="phoneTable"
+                sx={{
+                    '& .MuiDataGrid-columnHeaders': {
+                        backgroundColor: theme.palette.secondary.dark,
+                        color: '#fff'
+                    }
+                }}
             />
         </div>
     );
