@@ -21,7 +21,7 @@ const ServicesDataGrid = ({ rows, updateData }) => {
             field: 'detalle',
             headerClassName: 'MuiDataGrid-columnHeaders',
             headerName: 'Detalle',
-            width: 200,
+            flex: 1,
             renderHeader: () => <FormattedMessage id="services.table.detail" />,
             renderCell: (params) => {
                 return (
@@ -42,14 +42,14 @@ const ServicesDataGrid = ({ rows, updateData }) => {
             headerClassName: 'MuiDataGrid-columnHeaders',
             headerName: 'Código',
             renderHeader: () => <FormattedMessage id="services.table.code" />,
-            width: 150
+            flex: 1
         },
         {
             field: 'intservicio_id',
             headerClassName: 'MuiDataGrid-columnHeaders',
             headerName: 'Tipo',
             type: 'number',
-            width: 110,
+            flex: 1,
             renderHeader: () => <FormattedMessage id="services.table.type" />,
             renderCell: (params) => {
                 return <Box sx={{ width: '100%', textAlign: 'center' }}>{params.row.tipo}</Box>;
@@ -60,7 +60,7 @@ const ServicesDataGrid = ({ rows, updateData }) => {
             headerClassName: 'MuiDataGrid-columnHeaders',
             headerName: 'Servicio',
             sortable: false,
-            width: 400,
+            flex: 1,
             renderHeader: () => <FormattedMessage id="services.table.service" />,
             valueGetter: (value, row) => `${row.nombre || ''} ${row.direccion ? '-' + row.direccion : ''}`
         },
@@ -69,7 +69,7 @@ const ServicesDataGrid = ({ rows, updateData }) => {
             headerClassName: 'MuiDataGrid-columnHeaders',
             headerName: 'Estado',
             sortable: false,
-            width: 120,
+            flex: 1,
             renderHeader: () => <FormattedMessage id="services.table.state" />,
             renderCell: (params) => {
                 return (
@@ -84,7 +84,7 @@ const ServicesDataGrid = ({ rows, updateData }) => {
             headerClassName: 'MuiDataGrid-columnHeaders',
             headerName: 'Opciones',
             sortable: false,
-            width: 400,
+            flex: 1,
             renderHeader: () => <FormattedMessage id="services.table.options" />,
             renderCell: (params) => {
                 return (

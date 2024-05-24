@@ -20,7 +20,7 @@ const InvoicesDataGrid = ({ rows, downloadInvoice }) => {
             field: 'id',
             headerName: 'Download',
             headerClassName: 'MuiDataGrid-columnHeaders',
-            width: 150,
+            flex: 1,
             renderHeader: () => <FormattedMessage id="invoices.table.download" />,
             renderCell: (params) => {
                 return (
@@ -34,7 +34,7 @@ const InvoicesDataGrid = ({ rows, downloadInvoice }) => {
             field: 'fechafactura',
             headerName: 'Date',
             headerClassName: 'MuiDataGrid-columnHeaders',
-            width: 150,
+            flex: 1,
             renderHeader: () => <FormattedMessage id="invoices.table.date" />,
             valueGetter: (value, row) => `${fDate(row.fechafactura) || ''}`
         },
@@ -43,7 +43,7 @@ const InvoicesDataGrid = ({ rows, downloadInvoice }) => {
             headerName: 'Serie',
             headerClassName: 'MuiDataGrid-columnHeaders',
             type: 'number',
-            width: 110,
+            flex: 1,
             renderHeader: () => <FormattedMessage id="invoices.table.serie" />
         },
         {
@@ -51,7 +51,7 @@ const InvoicesDataGrid = ({ rows, downloadInvoice }) => {
             headerName: 'Number',
             headerClassName: 'MuiDataGrid-columnHeaders',
             sortable: false,
-            width: 160,
+            flex: 1,
             renderHeader: () => <FormattedMessage id="invoices.table.number" />
         },
         {
@@ -59,7 +59,7 @@ const InvoicesDataGrid = ({ rows, downloadInvoice }) => {
             headerName: 'Value',
             headerClassName: 'MuiDataGrid-columnHeaders',
             sortable: false,
-            width: 160,
+            flex: 1,
             renderHeader: () => <FormattedMessage id="invoices.table.value" />,
             renderCell: (params) => {
                 return (
@@ -74,7 +74,7 @@ const InvoicesDataGrid = ({ rows, downloadInvoice }) => {
             headerName: 'Pending',
             headerClassName: 'MuiDataGrid-columnHeaders',
             sortable: false,
-            width: 160,
+            flex: 1,
             renderHeader: () => <FormattedMessage id="invoices.table.pending" />,
             renderCell: (params) => {
                 return (
@@ -88,7 +88,7 @@ const InvoicesDataGrid = ({ rows, downloadInvoice }) => {
             field: 'download',
             headerName: '',
             headerClassName: 'MuiDataGrid-columnHeaders',
-            width: 160,
+            flex: 1,
             renderCell: () => {
                 return (
                     <Button variant="contained" color="primary">

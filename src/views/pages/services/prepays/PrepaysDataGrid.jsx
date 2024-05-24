@@ -11,35 +11,35 @@ const columns = [
         headerClassName: 'MuiDataGrid-columnHeaders',
         headerName: 'F. Inicio',
         renderHeader: () => <FormattedMessage id="services.prepay.table.begin" />,
-        width: 180
+        flex: 1
     },
     {
         field: 'fin',
         headerClassName: 'MuiDataGrid-columnHeaders',
         headerName: 'F. Fin',
         renderHeader: () => <FormattedMessage id="services.prepay.table.end" />,
-        width: 180
+        flex: 1
     },
     {
         field: 'fechapago',
         headerClassName: 'MuiDataGrid-columnHeaders',
         headerName: 'F. Pago',
         renderHeader: () => <FormattedMessage id="services.prepay.table.paydate" />,
-        width: 180
+        flex: 1
     },
     {
         field: 'importe',
         headerClassName: 'MuiDataGrid-columnHeaders',
         headerName: 'Importe',
         renderHeader: () => <FormattedMessage id="dashboard.showcase_invoices.value" />,
-        width: 190
+        flex: 1
     },
     {
         field: 'estado',
         headerClassName: 'MuiDataGrid-columnHeaders',
         headerName: 'Estado',
         renderHeader: () => <FormattedMessage id="services.prepay.table.status.title" />,
-        width: 190
+        flex: 1
     }
 ];
 

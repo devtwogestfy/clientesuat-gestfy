@@ -14,7 +14,7 @@ const columns = [
         field: 'notas',
         headerName: '',
         headerClassName: 'MuiDataGrid-columnHeaders',
-        width: 50,
+        flex: 1,
         renderCell: (params) => (
             <Box sx={{ width: '100%', textAlign: 'center' }}>
                 <ActionsButtons notas={params.row.notas} />
@@ -25,14 +25,14 @@ const columns = [
         field: 'numero',
         headerName: 'Número',
         headerClassName: 'MuiDataGrid-columnHeaders',
-        width: 150,
+        flex: 1,
         renderHeader: () => <FormattedMessage id="incidents.table.number" />
     },
     {
         field: 'alta',
         headerName: 'Alta',
         headerClassName: 'MuiDataGrid-columnHeaders',
-        width: 150,
+        flex: 1,
         renderHeader: () => <FormattedMessage id="incidents.table.date" />,
         valueGetter: (value, row) => `${fDate(row.alta) || ''}`
     },
@@ -41,7 +41,7 @@ const columns = [
         headerName: 'Descripción',
         headerClassName: 'MuiDataGrid-columnHeaders',
         renderHeader: () => <FormattedMessage id="incidents.table.description" />,
-        width: 180
+        flex: 1
     },
     {
         field: 'servicio',
@@ -49,7 +49,7 @@ const columns = [
         headerClassName: 'MuiDataGrid-columnHeaders',
         sortable: false,
         renderHeader: () => <FormattedMessage id="incidents.table.service" />,
-        width: 250
+        flex: 1
     },
     {
         field: 'horas',
@@ -57,14 +57,14 @@ const columns = [
         headerClassName: 'MuiDataGrid-columnHeaders',
         sortable: false,
         renderHeader: () => <FormattedMessage id="incidents.table.hours" />,
-        width: 160
+        flex: 1
     },
     {
         field: 'estado_id',
         headerName: 'Estado',
         headerClassName: 'MuiDataGrid-columnHeaders',
         sortable: false,
-        width: 160,
+        flex: 1,
         renderHeader: () => <FormattedMessage id="incidents.table.status" />,
         renderCell: (params) => (
             <Box sx={{ width: '100%', textAlign: 'center' }}>

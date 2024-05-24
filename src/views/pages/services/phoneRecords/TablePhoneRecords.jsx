@@ -11,49 +11,49 @@ const columns = [
         headerClassName: 'MuiDataGrid-columnHeaders',
         headerName: 'Fecha',
         renderHeader: () => <FormattedMessage id="phones.table.date" />,
-        width: 130
+        flex: 1
     },
     {
         field: 'origen',
         headerClassName: 'MuiDataGrid-columnHeaders',
         headerName: 'Origen',
         renderHeader: () => <FormattedMessage id="phones.table.source" />,
-        width: 130
+        flex: 1
     },
     {
         field: 'destino',
         headerClassName: 'MuiDataGrid-columnHeaders',
         headerName: 'Destino',
         renderHeader: () => <FormattedMessage id="phones.table.dest" />,
-        width: 130
+        flex: 1
     },
     {
         field: 'zona',
         headerClassName: 'MuiDataGrid-columnHeaders',
         headerName: 'Zona',
         renderHeader: () => <FormattedMessage id="phones.table.zone" />,
-        width: 200
+        flex: 1
     },
     {
         field: 'tipo',
         headerClassName: 'MuiDataGrid-columnHeaders',
         headerName: 'Tipo',
         renderHeader: () => <FormattedMessage id="phones.table.type" />,
-        width: 130
+        flex: 1
     },
     {
         field: 'segundos',
         headerClassName: 'MuiDataGrid-columnHeaders',
         headerName: 'Unidades',
         renderHeader: () => <FormattedMessage id="phones.table.units" />,
-        width: 130
+        flex: 1
     },
     {
         field: 'neto',
         headerClassName: 'MuiDataGrid-columnHeaders',
         headerName: 'Coste',
         renderHeader: () => <FormattedMessage id="phones.table.cost" />,
-        width: 130
+        flex: 1
     }
 ];
 
