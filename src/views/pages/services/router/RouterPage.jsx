@@ -32,7 +32,7 @@ const RouterPage = () => {
                             <FormularioLan updateData={updateData}></FormularioLan>
                         </Grid>
                         <Grid item xs={12} sm={12} md={12} lg={12}>
-                            <FormularioPuertos funcionPruertos={updateData}></FormularioPuertos>
+                            <FormularioPuertos funcionPuertos={updateData}></FormularioPuertos>
                         </Grid>
                     </Grid>
                 </Grid>

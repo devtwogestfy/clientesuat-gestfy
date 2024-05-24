@@ -96,13 +96,37 @@ const GetInfoService = () => {
         }
     };
 
+    const getRouterData = async (id) => {
+        try {
+            const response = await apiUrl.get('/portal/router/config/' + id);
+            const data = response.data;
+            return data;
+        } catch (error) {
+            //console.log(error)
+            throw new Error(error.response || 'Network request failed');
+        }
+    };
+
+    const updateRouterConfig = async (id = null, params = '') => {
+        try {
+            const response = await apiUrl.put('/portal/router/config/' + id, params);
+            const data = response.data;
+            return data;
+        } catch (error) {
+            //console.log(error)
+            throw new Error(error.response || 'Network request failed');
+        }
+    };
+
     return {
         getPhoneRecord,
         getPrepayments,
         createPrepay,
         validatePrepay,
         cancelPrepay,
-        startPurchasePrepaid
+        startPurchasePrepaid,
+        getRouterData,
+        updateRouterConfig
     };
 };
 

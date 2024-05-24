@@ -171,7 +171,7 @@ const ProfileSection = () => {
                                                     <GreetingComponent />,
                                                 </Typography>
                                                 <Typography component="span" variant="h4" sx={{ fontWeight: 400 }}>
-                                                    {clientInfo.nombre} {clientInfo.apellido}
+                                                    {clientInfo?.nombre} {clientInfo?.apellido}
                                                 </Typography>
                                             </Stack>
                                         </Stack>

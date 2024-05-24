@@ -9,7 +9,7 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 // eslint-disable-next-line react/prop-types
-function FormularioPuertos({ funcionPruertos }) {
+function FormularioPuertos({ funcionPuertos }) {
     const [rows, setRows] = useState([]);
 
     const handleAddRow = () => {
@@ -26,7 +26,7 @@ function FormularioPuertos({ funcionPruertos }) {
     };
 
     const ActualizarData = () => {
-        funcionPruertos(rows);
+        funcionPuertos(rows);
     };
 
     return (
