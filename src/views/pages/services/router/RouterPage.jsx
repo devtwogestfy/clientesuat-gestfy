@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import { gridSpacing } from 'store/constant';
 import FormularioWifi from './formularioWifi';
@@ -20,8 +20,28 @@ const RouterPage = () => {
 
     /*infoService.getRouterData(params.id).then((res) => {
         console.log(res);
+        setWifi24Data({
+            ssid: res.ssid,
+            password: res.passcli
+        });
     });*/
-
+    const fetchData = async () => {
+        try {
+            infoService.getRouterData(params.id).then((res) => {
+                setWifi24Data({
+                    ssid: res.ssid,
+                    password: res.passcli
+                });
+            });
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    useEffect(() => {
+        fetchData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+    console.log(wifi24Data);
     const updateData = (type, data) => {
         console.log('========================');
         console.log(data);
@@ -74,7 +94,7 @@ const RouterPage = () => {
                 <Grid item xs={12} sm={3} md={3} lg={3}>
                     <Grid container spacing={gridSpacing}>
                         <Grid item xs={12} sm={12} md={12} lg={12}>
-                            <FormularioWifi updateData={updateData}></FormularioWifi>
+                            <FormularioWifi wifi24Data={wifi24Data} updateData={updateData}></FormularioWifi>
                         </Grid>
                         <Grid item xs={12} sm={12} md={12} lg={12}>
                             <FormularioWifi5G updateData={updateData}></FormularioWifi5G>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Stack, CardContent, FormControl, InputAdornment, InputLabel, OutlinedInput, FormHelperText } from '@mui/material';
 import PropTypes from 'prop-types';
 import MainCard from 'ui-component/cards/MainCard';
@@ -6,11 +6,19 @@ import WifiIcon from '@mui/icons-material/Wifi';
 import SaveIcon from '@mui/icons-material/Save';
 import QrCodeIcon from '@mui/icons-material/QrCode';
 import CardSecondaryAction from 'ui-component/cards/CardSecondaryAction';
-function FormularioWifi({ updateData }) {
+function FormularioWifi({ wifi24Data, updateData }) {
     const [ssid, setSsid] = useState('');
     const [password, setPassword] = useState('');
     const [ssidError, setSsidError] = useState('');
     const [passwordError, setPasswordError] = useState('');
+
+    useEffect(() => {
+        if (wifi24Data) {
+            setSsid(wifi24Data.ssid || '');
+            setPassword(wifi24Data.password || '');
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const validateSsid = (value) => {
         if (value.length < 8 || value.length > 25) {
@@ -93,6 +101,7 @@ function FormularioWifi({ updateData }) {
 }
 
 FormularioWifi.propTypes = {
+    wifi24Data: PropTypes.array,
     updateData: PropTypes.func.isRequired
 };
 
