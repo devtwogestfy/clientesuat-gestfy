@@ -18,6 +18,10 @@ const RouterPage = () => {
     const [portsData, setPortsData] = useState({});
     const infoService = GetInfoService();
 
+    /*infoService.getRouterData(params.id).then((res) => {
+        console.log(res);
+    });*/
+
     const updateData = (type, data) => {
         console.log('========================');
         console.log(data);
@@ -33,7 +37,7 @@ const RouterPage = () => {
                 setLanData(data);
                 break;
             case 'ports':
-                setPortsData(data);
+                setPortsData(portValidator(data));
                 break;
             default:
                 break;
@@ -43,28 +47,6 @@ const RouterPage = () => {
     };
 
     const handleSubmit = () => {
-        if ((wifi24Data.ssid && !wifi24Data.password) || (!wifi24Data.ssid && wifi24Data.password) || !wifi24Data.valid) {
-            return;
-        }
-
-        if ((wifi5Data.ssid && !wifi5Data.password) || (!wifi5Data.ssid && wifi5Data.password) || !wifi5Data.valid) {
-            return;
-        }
-
-        if (
-            (lanData.ip && (!lanData.mask || !lanData.dhcpStart || !lanData.dhcpEnd)) ||
-            (lanData.mask && (!lanData.ip || !lanData.dhcpStart || !lanData.dhcpEnd)) ||
-            (lanData.dhcpStart && (!lanData.ip || !lanData.mask || !lanData.dhcpEnd)) ||
-            (lanData.dhcpEnd && (!lanData.ip || !lanData.mask || !lanData.dhcpStart)) ||
-            !lanData.valid
-        ) {
-            return;
-        }
-
-        if (!portsData.valid) {
-            return;
-        }
-
         const body = {
             wifi24: wifi24Data,
             wifi5: wifi5Data,
@@ -79,10 +61,10 @@ const RouterPage = () => {
             })
             .catch((error) => {
                 console.log(error);
-                DialogService.openDialog(0);
+                //DialogService.openDialog(0);
             })
             .finally(() => {
-                openSnack('dialogs.snacks.put_router');
+                //openSnack('dialogs.snacks.put_router');
             });
     };
 

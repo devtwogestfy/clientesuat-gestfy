@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Stack, CardContent, FormControl, InputAdornment, InputLabel, OutlinedInput } from '@mui/material';
+import { Button, Stack, CardContent, FormControl, InputAdornment, InputLabel, OutlinedInput, FormHelperText } from '@mui/material';
 import PropTypes from 'prop-types';
 import MainCard from 'ui-component/cards/MainCard';
 import WifiIcon from '@mui/icons-material/Wifi';
@@ -9,17 +9,42 @@ import CardSecondaryAction from 'ui-component/cards/CardSecondaryAction';
 function FormularioWifi({ updateData }) {
     const [ssid, setSsid] = useState('');
     const [password, setPassword] = useState('');
+    const [ssidError, setSsidError] = useState('');
+    const [passwordError, setPasswordError] = useState('');
+
+    const validateSsid = (value) => {
+        if (value.length < 8 || value.length > 25) {
+            setSsidError('SSID must be between 8 and 25 characters');
+        } else {
+            setSsidError('');
+        }
+    };
+
+    const validatePassword = (value) => {
+        if (value.length < 8 || value.length > 25) {
+            setPasswordError('Password must be between 8 and 25 characters');
+        } else {
+            setPasswordError('');
+        }
+    };
 
     const handleSsidChange = (event) => {
         setSsid(event.target.value);
+        validateSsid(event.target.value);
     };
 
     const handlePasswordChange = (event) => {
         setPassword(event.target.value);
+        validatePassword(event.target.value);
     };
 
     const handleSubmit = () => {
-        updateData('wifi24', { ssid, password });
+        validateSsid(ssid);
+        validatePassword(password);
+
+        if (!ssidError && !passwordError) {
+            updateData('wifi24', { ssid, password });
+        }
     };
 
     return (
@@ -43,6 +68,7 @@ function FormularioWifi({ updateData }) {
                         startAdornment={<InputAdornment position="start">*</InputAdornment>}
                         label="SSID"
                     />
+                    {ssidError && <FormHelperText error>{ssidError}</FormHelperText>}
                 </FormControl>
                 <FormControl fullWidth sx={{ m: 1 }}>
                     <InputLabel htmlFor="password">Contraseña</InputLabel>
@@ -54,6 +80,7 @@ function FormularioWifi({ updateData }) {
                         startAdornment={<InputAdornment position="start">*</InputAdornment>}
                         label="Contraseña"
                     />
+                    {passwordError && <FormHelperText error>{passwordError}</FormHelperText>}
                 </FormControl>
                 <Stack sx={{ alignItems: 'center' }}>
                     <Button variant="contained" endIcon={<QrCodeIcon />}>

@@ -6,11 +6,24 @@ import Icono from '@mui/icons-material/AccountTree';
 import CardSecondaryAction from 'ui-component/cards/CardSecondaryAction';
 import SaveIcon from '@mui/icons-material/Save';
 
+// Función para validar direcciones IP
+const isValidIP = (ip) => {
+    const ipRegex =
+        /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+    return ipRegex.test(ip);
+};
+
 function FormularioLan({ updateData }) {
     const [ip, setIp] = useState('');
     const [dhcpDesde, setDhcpDesde] = useState('');
     const [mascara, setMascara] = useState('');
     const [dhcpHasta, setDhcpHasta] = useState('');
+    const [errors, setErrors] = useState({
+        ip: '',
+        dhcpDesde: '',
+        mascara: '',
+        dhcpHasta: ''
+    });
 
     const handleIpChange = (event) => {
         setIp(event.target.value);
@@ -28,8 +41,21 @@ function FormularioLan({ updateData }) {
         setDhcpHasta(event.target.value);
     };
 
+    const validate = () => {
+        let temp = { ...errors };
+        temp.ip = isValidIP(ip) ? '' : 'Invalid IP address';
+        temp.mascara = isValidIP(mascara) ? '' : 'Invalid Mask address';
+        temp.dhcpDesde = isValidIP(dhcpDesde) ? '' : 'Invalid DHCP Start address';
+        temp.dhcpHasta = isValidIP(dhcpHasta) ? '' : 'Invalid DHCP End address';
+        setErrors(temp);
+        console.log(temp);
+        return Object.values(temp).every((x) => x === '');
+    };
+
     const handleSubmit = () => {
-        updateData('lan', { ip, dhcpDesde, mascara, dhcpHasta });
+        if (validate()) {
+            updateData('lan', { ip, dhcpDesde, mascara, dhcpHasta });
+        }
     };
 
     return (
@@ -47,46 +73,54 @@ function FormularioLan({ updateData }) {
                 <Grid container spacing="2">
                     <Grid item xs={6} sm={6} md={6} lg={6}>
                         <FormControl fullWidth sx={{ mb: 3 }}>
-                            <InputLabel htmlFor="outlined-adornment-amount">IP</InputLabel>
+                            <InputLabel htmlFor="ip">IP</InputLabel>
                             <OutlinedInput
                                 id="ip"
                                 value={ip}
                                 onChange={handleIpChange}
                                 startAdornment={<InputAdornment position="start">*</InputAdornment>}
                                 label="IP"
+                                error={!!errors.ip}
                             />
+                            {errors.ip && <p style={{ color: 'red' }}>{errors.ip}</p>}
                         </FormControl>
                         <FormControl fullWidth>
-                            <InputLabel htmlFor="outlined-adornment-amount">DHCP Desde</InputLabel>
+                            <InputLabel htmlFor="dhcp-desde">DHCP Desde</InputLabel>
                             <OutlinedInput
                                 id="dhcp-desde"
                                 value={dhcpDesde}
                                 onChange={handleDhcpDesdeChange}
                                 startAdornment={<InputAdornment position="start">*</InputAdornment>}
                                 label="DHCP Desde"
+                                error={!!errors.dhcpDesde}
                             />
+                            {errors.dhcpDesde && <p style={{ color: 'red' }}>{errors.dhcpDesde}</p>}
                         </FormControl>
                     </Grid>
                     <Grid item xs={6} sm={6} md={6} lg={6}>
                         <FormControl fullWidth sx={{ mb: 3, ml: 3, pr: 3 }}>
-                            <InputLabel htmlFor="outlined-adornment-amount">Máscara</InputLabel>
+                            <InputLabel htmlFor="mascara">Máscara</InputLabel>
                             <OutlinedInput
                                 id="mascara"
                                 value={mascara}
                                 onChange={handleMascaraChange}
                                 startAdornment={<InputAdornment position="start">*</InputAdornment>}
                                 label="Máscara"
+                                error={!!errors.mascara}
                             />
+                            {errors.mascara && <p style={{ color: 'red' }}>{errors.mascara}</p>}
                         </FormControl>
                         <FormControl fullWidth sx={{ ml: 3, pr: 3 }}>
-                            <InputLabel htmlFor="outlined-adornment-amount">DHCP Hasta</InputLabel>
+                            <InputLabel htmlFor="dhcp-hasta">DHCP Hasta</InputLabel>
                             <OutlinedInput
                                 id="dhcp-hasta"
                                 value={dhcpHasta}
                                 onChange={handleDhcpHastaChange}
                                 startAdornment={<InputAdornment position="start">*</InputAdornment>}
                                 label="DHCP Hasta"
+                                error={!!errors.dhcpHasta}
                             />
+                            {errors.dhcpHasta && <p style={{ color: 'red' }}>{errors.dhcpHasta}</p>}
                         </FormControl>
                     </Grid>
                 </Grid>
@@ -101,4 +135,5 @@ function FormularioLan({ updateData }) {
 FormularioLan.propTypes = {
     updateData: PropTypes.func.isRequired
 };
+
 export default FormularioLan;

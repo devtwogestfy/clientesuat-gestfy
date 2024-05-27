@@ -113,7 +113,7 @@ const GetInfoService = () => {
             const data = response.data;
             return data;
         } catch (error) {
-            //console.log(error)
+            console.log(error);
             throw new Error(error.response || 'Network request failed');
         }
     };
