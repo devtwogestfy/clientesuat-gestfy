@@ -141,10 +141,10 @@ function FormularioLan({ lanData, updateData }) {
 
 FormularioLan.propTypes = {
     lanData: PropTypes.shape({
-        ip: PropTypes.string,
-        mascara: PropTypes.string,
-        dhcpDesde: PropTypes.string,
-        dhcpHasta: PropTypes.string
+        ip: PropTypes.string.isRequired,
+        mascara: PropTypes.string.isRequired,
+        dhcpDesde: PropTypes.string.isRequired,
+        dhcpHasta: PropTypes.string.isRequired
     }).isRequired,
     updateData: PropTypes.func.isRequired
 };

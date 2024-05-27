@@ -14,7 +14,12 @@ const RouterPage = () => {
     const params = useParams();
     const [wifi24Data, setWifi24Data] = useState({ ssid: '', password: '' });
     const [wifi5Data, setWifi5Data] = useState({ ssid: '', password: '' });
-    const [lanData, setLanData] = useState({});
+    const [lanData, setLanData] = useState({
+        ip: '',
+        mascara: '',
+        dhcpDesde: '',
+        dhcpHasta: ''
+    });
     const [portsData, setPortsData] = useState([]);
     const infoService = GetInfoService();
 
@@ -23,18 +28,18 @@ const RouterPage = () => {
             .getRouterData(params.id)
             .then((res) => {
                 setWifi24Data({
-                    ssid: res.ssid,
-                    password: res.passcli
+                    ssid: res.ssid || '',
+                    password: res.passcli || ''
                 });
                 setWifi5Data({
-                    ssid: res.ssid5,
-                    password: res.passcli5
+                    ssid: res.ssid5 || '',
+                    password: res.passcli5 || ''
                 });
                 setLanData({
-                    ip: res.lanip,
-                    mascara: res.lanmask,
-                    dhcpDesde: res.landesde,
-                    dhcpHasta: res.lanhasta
+                    ip: res.lanip || '',
+                    mascara: res.lanmask || '',
+                    dhcpDesde: res.landesde || '',
+                    dhcpHasta: res.lanhasta || ''
                 });
                 const portsDataArray = Array.isArray(res.items) ? res.items : Object.values(res.items);
                 setPortsData(portsDataArray);

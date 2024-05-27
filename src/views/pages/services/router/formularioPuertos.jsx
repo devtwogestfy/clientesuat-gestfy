@@ -16,10 +16,10 @@ function FormularioPuertos({ portsData, funcionPuertos }) {
         if (portsData) {
             const formattedRows = portsData.map((item) => ({
                 id: item.id,
-                ip: item.ip,
-                puertoExterno: item.desde,
-                puertoInterno: item.hasta,
-                protocolo: item.protocolo
+                ip: item.ip || '',
+                puertoExterno: item.desde || '',
+                puertoInterno: item.hasta || '',
+                protocolo: item.protocolo || ''
             }));
             setRows(formattedRows);
         }
@@ -35,7 +35,6 @@ function FormularioPuertos({ portsData, funcionPuertos }) {
 
     const handleChange = (id, field, value) => {
         setRows(rows.map((row) => (row.id === id ? { ...row, [field]: value } : row)));
-        console.log(rows);
     };
 
     const ActualizarData = () => {
