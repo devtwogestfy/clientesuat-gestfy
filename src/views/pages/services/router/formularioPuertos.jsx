@@ -1,10 +1,25 @@
 import React, { useState, useEffect } from 'react';
-import { CardContent, IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from '@mui/material';
+import {
+    CardContent,
+    IconButton,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    TextField,
+    Select,
+    MenuItem,
+    FormControl,
+    InputLabel,
+    Paper,
+    FormHelperText
+} from '@mui/material';
 import MainCard from 'ui-component/cards/MainCard';
 import CardSecondaryAction from 'ui-component/cards/CardSecondaryAction';
 import SaveIcon from '@mui/icons-material/Save';
 import Icono from '@mui/icons-material/ImportExport';
-import Paper from '@mui/material/Paper';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteIcon from '@mui/icons-material/Delete';
 import PropTypes from 'prop-types';
@@ -16,7 +31,15 @@ function FormularioPuertos({ portsData, funcionPuertos }) {
             /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
         return ipRegex.test(ip);
     };
+
+    // Función para validar puertos
+    const isValidPort = (port) => {
+        const portNumber = parseInt(port, 10);
+        return portNumber >= 1 && portNumber <= 65534;
+    };
+
     const [rows, setRows] = useState([]);
+    const [errors, setErrors] = useState({});
 
     useEffect(() => {
         if (portsData) {
@@ -40,8 +63,27 @@ function FormularioPuertos({ portsData, funcionPuertos }) {
     };
 
     const handleChange = (id, field, value) => {
-         
         setRows(rows.map((row) => (row.id === id ? { ...row, [field]: value } : row)));
+
+        if (field === 'ip') {
+            setErrors((prevErrors) => ({
+                ...prevErrors,
+                [id]: {
+                    ...prevErrors[id],
+                    ip: !isValidIP(value) ? 'IP no válida' : ''
+                }
+            }));
+        }
+
+        if (field === 'extport' || field === 'intport') {
+            setErrors((prevErrors) => ({
+                ...prevErrors,
+                [id]: {
+                    ...prevErrors[id],
+                    [field]: !isValidPort(value) ? 'Introduzca un puerto válido (1-65534)' : ''
+                }
+            }));
+        }
     };
 
     const ActualizarData = () => {
@@ -85,36 +127,59 @@ function FormularioPuertos({ portsData, funcionPuertos }) {
                             {rows.map((row) => (
                                 <TableRow key={row.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                                     <TableCell>
-                                        <TextField
-                                            label="Ingrese su IP"
-                                            variant="standard"
-                                            value={row.ip}
-                                            onChange={(e) => handleChange(row.id, 'ip', e.target.value)}
-                                        />
+                                        <FormControl variant="standard" fullWidth error={!!errors[row.id]?.ip}>
+                                            <TextField
+                                                label="Ingrese su IP"
+                                                variant="standard"
+                                                value={row.ip}
+                                                onChange={(e) => handleChange(row.id, 'ip', e.target.value)}
+                                                error={!!errors[row.id]?.ip}
+                                            />
+                                            {errors[row.id]?.ip && <FormHelperText>{errors[row.id]?.ip}</FormHelperText>}
+                                        </FormControl>
                                     </TableCell>
                                     <TableCell>
-                                        <TextField
-                                            label="Ingrese su Puerto"
-                                            variant="standard"
-                                            value={row.extport}
-                                            onChange={(e) => handleChange(row.id, 'extport', e.target.value)}
-                                        />
+                                        <FormControl variant="standard" fullWidth error={!!errors[row.id]?.extport}>
+                                            <TextField
+                                                label="Ingrese su Puerto"
+                                                variant="standard"
+                                                value={row.extport}
+                                                onChange={(e) => handleChange(row.id, 'extport', e.target.value)}
+                                                error={!!errors[row.id]?.extport}
+                                            />
+                                            {errors[row.id]?.extport && (
+                                                <FormHelperText>{errors[row.id]?.extport}</FormHelperText>
+                                            )}
+                                        </FormControl>
                                     </TableCell>
                                     <TableCell>
-                                        <TextField
-                                            label="Ingrese su Puerto"
-                                            variant="standard"
-                                            value={row.intport}
-                                            onChange={(e) => handleChange(row.id, 'intport', e.target.value)}
-                                        />
+                                        <FormControl variant="standard" fullWidth error={!!errors[row.id]?.intport}>
+                                            <TextField
+                                                label="Ingrese su Puerto"
+                                                variant="standard"
+                                                value={row.intport}
+                                                onChange={(e) => handleChange(row.id, 'intport', e.target.value)}
+                                                error={!!errors[row.id]?.intport}
+                                            />
+                                            {errors[row.id]?.intport && (
+                                                <FormHelperText>{errors[row.id]?.intport}</FormHelperText>
+                                            )}
+                                        </FormControl>
                                     </TableCell>
                                     <TableCell>
-                                        <TextField
-                                            label="Ingrese su Protocolo"
-                                            variant="standard"
-                                            value={row.protocol}
-                                            onChange={(e) => handleChange(row.id, 'protocol', e.target.value)}
-                                        />
+                                        <FormControl variant="standard" fullWidth>
+                                            <InputLabel id={`protocol-label-${row.id}`}>Protocolo</InputLabel>
+                                            <Select
+                                                labelId={`protocol-label-${row.id}`}
+                                                value={row.protocol}
+                                                onChange={(e) => handleChange(row.id, 'protocol', e.target.value)}
+                                                label="Protocolo"
+                                            >
+                                                <MenuItem value="1">UDP</MenuItem>
+                                                <MenuItem value="2">TCP</MenuItem>
+                                                <MenuItem value="3">UDP/TCP</MenuItem>
+                                            </Select>
+                                        </FormControl>
                                     </TableCell>
                                     <TableCell>
                                         <IconButton aria-label="delete" color="error" onClick={() => handleDeleteRow(row.id)}>
