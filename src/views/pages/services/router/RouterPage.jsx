@@ -42,7 +42,7 @@ const RouterPage = () => {
                     dhcpStart: res.landesde || '',
                     dhcpEnd: res.lanhasta || ''
                 });
-                const portsDataArray = Array.isArray(res.items) ? res.items : Object.values(res.items);
+                const portsDataArray = res.items ? (Array.isArray(res.items) ? res.items : Object.values(res.items)) : [];
                 setPortsData(portsDataArray);
                 console.log(res);
                 setTimeout(() => {

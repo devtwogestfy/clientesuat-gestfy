@@ -1,5 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { Button, CardContent, FormControl, InputAdornment, InputLabel, OutlinedInput, Stack, FormHelperText, IconButton } from '@mui/material';
+import {
+    Button,
+    Stack,
+    CardContent,
+    FormControl,
+    InputAdornment,
+    InputLabel,
+    OutlinedInput,
+    FormHelperText,
+    IconButton,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogTitle
+} from '@mui/material';
 import PropTypes from 'prop-types';
 import MainCard from 'ui-component/cards/MainCard';
 import WifiIcon from '@mui/icons-material/NetworkCheck';
@@ -8,6 +22,7 @@ import SaveIcon from '@mui/icons-material/Save';
 import QrCodeIcon from '@mui/icons-material/QrCode';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import QRCode from 'qrcode.react';
 
 function FormularioWifi5G({ wifi5Data, updateData }) {
     const [ssid, setSsid] = useState('');
@@ -15,6 +30,7 @@ function FormularioWifi5G({ wifi5Data, updateData }) {
     const [showPassword, setShowPassword] = useState(false);
     const [ssidError, setSsidError] = useState('');
     const [passwordError, setPasswordError] = useState('');
+    const [open, setOpen] = useState(false);
 
     useEffect(() => {
         setSsid(wifi5Data.ssid);
@@ -62,6 +78,14 @@ function FormularioWifi5G({ wifi5Data, updateData }) {
         if (!ssidError && !passwordError) {
             updateData('wifi5', { ssid, password });
         }
+    };
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
     };
 
     return (
@@ -115,11 +139,22 @@ function FormularioWifi5G({ wifi5Data, updateData }) {
                 </FormControl>
 
                 <Stack sx={{ alignItems: 'center' }}>
-                    <Button variant="contained" endIcon={<QrCodeIcon />}>
+                    <Button variant="contained" endIcon={<QrCodeIcon />} onClick={handleClickOpen}>
                         Ver Qr
                     </Button>
                 </Stack>
             </CardContent>
+            <Dialog open={open} onClose={handleClose}>
+                <DialogTitle>QR Code</DialogTitle>
+                <DialogContent>
+                    <QRCode value={`WIFI:T:WPA;S:${ssid};P:${password};;`} />
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose} color="primary">
+                        Cerrar
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </MainCard>
     );
 }
