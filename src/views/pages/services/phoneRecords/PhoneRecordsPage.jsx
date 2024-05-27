@@ -240,9 +240,7 @@ const PhoneRecordsPage = () => {
                     </Grid>
                 </Grid>
                 <Grid item xs={12}>
-                    <Box sx={styles.root}>
-                        <TablePhoneRecords rows={data} />
-                    </Box>
+                    <TablePhoneRecords rows={data} />
                 </Grid>
                 <Grid item xs={12}>
                     <BackButton />

@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react';
 // material-ui
-import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import MainCard from 'ui-component/cards/MainCard';
 import { gridSpacing } from 'store/constant';
@@ -45,9 +44,7 @@ const DocumentsPage = () => {
         <MainCard>
             <Grid container spacing={gridSpacing}>
                 <Grid item xs={12}>
-                    <Box sx={styles.root}>
-                        <DocumentsDataGrid rows={dataDocuments} downloadInvoice={descargarFactura} />
-                    </Box>
+                    <DocumentsDataGrid rows={dataDocuments} downloadInvoice={descargarFactura} />
                 </Grid>
             </Grid>
         </MainCard>
