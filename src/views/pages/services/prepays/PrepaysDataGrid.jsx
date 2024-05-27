@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import TableWithoutRecord from 'views/utilities/tables/withoutRecord';
 import { useTheme } from '@mui/material/styles';
 import { FormattedMessage } from 'react-intl';
+import dataGridStyles from 'utils/dataGridStyles';
 
 const columns = [
     {
@@ -49,12 +50,13 @@ PrepaysPage.propTypes = {
 
 export default function PrepaysPage({ rows }) {
     const theme = useTheme();
+    const styles = dataGridStyles(theme);
     const getRowClassName = (params) => {
         return params.indexRelativeToCurrentPage % 2 === 0 ? 'cebra-row' : '';
     };
 
     return (
-        <div style={{ height: 400, width: '100%' }}>
+        <div style={styles.root}>
             <DataGrid
                 getRowClassName={getRowClassName}
                 rows={rows}
@@ -66,12 +68,7 @@ export default function PrepaysPage({ rows }) {
                     }
                 }}
                 pageSizeOptions={[5, 10]}
-                sx={{
-                    '& .MuiDataGrid-columnHeaders': {
-                        backgroundColor: theme.palette.secondary.dark,
-                        color: '#fff'
-                    }
-                }}
+                sx={styles.dataGrid}
             />
         </div>
     );

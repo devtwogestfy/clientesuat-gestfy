@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import TableWithoutRecord from 'views/utilities/tables/withoutRecord';
 import { useTheme } from '@mui/material/styles';
 import { FormattedMessage } from 'react-intl';
+import dataGridStyles from 'utils/dataGridStyles';
+import Box from '@mui/material/Box';
 
 const columns = [
     {
@@ -63,8 +65,9 @@ TablePhoneRecords.propTypes = {
 
 export default function TablePhoneRecords({ rows }) {
     const theme = useTheme();
+    const styles = dataGridStyles(theme);
     return (
-        <div style={{ height: 400, width: '100%' }}>
+        <Box sx={styles.root}>
             <DataGrid
                 rows={rows}
                 columns={columns}
@@ -77,13 +80,8 @@ export default function TablePhoneRecords({ rows }) {
                 pageSizeOptions={[5, 10]}
                 getRowId={(row) => `${row.fecha}-${row.origen}-${row.destino}`}
                 id="phoneTable"
-                sx={{
-                    '& .MuiDataGrid-columnHeaders': {
-                        backgroundColor: theme.palette.secondary.dark,
-                        color: '#fff'
-                    }
-                }}
+                sx={styles.dataGrid}
             />
-        </div>
+        </Box>
     );
 }

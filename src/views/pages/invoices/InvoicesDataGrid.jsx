@@ -8,9 +8,11 @@ import Actions from './Actions';
 import TableWithoutRecord from 'views/utilities/tables/withoutRecord';
 import { Badge, Button } from '@mui/material';
 import { fDate } from 'utils/format-date';
+import dataGridStyles from 'utils/dataGridStyles';
 
 const InvoicesDataGrid = ({ rows, downloadInvoice }) => {
     const theme = useTheme();
+    const styles = dataGridStyles(theme);
     const getRowClassName = (params) => {
         return params.indexRelativeToCurrentPage % 2 === 0 ? 'cebra-row' : '';
     };
@@ -100,7 +102,7 @@ const InvoicesDataGrid = ({ rows, downloadInvoice }) => {
     ];
 
     return (
-        <Box sx={{ height: 400, width: '100%' }}>
+        <Box sx={styles.root}>
             <DataGrid
                 getRowClassName={getRowClassName} // Aplicar estilos de cebra a las filas
                 rows={rows}
@@ -115,12 +117,7 @@ const InvoicesDataGrid = ({ rows, downloadInvoice }) => {
                 pageSizeOptions={[5]}
                 disableRowSelectionOnClick
                 slots={{ noRowsOverlay: TableWithoutRecord }}
-                sx={{
-                    '& .MuiDataGrid-columnHeaders': {
-                        backgroundColor: theme.palette.secondary.dark,
-                        color: '#fff'
-                    }
-                }}
+                sx={styles.dataGrid}
             />
         </Box>
     );

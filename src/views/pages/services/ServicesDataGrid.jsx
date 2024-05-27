@@ -9,9 +9,11 @@ import ActionsButtons from './ActionsButtons';
 import OptionsButtons from './OptionsButtons';
 import TableWithoutRecord from 'views/utilities/tables/withoutRecord';
 import { FormattedMessage } from 'react-intl';
+import dataGridStyles from 'utils/dataGridStyles';
 
 const ServicesDataGrid = ({ rows, updateData }) => {
     const theme = useTheme();
+    const styles = dataGridStyles(theme);
     const getRowClassName = (params) => {
         return params.indexRelativeToCurrentPage % 2 === 0 ? 'cebra-row' : '';
     };
@@ -97,7 +99,7 @@ const ServicesDataGrid = ({ rows, updateData }) => {
     ];
 
     return (
-        <Box sx={{ height: 400, width: '100%' }}>
+        <Box sx={styles.root}>
             <DataGrid
                 getRowClassName={getRowClassName}
                 rows={rows}
@@ -112,12 +114,7 @@ const ServicesDataGrid = ({ rows, updateData }) => {
                 pageSizeOptions={[5]}
                 disableRowSelectionOnClick
                 slots={{ noRowsOverlay: TableWithoutRecord }}
-                sx={{
-                    '& .MuiDataGrid-columnHeaders': {
-                        backgroundColor: theme.palette.secondary.dark,
-                        color: '#fff'
-                    }
-                }}
+                sx={styles.dataGrid}
             />
         </Box>
     );

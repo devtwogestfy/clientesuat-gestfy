@@ -8,6 +8,7 @@ import StatusColor from './StatusColor';
 import ActionsButtons from './ActionsButtons';
 import { Box } from '@mui/material';
 import { FormattedMessage } from 'react-intl';
+import dataGridStyles from 'utils/dataGridStyles';
 
 const columns = [
     {
@@ -80,12 +81,13 @@ IncidentsDataGrid.propTypes = {
 
 export default function IncidentsDataGrid({ rows }) {
     const theme = useTheme();
+    const styles = dataGridStyles(theme);
     const getRowClassName = (params) => {
         return params.indexRelativeToCurrentPage % 2 === 0 ? 'cebra-row' : '';
     };
 
     return (
-        <Box sx={{ height: 400, width: '100%' }}>
+        <Box sx={styles.root}>
             <DataGrid
                 getRowClassName={getRowClassName}
                 rows={rows}
@@ -97,12 +99,7 @@ export default function IncidentsDataGrid({ rows }) {
                     }
                 }}
                 pageSizeOptions={[5, 10]}
-                sx={{
-                    '& .MuiDataGrid-columnHeaders': {
-                        backgroundColor: theme.palette.secondary.dark,
-                        color: '#fff'
-                    }
-                }}
+                sx={styles.dataGrid}
             />
         </Box>
     );

@@ -45,7 +45,7 @@ const DocumentsPage = () => {
         <MainCard>
             <Grid container spacing={gridSpacing}>
                 <Grid item xs={12}>
-                    <Box sx={{ height: 400, width: '100%' }}>
+                    <Box sx={styles.root}>
                         <DocumentsDataGrid rows={dataDocuments} downloadInvoice={descargarFactura} />
                     </Box>
                 </Grid>

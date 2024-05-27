@@ -7,9 +7,11 @@ import { FormattedMessage } from 'react-intl';
 import ActionsButtons from './ActionsButtons';
 import TableWithoutRecord from 'views/utilities/tables/withoutRecord';
 import { fDate } from 'utils/format-date';
+import dataGridStyles from 'utils/dataGridStyles';
 
 const DocumentsDataGrid = ({ rows, downloadInvoice }) => {
     const theme = useTheme();
+    const styles = dataGridStyles(theme);
     const getRowClassName = (params) => {
         return params.indexRelativeToCurrentPage % 2 === 0 ? 'cebra-row' : '';
     };
@@ -48,7 +50,7 @@ const DocumentsDataGrid = ({ rows, downloadInvoice }) => {
     ];
 
     return (
-        <Box sx={{ height: 400, width: '100%' }}>
+        <Box sx={styles.root}>
             <DataGrid
                 getRowClassName={getRowClassName}
                 rows={rows}
@@ -63,12 +65,7 @@ const DocumentsDataGrid = ({ rows, downloadInvoice }) => {
                 pageSizeOptions={[5]}
                 disableRowSelectionOnClick
                 slots={{ noRowsOverlay: TableWithoutRecord }}
-                sx={{
-                    '& .MuiDataGrid-columnHeaders': {
-                        backgroundColor: theme.palette.secondary.dark,
-                        color: '#fff'
-                    }
-                }}
+                sx={styles.dataGrid}
             />
         </Box>
     );
