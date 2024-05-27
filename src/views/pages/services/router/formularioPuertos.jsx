@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CardContent, IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from '@mui/material';
 import MainCard from 'ui-component/cards/MainCard';
 import CardSecondaryAction from 'ui-component/cards/CardSecondaryAction';
@@ -7,10 +7,23 @@ import Icono from '@mui/icons-material/ImportExport';
 import Paper from '@mui/material/Paper';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteIcon from '@mui/icons-material/Delete';
+import PropTypes from 'prop-types';
 
-// eslint-disable-next-line react/prop-types
-function FormularioPuertos({ funcionPuertos }) {
+function FormularioPuertos({ portsData, funcionPuertos }) {
     const [rows, setRows] = useState([]);
+
+    useEffect(() => {
+        if (portsData) {
+            const formattedRows = portsData.map((item) => ({
+                id: item.id,
+                ip: item.ip,
+                puertoExterno: item.desde,
+                puertoInterno: item.hasta,
+                protocolo: item.protocolo
+            }));
+            setRows(formattedRows);
+        }
+    }, [portsData]);
 
     const handleAddRow = () => {
         setRows([...rows, { id: Date.now(), ip: '', puertoExterno: '', puertoInterno: '', protocolo: '' }]);
@@ -111,5 +124,10 @@ function FormularioPuertos({ funcionPuertos }) {
         </MainCard>
     );
 }
+
+FormularioPuertos.propTypes = {
+    portsData: PropTypes.array.isRequired,
+    funcionPuertos: PropTypes.func.isRequired
+};
 
 export default FormularioPuertos;

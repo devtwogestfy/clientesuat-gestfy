@@ -13,12 +13,9 @@ function FormularioWifi({ wifi24Data, updateData }) {
     const [passwordError, setPasswordError] = useState('');
 
     useEffect(() => {
-        if (wifi24Data) {
-            setSsid(wifi24Data.ssid || '');
-            setPassword(wifi24Data.password || '');
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+        setSsid(wifi24Data.ssid);
+        setPassword(wifi24Data.password);
+    }, [wifi24Data]);
 
     const validateSsid = (value) => {
         if (value.length < 8 || value.length > 25) {
@@ -101,7 +98,10 @@ function FormularioWifi({ wifi24Data, updateData }) {
 }
 
 FormularioWifi.propTypes = {
-    wifi24Data: PropTypes.array,
+    wifi24Data: PropTypes.shape({
+        ssid: PropTypes.string.isRequired,
+        password: PropTypes.string.isRequired
+    }).isRequired,
     updateData: PropTypes.func.isRequired
 };
 

@@ -1,5 +1,5 @@
 import { Button, CardContent, FormControl, InputAdornment, InputLabel, OutlinedInput, Stack, FormHelperText } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import MainCard from 'ui-component/cards/MainCard';
 import WifiIcon from '@mui/icons-material/NetworkCheck';
@@ -7,11 +7,16 @@ import CardSecondaryAction from 'ui-component/cards/CardSecondaryAction';
 import SaveIcon from '@mui/icons-material/Save';
 import QrCodeIcon from '@mui/icons-material/QrCode';
 
-function FormularioWifi5G({ updateData }) {
+function FormularioWifi5G({ wifi5Data, updateData }) {
     const [ssid, setSsid] = useState('');
     const [password, setPassword] = useState('');
     const [ssidError, setSsidError] = useState('');
     const [passwordError, setPasswordError] = useState('');
+
+    useEffect(() => {
+        setSsid(wifi5Data.ssid);
+        setPassword(wifi5Data.password);
+    }, [wifi5Data]);
 
     const validateSsid = (value) => {
         if (value.length < 8 || value.length > 25) {
@@ -93,6 +98,10 @@ function FormularioWifi5G({ updateData }) {
 }
 
 FormularioWifi5G.propTypes = {
+    wifi5Data: PropTypes.shape({
+        ssid: PropTypes.string.isRequired,
+        password: PropTypes.string.isRequired
+    }).isRequired,
     updateData: PropTypes.func.isRequired
 };
 

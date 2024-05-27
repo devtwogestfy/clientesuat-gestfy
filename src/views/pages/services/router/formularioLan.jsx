@@ -1,5 +1,5 @@
 import { Alert, CardContent, FormControl, Grid, InputAdornment, InputLabel, OutlinedInput } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import MainCard from 'ui-component/cards/MainCard';
 import Icono from '@mui/icons-material/AccountTree';
@@ -13,7 +13,7 @@ const isValidIP = (ip) => {
     return ipRegex.test(ip);
 };
 
-function FormularioLan({ updateData }) {
+function FormularioLan({ lanData, updateData }) {
     const [ip, setIp] = useState('');
     const [dhcpDesde, setDhcpDesde] = useState('');
     const [mascara, setMascara] = useState('');
@@ -24,6 +24,13 @@ function FormularioLan({ updateData }) {
         mascara: '',
         dhcpHasta: ''
     });
+
+    useEffect(() => {
+        setIp(lanData.ip);
+        setMascara(lanData.mascara);
+        setDhcpDesde(lanData.dhcpDesde);
+        setDhcpHasta(lanData.dhcpHasta);
+    }, [lanData]);
 
     const handleIpChange = (event) => {
         setIp(event.target.value);
@@ -133,6 +140,12 @@ function FormularioLan({ updateData }) {
 }
 
 FormularioLan.propTypes = {
+    lanData: PropTypes.shape({
+        ip: PropTypes.string,
+        mascara: PropTypes.string,
+        dhcpDesde: PropTypes.string,
+        dhcpHasta: PropTypes.string
+    }).isRequired,
     updateData: PropTypes.func.isRequired
 };
 
