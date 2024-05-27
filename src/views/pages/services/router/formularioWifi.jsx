@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Stack, CardContent, FormControl, InputAdornment, InputLabel, OutlinedInput, FormHelperText } from '@mui/material';
+import { Button, Stack, CardContent, FormControl, InputAdornment, InputLabel, OutlinedInput, FormHelperText, IconButton } from '@mui/material';
 import PropTypes from 'prop-types';
 import MainCard from 'ui-component/cards/MainCard';
 import WifiIcon from '@mui/icons-material/Wifi';
 import SaveIcon from '@mui/icons-material/Save';
 import QrCodeIcon from '@mui/icons-material/QrCode';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import CardSecondaryAction from 'ui-component/cards/CardSecondaryAction';
+
 function FormularioWifi({ wifi24Data, updateData }) {
     const [ssid, setSsid] = useState('');
     const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
     const [ssidError, setSsidError] = useState('');
     const [passwordError, setPasswordError] = useState('');
 
@@ -41,6 +45,14 @@ function FormularioWifi({ wifi24Data, updateData }) {
     const handlePasswordChange = (event) => {
         setPassword(event.target.value);
         validatePassword(event.target.value);
+    };
+
+    const handleClickShowPassword = () => {
+        setShowPassword(!showPassword);
+    };
+
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault();
     };
 
     const handleSubmit = () => {
@@ -80,10 +92,22 @@ function FormularioWifi({ wifi24Data, updateData }) {
                     <InputLabel htmlFor="password">Contraseña</InputLabel>
                     <OutlinedInput
                         id="password"
-                        type="password"
+                        type={showPassword ? 'text' : 'password'}
                         value={password}
                         onChange={handlePasswordChange}
                         startAdornment={<InputAdornment position="start">*</InputAdornment>}
+                        endAdornment={
+                            <InputAdornment position="end">
+                                <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={handleClickShowPassword}
+                                    onMouseDown={handleMouseDownPassword}
+                                    edge="end"
+                                >
+                                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                                </IconButton>
+                            </InputAdornment>
+                        }
                         label="Contraseña"
                         error={!!passwordError}
                     />
