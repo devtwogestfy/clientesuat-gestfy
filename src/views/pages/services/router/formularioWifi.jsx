@@ -72,6 +72,7 @@ function FormularioWifi({ wifi24Data, updateData }) {
                         onChange={handleSsidChange}
                         startAdornment={<InputAdornment position="start">*</InputAdornment>}
                         label="SSID"
+                        error={!!ssidError}
                     />
                     {ssidError && <FormHelperText error>{ssidError}</FormHelperText>}
                 </FormControl>
@@ -84,6 +85,7 @@ function FormularioWifi({ wifi24Data, updateData }) {
                         onChange={handlePasswordChange}
                         startAdornment={<InputAdornment position="start">*</InputAdornment>}
                         label="Contraseña"
+                        error={!!passwordError}
                     />
                     {passwordError && <FormHelperText error>{passwordError}</FormHelperText>}
                 </FormControl>

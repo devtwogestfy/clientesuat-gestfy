@@ -107,7 +107,7 @@ const GetInfoService = () => {
         }
     };
 
-    const updateRouterConfig = async (id = null, params = '') => {
+    const updateRouterConfig = async (params = '', id = null) => {
         try {
             const response = await apiUrl.put('/portal/router/config/' + id, params);
             const data = response.data;

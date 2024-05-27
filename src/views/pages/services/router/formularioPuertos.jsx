@@ -10,6 +10,12 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import PropTypes from 'prop-types';
 
 function FormularioPuertos({ portsData, funcionPuertos }) {
+    // Función para validar direcciones IP
+    const isValidIP = (ip) => {
+        const ipRegex =
+            /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+        return ipRegex.test(ip);
+    };
     const [rows, setRows] = useState([]);
 
     useEffect(() => {
@@ -34,6 +40,7 @@ function FormularioPuertos({ portsData, funcionPuertos }) {
     };
 
     const handleChange = (id, field, value) => {
+         
         setRows(rows.map((row) => (row.id === id ? { ...row, [field]: value } : row)));
     };
 
@@ -90,7 +97,7 @@ function FormularioPuertos({ portsData, funcionPuertos }) {
                                             label="Ingrese su Puerto"
                                             variant="standard"
                                             value={row.extport}
-                                            onChange={(e) => handleChange(row.id, 'puertoExterno', e.target.value)}
+                                            onChange={(e) => handleChange(row.id, 'extport', e.target.value)}
                                         />
                                     </TableCell>
                                     <TableCell>
@@ -98,7 +105,7 @@ function FormularioPuertos({ portsData, funcionPuertos }) {
                                             label="Ingrese su Puerto"
                                             variant="standard"
                                             value={row.intport}
-                                            onChange={(e) => handleChange(row.id, 'puertoInterno', e.target.value)}
+                                            onChange={(e) => handleChange(row.id, 'intport', e.target.value)}
                                         />
                                     </TableCell>
                                     <TableCell>
@@ -106,7 +113,7 @@ function FormularioPuertos({ portsData, funcionPuertos }) {
                                             label="Ingrese su Protocolo"
                                             variant="standard"
                                             value={row.protocol}
-                                            onChange={(e) => handleChange(row.id, 'protocolo', e.target.value)}
+                                            onChange={(e) => handleChange(row.id, 'protocol', e.target.value)}
                                         />
                                     </TableCell>
                                     <TableCell>
