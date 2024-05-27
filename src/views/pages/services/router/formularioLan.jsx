@@ -15,21 +15,21 @@ const isValidIP = (ip) => {
 
 function FormularioLan({ lanData, updateData }) {
     const [ip, setIp] = useState('');
-    const [dhcpDesde, setDhcpDesde] = useState('');
-    const [mascara, setMascara] = useState('');
-    const [dhcpHasta, setDhcpHasta] = useState('');
+    const [dhcpStart, setDhcpStart] = useState('');
+    const [mask, setMask] = useState('');
+    const [dhcpEnd, setDhcpEnd] = useState('');
     const [errors, setErrors] = useState({
         ip: '',
-        dhcpDesde: '',
-        mascara: '',
-        dhcpHasta: ''
+        dhcpStart: '',
+        mask: '',
+        dhcpEnd: ''
     });
 
     useEffect(() => {
         setIp(lanData.ip);
-        setMascara(lanData.mascara);
-        setDhcpDesde(lanData.dhcpDesde);
-        setDhcpHasta(lanData.dhcpHasta);
+        setMask(lanData.mask);
+        setDhcpStart(lanData.dhcpStart);
+        setDhcpEnd(lanData.dhcpEnd);
     }, [lanData]);
 
     const handleIpChange = (event) => {
@@ -37,7 +37,7 @@ function FormularioLan({ lanData, updateData }) {
     };
 
     const handleDhcpDesdeChange = (event) => {
-        setDhcpDesde(event.target.value);
+        setDhcpStart(event.target.value);
     };
 
     const handleMascaraChange = (event) => {
@@ -45,15 +45,15 @@ function FormularioLan({ lanData, updateData }) {
     };
 
     const handleDhcpHastaChange = (event) => {
-        setDhcpHasta(event.target.value);
+        setDhcpEnd(event.target.value);
     };
 
     const validate = () => {
         let temp = { ...errors };
         temp.ip = isValidIP(ip) ? '' : 'Invalid IP address';
-        temp.mascara = isValidIP(mascara) ? '' : 'Invalid Mask address';
-        temp.dhcpDesde = isValidIP(dhcpDesde) ? '' : 'Invalid DHCP Start address';
-        temp.dhcpHasta = isValidIP(dhcpHasta) ? '' : 'Invalid DHCP End address';
+        temp.mask = isValidIP(mask) ? '' : 'Invalid Mask address';
+        temp.dhcpStart = isValidIP(dhcpStart) ? '' : 'Invalid DHCP Start address';
+        temp.dhcpEnd = isValidIP(dhcpEnd) ? '' : 'Invalid DHCP End address';
         setErrors(temp);
         console.log(temp);
         return Object.values(temp).every((x) => x === '');
@@ -61,7 +61,7 @@ function FormularioLan({ lanData, updateData }) {
 
     const handleSubmit = () => {
         if (validate()) {
-            updateData('lan', { ip, dhcpDesde, mascara, dhcpHasta });
+            updateData('lan', { ip, mask, dhcpStart, dhcpEnd });
         }
     };
 
@@ -95,13 +95,13 @@ function FormularioLan({ lanData, updateData }) {
                             <InputLabel htmlFor="dhcp-desde">DHCP Desde</InputLabel>
                             <OutlinedInput
                                 id="dhcp-desde"
-                                value={dhcpDesde}
+                                value={dhcpStart}
                                 onChange={handleDhcpDesdeChange}
                                 startAdornment={<InputAdornment position="start">*</InputAdornment>}
                                 label="DHCP Desde"
-                                error={!!errors.dhcpDesde}
+                                error={!!errors.dhcpStart}
                             />
-                            {errors.dhcpDesde && <p style={{ color: 'red' }}>{errors.dhcpDesde}</p>}
+                            {errors.dhcpStart && <p style={{ color: 'red' }}>{errors.dhcpStart}</p>}
                         </FormControl>
                     </Grid>
                     <Grid item xs={6} sm={6} md={6} lg={6}>
@@ -109,25 +109,25 @@ function FormularioLan({ lanData, updateData }) {
                             <InputLabel htmlFor="mascara">Máscara</InputLabel>
                             <OutlinedInput
                                 id="mascara"
-                                value={mascara}
+                                value={mask}
                                 onChange={handleMascaraChange}
                                 startAdornment={<InputAdornment position="start">*</InputAdornment>}
                                 label="Máscara"
-                                error={!!errors.mascara}
+                                error={!!errors.mask}
                             />
-                            {errors.mascara && <p style={{ color: 'red' }}>{errors.mascara}</p>}
+                            {errors.mask && <p style={{ color: 'red' }}>{errors.mask}</p>}
                         </FormControl>
                         <FormControl fullWidth sx={{ ml: 3, pr: 3 }}>
                             <InputLabel htmlFor="dhcp-hasta">DHCP Hasta</InputLabel>
                             <OutlinedInput
                                 id="dhcp-hasta"
-                                value={dhcpHasta}
+                                value={dhcpEnd}
                                 onChange={handleDhcpHastaChange}
                                 startAdornment={<InputAdornment position="start">*</InputAdornment>}
                                 label="DHCP Hasta"
-                                error={!!errors.dhcpHasta}
+                                error={!!errors.dhcpEnd}
                             />
-                            {errors.dhcpHasta && <p style={{ color: 'red' }}>{errors.dhcpHasta}</p>}
+                            {errors.dhcpEnd && <p style={{ color: 'red' }}>{errors.dhcpEnd}</p>}
                         </FormControl>
                     </Grid>
                 </Grid>
@@ -142,9 +142,9 @@ function FormularioLan({ lanData, updateData }) {
 FormularioLan.propTypes = {
     lanData: PropTypes.shape({
         ip: PropTypes.string.isRequired,
-        mascara: PropTypes.string.isRequired,
-        dhcpDesde: PropTypes.string.isRequired,
-        dhcpHasta: PropTypes.string.isRequired
+        mask: PropTypes.string.isRequired,
+        dhcpStart: PropTypes.string.isRequired,
+        dhcpEnd: PropTypes.string.isRequired
     }).isRequired,
     updateData: PropTypes.func.isRequired
 };

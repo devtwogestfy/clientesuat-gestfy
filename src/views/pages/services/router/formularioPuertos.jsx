@@ -17,16 +17,16 @@ function FormularioPuertos({ portsData, funcionPuertos }) {
             const formattedRows = portsData.map((item) => ({
                 id: item.id,
                 ip: item.ip || '',
-                puertoExterno: item.desde || '',
-                puertoInterno: item.hasta || '',
-                protocolo: item.protocolo || ''
+                extport: item.desde || '',
+                intport: item.hasta || '',
+                protocol: item.protocolo || ''
             }));
             setRows(formattedRows);
         }
     }, [portsData]);
 
     const handleAddRow = () => {
-        setRows([...rows, { id: Date.now(), ip: '', puertoExterno: '', puertoInterno: '', protocolo: '' }]);
+        setRows([...rows, { id: Date.now(), ip: '', extport: '', intport: '', protocol: '' }]);
     };
 
     const handleDeleteRow = (id) => {
@@ -89,7 +89,7 @@ function FormularioPuertos({ portsData, funcionPuertos }) {
                                         <TextField
                                             label="Ingrese su Puerto"
                                             variant="standard"
-                                            value={row.puertoExterno}
+                                            value={row.extport}
                                             onChange={(e) => handleChange(row.id, 'puertoExterno', e.target.value)}
                                         />
                                     </TableCell>
@@ -97,7 +97,7 @@ function FormularioPuertos({ portsData, funcionPuertos }) {
                                         <TextField
                                             label="Ingrese su Puerto"
                                             variant="standard"
-                                            value={row.puertoInterno}
+                                            value={row.intport}
                                             onChange={(e) => handleChange(row.id, 'puertoInterno', e.target.value)}
                                         />
                                     </TableCell>
@@ -105,7 +105,7 @@ function FormularioPuertos({ portsData, funcionPuertos }) {
                                         <TextField
                                             label="Ingrese su Protocolo"
                                             variant="standard"
-                                            value={row.protocolo}
+                                            value={row.protocol}
                                             onChange={(e) => handleChange(row.id, 'protocolo', e.target.value)}
                                         />
                                     </TableCell>

@@ -16,9 +16,9 @@ const RouterPage = () => {
     const [wifi5Data, setWifi5Data] = useState({ ssid: '', password: '' });
     const [lanData, setLanData] = useState({
         ip: '',
-        mascara: '',
-        dhcpDesde: '',
-        dhcpHasta: ''
+        mask: '',
+        dhcpStart: '',
+        dhcpEnd: ''
     });
     const [portsData, setPortsData] = useState([]);
     const infoService = GetInfoService();
@@ -37,13 +37,12 @@ const RouterPage = () => {
                 });
                 setLanData({
                     ip: res.lanip || '',
-                    mascara: res.lanmask || '',
-                    dhcpDesde: res.landesde || '',
-                    dhcpHasta: res.lanhasta || ''
+                    mask: res.lanmask || '',
+                    dhcpStart: res.landesde || '',
+                    dhcpEnd: res.lanhasta || ''
                 });
                 const portsDataArray = Array.isArray(res.items) ? res.items : Object.values(res.items);
                 setPortsData(portsDataArray);
-                console.log('11111');
                 console.log(res);
             })
             .catch((error) => {
@@ -87,7 +86,7 @@ const RouterPage = () => {
             lan: lanData,
             ports: portsData
         };
-
+        console.log(body);
         infoService
             .updateRouterConfig(body, params.id)
             .then((res) => {
