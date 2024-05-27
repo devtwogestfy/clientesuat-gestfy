@@ -147,9 +147,7 @@ function FormularioPuertos({ portsData, funcionPuertos }) {
                                                 onChange={(e) => handleChange(row.id, 'extport', e.target.value)}
                                                 error={!!errors[row.id]?.extport}
                                             />
-                                            {errors[row.id]?.extport && (
-                                                <FormHelperText>{errors[row.id]?.extport}</FormHelperText>
-                                            )}
+                                            {errors[row.id]?.extport && <FormHelperText>{errors[row.id]?.extport}</FormHelperText>}
                                         </FormControl>
                                     </TableCell>
                                     <TableCell>
@@ -161,9 +159,7 @@ function FormularioPuertos({ portsData, funcionPuertos }) {
                                                 onChange={(e) => handleChange(row.id, 'intport', e.target.value)}
                                                 error={!!errors[row.id]?.intport}
                                             />
-                                            {errors[row.id]?.intport && (
-                                                <FormHelperText>{errors[row.id]?.intport}</FormHelperText>
-                                            )}
+                                            {errors[row.id]?.intport && <FormHelperText>{errors[row.id]?.intport}</FormHelperText>}
                                         </FormControl>
                                     </TableCell>
                                     <TableCell>
@@ -197,7 +193,14 @@ function FormularioPuertos({ portsData, funcionPuertos }) {
 }
 
 FormularioPuertos.propTypes = {
-    portsData: PropTypes.array.isRequired,
+    portsData: PropTypes.arrayOf(
+        PropTypes.shape({
+            ip: PropTypes.string,
+            desde: PropTypes.number,
+            hasta: PropTypes.number,
+            protocolo: PropTypes.number
+        })
+    ).isRequired,
     funcionPuertos: PropTypes.func.isRequired
 };
 
