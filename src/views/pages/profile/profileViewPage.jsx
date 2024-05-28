@@ -27,6 +27,9 @@ import InboxIcon from '@mui/icons-material/Inbox';
 import DraftsIcon from '@mui/icons-material/Drafts';
 import PinDropIcon from '@mui/icons-material/PinDrop';
 import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid';
+import ServiceTabPanel from './ServiceTabPanel';
+import InvoiceTabPanel from './InvoiceTabPanel';
+import IncidentTabPanel from './IncidentTabPanel';
 
 // eslint-disable-next-line react/prop-types
 function CustomTabPanel({ children, value, index }) {
@@ -145,13 +148,13 @@ const ProfileViewPage = () => {
                     </Grid>
                 </CustomTabPanel>
                 <CustomTabPanel value={value} index={1}>
-                    Servicios
+                   <ServiceTabPanel  />
                 </CustomTabPanel>
                 <CustomTabPanel value={value} index={2}>
-                    Facturas
+                    <InvoiceTabPanel  />
                 </CustomTabPanel>
                 <CustomTabPanel value={value} index={3}>
-                    Incidencias
+                     <IncidentTabPanel  />
                 </CustomTabPanel>
             </Box>
         </MainCard>
