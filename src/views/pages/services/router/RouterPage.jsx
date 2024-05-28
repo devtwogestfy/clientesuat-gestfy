@@ -48,7 +48,14 @@ const RouterPage = () => {
                     dhcpEnd: res.lanhasta || ''
                 });
                 const portsDataArray = res.items ? (Array.isArray(res.items) ? res.items : Object.values(res.items)) : [];
-                setPortsData(portsDataArray);
+                const formattedPortsData = portsDataArray.map(item => ({
+                    id: item.id,
+                    extport: item.desde,
+                    intport: item.hasta,
+                    ip: item.ip,
+                    protocol: item.protocolo
+                }));
+                setPortsData(formattedPortsData);
                 console.log(res);
                 setTimeout(() => {
                     setIsLoading(false);

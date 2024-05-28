@@ -46,9 +46,9 @@ function FormularioPuertos({ portsData, funcionPuertos }) {
             const formattedRows = portsData.map((item) => ({
                 id: item.id,
                 ip: item.ip || '',
-                extport: item.desde || '',
-                intport: item.hasta || '',
-                protocol: item.protocolo || ''
+                extport: item.extport || '',
+                intport: item.intport || '',
+                protocol: item.protocol || ''
             }));
             setRows(formattedRows);
         }
@@ -196,9 +196,10 @@ FormularioPuertos.propTypes = {
     portsData: PropTypes.arrayOf(
         PropTypes.shape({
             ip: PropTypes.string,
-            desde: PropTypes.number,
-            hasta: PropTypes.number,
-            protocolo: PropTypes.number
+            extport: PropTypes.number,
+            intport: PropTypes.number,
+            protocol: PropTypes.number,
+            id: PropTypes.number
         })
     ).isRequired,
     funcionPuertos: PropTypes.func.isRequired
