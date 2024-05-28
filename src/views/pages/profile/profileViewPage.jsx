@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import {
     Card,
     CardActionArea,
@@ -30,6 +30,8 @@ import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid';
 import ServiceTabPanel from './ServiceTabPanel';
 import InvoiceTabPanel from './InvoiceTabPanel';
 import IncidentTabPanel from './IncidentTabPanel';
+import GetInfoClient from 'configuraciones/servicios/client';
+import { Link } from 'react-router-dom';
 
 // eslint-disable-next-line react/prop-types
 function CustomTabPanel({ children, value, index }) {
@@ -45,7 +47,23 @@ function CustomTabPanel({ children, value, index }) {
 }
 
 const ProfileViewPage = () => {
-    const [value, setValue] = React.useState(0);
+    const [value, setValue] = useState(0);
+    const [clientInfo, setClientInfo] = useState(null);
+
+    const infoClient = GetInfoClient();
+    const fetchData = async () => {
+        try {
+            infoClient.getClient().then((client) => {
+                setClientInfo(client);
+            });
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    useEffect(() => {
+        fetchData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -73,15 +91,15 @@ const ProfileViewPage = () => {
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={8} md={6}>
                                 <Typography gutterBottom variant="h2" component="div">
-                                    Kevin Duran
+                                   {clientInfo && clientInfo ? `${clientInfo.nombre} ${clientInfo.apellido}` : '-'}
                                 </Typography>
                             </Grid>
                             <Grid item xs={12} sm={4} md={6} container justifyContent="flex-end">
                                 <Stack direction="row" spacing={2}>
-                                    <Button variant="outlined" startIcon={<HomeIcono />}>
+                                    <Button component={Link} to="/" variant="outlined" startIcon={<HomeIcono />}>
                                         Inicio
                                     </Button>
-                                    <Button variant="contained" endIcon={<SendIcon />}>
+                                    <Button component={Link} to="/incidents" variant="contained" endIcon={<SendIcon />}>
                                         Nueva Incidencia
                                     </Button>
                                 </Stack>

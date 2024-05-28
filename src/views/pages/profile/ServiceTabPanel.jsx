@@ -72,7 +72,7 @@ const ServiceTabPanel = () => {
     return (
         <MainCard>
             <Grid container spacing={gridSpacing}>
-                <Grid item xs={12} sm={4} md={4} lg={4}>
+                <Grid item xs={12} sm={3} md={3} lg={3}>
                     <Grid container spacing={gridSpacing} direction="column">
                         <Grid item xs={12}>
                             <TotalServiceCard
@@ -112,7 +112,7 @@ const ServiceTabPanel = () => {
                         </Grid>
                     </Grid>
                 </Grid>
-                <Grid item xs={12} sm={8} md={8} lg={8}>
+                <Grid item xs={12} sm={9} md={9} lg={9}>
                     <ServicesDataGrid rows={data} updateData={updateData} />
                 </Grid>
             </Grid>
