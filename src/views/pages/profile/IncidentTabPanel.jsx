@@ -92,7 +92,7 @@ const IncidentTabPanel = () => {
 
     return (
         <MainCard>
-            <Grid container spacing={gridSpacing}>
+            <Grid container spacing={gridSpacing} >
                 <Grid item xs={12} sm={3} md={3} lg={3}>
                     <Grid container spacing={gridSpacing} direction="column">
                         <Grid item xs={12}>
@@ -106,11 +106,6 @@ const IncidentTabPanel = () => {
                         </Grid>
                         <Grid item xs={12}>
                             <TotalHoursCard title="Horas" total={totalHours} />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <IconButton title="Nueva Incidencia" onClick={openCreateModal}>
-                                <AddCircleRoundedIcon sx={{ color: theme.palette.primary[800] }} />
-                            </IconButton>
                         </Grid>
                     </Grid>
                 </Grid>
