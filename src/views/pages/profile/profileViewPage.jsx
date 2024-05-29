@@ -32,6 +32,7 @@ import SuccessDialog from './SuccessDialog';
 import GetInfoClient from 'configuraciones/servicios/client';
 import GetInfoIncident from 'configuraciones/servicios/incident';
 import { Link } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
 
 // eslint-disable-next-line react/prop-types
 function CustomTabPanel({ children, value, index }) {
@@ -139,10 +140,10 @@ const ProfileViewPage = () => {
               <Grid item xs={12} sm={4} md={6} container justifyContent="flex-end">
                 <Stack direction="row" spacing={2}>
                   <Button component={Link} to="/" variant="outlined" startIcon={<HomeIcono />}>
-                    Inicio
+                    <FormattedMessage id="layout.menu_home" />
                   </Button>
                   <Button variant="contained" endIcon={<SendIcon />} onClick={handleOpen}>
-                    Contacto
+                    <FormattedMessage id="info.contact" />
                   </Button>
                 </Stack>
               </Grid>
