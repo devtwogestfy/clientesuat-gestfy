@@ -10,12 +10,14 @@ import LastInvoiceCard from './LastInvoiceCard';
 import TotalDebtCard from './TotalDebtCard';
 import InvoicesDataGrid from './InvoicesDataGrid';
 import { fetchSummaryData, fetchData, descargarFactura } from 'services/invoiceService';
+import CircularWithValueLabel from 'views/utilities/CircularProgressWithLabel';
 
 const InvoicesPage = () => {
   const [ultimafactura, setUltimafactura] = useState(null);
   const [pendiente, setPendiente] = useState(null);
   const [numeroFacturas, setNumeroFacturas] = useState(null);
   const [dataInvoices, setDataInvoices] = useState([]);
+  const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
     let isMounted = true;
@@ -29,6 +31,7 @@ const InvoicesPage = () => {
 
           const invoices = await fetchData();
           setDataInvoices(invoices);
+          setLoading(false);
         } catch (error) {
           console.error('Error loading data:', error);
         }
@@ -36,7 +39,6 @@ const InvoicesPage = () => {
     };
 
     loadData();
-
     return () => {
       isMounted = false;
     };
@@ -44,23 +46,29 @@ const InvoicesPage = () => {
 
   return (
     <MainCard>
-      <Grid container spacing={gridSpacing}>
-        <Grid item xs={12}>
-          <Grid container spacing={gridSpacing}>
-            <Grid item xs={12} sm={6} md={4} lg={4}>
-              <NumberInvoicesCard title="Facturas" total={parseInt(numeroFacturas)} />
+      <Grid container spacing={gridSpacing} justifyContent="center" alignItems="center" style={{ minHeight: '100vh' }}>
+        {isLoading ? (
+          <CircularWithValueLabel color="secondary" />
+        ) : (
+          <>
+            <Grid item xs={12}>
+              <Grid container spacing={gridSpacing}>
+                <Grid item xs={12} sm={6} md={4} lg={4}>
+                  <NumberInvoicesCard title="Facturas" total={parseInt(numeroFacturas)} />
+                </Grid>
+                <Grid item xs={12} sm={6} md={4} lg={4}>
+                  <LastInvoiceCard title="Última Factura" total={parseFloat(ultimafactura)} />
+                </Grid>
+                <Grid item xs={12} sm={6} md={4} lg={4}>
+                  <TotalDebtCard title="Deuda Total" total={parseFloat(pendiente)} />
+                </Grid>
+              </Grid>
             </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={4}>
-              <LastInvoiceCard title="Última Factura" total={parseFloat(ultimafactura)} />
+            <Grid item xs={12}>
+              <InvoicesDataGrid rows={dataInvoices} downloadInvoice={descargarFactura} />
             </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={4}>
-              <TotalDebtCard title="Deuda Total" total={parseFloat(pendiente)} />
-            </Grid>
-          </Grid>
-        </Grid>
-        <Grid item xs={12}>
-          <InvoicesDataGrid rows={dataInvoices} downloadInvoice={descargarFactura} />
-        </Grid>
+          </>
+        )}
       </Grid>
     </MainCard>
   );
