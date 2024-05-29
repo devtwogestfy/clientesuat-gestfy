@@ -197,8 +197,7 @@ function OptionsButtons({ element, updateData }) {
           (element.prepaidState === 1 && (
             <>
               <Button aria-label="pay" onClick={handleFormalizePrepay} variant="contained">
-                qqqqqq
-                <FormattedMessage id="serviceees.table.prepay.pay" />
+                <FormattedMessage id="services.table.prepay.pay" />
               </Button>
               <Button aria-label="cancel" onClick={handleCancelPrepay} variant="contained">
                 <FormattedMessage id="services.table.prepay.cancel" />
