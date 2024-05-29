@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { Box, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
-
+import { Box, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Typography } from '@mui/material';
 import InboxIcon from '@mui/icons-material/Inbox';
 import DraftsIcon from '@mui/icons-material/Drafts';
 import PinDropIcon from '@mui/icons-material/PinDrop';
@@ -28,7 +27,14 @@ const ClientTabPanel = () => {
                     <ListItemIcon>
                       <PhoneAndroidIcon />
                     </ListItemIcon>
-                    <ListItemText primary="Telefono" /> (+51) 934356241
+                    <ListItemText
+                      primary={
+                        <React.Fragment>
+                          <Typography variant="body1">Telefono</Typography>
+                          <Typography variant="body2">(+51) 934356241</Typography>
+                        </React.Fragment>
+                      }
+                    />
                   </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding>
@@ -36,7 +42,14 @@ const ClientTabPanel = () => {
                     <ListItemIcon>
                       <DraftsIcon />
                     </ListItemIcon>
-                    <ListItemText primary="Email" /> correo@gmail.com
+                    <ListItemText
+                      primary={
+                        <React.Fragment>
+                          <Typography variant="body1">Email</Typography>
+                          <Typography variant="body2">correo@gmail.com</Typography>
+                        </React.Fragment>
+                      }
+                    />
                   </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding>
@@ -44,7 +57,14 @@ const ClientTabPanel = () => {
                     <ListItemIcon>
                       <PinDropIcon />
                     </ListItemIcon>
-                    <ListItemText primary="Dirección" /> Lima - Peru
+                    <ListItemText
+                      primary={
+                        <React.Fragment>
+                          <Typography variant="body1">Dirección</Typography>
+                          <Typography variant="body2">Lima - Peru</Typography>
+                        </React.Fragment>
+                      }
+                    />
                   </ListItemButton>
                 </ListItem>
               </List>
