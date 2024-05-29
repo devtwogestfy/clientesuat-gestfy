@@ -81,41 +81,6 @@ function OptionsButtons({ element, updateData }) {
       return response;
     });
     console.log(data);
-    //setLoading(true);
-
-    // Crear y enviar formulario
-    /*const form = document.createElement('form');
-            form.action = data.url;
-            form.method = 'POST';
-            form.target = '_self';
-            form.style.display = 'none';
-
-            const input1 = document.createElement('input');
-            input1.type = 'hidden';
-            input1.name = 'Ds_SignatureVersion';
-            input1.value = data.signatureVersion;
-
-            const input2 = document.createElement('input');
-            input2.type = 'hidden';
-            input2.name = 'Ds_MerchantParameters';
-            input2.value = data.merchantParams;
-
-            const input3 = document.createElement('input');
-            input3.type = 'hidden';
-            input3.name = 'Ds_Signature';
-            input3.value = data.signature;
-
-            const submitInput = document.createElement('input');
-            submitInput.type = 'submit';
-
-            form.appendChild(input1);
-            form.appendChild(input2);
-            form.appendChild(input3);
-            form.appendChild(submitInput);
-            document.body.appendChild(form);
-            submitInput.click();
-
-            form.remove();¨*/
   };
 
   const handleCancelSendPrepay = () => {

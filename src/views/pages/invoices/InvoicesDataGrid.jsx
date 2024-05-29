@@ -10,11 +10,14 @@ import { Badge, Button } from '@mui/material';
 import { fDate } from 'utils/format-date';
 import dataGridStyles from 'utils/dataGridStyles';
 import PayDialog from './../../utilities/dialogs/PayDialog';
+import GetInfoService from 'configuraciones/servicios/service';
 
 const InvoicesDataGrid = ({ rows, downloadInvoice }) => {
   const theme = useTheme();
   const styles = dataGridStyles(theme);
   const [openPay, setOpenPay] = useState(false);
+  const [element, setElement] = useState([]);
+  const infoService = GetInfoService();
   const getRowClassName = (params) => {
     return params.indexRelativeToCurrentPage % 2 === 0 ? 'cebra-row' : '';
   };
@@ -93,9 +96,9 @@ const InvoicesDataGrid = ({ rows, downloadInvoice }) => {
       headerName: '',
       headerClassName: 'MuiDataGrid-columnHeaders',
       flex: 1,
-      renderCell: () => {
+      renderCell: (params) => {
         return (
-          <Button variant="contained" color="primary" onClick={handleClosePay}>
+          <Button variant="contained" color="primary" onClick={() => handleFormalizePrepay(params.row)}>
             <FormattedMessage id="invoices.table.pay" />
           </Button>
         );
@@ -103,16 +106,18 @@ const InvoicesDataGrid = ({ rows, downloadInvoice }) => {
     }
   ];
 
-  const handleClosePay = (submit) => {
+  const handleFormalizePrepay = (row) => {
+    setOpenPay(true);
+    setElement(row);
+  };
+
+  const handleClosePay = (type = 'bizum') => {
     setOpenPay(false);
-    console.log(proformaId);
-    if (submit) {
-      const data = infoService.startPurchasePrepaid(147, location.href, submit).then((response) => {
-        console.log(response);
-        return response;
-      });
-      console.log(data);
-    }
+    const data = infoService.startPurchasePrepaid(element.id, location.href, type).then((response) => {
+      console.log(response);
+      return response;
+    });
+    console.log(data);
   };
 
   return (
