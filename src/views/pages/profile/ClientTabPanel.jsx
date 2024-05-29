@@ -1,13 +1,5 @@
 import * as React from 'react';
-import {
-  Box,
-  Grid,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText
-} from '@mui/material';
+import { Box, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 
 import InboxIcon from '@mui/icons-material/Inbox';
 import DraftsIcon from '@mui/icons-material/Drafts';

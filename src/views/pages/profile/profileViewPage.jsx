@@ -82,7 +82,6 @@ const ProfileViewPage = () => {
     setOpen(false);
     setError('');
     setMessage('');
-
   };
 
   const handleSendMessage = () => {
@@ -206,7 +205,7 @@ const ProfileViewPage = () => {
             </Button>
           </DialogActions>
         </Dialog>
-        <SuccessDialog  openSuccess={openSuccess} handleCloseSuccess={handleCloseSuccess}/>
+        <SuccessDialog openSuccess={openSuccess} handleCloseSuccess={handleCloseSuccess} />
       </Box>
     </MainCard>
   );
