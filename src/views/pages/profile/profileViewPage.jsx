@@ -160,7 +160,7 @@ const ProfileViewPage = () => {
           </Tabs>
         </Box>
         <CustomTabPanel value={value} index={0}>
-          <ClientTabPanel />
+          <ClientTabPanel clientInfo={clientInfo} />
         </CustomTabPanel>
         <CustomTabPanel value={value} index={1}>
           <ServiceTabPanel />

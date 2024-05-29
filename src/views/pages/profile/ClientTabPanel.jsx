@@ -4,8 +4,9 @@ import InboxIcon from '@mui/icons-material/Inbox';
 import DraftsIcon from '@mui/icons-material/Drafts';
 import PinDropIcon from '@mui/icons-material/PinDrop';
 import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid';
+import { FormattedMessage } from 'react-intl';
 
-const ClientTabPanel = () => {
+const ClientTabPanel = ({ clientInfo }) => {
   return (
     <>
       <Grid container spacing={2}>
@@ -16,22 +17,16 @@ const ClientTabPanel = () => {
                 <ListItem disablePadding>
                   <ListItemButton>
                     <ListItemIcon>
-                      <InboxIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Inbox" />
-                  </ListItemButton>
-                </ListItem>
-
-                <ListItem disablePadding>
-                  <ListItemButton>
-                    <ListItemIcon>
                       <PhoneAndroidIcon />
                     </ListItemIcon>
                     <ListItemText
                       primary={
                         <React.Fragment>
-                          <Typography variant="body1">Telefono</Typography>
-                          <Typography variant="body2">(+51) 934356241</Typography>
+                          <Typography variant="body1">
+                            {' '}
+                            <FormattedMessage id="dashboard.showcase_services.contact.phone" />
+                          </Typography>
+                          <Typography variant="body2"> {clientInfo && clientInfo.tel1 ? `${clientInfo.tel1}` : '-'}</Typography>
                         </React.Fragment>
                       }
                     />
@@ -45,8 +40,10 @@ const ClientTabPanel = () => {
                     <ListItemText
                       primary={
                         <React.Fragment>
-                          <Typography variant="body1">Email</Typography>
-                          <Typography variant="body2">correo@gmail.com</Typography>
+                          <Typography variant="body1">
+                            <FormattedMessage id="dashboard.showcase_services.contact.email" />
+                          </Typography>
+                          <Typography variant="body2">{clientInfo && clientInfo.email ? `${clientInfo.email}` : '-'}</Typography>
                         </React.Fragment>
                       }
                     />
@@ -60,8 +57,10 @@ const ClientTabPanel = () => {
                     <ListItemText
                       primary={
                         <React.Fragment>
-                          <Typography variant="body1">Dirección</Typography>
-                          <Typography variant="body2">Lima - Peru</Typography>
+                          <Typography variant="body1">
+                            <FormattedMessage id="dashboard.showcase_services.contact.address" />
+                          </Typography>
+                          <Typography variant="body2">{clientInfo && clientInfo.direccion ? `${clientInfo.direccion}` : '-'}</Typography>
                         </React.Fragment>
                       }
                     />

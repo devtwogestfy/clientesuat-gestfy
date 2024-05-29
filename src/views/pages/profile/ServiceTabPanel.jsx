@@ -68,7 +68,6 @@ const ServiceTabPanel = () => {
       console.error('Error fetching data:', error);
     }
   };
-  console.log(data);
   return (
     <MainCard>
       <Grid container spacing={gridSpacing}>
