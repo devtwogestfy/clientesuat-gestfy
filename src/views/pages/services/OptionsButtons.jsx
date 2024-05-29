@@ -74,11 +74,9 @@ function OptionsButtons({ element, updateData }) {
         setOpenCancel(false);
     };
 
-    const handleClosePay = (submit) => {
+    const handleClosePay = (type = 'bizum') => {
         setOpenPay(false);
-        console.log(proformaId);
-        if (submit) {
-            const data = infoService.startPurchasePrepaid(147, location.href, submit).then((response) => {
+            const data = infoService.startPurchasePrepaid(element.id, location.href, type).then((response) => {
                 console.log(response);
                 return response;
             });
@@ -118,7 +116,6 @@ function OptionsButtons({ element, updateData }) {
             submitInput.click();
 
             form.remove();¨*/
-        }
     };
 
     const handleCancelSendPrepay = () => {

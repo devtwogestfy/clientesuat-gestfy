@@ -144,7 +144,7 @@ function FormularioWifi({ wifi24Data, updateData }) {
                 </Stack>
             </CardContent>
             <Dialog open={open} onClose={handleClose}>
-                <DialogTitle>QR Code</DialogTitle>
+                <DialogTitle><WifiIcon /> QR Code</DialogTitle>
                 <DialogContent>
                     <QRCode value={`WIFI:T:WPA;S:${ssid};P:${password};;`} />
                 </DialogContent>

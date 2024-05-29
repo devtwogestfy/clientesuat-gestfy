@@ -19,7 +19,7 @@ const PayDialog = ({ openPay, handleClosePay }) => {
                     </Grid>
                     <Grid item container direction="row" justify="center" margin={1}>
                         <Grid item xs={4}>
-                            <IconButton color="primary" onClick={handleClosePay} sx={{ width: '80%' }}>
+                            <IconButton color="primary" onClick={()=>{handleClosePay('targeta')}} sx={{ width: '80%' }}>
                                 <CreditCardIcon fontSize="large" />
                             </IconButton>
                             <Typography variant="body2">

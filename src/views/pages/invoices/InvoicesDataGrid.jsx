@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{ useState } from 'react';
 import { useTheme } from '@mui/material/styles';
 import { DataGrid } from '@mui/x-data-grid';
 import PropTypes from 'prop-types';
@@ -9,10 +9,12 @@ import TableWithoutRecord from 'views/utilities/tables/withoutRecord';
 import { Badge, Button } from '@mui/material';
 import { fDate } from 'utils/format-date';
 import dataGridStyles from 'utils/dataGridStyles';
+import PayDialog from './../../utilities/dialogs/PayDialog';
 
 const InvoicesDataGrid = ({ rows, downloadInvoice }) => {
     const theme = useTheme();
     const styles = dataGridStyles(theme);
+     const [openPay, setOpenPay] = useState(false);
     const getRowClassName = (params) => {
         return params.indexRelativeToCurrentPage % 2 === 0 ? 'cebra-row' : '';
     };
@@ -93,13 +95,26 @@ const InvoicesDataGrid = ({ rows, downloadInvoice }) => {
             flex: 1,
             renderCell: () => {
                 return (
-                    <Button variant="contained" color="primary">
+                    <Button variant="contained" color="primary" onClick={handleClosePay}>
                         <FormattedMessage id="invoices.table.pay" />
                     </Button>
                 );
             }
         }
     ];
+
+     const handleClosePay = (submit) => {
+        setOpenPay(false);
+        console.log(proformaId);
+        if (submit) {
+            const data = infoService.startPurchasePrepaid(147, location.href, submit).then((response) => {
+                console.log(response);
+                return response;
+            });
+            console.log(data);
+         
+        }
+    };
 
     return (
         <Box sx={styles.root}>
@@ -119,6 +134,7 @@ const InvoicesDataGrid = ({ rows, downloadInvoice }) => {
                 slots={{ noRowsOverlay: TableWithoutRecord }}
                 sx={styles.dataGrid}
             />
+             <PayDialog openPay={openPay} handleClosePay={handleClosePay} />
         </Box>
     );
 };
