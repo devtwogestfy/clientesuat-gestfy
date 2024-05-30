@@ -194,11 +194,11 @@ const ProfileViewPage = () => {
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClose} color="primary">
-              Cancelar
-            </Button>
-            <Button onClick={handleSendMessage} color="primary">
+            <Button variant="contained" onClick={handleSendMessage} color="success">
               Enviar
+            </Button>
+            <Button variant="contained" onClick={handleClose} color="error">
+              Cancelar
             </Button>
           </DialogActions>
         </Dialog>

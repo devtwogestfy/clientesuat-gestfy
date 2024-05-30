@@ -12,6 +12,7 @@ import { useTheme } from '@mui/material/styles';
 import CreateIncidentDialog from './CreateIncidentDialog';
 import PostInfoService from 'configuraciones/servicios/post-info-client';
 import IncidentsDataGrid from './IncidentsDataGrid';
+import GetCustomization from 'services/customizeService';
 
 const IncidentsPage = () => {
   const theme = useTheme();
@@ -26,6 +27,7 @@ const IncidentsPage = () => {
   const [services, setServices] = useState([]);
   const [isAlertSuccess, setIsAlertSuccess] = useState(false);
   const [errors, setErrors] = useState({});
+  const [viewTicket, setViewTicket] = useState(null);
 
   const openCreateModal = () => {
     setOpen(true);
@@ -35,7 +37,16 @@ const IncidentsPage = () => {
   useEffect(() => {
     setOpen(false);
     fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const fetchCustomization = async () => {
+      try {
+        const customization = await GetCustomization();
+        setViewTicket(customization.view_tickets);
+      } catch (error) {
+        console.error('Error fetching customization:', error);
+      }
+    };
+
+    fetchCustomization();
   }, []);
 
   const infoService = GetInfoService();
@@ -109,15 +120,18 @@ const IncidentsPage = () => {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={12}>
-          <Grid container spacing={gridSpacing}>
-            <Grid item xs={12} sm={6} md={4} lg={3}>
-              <IconButton title="Nueva Incidencia" onClick={openCreateModal}>
-                <AddCircleRoundedIcon sx={{ color: theme.palette.primary[800] }} />
-              </IconButton>
+        {viewTicket === 1 && (
+          <Grid item xs={12}>
+            <Grid container spacing={gridSpacing}>
+              <Grid item xs={12} sm={6} md={4} lg={3}>
+                <IconButton title="Nueva Incidencia" onClick={openCreateModal}>
+                  <AddCircleRoundedIcon sx={{ color: theme.palette.primary[800] }} />
+                </IconButton>
+              </Grid>
             </Grid>
           </Grid>
-        </Grid>
+        )}
+
         <Grid item xs={12}>
           <IncidentsDataGrid rows={incidents} />
           <Popper open={isAlertSuccess} transition>
