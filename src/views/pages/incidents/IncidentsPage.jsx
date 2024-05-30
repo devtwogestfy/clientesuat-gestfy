@@ -27,7 +27,7 @@ const IncidentsPage = () => {
   const [services, setServices] = useState([]);
   const [isAlertSuccess, setIsAlertSuccess] = useState(false);
   const [errors, setErrors] = useState({});
-  const [viewTicket, setViewTicket] = useState(null);
+  const [newTicket, setNewTicket] = useState(null);
 
   const openCreateModal = () => {
     setOpen(true);
@@ -40,7 +40,7 @@ const IncidentsPage = () => {
     const fetchCustomization = async () => {
       try {
         const customization = await GetCustomization();
-        setViewTicket(customization.view_tickets);
+        setNewTicket(customization.new_tickets);
       } catch (error) {
         console.error('Error fetching customization:', error);
       }
@@ -120,7 +120,7 @@ const IncidentsPage = () => {
             </Grid>
           </Grid>
         </Grid>
-        {viewTicket === 1 && (
+        {newTicket === 1 && (
           <Grid item xs={12}>
             <Grid container spacing={gridSpacing}>
               <Grid item xs={12} sm={6} md={4} lg={3}>

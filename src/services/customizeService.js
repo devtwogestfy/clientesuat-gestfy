@@ -37,7 +37,6 @@ const GetCustomization = async () => {
       };
     } catch (error) {
       console.error('Error fetching before config:', error);
-      throw error;
     }
   } else {
     try {
@@ -45,7 +44,7 @@ const GetCustomization = async () => {
       return ret;
     } catch (error) {
       console.error('Error fetching base config:', error);
-      throw error;
+      return error;
     }
   }
 };
