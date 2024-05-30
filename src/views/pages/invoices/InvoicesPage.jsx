@@ -11,6 +11,7 @@ import TotalDebtCard from './TotalDebtCard';
 import InvoicesDataGrid from './InvoicesDataGrid';
 import { fetchSummaryData, fetchData, descargarFactura } from 'services/invoiceService';
 import CircularWithValueLabel from 'views/utilities/CircularProgressWithLabel';
+import './InvoicesPage.css';
 
 const InvoicesPage = () => {
   const [ultimafactura, setUltimafactura] = useState(null);
@@ -46,29 +47,31 @@ const InvoicesPage = () => {
 
   return (
     <MainCard>
-      <Grid container spacing={gridSpacing} justifyContent="center" alignItems="center" style={{ minHeight: '100vh' }}>
-        {isLoading ? (
-          <CircularWithValueLabel color="secondary" />
-        ) : (
-          <>
-            <Grid item xs={12}>
-              <Grid container spacing={gridSpacing}>
-                <Grid item xs={12} sm={6} md={4} lg={4}>
-                  <NumberInvoicesCard title="Facturas" total={parseInt(numeroFacturas)} />
-                </Grid>
-                <Grid item xs={12} sm={6} md={4} lg={4}>
-                  <LastInvoiceCard title="Última Factura" total={parseFloat(ultimafactura)} />
-                </Grid>
-                <Grid item xs={12} sm={6} md={4} lg={4}>
-                  <TotalDebtCard title="Deuda Total" total={parseFloat(pendiente)} />
-                </Grid>
-              </Grid>
+      <Grid container spacing={gridSpacing}>
+        <Grid item xs={12}>
+          <Grid container spacing={gridSpacing}>
+            <Grid item xs={12} sm={6} md={4} lg={4}>
+              <NumberInvoicesCard isLoading={isLoading} title="Facturas" total={parseInt(numeroFacturas)} />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} sm={6} md={4} lg={4}>
+              <LastInvoiceCard isLoading={isLoading} title="Última Factura" total={parseFloat(ultimafactura)} />
+            </Grid>
+            <Grid item xs={12} sm={6} md={4} lg={4}>
+              <TotalDebtCard isLoading={isLoading} title="Deuda Total" total={parseFloat(pendiente)} />
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid item xs={12}>
+          {isLoading ? (
+            <div className="center-spinner">
+              <CircularWithValueLabel color="secondary" />
+            </div>
+          ) : (
+            <>
               <InvoicesDataGrid rows={dataInvoices} downloadInvoice={descargarFactura} />
-            </Grid>
-          </>
-        )}
+            </>
+          )}
+        </Grid>
       </Grid>
     </MainCard>
   );
