@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTheme } from '@mui/material/styles';
 import { DataGrid } from '@mui/x-data-grid';
 import PropTypes from 'prop-types';
@@ -10,7 +10,7 @@ import { Badge, Button } from '@mui/material';
 import { fDate } from 'utils/format-date';
 import dataGridStyles from 'utils/dataGridStyles';
 import PayDialog from './../../utilities/dialogs/PayDialog';
-import GetInfoService from 'configuraciones/servicios/service';
+import InfoInvoice from 'configuraciones/servicios/invoice';
 import GetCustomization from 'services/customizeService';
 
 const InvoicesDataGrid = ({ rows, downloadInvoice }) => {
@@ -18,7 +18,8 @@ const InvoicesDataGrid = ({ rows, downloadInvoice }) => {
   const styles = dataGridStyles(theme);
   const [openPay, setOpenPay] = useState(false);
   const [element, setElement] = useState([]);
-  const infoService = GetInfoService();
+  const [onlinePaymentsProvider, setOnlinePaymentsProvider] = useState(null);
+  const infoInvoice = InfoInvoice();
   const getRowClassName = (params) => {
     return params.indexRelativeToCurrentPage % 2 === 0 ? 'cebra-row' : '';
   };
@@ -112,14 +113,43 @@ const InvoicesDataGrid = ({ rows, downloadInvoice }) => {
     setElement(row);
   };
 
+  useEffect(() => {
+    const fetchCustomization = async () => {
+      try {
+        const customization = await GetCustomization();
+        setOnlinePaymentsProvider(customization.online_payments_provider);
+      } catch (error) {
+        console.error('Error fetching customization:', error);
+      }
+    };
+
+    fetchCustomization();
+  }, []);
+
   const handleClosePay = (type = 'bizum') => {
     //setOpenPay(false);
-    console.log(GetCustomization());
-    /*const data = infoService.startPurchasePrepaid(element.id, location.href, type).then((response) => {
+    console.log(onlinePaymentsProvider);
+    if (onlinePaymentsProvider == 1) {
+      callRedsys(element.id, type);
+    } else if (onlinePaymentsProvider == 2) {
+      callCecabank(element.id, type);
+    }
+  };
+
+  const callRedsys = (factId, type) => {
+    const data = infoInvoice.startPurchase(factId, location.href, type).then((response) => {
       console.log(response);
       return response;
     });
-    console.log(data);*/
+    console.log(data);
+  };
+
+  const callCecabank = (factId, type) => {
+    const data = infoInvoice.startPurchaseCeca(factId, location.href, type).then((response) => {
+      console.log(response);
+      return response;
+    });
+    console.log(data);
   };
 
   return (
