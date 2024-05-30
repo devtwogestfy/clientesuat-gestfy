@@ -89,7 +89,7 @@ const IncidentsPage = () => {
       setErrors(newErrors);
     }
   };
-  console.log(incidents);
+
   return (
     <MainCard>
       <Grid container spacing={gridSpacing}>
