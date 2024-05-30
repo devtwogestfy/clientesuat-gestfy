@@ -11,6 +11,7 @@ import { fDate } from 'utils/format-date';
 import dataGridStyles from 'utils/dataGridStyles';
 import PayDialog from './../../utilities/dialogs/PayDialog';
 import GetInfoService from 'configuraciones/servicios/service';
+import GetCustomization from 'services/customizeService';
 
 const InvoicesDataGrid = ({ rows, downloadInvoice }) => {
   const theme = useTheme();
@@ -112,12 +113,13 @@ const InvoicesDataGrid = ({ rows, downloadInvoice }) => {
   };
 
   const handleClosePay = (type = 'bizum') => {
-    setOpenPay(false);
-    const data = infoService.startPurchasePrepaid(element.id, location.href, type).then((response) => {
+    //setOpenPay(false);
+    console.log(GetCustomization());
+    /*const data = infoService.startPurchasePrepaid(element.id, location.href, type).then((response) => {
       console.log(response);
       return response;
     });
-    console.log(data);
+    console.log(data);*/
   };
 
   return (
