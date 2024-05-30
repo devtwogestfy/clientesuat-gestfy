@@ -127,13 +127,16 @@ const InvoicesDataGrid = ({ rows, downloadInvoice }) => {
   }, []);
 
   const handleClosePay = (type = 'bizum') => {
-    //setOpenPay(false);
-    console.log(onlinePaymentsProvider);
+    if (type === 'cancel') {
+      setOpenPay(false);
+      return;
+    }
     if (onlinePaymentsProvider == 1) {
       callRedsys(element.id, type);
     } else if (onlinePaymentsProvider == 2) {
       callCecabank(element.id, type);
     }
+    setOpenPay(false);
   };
 
   const callRedsys = (factId, type) => {

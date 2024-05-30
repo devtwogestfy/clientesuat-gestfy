@@ -42,7 +42,13 @@ const PayDialog = ({ openPay, handleClosePay }) => {
               </Typography>
             </Grid>
             <Grid item xs={4}>
-              <IconButton color="primary" onClick={handleClosePay} sx={{ width: '80%' }}>
+              <IconButton
+                color="primary"
+                onClick={() => {
+                  handleClosePay('bizum');
+                }}
+                sx={{ width: '80%' }}
+              >
                 <PhoneIphoneIcon fontSize="large" />
               </IconButton>
               <Typography variant="body2">
@@ -126,7 +132,13 @@ const PayDialog = ({ openPay, handleClosePay }) => {
             </Grid>
 
             <Grid item xs={4}>
-              <IconButton color="error" onClick={handleClosePay} sx={{ width: '80%' }}>
+              <IconButton
+                color="error"
+                onClick={() => {
+                  handleClosePay('cancel');
+                }}
+                sx={{ width: '80%' }}
+              >
                 <CancelIcon fontSize="large" />
               </IconButton>
               <Typography variant="body2">
