@@ -33,7 +33,8 @@ import GetInfoClient from 'configuraciones/servicios/client';
 import GetInfoIncident from 'configuraciones/servicios/incident';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-
+import GetCustomization from 'services/customizeService';
+const customization = await GetCustomization();
 // eslint-disable-next-line react/prop-types
 function CustomTabPanel({ children, value, index }) {
   return (
@@ -157,7 +158,7 @@ const ProfileViewPage = () => {
             <Tab label="Datos" id="simple-tab-0" aria-controls="simple-tabpanel-0" />
             <Tab label="Servicios" id="simple-tab-1" aria-controls="simple-tabpanel-1" />
             <Tab label="Facturas" id="simple-tab-2" aria-controls="simple-tabpanel-2" />
-            <Tab label="Incidencias" id="simple-tab-3" aria-controls="simple-tabpanel-3" />
+            {customization.view_tickets === 1 && <Tab label="Incidencias" id="simple-tab-3" aria-controls="simple-tabpanel-3" />}
           </Tabs>
         </Box>
         <CustomTabPanel value={value} index={0}>
@@ -168,10 +169,12 @@ const ProfileViewPage = () => {
         </CustomTabPanel>
         <CustomTabPanel value={value} index={2}>
           <InvoiceTabPanel />
-        </CustomTabPanel>
-        <CustomTabPanel value={value} index={3}>
-          <IncidentTabPanel />
-        </CustomTabPanel>
+        </CustomTabPanel>{' '}
+        {customization.view_tickets === 1 && (
+          <CustomTabPanel value={value} index={3}>
+            <IncidentTabPanel />
+          </CustomTabPanel>
+        )}
         <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
           <DialogTitle id="form-dialog-title">Enviar mensaje</DialogTitle>
           <DialogContent>

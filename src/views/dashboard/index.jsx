@@ -12,7 +12,6 @@ import ServicesCard from './ServicesCard';
 import { gridSpacing } from 'store/constant';
 import CircularWithValueLabel from 'views/utilities/CircularProgressWithLabel';
 import GetCustomization from 'services/customizeService';
-// ==============================|| DEFAULT DASHBOARD ||============================== //
 
 const customization = await GetCustomization();
 
