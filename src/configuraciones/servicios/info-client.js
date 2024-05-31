@@ -43,60 +43,6 @@ const GetInfoService = () => {
     return request('/appclientes/cliente');
   };
 
-  const getInvoices = async (page = 1, limit = 25, sort = '', from = null, end = null, state = null) => {
-    let filter =
-      '[{"property": "desde", "value":"' +
-      from +
-      '"}, {"property": "hasta", "value":"' +
-      end +
-      '"}, {"property": "estado", "value":"' +
-      state +
-      '"}]';
-    const params = {
-      page: page.toString(),
-      limit: limit.toString(),
-      sort: sort,
-      filter: filter
-    };
-    return request('/appclientes/facturas', params);
-  };
-
-  const getInvoicesSummary = async () => {
-    try {
-      const response = await backendAPI.get('/portal/facturas/datos');
-      const data = response.data;
-      return data;
-    } catch (error) {
-      throw new Error(error.response || 'Network request failed');
-    }
-  };
-
-  const getDataInvoices = async (page = 1, limit = 25, sort = '', from = null, end = null, state = null) => {
-    try {
-      let filter =
-        '[{"property": "desde", "value":"' +
-        from +
-        '"}, {"property": "hasta", "value":"' +
-        end +
-        '"}, {"property": "estado", "value":"' +
-        state +
-        '"}]';
-
-      const params = {
-        page: page.toString(),
-        limit: limit.toString(),
-        sort: sort,
-        filter: filter
-      };
-
-      const response = await backendAPI.get('/portal/facturas', { params });
-      const data = response.data;
-      return data;
-    } catch (error) {
-      throw new Error(error.response || 'Network request failed');
-    }
-  };
-
   const getIncidentsSummary = async () => {
     try {
       const response = await backendAPI.get('/portal/incidencias/datos');
@@ -175,24 +121,6 @@ const GetInfoService = () => {
     }
   };
 
-  const descargarFactura = async (id) => {
-    try {
-      const response = await backendAPI.get('/portal/factura/' + id, { responseType: 'blob', observe: 'response' });
-      let title = response.headers.get('content-disposition').split('filename=')[1].split(';')[0];
-      title = title?.substring(1, title.length - 1);
-
-      console.log(response);
-      let data = {
-        file: response.data,
-        filename: title
-      };
-      return data;
-    } catch (error) {
-      console.log(error);
-      throw new Error(error.response || 'Network request failed');
-    }
-  };
-
   const getBilling = async (page = 1, limit = 25, sort = '') => {
     try {
       const params = {
@@ -238,15 +166,11 @@ const GetInfoService = () => {
 
   return {
     getCliente,
-    getInvoices,
-    getInvoicesSummary,
-    getDataInvoices,
     getIncidentsSummary,
     getSat,
     getTickets,
     getPhones,
     getServices,
-    descargarFactura,
     getBilling,
     getServicesList,
     getBaseconfig,

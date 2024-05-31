@@ -1,10 +1,10 @@
-import GetInfoService from 'configuraciones/servicios/info-client';
+import InfoInvoice from 'configuraciones/servicios/invoice';
 
-const infoService = GetInfoService();
+const infoInvoice = InfoInvoice();
 
 const fetchSummaryData = async () => {
   try {
-    const summaryData = await infoService.getInvoicesSummary();
+    const summaryData = await infoInvoice.getInvoicesSummary();
     return {
       pendiente: summaryData.pendiente,
       numeroFacturas: summaryData.numerofacturas,
@@ -18,7 +18,7 @@ const fetchSummaryData = async () => {
 
 const fetchData = async () => {
   try {
-    const invoices = await infoService.getDataInvoices();
+    const invoices = await infoInvoice.getDataInvoices();
     return invoices.items;
   } catch (error) {
     console.error('Error fetching invoices data:', error);
@@ -28,7 +28,7 @@ const fetchData = async () => {
 
 const descargarFactura = async (id) => {
   try {
-    const response = await infoService.descargarFactura(id);
+    const response = await infoInvoice.descargarFactura(id);
     let f = blobToFile(response.file, response.filename);
     let fileUrl = URL.createObjectURL(f);
 
