@@ -1,54 +1,44 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react';
-// material-ui
 import Grid from '@mui/material/Grid';
 import MainCard from 'ui-component/cards/MainCard';
 import { gridSpacing } from 'store/constant';
-import GetInfoService from 'configuraciones/servicios/info-client';
 import DocumentsDataGrid from './DocumentsDataGrid';
+import CircularWithValueLabel from 'views/utilities/CircularProgressWithLabel';
+import 'assets/css/Spinner.css';
+import { getDocuments, downloadDocument } from 'services/documentService';
 
 const DocumentsPage = () => {
-    const [dataDocuments, setDataDocuments] = useState([]);
-    const infoService = GetInfoService();
+  const [dataDocuments, setDataDocuments] = useState([]);
+  const [isLoading, setLoading] = useState(true);
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    useEffect(() => {
-        const fetchData = async () => {
-            infoService.getDocuments().then((documents) => {
-                setDataDocuments(documents.items);
-            });
-        };
-        fetchData();
-    }, []);
-
-    const descargarFactura = async (id) => {
-        infoService.downloadDocument(id).then((response) => {
-            let f = blobToFile(response.file, response.filename);
-            let fileUrl = URL.createObjectURL(f);
-
-            const link = document.createElement('a');
-            link.setAttribute('target', '_blank');
-            link.setAttribute('href', fileUrl);
-            link.setAttribute('download', response.filename);
-            link.click();
-        });
+  useEffect(() => {
+    const fetchData = async () => {
+      const documents = await getDocuments();
+      setDataDocuments(documents);
+      setLoading(false);
     };
+    fetchData();
+  }, []);
 
-    const blobToFile = (theBlob, fileName) => {
-        console.log(theBlob);
-        console.log(fileName);
-        return new File([theBlob], fileName, { lastModified: new Date().getTime(), type: theBlob.type });
-    };
+  const descargarFactura = async (id) => {
+    await downloadDocument(id);
+  };
 
-    return (
-        <MainCard>
-            <Grid container spacing={gridSpacing}>
-                <Grid item xs={12}>
-                    <DocumentsDataGrid rows={dataDocuments} downloadInvoice={descargarFactura} />
-                </Grid>
-            </Grid>
-        </MainCard>
-    );
+  return (
+    <MainCard>
+      <Grid container spacing={gridSpacing}>
+        <Grid item xs={12}>
+          {isLoading ? (
+            <div className="center-spinner">
+              <CircularWithValueLabel color="secondary" />
+            </div>
+          ) : (
+            <DocumentsDataGrid rows={dataDocuments} downloadInvoice={descargarFactura} />
+          )}
+        </Grid>
+      </Grid>
+    </MainCard>
+  );
 };
 
 export default DocumentsPage;
