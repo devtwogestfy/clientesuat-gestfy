@@ -10,14 +10,9 @@ import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
-// third party
 import * as Yup from 'yup';
 import { Formik } from 'formik';
-
-// project imports
 import AnimateButton from 'ui-component/extended/AnimateButton';
-
-// assets
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
@@ -27,7 +22,6 @@ import { FormattedMessage } from 'react-intl';
 import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import { createSessionId, getSessionId } from 'utils/sessionId';
 import { v4 as uuidv4 } from 'uuid';
-// ============================|| FIREBASE - LOGIN ||============================ //
 
 const AuthLogin = ({ ...others }) => {
   const theme = useTheme();
@@ -59,7 +53,7 @@ const AuthLogin = ({ ...others }) => {
       .iniciarSesion(userEmail, password)
       .then((response) => {
         // Manejar la respuesta exitosa aquí
-        setCookie(createSessionId(), response);
+        setCookie(createSessionId(), uuidv4());
       })
       // eslint-disable-next-line no-unused-vars
       .catch((error) => {

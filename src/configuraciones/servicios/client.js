@@ -6,15 +6,8 @@ const GetInfoClient = () => {
   const apiUrl = backendAPI;
 
   const getClient = async () => {
-    try {
-      const response = await apiUrl.get('/portal/cliente');
-      const data = response.data;
-      return data;
-    } catch (error) {
-      Cookies.remove(getSessionId());
-      console.log(error);
-      //throw new Error(error.response || 'Network request failed');
-    }
+    const response = await apiUrl.get('/portal/cliente');
+    return response.data;
   };
 
   return {

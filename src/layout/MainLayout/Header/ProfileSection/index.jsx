@@ -67,7 +67,6 @@ const ProfileSection = () => {
   const handleLogout = async () => {
     console.log('Logout');
     removeCookie(getSessionId());
-    localStorage.removeItem('id');
     navigate('/login');
   };
 
