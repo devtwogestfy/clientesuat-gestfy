@@ -1,6 +1,6 @@
 import { backendAPI } from 'configuraciones/app';
 import Cookies from 'js-cookie';
-
+import { getSessionId } from 'utils/sessionId';
 class apiLogin {
   iniciarSesion(usuario, clave) {
     let parametros = {
@@ -20,7 +20,7 @@ class apiLogin {
   }
 
   isLoggedIn() {
-    let cookieVal = Cookies.get('usuario');
+    let cookieVal = Cookies.get(getSessionId());
     return cookieVal !== '' && cookieVal !== undefined && cookieVal !== null;
   }
 }

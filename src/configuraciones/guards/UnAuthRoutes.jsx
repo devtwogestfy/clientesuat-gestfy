@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
-
+import { getSessionId } from 'utils/sessionId';
 // eslint-disable-next-line react/prop-types
 const UnAuthRoutes = ({ component }) => {
   const [usuarioAutenticado, setUsuarioAutenticado] = useState(null);
-  const [cookies] = useCookies(['usuario']);
+  const [cookies] = useCookies([getSessionId()]);
 
+  console.log(cookies);
   useEffect(() => {
     setUsuarioAutenticado(cookies);
   }, [cookies, usuarioAutenticado]);

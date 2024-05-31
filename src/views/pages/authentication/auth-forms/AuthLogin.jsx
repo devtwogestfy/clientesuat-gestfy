@@ -25,6 +25,8 @@ import apiLogin from 'configuraciones/servicios/login';
 import { useCookies } from 'react-cookie';
 import { FormattedMessage } from 'react-intl';
 import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
+import { createSessionId, getSessionId } from 'utils/sessionId';
+import { v4 as uuidv4 } from 'uuid';
 // ============================|| FIREBASE - LOGIN ||============================ //
 
 const AuthLogin = ({ ...others }) => {
@@ -32,7 +34,7 @@ const AuthLogin = ({ ...others }) => {
   const [userEmail, setUserEmail] = useState('');
   const [password, setPassword] = useState('');
   // eslint-disable-next-line no-unused-vars
-  const [cookies, setCookie] = useCookies(['usuario']);
+  const [cookies, setCookie] = useCookies([getSessionId()]);
   const [openAlert, setOpenAlert] = useState(false);
 
   const handleCloseAlert = () => {
@@ -57,7 +59,7 @@ const AuthLogin = ({ ...others }) => {
       .iniciarSesion(userEmail, password)
       .then((response) => {
         // Manejar la respuesta exitosa aquí
-        setCookie('usuario', response);
+        setCookie(createSessionId(), response);
       })
       // eslint-disable-next-line no-unused-vars
       .catch((error) => {
@@ -70,8 +72,8 @@ const AuthLogin = ({ ...others }) => {
     <>
       <Formik
         initialValues={{
-          userEmail: 'pedro',
-          password: 'gabriel',
+          userEmail: '',
+          password: '',
           submit: null
         }}
         validationSchema={Yup.object().shape({
