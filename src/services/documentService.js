@@ -1,10 +1,10 @@
-import GetInfoService from 'configuraciones/servicios/info-client';
+import GetInfoDocument from 'configuraciones/servicios/document';
 
-const infoService = GetInfoService();
+const infoDocument = GetInfoDocument();
 
 export const getDocuments = async () => {
   try {
-    const documents = await infoService.getDocuments();
+    const documents = await infoDocument.getDocuments();
     return documents.items;
   } catch (error) {
     console.error('Error fetching documents:', error);
@@ -14,7 +14,7 @@ export const getDocuments = async () => {
 
 export const downloadDocument = async (id) => {
   try {
-    const response = await infoService.downloadDocument(id);
+    const response = await infoDocument.downloadDocument(id);
     const file = blobToFile(response.file, response.filename);
     const fileUrl = URL.createObjectURL(file);
 
