@@ -62,7 +62,7 @@ const utilities = {
       url: '/services',
       icon: icons.IconSettings,
       breadcrumbs: false,
-      permission: 11
+      permission: 1
     },
     {
       id: 'util-documentation',
