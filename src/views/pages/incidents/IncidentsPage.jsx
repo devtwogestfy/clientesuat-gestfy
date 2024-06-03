@@ -3,6 +3,7 @@ import { IconButton, Grid, Alert, Popper, Fade, Stack } from '@mui/material';
 import MainCard from 'ui-component/cards/MainCard';
 import { gridSpacing } from 'store/constant';
 import GetInfoService from 'configuraciones/servicios/info-client';
+import GetInfoIncident from 'configuraciones/servicios/incident';
 import TotalIncidentsCard from './TotalIncidentsCard';
 import TotalOpenCard from './TotalOpenCard';
 import TotalCloseCard from './TotalCloseCard';
@@ -50,19 +51,20 @@ const IncidentsPage = () => {
   }, []);
 
   const infoService = GetInfoService();
+  const infoIncident = GetInfoIncident();
   const postInfoService = PostInfoService();
-  infoService.getIncidentsSummary().then((summaryIncident) => {
+  infoIncident.getIncidentsSummary().then((summaryIncident) => {
     setTotalIncidents(summaryIncident.numeroincidencias);
     setTotalOpen(summaryIncident.abiertas);
     setTotalClose(summaryIncident.cerradas);
   });
 
-  infoService.getSat().then((summaryHour) => {
+  infoIncident.getSat().then((summaryHour) => {
     setTotalHours(summaryHour.formateado);
   });
 
   const fetchData = async () => {
-    infoService.getTickets().then((dataIncidents) => {
+    infoIncident.getTickets().then((dataIncidents) => {
       setIncidents(dataIncidents.items);
     });
 

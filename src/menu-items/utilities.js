@@ -1,7 +1,6 @@
-// assets
 import { IconHome, IconUser, IconReceipt, IconAlertTriangleFilled, IconSettings, IconFileFilled } from '@tabler/icons-react';
 import GetCustomization from 'services/customizeService';
-// constant
+
 const icons = {
   IconHome,
   IconUser,
@@ -12,8 +11,6 @@ const icons = {
 };
 
 const customization = await GetCustomization();
-console.log(customization);
-// ==============================|| UTILITIES MENU ITEMS ||============================== //
 
 const utilities = {
   id: 'utilities',

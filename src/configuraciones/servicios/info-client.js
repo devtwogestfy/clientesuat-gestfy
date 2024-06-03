@@ -43,52 +43,6 @@ const GetInfoService = () => {
     return request('/appclientes/cliente');
   };
 
-  const getIncidentsSummary = async () => {
-    try {
-      const response = await backendAPI.get('/portal/incidencias/datos');
-      const data = response.data;
-      return data;
-    } catch (error) {
-      throw new Error(error.response || 'Network request failed');
-    }
-  };
-
-  const getSat = async () => {
-    try {
-      const response = await backendAPI.get('/portal/sat');
-      const data = response.data;
-      return data;
-    } catch (error) {
-      throw new Error(error.response || 'Network request failed');
-    }
-  };
-
-  const getTickets = async (page = 1, limit = 25, sort = '', from = null, end = null, state = null) => {
-    try {
-      let filter =
-        '[{"property": "desde", "value":"' +
-        from +
-        '"}, {"property": "hasta", "value":"' +
-        end +
-        '"}, {"property": "estado", "value":"' +
-        state +
-        '"}]';
-
-      const params = {
-        page: page.toString(),
-        limit: limit.toString(),
-        sort: sort,
-        filter: filter
-      };
-
-      const response = await backendAPI.get('/portal/ticketscli', { params });
-      const data = response.data;
-      return data;
-    } catch (error) {
-      throw new Error(error.response || 'Network request failed');
-    }
-  };
-
   const getPhones = async (page = 1, limit = 25, sort = '') => {
     try {
       const params = {
@@ -166,9 +120,6 @@ const GetInfoService = () => {
 
   return {
     getCliente,
-    getIncidentsSummary,
-    getSat,
-    getTickets,
     getPhones,
     getServices,
     getBilling,
