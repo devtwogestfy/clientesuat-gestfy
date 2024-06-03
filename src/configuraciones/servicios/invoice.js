@@ -22,39 +22,31 @@ const InfoInvoice = () => {
   };
 
   const getInvoicesSummary = async () => {
-    try {
-      const response = await backendAPI.get('/portal/facturas/datos');
-      const data = response.data;
-      return data;
-    } catch (error) {
-      throw new Error(error.response || 'Network request failed');
-    }
+    const response = await backendAPI.get('/portal/facturas/datos');
+    const data = response.data;
+    return data;
   };
 
   const getDataInvoices = async (page = 1, limit = 25, sort = '', from = null, end = null, state = null) => {
-    try {
-      let filter =
-        '[{"property": "desde", "value":"' +
-        from +
-        '"}, {"property": "hasta", "value":"' +
-        end +
-        '"}, {"property": "estado", "value":"' +
-        state +
-        '"}]';
+    let filter =
+      '[{"property": "desde", "value":"' +
+      from +
+      '"}, {"property": "hasta", "value":"' +
+      end +
+      '"}, {"property": "estado", "value":"' +
+      state +
+      '"}]';
 
-      const params = {
-        page: page.toString(),
-        limit: limit.toString(),
-        sort: sort,
-        filter: filter
-      };
+    const params = {
+      page: page.toString(),
+      limit: limit.toString(),
+      sort: sort,
+      filter: filter
+    };
 
-      const response = await backendAPI.get('/portal/facturas', { params });
-      const data = response.data;
-      return data;
-    } catch (error) {
-      throw new Error(error.response || 'Network request failed');
-    }
+    const response = await backendAPI.get('/portal/facturas', { params });
+    const data = response.data;
+    return data;
   };
 
   const startPurchase = async (factId = null, url = location.href, type = 'bizum') => {
@@ -63,19 +55,14 @@ const InfoInvoice = () => {
       type: type
     };
 
-    try {
-      const response = await apiUrl
-        .post(`/portal-payment/${factId}`, params)
-        .then((response) => {
-          generateFormPayBizum(response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    } catch (error) {
-      console.error(error);
-      throw error;
-    }
+    const response = await apiUrl
+      .post(`/portal-payment/${factId}`, params)
+      .then((response) => {
+        generateFormPayBizum(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const startPurchaseCeca = async (factId = null, url = location.href, type = 'bizum') => {
@@ -83,20 +70,14 @@ const InfoInvoice = () => {
       url: url,
       type: type
     };
-
-    try {
-      const response = await apiUrl
-        .post(`/portal-payment/ceca/${factId}`, params)
-        .then((response) => {
-          generateFormPayCeca(response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    } catch (error) {
-      console.error(error);
-      throw error;
-    }
+    const response = await apiUrl
+      .post(`/portal-payment/ceca/${factId}`, params)
+      .then((response) => {
+        generateFormPayCeca(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const generateFormPayBizum = (data) => {
@@ -146,8 +127,6 @@ const InfoInvoice = () => {
   };
 
   const generateFormPayCeca = (data) => {
-    console.log(data);
-
     let form = document.createElement('form');
     form.action = data.url;
     form.method = 'POST';
@@ -180,21 +159,16 @@ const InfoInvoice = () => {
   };
 
   const descargarFactura = async (id) => {
-    try {
-      const response = await backendAPI.get('/portal/factura/' + id, { responseType: 'blob', observe: 'response' });
-      let title = response.headers.get('content-disposition').split('filename=')[1].split(';')[0];
-      title = title?.substring(1, title.length - 1);
+    const response = await backendAPI.get('/portal/factura/' + id, { responseType: 'blob', observe: 'response' });
+    let title = response.headers.get('content-disposition').split('filename=')[1].split(';')[0];
+    title = title?.substring(1, title.length - 1);
 
-      console.log(response);
-      let data = {
-        file: response.data,
-        filename: title
-      };
-      return data;
-    } catch (error) {
-      console.log(error);
-      throw new Error(error.response || 'Network request failed');
-    }
+    console.log(response);
+    let data = {
+      file: response.data,
+      filename: title
+    };
+    return data;
   };
 
   return {

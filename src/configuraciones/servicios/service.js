@@ -17,13 +17,8 @@ const GetInfoService = () => {
       filter: filter
     };
 
-    try {
-      const response = await apiUrl.get(`/portal/cdr`, { params });
-      return response.data;
-    } catch (error) {
-      console.error('Error fetching phone record:', error);
-      throw error;
-    }
+    const response = await apiUrl.get(`/portal/cdr`, { params });
+    return response.data;
   };
 
   const getPrepayments = async (page = 1, limit = 25, sort = '', servId = null) => {
@@ -36,53 +31,29 @@ const GetInfoService = () => {
       sort: sort
     };
 
-    try {
-      const response = await apiUrl.get(`/portal/prepay-list`, { params });
-      return response.data;
-    } catch (error) {
-      console.error('Error fetching phone record:', error);
-      throw error;
-    }
+    const response = await apiUrl.get(`/portal/prepay-list`, { params });
+    return response.data;
   };
 
   const createPrepay = async (values) => {
-    console.log(values);
-    try {
-      const response = await apiUrl.post('/prepaid-gen/cliente', values);
-      const data = response.data;
-      return data;
-    } catch (error) {
-      console.log(error);
-      throw new Error(error.response || 'Network request failed');
-    }
+    const response = await apiUrl.post('/prepaid-gen/cliente', values);
+    const data = response.data;
+    return data;
   };
 
   const validatePrepay = async (id) => {
-    try {
-      console.log(id);
-      const response = await apiUrl.post('/prepaid-validate/' + id);
-      const data = response.data;
-      return data;
-    } catch (error) {
-      console.log(error);
-      throw new Error(error.response || 'Network request failed');
-    }
+    const response = await apiUrl.post('/prepaid-validate/' + id);
+    const data = response.data;
+    return data;
   };
 
   const cancelPrepay = async (id) => {
-    try {
-      const response = await apiUrl.put('/prepaid-cancel/' + id);
-      const data = response.data;
-      return data;
-    } catch (error) {
-      //console.log(error)
-      throw new Error(error.response || 'Network request failed');
-    }
+    const response = await apiUrl.put('/prepaid-cancel/' + id);
+    const data = response.data;
+    return data;
   };
 
   const generateFormPayBizum = (data) => {
-    console.log(data);
-
     let form = document.createElement('form');
     form.action = data.url;
     form.method = 'POST';
@@ -132,73 +103,50 @@ const GetInfoService = () => {
       action: action
     };
 
-    try {
-      const response = await apiUrl
-        .post(`/portal-payment-prepay/${factId}`, params)
-        .then((response) => {
-          generateFormPayBizum(response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    } catch (error) {
-      console.error(error);
-      throw error;
-    }
+    const response = await apiUrl
+      .post(`/portal-payment-prepay/${factId}`, params)
+      .then((response) => {
+        generateFormPayBizum(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const getRouterData = async (id) => {
-    try {
-      const response = await apiUrl.get('/portal/router/config/' + id);
-      const data = response.data;
-      return data;
-    } catch (error) {
-      //console.log(error)
-      throw new Error(error.response || 'Network request failed');
-    }
+    const response = await apiUrl.get('/portal/router/config/' + id);
+    const data = response.data;
+    return data;
   };
 
   const updateRouterConfig = async (params = '', id = null) => {
-    try {
-      const response = await apiUrl.put('/portal/router/config/' + id, params);
-      const data = response.data;
-      return data;
-    } catch (error) {
-      console.log(error);
-      throw new Error(error.response || 'Network request failed');
-    }
+    const response = await apiUrl.put('/portal/router/config/' + id, params);
+    const data = response.data;
+    return data;
   };
 
   const getPhones = async (page = 1, limit = 25, sort = '') => {
-    try {
-      const params = {
-        page: page.toString(),
-        limit: limit.toString(),
-        sort: sort
-      };
+    const params = {
+      page: page.toString(),
+      limit: limit.toString(),
+      sort: sort
+    };
 
-      const response = await backendAPI.get('/portal/tels', { params });
-      const data = response.data;
-      return data;
-    } catch (error) {
-      throw new Error(error.response || 'Network request failed');
-    }
+    const response = await backendAPI.get('/portal/tels', { params });
+    const data = response.data;
+    return data;
   };
 
   const getServices = async (page = 1, limit = 25, sort = '') => {
-    try {
-      const params = {
-        page: page.toString(),
-        limit: limit.toString(),
-        sort: sort
-      };
+    const params = {
+      page: page.toString(),
+      limit: limit.toString(),
+      sort: sort
+    };
 
-      const response = await backendAPI.get('/portal/pservs', { params });
-      const data = response.data;
-      return data;
-    } catch (error) {
-      throw new Error(error.response || 'Network request failed');
-    }
+    const response = await backendAPI.get('/portal/pservs', { params });
+    const data = response.data;
+    return data;
   };
 
   return {
