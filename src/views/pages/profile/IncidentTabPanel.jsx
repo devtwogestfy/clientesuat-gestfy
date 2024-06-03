@@ -10,7 +10,6 @@ import TotalCloseCard from '../incidents/TotalCloseCard';
 import TotalHoursCard from '../incidents/TotalHoursCard';
 import { useTheme } from '@mui/material/styles';
 import CreateIncidentDialog from '../incidents/CreateIncidentDialog';
-import PostInfoService from 'configuraciones/servicios/post-info-client';
 import IncidentsDataGrid from '../incidents/IncidentsDataGrid';
 
 const IncidentTabPanel = () => {
@@ -40,7 +39,6 @@ const IncidentTabPanel = () => {
 
   const infoService = GetInfoService();
   const infoIncident = GetInfoIncident();
-  const postInfoService = PostInfoService();
   infoIncident.getIncidentsSummary().then((summaryIncident) => {
     setTotalIncidents(summaryIncident.numeroincidencias);
     setTotalOpen(summaryIncident.abiertas);
@@ -76,7 +74,7 @@ const IncidentTabPanel = () => {
       newErrors.description = 'La descripción debe tener al menos 25 caracteres.';
     }
     if (Object.keys(newErrors).length === 0) {
-      postInfoService.createIncident(parameters).then((response) => {
+      infoIncident.createIncident(parameters).then((response) => {
         console.log(response);
         setOpen(false);
         fetchData();

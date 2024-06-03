@@ -11,7 +11,6 @@ import TotalHoursCard from './TotalHoursCard';
 import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
 import { useTheme } from '@mui/material/styles';
 import CreateIncidentDialog from './CreateIncidentDialog';
-import PostInfoService from 'configuraciones/servicios/post-info-client';
 import IncidentsDataGrid from './IncidentsDataGrid';
 import GetCustomization from 'services/customizeService';
 
@@ -52,7 +51,6 @@ const IncidentsPage = () => {
 
   const infoService = GetInfoService();
   const infoIncident = GetInfoIncident();
-  const postInfoService = PostInfoService();
   infoIncident.getIncidentsSummary().then((summaryIncident) => {
     setTotalIncidents(summaryIncident.numeroincidencias);
     setTotalOpen(summaryIncident.abiertas);
@@ -88,7 +86,7 @@ const IncidentsPage = () => {
       newErrors.description = 'La descripción debe tener al menos 25 caracteres.';
     }
     if (Object.keys(newErrors).length === 0) {
-      postInfoService.createIncident(parameters).then((response) => {
+      infoIncident.createIncident(parameters).then((response) => {
         console.log(response);
         setOpen(false);
         fetchData();
