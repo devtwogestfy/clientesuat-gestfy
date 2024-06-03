@@ -4,7 +4,7 @@ import Grid from '@mui/material/Grid';
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
 import { gridSpacing } from 'store/constant';
-import GetInfoService from 'configuraciones/servicios/info-client';
+import InfoInvoice from 'configuraciones/servicios/invoice';
 import NumberInvoicesCard from '../invoices/NumberInvoicesCard';
 import LastInvoiceCard from '../invoices/LastInvoiceCard';
 import TotalDebtCard from '../invoices/TotalDebtCard';
@@ -16,7 +16,7 @@ const InvoiceTabPanel = () => {
   const [numeroFacturas, setNumeroFacturas] = useState(null);
   const [dataInvoices, setDataInvoices] = useState([]);
 
-  const infoService = GetInfoService();
+  const infoService = InfoInvoice();
 
   const fetchSummaryData = async () => {
     try {
@@ -33,7 +33,6 @@ const InvoiceTabPanel = () => {
     try {
       const invoices = await infoService.getDataInvoices();
       setDataInvoices(invoices.items);
-      console.log(invoices.items);
     } catch (error) {
       console.error('Error fetching invoices data:', error);
     }

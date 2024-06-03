@@ -12,7 +12,7 @@ const icons = {
 };
 
 const customization = await GetCustomization();
-
+console.log(customization);
 // ==============================|| UTILITIES MENU ITEMS ||============================== //
 
 const utilities = {
