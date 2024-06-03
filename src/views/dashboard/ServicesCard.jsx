@@ -7,7 +7,7 @@ import SkeletonEarningCard from 'ui-component/cards/Skeleton/EarningCard';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import CloseIcon from '@mui/icons-material/Close';
 import ServicesPage from 'views/pages/services/ServicesPage';
-import GetInfoService from 'configuraciones/servicios/info-client';
+import GetInfoService from 'configuraciones/servicios/service';
 import SummaryInfo from './SummaryInfo';
 import { FormattedMessage } from 'react-intl';
 import { useCookies } from 'react-cookie';

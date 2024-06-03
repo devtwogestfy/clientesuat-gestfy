@@ -43,38 +43,6 @@ const GetInfoService = () => {
     return request('/appclientes/cliente');
   };
 
-  const getPhones = async (page = 1, limit = 25, sort = '') => {
-    try {
-      const params = {
-        page: page.toString(),
-        limit: limit.toString(),
-        sort: sort
-      };
-
-      const response = await backendAPI.get('/portal/tels', { params });
-      const data = response.data;
-      return data;
-    } catch (error) {
-      throw new Error(error.response || 'Network request failed');
-    }
-  };
-
-  const getServices = async (page = 1, limit = 25, sort = '') => {
-    try {
-      const params = {
-        page: page.toString(),
-        limit: limit.toString(),
-        sort: sort
-      };
-
-      const response = await backendAPI.get('/portal/pservs', { params });
-      const data = response.data;
-      return data;
-    } catch (error) {
-      throw new Error(error.response || 'Network request failed');
-    }
-  };
-
   const getBilling = async (page = 1, limit = 25, sort = '') => {
     try {
       const params = {
@@ -120,8 +88,6 @@ const GetInfoService = () => {
 
   return {
     getCliente,
-    getPhones,
-    getServices,
     getBilling,
     getServicesList,
     getBaseconfig,
