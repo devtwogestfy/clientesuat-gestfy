@@ -1,4 +1,4 @@
-import GetInfoService from 'configuraciones/servicios/info-client';
+import GetInfoService from 'configuraciones/servicios/client';
 import apiLogin from 'configuraciones/servicios/login';
 
 const infoService = GetInfoService();
