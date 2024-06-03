@@ -4,7 +4,7 @@ import Grid from '@mui/material/Grid';
 import MainCard from 'ui-component/cards/MainCard';
 import { gridSpacing } from 'store/constant';
 import TotalServiceCard from '../services/TotalServiceCard';
-import GetInfoService from 'configuraciones/servicios/service';
+import GetInfoService from 'settings/servicios/service';
 import ServicesDataGrid from '../services/ServicesDataGrid';
 
 const ServiceTabPanel = () => {

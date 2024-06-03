@@ -3,7 +3,7 @@ import { lazy } from 'react';
 // project imports
 import MainLayout from 'layout/MainLayout';
 import Loadable from 'ui-component/Loadable';
-import AuthGuard from 'configuraciones/guards/AuthGuards';
+import AuthGuard from 'settings/guards/AuthGuards';
 
 // dashboard routing
 const DashboardDefault = Loadable(lazy(() => import('views/dashboard')));
@@ -18,60 +18,60 @@ const PrepaysPage = Loadable(lazy(() => import('views/pages/services/prepays/Pre
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
-    path: '/',
-    element: <AuthGuard component={<MainLayout />}></AuthGuard>,
-    children: [
+  path: '/',
+  element: <AuthGuard component={<MainLayout />}></AuthGuard>,
+  children: [
+    {
+      path: '/',
+      element: <AuthGuard component={<DashboardDefault />}></AuthGuard>
+    },
+    {
+      path: 'dashboard',
+      children: [
         {
-            path: '/',
-            element: <AuthGuard component={<DashboardDefault />}></AuthGuard>
-        },
-        {
-            path: 'dashboard',
-            children: [
-                {
-                    path: 'default',
-                    element: <AuthGuard component={<DashboardDefault />}></AuthGuard>
-                }
-            ]
-        },
-        {
-            path: 'documents',
-            element: <AuthGuard component={<DocumentsPage />}></AuthGuard>
-        },
-        {
-            path: 'invoices',
-            element: <AuthGuard component={<InvoicesPage />}></AuthGuard>
-        },
-        {
-            path: 'incidents',
-            element: <AuthGuard component={<IncidentsPage />}></AuthGuard>
-        },
-        {
-            path: 'profile',
-            element: <AuthGuard component={<ProfileViewPage />}></AuthGuard>
-        },
-        {
-            path: 'services',
-            element: <AuthGuard component={<ServicesPage />}></AuthGuard>
-        },
-        {
-            path: 'services',
-            children: [
-                {
-                    path: 'phone-records/:id',
-                    element: <AuthGuard component={<PhoneRecordsPage />}></AuthGuard>
-                },
-                {
-                    path: 'prepays/:id',
-                    element: <AuthGuard component={<PrepaysPage />}></AuthGuard>
-                },
-                {
-                    path: 'router/:id',
-                    element: <AuthGuard component={<RouterPage />}></AuthGuard>
-                }
-            ]
+          path: 'default',
+          element: <AuthGuard component={<DashboardDefault />}></AuthGuard>
         }
-    ]
+      ]
+    },
+    {
+      path: 'documents',
+      element: <AuthGuard component={<DocumentsPage />}></AuthGuard>
+    },
+    {
+      path: 'invoices',
+      element: <AuthGuard component={<InvoicesPage />}></AuthGuard>
+    },
+    {
+      path: 'incidents',
+      element: <AuthGuard component={<IncidentsPage />}></AuthGuard>
+    },
+    {
+      path: 'profile',
+      element: <AuthGuard component={<ProfileViewPage />}></AuthGuard>
+    },
+    {
+      path: 'services',
+      element: <AuthGuard component={<ServicesPage />}></AuthGuard>
+    },
+    {
+      path: 'services',
+      children: [
+        {
+          path: 'phone-records/:id',
+          element: <AuthGuard component={<PhoneRecordsPage />}></AuthGuard>
+        },
+        {
+          path: 'prepays/:id',
+          element: <AuthGuard component={<PrepaysPage />}></AuthGuard>
+        },
+        {
+          path: 'router/:id',
+          element: <AuthGuard component={<RouterPage />}></AuthGuard>
+        }
+      ]
+    }
+  ]
 };
 
 export default MainRoutes;

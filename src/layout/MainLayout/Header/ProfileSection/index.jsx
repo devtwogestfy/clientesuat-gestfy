@@ -32,7 +32,7 @@ import User1 from 'assets/images/users/user-round.svg';
 import { IconLogout, IconSettings, IconUser } from '@tabler/icons-react';
 import { useCookies } from 'react-cookie';
 import GreetingComponent from './GreetingComponent';
-import GetInfoClient from 'configuraciones/servicios/client';
+import GetInfoClient from 'settings/servicios/client';
 import { getSessionId } from 'utils/sessionId';
 // ==============================|| PROFILE MENU ||============================== //
 

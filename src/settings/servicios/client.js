@@ -1,4 +1,4 @@
-import { backendAPI } from 'configuraciones/app';
+import { backendAPI } from 'settings/app';
 import { getSessionId } from 'utils/sessionId';
 import Cookies from 'js-cookie';
 

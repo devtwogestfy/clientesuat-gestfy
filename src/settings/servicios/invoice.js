@@ -1,4 +1,4 @@
-import { backendAPI } from 'configuraciones/app';
+import { backendAPI } from 'settings/app';
 
 const InfoInvoice = () => {
   const apiUrl = backendAPI;

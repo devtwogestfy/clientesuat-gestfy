@@ -1,4 +1,4 @@
-import GetInfoDocument from 'configuraciones/servicios/document';
+import GetInfoDocument from 'settings/servicios/document';
 
 const infoDocument = GetInfoDocument();
 

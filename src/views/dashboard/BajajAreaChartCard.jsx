@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import ApexCharts from 'apexcharts';
 import Chart from 'react-apexcharts';
 import { useTheme } from '@mui/material/styles';
-import GetInfoService from 'configuraciones/servicios/service';
+import GetInfoService from 'settings/servicios/service';
 
 const BajajAreaChartCard = () => {
   const theme = useTheme();

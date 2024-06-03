@@ -14,7 +14,7 @@ import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import CloseIcon from '@mui/icons-material/Close';
 import InvoicesPage from 'views/pages/invoices/InvoicesPage';
 import SummaryInfo from './SummaryInfo';
-import InfoInvoice from 'configuraciones/servicios/invoice';
+import InfoInvoice from 'settings/servicios/invoice';
 import { FormattedMessage } from 'react-intl';
 
 const CardWrapper = styled(MainCard)(({ theme }) => ({

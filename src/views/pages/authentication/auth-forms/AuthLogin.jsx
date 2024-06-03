@@ -16,7 +16,7 @@ import AnimateButton from 'ui-component/extended/AnimateButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
-import apiLogin from 'configuraciones/servicios/login';
+import apiLogin from 'settings/servicios/login';
 import { useCookies } from 'react-cookie';
 import { FormattedMessage } from 'react-intl';
 import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';

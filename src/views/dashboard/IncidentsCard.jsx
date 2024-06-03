@@ -8,7 +8,7 @@ import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import CloseIcon from '@mui/icons-material/Close';
 import IncidentsPage from 'views/pages/incidents/IncidentsPage';
 import SummaryInfo from './SummaryInfo';
-import GetInfoIncident from 'configuraciones/servicios/incident';
+import GetInfoIncident from 'settings/servicios/incident';
 import { FormattedMessage } from 'react-intl';
 
 const CardWrapper = styled(MainCard)(({ theme }) => ({

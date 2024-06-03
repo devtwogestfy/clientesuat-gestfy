@@ -23,7 +23,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs';
 import NumberInputBasic from './NaturalNumberInput';
 import PropTypes from 'prop-types';
-import GetInfoService from 'configuraciones/servicios/service';
+import GetInfoService from 'settings/servicios/service';
 import CancelPrepayDialog from './CancelPrepayDialog';
 import CancelPrepayPopper from './CancelPrepayPopper';
 import PayDialog from './../../utilities/dialogs/PayDialog';

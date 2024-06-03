@@ -10,7 +10,7 @@ import { Badge, Button } from '@mui/material';
 import { fDate } from 'utils/format-date';
 import dataGridStyles from 'utils/dataGridStyles';
 import PayDialog from './../../utilities/dialogs/PayDialog';
-import InfoInvoice from 'configuraciones/servicios/invoice';
+import InfoInvoice from 'settings/servicios/invoice';
 import GetCustomization from 'services/customizeService';
 
 const InvoicesDataGrid = ({ rows, downloadInvoice }) => {

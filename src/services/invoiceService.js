@@ -1,4 +1,4 @@
-import InfoInvoice from 'configuraciones/servicios/invoice';
+import InfoInvoice from 'settings/servicios/invoice';
 
 const infoInvoice = InfoInvoice();
 

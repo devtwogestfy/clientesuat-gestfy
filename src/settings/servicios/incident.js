@@ -1,4 +1,4 @@
-import { backendAPI } from 'configuraciones/app';
+import { backendAPI } from 'settings/app';
 
 const GetInfoIncident = () => {
   const apiUrl = backendAPI;

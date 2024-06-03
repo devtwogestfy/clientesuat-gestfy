@@ -4,7 +4,7 @@ import Grid from '@mui/material/Grid';
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
 import { gridSpacing } from 'store/constant';
-import InfoInvoice from 'configuraciones/servicios/invoice';
+import InfoInvoice from 'settings/servicios/invoice';
 import NumberInvoicesCard from '../invoices/NumberInvoicesCard';
 import LastInvoiceCard from '../invoices/LastInvoiceCard';
 import TotalDebtCard from '../invoices/TotalDebtCard';

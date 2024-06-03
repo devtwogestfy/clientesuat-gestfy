@@ -1,5 +1,5 @@
-import GetInfoService from 'configuraciones/servicios/client';
-import apiLogin from 'configuraciones/servicios/login';
+import GetInfoService from 'settings/servicios/client';
+import apiLogin from 'settings/servicios/login';
 
 const infoService = GetInfoService();
 const instanceLogin = new apiLogin();
