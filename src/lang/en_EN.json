@@ -254,5 +254,7 @@
   "advertisements.button.show_more": "Show More",
 
   "errors.base": "An error has occurred, please consult technical support.",
-  "table.empty": "There are no records"
+  "table.empty": "There are no records",
+  "email.isRequired": "Email is required",
+  "password.isRequired": "Password is required"
 }

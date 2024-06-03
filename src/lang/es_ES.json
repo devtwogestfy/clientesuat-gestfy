@@ -254,5 +254,7 @@
   "advertisements.button.show_more": "Ver Más",
 
   "errors.base": "Se ha producido un error, consulte al servicio técnico.",
-  "table.empty": "No hay registros"
+  "table.empty": "No hay registros",
+  "email.isRequired": "Se requiere usuario",
+  "password.isRequired": "Se requiere contraseña"
 }
