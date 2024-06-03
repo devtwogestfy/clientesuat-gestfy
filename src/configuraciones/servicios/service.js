@@ -149,6 +149,31 @@ const GetInfoService = () => {
     return data;
   };
 
+  const getBilling = async (page = 1, limit = 25, sort = '') => {
+    const params = {
+      page: page.toString(),
+      limit: limit.toString(),
+      sort: sort
+    };
+
+    const response = await backendAPI.get('/portal/facturacion', { params });
+    const data = response.data;
+
+    return data;
+  };
+
+  const getServicesList = async (page = 1, limit = 25, sort = '') => {
+    const params = {
+      page: page.toString(),
+      limit: limit.toString(),
+      sort: sort
+    };
+
+    const response = await backendAPI.get('/portal/servicios', { params });
+    const data = response.data;
+    return data;
+  };
+
   return {
     getPhoneRecord,
     getPrepayments,
@@ -159,7 +184,9 @@ const GetInfoService = () => {
     getRouterData,
     updateRouterConfig,
     getPhones,
-    getServices
+    getServices,
+    getBilling,
+    getServicesList
   };
 };
 

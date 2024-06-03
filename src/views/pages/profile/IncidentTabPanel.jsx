@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Grid, Alert, Popper, Fade, Stack } from '@mui/material';
 import MainCard from 'ui-component/cards/MainCard';
 import { gridSpacing } from 'store/constant';
-import GetInfoService from 'configuraciones/servicios/info-client';
+import GetInfoService from 'configuraciones/servicios/service';
 import GetInfoIncident from 'configuraciones/servicios/incident';
 import TotalIncidentsCard from '../incidents/TotalIncidentsCard';
 import TotalOpenCard from '../incidents/TotalOpenCard';
