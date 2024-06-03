@@ -3,7 +3,7 @@ import { Grid, Alert, Popper, Fade, Stack } from '@mui/material';
 import MainCard from 'ui-component/cards/MainCard';
 import { gridSpacing } from 'store/constant';
 import GetInfoService from 'settings/servicios/service';
-import GetInfoIncident from 'settings/servicios/incident';
+import { createIncident, getIncidentsSummary, getSat, getTickets } from 'settings/servicios/incident';
 import TotalIncidentsCard from '../incidents/TotalIncidentsCard';
 import TotalOpenCard from '../incidents/TotalOpenCard';
 import TotalCloseCard from '../incidents/TotalCloseCard';
@@ -38,19 +38,18 @@ const IncidentTabPanel = () => {
   }, []);
 
   const infoService = GetInfoService();
-  const infoIncident = GetInfoIncident();
-  infoIncident.getIncidentsSummary().then((summaryIncident) => {
+  getIncidentsSummary().then((summaryIncident) => {
     setTotalIncidents(summaryIncident.numeroincidencias);
     setTotalOpen(summaryIncident.abiertas);
     setTotalClose(summaryIncident.cerradas);
   });
 
-  infoIncident.getSat().then((summaryHour) => {
+  getSat().then((summaryHour) => {
     setTotalHours(summaryHour.formateado);
   });
 
   const fetchData = async () => {
-    infoIncident.getTickets().then((dataIncidents) => {
+    getTickets().then((dataIncidents) => {
       setIncidents(dataIncidents.items);
     });
 
@@ -74,7 +73,7 @@ const IncidentTabPanel = () => {
       newErrors.description = 'La descripción debe tener al menos 25 caracteres.';
     }
     if (Object.keys(newErrors).length === 0) {
-      infoIncident.createIncident(parameters).then((response) => {
+      createIncident(parameters).then((response) => {
         console.log(response);
         setOpen(false);
         fetchData();

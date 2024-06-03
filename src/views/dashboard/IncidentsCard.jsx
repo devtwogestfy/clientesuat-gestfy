@@ -8,7 +8,7 @@ import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import CloseIcon from '@mui/icons-material/Close';
 import IncidentsPage from 'views/pages/incidents/IncidentsPage';
 import SummaryInfo from './SummaryInfo';
-import GetInfoIncident from 'settings/servicios/incident';
+import { getIncidentsSummary } from 'settings/servicios/incident';
 import { FormattedMessage } from 'react-intl';
 
 const CardWrapper = styled(MainCard)(({ theme }) => ({
@@ -69,13 +69,11 @@ const IncidentsCard = ({ isLoading }) => {
     setOpen(false);
   }, []);
 
-  GetInfoIncident()
-    .getIncidentsSummary()
-    .then((summaryIncident) => {
-      setTotalIncidents(summaryIncident.numeroincidencias);
-      setTotalOpen(summaryIncident.abiertas);
-      setTotalClose(summaryIncident.cerradas);
-    });
+  getIncidentsSummary().then((summaryIncident) => {
+    setTotalIncidents(summaryIncident.numeroincidencias);
+    setTotalOpen(summaryIncident.abiertas);
+    setTotalClose(summaryIncident.cerradas);
+  });
 
   return (
     <>

@@ -30,7 +30,7 @@ import IncidentTabPanel from './IncidentTabPanel';
 import ClientTabPanel from './ClientTabPanel';
 import SuccessDialog from './SuccessDialog';
 import GetInfoClient from 'settings/servicios/client';
-import GetInfoIncident from 'settings/servicios/incident';
+import { createIncident } from 'settings/servicios/incident';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import GetCustomization from 'services/customizeService';
@@ -50,7 +50,6 @@ const ProfileViewPage = () => {
   const [clientInfo, setClientInfo] = useState(null);
   const [message, setMessage] = useState('');
   const infoClient = GetInfoClient();
-  const infoIncident = GetInfoIncident();
   const [error, setError] = useState('');
   const [openSuccess, setOpenSuccess] = useState(false);
 
@@ -89,8 +88,7 @@ const ProfileViewPage = () => {
       let body = {
         texto: message
       };
-      infoIncident
-        .createIncident(body)
+      createIncident(body)
         .then((res) => {
           console.log(res);
           handleClose();

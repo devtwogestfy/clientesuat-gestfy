@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { IconButton, Grid, Alert, Popper, Fade, Stack } from '@mui/material';
 import MainCard from 'ui-component/cards/MainCard';
 import { gridSpacing } from 'store/constant';
-import GetInfoService from 'settings/servicios/service';
-import GetInfoIncident from 'settings/servicios/incident';
 import TotalIncidentsCard from './TotalIncidentsCard';
 import TotalOpenCard from './TotalOpenCard';
 import TotalCloseCard from './TotalCloseCard';
@@ -13,18 +11,18 @@ import { useTheme } from '@mui/material/styles';
 import CreateIncidentDialog from './CreateIncidentDialog';
 import IncidentsDataGrid from './IncidentsDataGrid';
 import GetCustomization from 'services/customizeService';
+import CircularWithValueLabel from 'views/utilities/CircularProgressWithLabel';
+import 'assets/css/Spinner.css';
+import useIncidentsData from 'hooks/useIncidentsData';
+import useServicesData from 'hooks/useServicesData';
 
 const IncidentsPage = () => {
   const theme = useTheme();
-  const [totalIncidents, setTotalIncidents] = useState(null);
-  const [totalOpen, setTotalOpen] = useState(null);
-  const [totalClose, setTotalClose] = useState(null);
-  const [totalHours, setTotalHours] = useState(null);
-  const [incidents, setIncidents] = useState([]);
+  const { totalIncidents, totalOpen, totalClose, totalHours, incidents, isLoading, handleCreateIncident } = useIncidentsData();
+  const { services } = useServicesData();
   const [open, setOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
   const [description, setDescription] = useState('');
-  const [services, setServices] = useState([]);
   const [isAlertSuccess, setIsAlertSuccess] = useState(false);
   const [errors, setErrors] = useState({});
   const [newTicket, setNewTicket] = useState(null);
@@ -35,8 +33,6 @@ const IncidentsPage = () => {
   const handleModalClose = () => setOpen(false);
 
   useEffect(() => {
-    setOpen(false);
-    fetchData();
     const fetchCustomization = async () => {
       try {
         const customization = await GetCustomization();
@@ -49,36 +45,13 @@ const IncidentsPage = () => {
     fetchCustomization();
   }, []);
 
-  const infoService = GetInfoService();
-  const infoIncident = GetInfoIncident();
-  infoIncident.getIncidentsSummary().then((summaryIncident) => {
-    setTotalIncidents(summaryIncident.numeroincidencias);
-    setTotalOpen(summaryIncident.abiertas);
-    setTotalClose(summaryIncident.cerradas);
-  });
-
-  infoIncident.getSat().then((summaryHour) => {
-    setTotalHours(summaryHour.formateado);
-  });
-
-  const fetchData = async () => {
-    infoIncident.getTickets().then((dataIncidents) => {
-      setIncidents(dataIncidents.items);
-    });
-
-    infoService.getServicesList(1, 25).then((dataServices) => {
-      setServices(dataServices.items);
-    });
-  };
-
-  const handleCreateIncident = () => {
+  const validateAndCreateIncident = () => {
     const parameters = {
       servicio_id: selectedOption,
       texto: description
     };
 
     const newErrors = {};
-    console.log(selectedOption);
     if (selectedOption === null) {
       newErrors.service = 'El servicio es obligatorio.';
     }
@@ -86,16 +59,7 @@ const IncidentsPage = () => {
       newErrors.description = 'La descripción debe tener al menos 25 caracteres.';
     }
     if (Object.keys(newErrors).length === 0) {
-      infoIncident.createIncident(parameters).then((response) => {
-        console.log(response);
-        setOpen(false);
-        fetchData();
-        setIsAlertSuccess(true); // Mostrar la alerta
-        setTimeout(() => {
-          setIsAlertSuccess(false); // Ocultar la alerta después de un tiempo
-        }, 3000);
-        setOpen(false);
-      });
+      handleCreateIncident(parameters, setErrors, fetchData, setIsAlertSuccess, setOpen);
     } else {
       setErrors(newErrors);
     }
@@ -107,16 +71,16 @@ const IncidentsPage = () => {
         <Grid item xs={12}>
           <Grid container spacing={gridSpacing}>
             <Grid item xs={12} sm={6} md={4} lg={3}>
-              <TotalIncidentsCard title="Incidencias" total={parseInt(totalIncidents)} />
+              <TotalIncidentsCard title="Incidencias" total={parseInt(totalIncidents)} isLoading={isLoading} />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
-              <TotalOpenCard title="Abiertas" total={parseInt(totalOpen)} />
+              <TotalOpenCard title="Abiertas" total={parseInt(totalOpen)} isLoading={isLoading} />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
-              <TotalCloseCard title="Cerradas" total={parseInt(totalClose)} />
+              <TotalCloseCard title="Cerradas" total={parseInt(totalClose)} isLoading={isLoading} />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
-              <TotalHoursCard title="Horas" total={totalHours} />
+              <TotalHoursCard title="Horas" total={totalHours} isLoading={isLoading} />
             </Grid>
           </Grid>
         </Grid>
@@ -133,7 +97,13 @@ const IncidentsPage = () => {
         )}
 
         <Grid item xs={12}>
-          <IncidentsDataGrid rows={incidents} />
+          {isLoading ? (
+            <div className="center-spinner">
+              <CircularWithValueLabel color="secondary" />
+            </div>
+          ) : (
+            <IncidentsDataGrid rows={incidents} />
+          )}
           <Popper open={isAlertSuccess} transition>
             {({ TransitionProps }) => (
               <Fade {...TransitionProps} timeout={350}>
@@ -153,7 +123,7 @@ const IncidentsPage = () => {
             setSelectedOption={setSelectedOption}
             description={description}
             setDescription={setDescription}
-            handleCreateIncident={handleCreateIncident}
+            handleCreateIncident={validateAndCreateIncident}
             errors={errors}
             setErrors={setErrors}
           />
