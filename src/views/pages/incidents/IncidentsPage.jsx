@@ -12,7 +12,6 @@ import CreateIncidentDialog from './CreateIncidentDialog';
 import IncidentsDataGrid from './IncidentsDataGrid';
 import GetCustomization from 'services/customizeService';
 import CircularWithValueLabel from 'views/utilities/CircularProgressWithLabel';
-import 'assets/css/Spinner.css';
 import useIncidentsData from 'hooks/useIncidentsData';
 import useServicesData from 'hooks/useServicesData';
 

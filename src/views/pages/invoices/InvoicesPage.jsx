@@ -11,7 +11,6 @@ import TotalDebtCard from './TotalDebtCard';
 import InvoicesDataGrid from './InvoicesDataGrid';
 import { fetchSummaryData, fetchData, descargarFactura } from 'services/invoiceService';
 import CircularWithValueLabel from 'views/utilities/CircularProgressWithLabel';
-import 'assets/css/Spinner.css';
 
 const InvoicesPage = () => {
   const [ultimafactura, setUltimafactura] = useState(null);

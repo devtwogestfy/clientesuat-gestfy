@@ -7,6 +7,7 @@ import { gridSpacing } from 'store/constant';
 import TotalServiceCard from './TotalServiceCard';
 import GetInfoService from 'settings/servicios/service';
 import ServicesDataGrid from './ServicesDataGrid';
+import CircularWithValueLabel from 'views/utilities/CircularProgressWithLabel';
 
 const ServicesPage = () => {
   const theme = useTheme();
@@ -15,7 +16,7 @@ const ServicesPage = () => {
   const [mobiles, setMobiles] = useState(0);
   const [ftth, setFtth] = useState(0);
   const [others, setOthers] = useState(0);
-
+  const [isLoading, setLoading] = useState(true);
   useEffect(() => {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -65,11 +66,12 @@ const ServicesPage = () => {
       setMobiles(mobilesCount);
       setFtth(ftthCount);
       setOthers(othersCount);
+      setLoading(false);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
   };
-  console.log(data);
+
   return (
     <MainCard>
       <Grid container spacing={gridSpacing}>
@@ -82,6 +84,7 @@ const ServicesPage = () => {
                 colorCard={theme.palette.secondary.dark}
                 backgroundCard={theme.palette.secondary[800]}
                 icon="router"
+                isLoading={isLoading}
               />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
@@ -91,6 +94,7 @@ const ServicesPage = () => {
                 colorCard={theme.palette.primary.dark}
                 backgroundCard={theme.palette.primary[800]}
                 icon="phone"
+                isLoading={isLoading}
               />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
@@ -100,6 +104,7 @@ const ServicesPage = () => {
                 colorCard={theme.palette.success.dark}
                 backgroundCard={theme.palette.success.light}
                 icon="mobile"
+                isLoading={isLoading}
               />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
@@ -109,12 +114,19 @@ const ServicesPage = () => {
                 colorCard={theme.palette.error.dark}
                 backgroundCard={theme.palette.error.light}
                 icon="other"
+                isLoading={isLoading}
               />
             </Grid>
           </Grid>
         </Grid>
         <Grid item xs={12}>
-          <ServicesDataGrid rows={data} updateData={updateData} />
+          {isLoading ? (
+            <div className="center-spinner">
+              <CircularWithValueLabel color="secondary" />
+            </div>
+          ) : (
+            <ServicesDataGrid rows={data} updateData={updateData} />
+          )}
         </Grid>
       </Grid>
     </MainCard>

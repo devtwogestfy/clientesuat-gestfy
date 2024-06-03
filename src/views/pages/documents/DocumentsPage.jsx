@@ -4,7 +4,6 @@ import MainCard from 'ui-component/cards/MainCard';
 import { gridSpacing } from 'store/constant';
 import DocumentsDataGrid from './DocumentsDataGrid';
 import CircularWithValueLabel from 'views/utilities/CircularProgressWithLabel';
-import 'assets/css/Spinner.css';
 import { getDocuments, downloadDocument } from 'services/documentService';
 
 const DocumentsPage = () => {
