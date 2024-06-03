@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { IconButton, Grid, Alert, Popper, Fade, Stack } from '@mui/material';
+import { Grid, Alert, Popper, Fade, Stack } from '@mui/material';
 import MainCard from 'ui-component/cards/MainCard';
 import { gridSpacing } from 'store/constant';
 import GetInfoService from 'configuraciones/servicios/info-client';
@@ -8,7 +8,6 @@ import TotalIncidentsCard from '../incidents/TotalIncidentsCard';
 import TotalOpenCard from '../incidents/TotalOpenCard';
 import TotalCloseCard from '../incidents/TotalCloseCard';
 import TotalHoursCard from '../incidents/TotalHoursCard';
-import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
 import { useTheme } from '@mui/material/styles';
 import CreateIncidentDialog from '../incidents/CreateIncidentDialog';
 import PostInfoService from 'configuraciones/servicios/post-info-client';
