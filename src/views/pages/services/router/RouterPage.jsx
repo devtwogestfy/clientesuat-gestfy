@@ -104,8 +104,9 @@ const RouterPage = () => {
       lan: lanData,
       ports: portsData
     };
+    console.log('aquiii');
     console.log(body);
-    infoService
+    /*infoService
       .updateRouterConfig(body, params.id)
       .then((res) => {
         console.log(res);
@@ -119,7 +120,7 @@ const RouterPage = () => {
       })
       .finally(() => {
         //openSnack('dialogs.snacks.put_router');
-      });
+      });*/
   };
 
   return (
