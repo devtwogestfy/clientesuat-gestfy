@@ -63,7 +63,7 @@ const ProfileSection = () => {
    * */
   const anchorRef = useRef(null);
   const handleLogout = async () => {
-    console.log('Logout');
+    //console.log('Logout', getSessionId());
     removeCookie(getSessionId());
     navigate('/login');
   };

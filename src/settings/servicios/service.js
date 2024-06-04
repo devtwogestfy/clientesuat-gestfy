@@ -144,7 +144,7 @@ const GetInfoService = () => {
       sort: sort
     };
 
-    const response = await backendAPI.get('/portal23/pservs', { params });
+    const response = await backendAPI.get('/portal/pservs', { params });
     const data = response.data;
     return data;
   };

@@ -27,9 +27,7 @@ const AuthLogin = ({ ...others }) => {
   const theme = useTheme();
   const [userEmail, setUserEmail] = useState('');
   const [password, setPassword] = useState('');
-  // eslint-disable-next-line no-unused-vars
   const [cookies, setCookie] = useCookies([getSessionId()]);
-  const [openAlert, setOpenAlert] = useState(false);
 
   const handleCloseAlert = () => {
     setOpenAlert(false);
@@ -52,12 +50,9 @@ const AuthLogin = ({ ...others }) => {
     instanciaLogin
       .iniciarSesion(userEmail, password)
       .then((response) => {
-        // Manejar la respuesta exitosa aquí
         setCookie(createSessionId(), uuidv4());
       })
-      // eslint-disable-next-line no-unused-vars
       .catch((error) => {
-        setOpenAlert(true);
         console.log(error);
       });
   }
@@ -71,7 +66,7 @@ const AuthLogin = ({ ...others }) => {
           submit: null
         }}
         validationSchema={Yup.object().shape({
-          userEmail: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
+          userEmail: Yup.string().max(255).required('Email is required'),
           password: Yup.string()
             .max(255)
             .required(<FormattedMessage id="password.isRequired" />)
@@ -146,23 +141,6 @@ const AuthLogin = ({ ...others }) => {
                 </Button>
               </AnimateButton>
             </Box>
-            {openAlert && (
-              <Dialog severity="error" open={openAlert} onClose={handleCloseAlert}>
-                <DialogTitle>
-                  <FormattedMessage id="login.errors.title" />
-                </DialogTitle>
-                <DialogContent>
-                  <p>
-                    <FormattedMessage id="login.errors.message" />
-                  </p>
-                </DialogContent>
-                <DialogActions>
-                  <Button onClick={handleCloseAlert} color="primary">
-                    OK
-                  </Button>
-                </DialogActions>
-              </Dialog>
-            )}
           </form>
         )}
       </Formik>

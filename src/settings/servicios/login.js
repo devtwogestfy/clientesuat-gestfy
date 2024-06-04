@@ -11,9 +11,11 @@ class apiLogin {
       backendAPI
         .post('/portal/loginuser', parametros)
         .then(function (response) {
+          console.log(response);
           resolve(response);
         })
         .catch(function (error) {
+          console.log(error);
           reject(error.response);
         });
     });

@@ -17,15 +17,21 @@ backendAPI.interceptors.response.use(
     return response;
   },
   function (error) {
-    console.log(error.response.status);
-    if (error.response.status == 401) {
-      eliminarCookies();
-      showMessageDialog('Error de autenticación', 'Su sesión ha expirado. Por favor, inicie sesión nuevamente.');
-      window.location.href = 'login';
+    if (error.response) {
+      console.log(error.response);
+      if (error.response.status === 401) {
+        eliminarCookies();
+        showMessageDialog('Error de autenticación', 'Su sesión ha expirado. Por favor, inicie sesión nuevamente.');
+        window.location.href = '/login';
+      } else if (error.response.status === 404) {
+        showMessageDialog('Error', error.response.data);
+      } else {
+        showMessageDialog('Error', 'Algo salió mal. Por favor, inténtelo de nuevo más tarde.');
+      }
     } else {
-      showMessageDialog('Error', 'Algo salió mal. Por favor, inténtelo de nuevo más tarde.');
+      showMessageDialog('Error', 'No se pudo conectar al servidor. Por favor, inténtelo de nuevo más tarde.');
     }
-    return error;
+    return Promise.reject(error); // This is important
   }
 );
 
