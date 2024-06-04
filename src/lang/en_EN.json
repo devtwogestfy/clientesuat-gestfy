@@ -67,6 +67,7 @@
   "invoices.table.number": "Number",
   "invoices.table.value": "Amount",
   "invoices.table.pending": "Pending",
+  "invoices.table.actions": "Actions",
   "invoices.table.paid": "Paid",
   "invoices.table.pay": "Pay",
 

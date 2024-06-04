@@ -95,9 +95,10 @@ const InvoicesDataGrid = ({ rows, downloadInvoice }) => {
     },
     {
       field: 'download',
-      headerName: '',
+      headerName: 'Actions',
       headerClassName: 'MuiDataGrid-columnHeaders',
       flex: 1,
+      renderHeader: () => <FormattedMessage id="invoices.table.actions" />,
       renderCell: (params) => {
         return (
           <Button variant="contained" color="primary" onClick={() => handleFormalizePrepay(params.row)}>
