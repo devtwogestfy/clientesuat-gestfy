@@ -12,6 +12,7 @@ const BajajAreaChartCard = () => {
   const theme = useTheme();
   const orangeDark = theme.palette.secondary[800];
   const [data, setData] = useState([]);
+  const [totalSum, setTotalSum] = useState(0); // Initialize totalSum state
   const customization = useSelector((state) => state.customization);
   const { navType } = customization;
 
@@ -28,6 +29,10 @@ const BajajAreaChartCard = () => {
     try {
       const billing = await GetInfoService().getBilling();
       setData(billing);
+
+      // Calculate the total sum
+      const total = billing.reduce((sum, item) => sum + parseFloat(item.suma), 0);
+      setTotalSum(total);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -48,7 +53,6 @@ const BajajAreaChartCard = () => {
         enabled: true
       }
     },
-
     dataLabels: {
       enabled: false
     },
@@ -86,7 +90,7 @@ const BajajAreaChartCard = () => {
             <Grid item></Grid>
             <Grid item>
               <Typography variant="h4" sx={{ color: 'grey.800' }}>
-                $0.00
+                ${totalSum.toFixed(2)} {/* Display the total sum */}
               </Typography>
             </Grid>
           </Grid>
