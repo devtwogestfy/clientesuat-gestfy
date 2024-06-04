@@ -9,7 +9,7 @@ import GetInfoService from 'settings/servicios/service';
 import BackButton from 'views/utilities/BottonBack';
 import { useParams } from 'react-router-dom';
 import CircularWithValueLabel from 'views/utilities/CircularProgressWithLabel';
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
+
 const RouterPage = () => {
   const params = useParams();
   const [isLoading, setIsLoading] = useState(true);
@@ -22,13 +22,8 @@ const RouterPage = () => {
     dhcpEnd: ''
   });
   const [portsData, setPortsData] = useState([]);
-  const [errorDialogOpen, setErrorDialogOpen] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
   const infoService = GetInfoService();
 
-  const handleCloseErrorDialog = () => {
-    setErrorDialogOpen(false);
-  };
   const fetchData = () => {
     infoService
       .getRouterData(params.id)
@@ -56,18 +51,13 @@ const RouterPage = () => {
           protocol: item.protocolo
         }));
         setPortsData(formattedPortsData);
-        console.log(res);
+        //console.log(res);
         setTimeout(() => {
           setIsLoading(false);
         }, 2000);
       })
       .catch((error) => {
         console.error(error);
-        if (error.response && error.response.status === 400) {
-          // Display error dialog
-          setErrorMessage('Bad request. Please check your input.');
-          setErrorDialogOpen(true);
-        }
       });
   };
 
@@ -104,23 +94,16 @@ const RouterPage = () => {
       lan: lanData,
       ports: portsData
     };
-    console.log('aquiii');
-    console.log(body);
-    /*infoService
+    //console.log(body);
+    infoService
       .updateRouterConfig(body, params.id)
       .then((res) => {
         console.log(res);
       })
       .catch((error) => {
         console.log(error);
-
-        // Display error dialog
-        setErrorMessage('Bad request. Please check your input.');
-        setErrorDialogOpen(true);
       })
-      .finally(() => {
-        //openSnack('dialogs.snacks.put_router');
-      });*/
+      .finally(() => {});
   };
 
   return (
@@ -152,15 +135,6 @@ const RouterPage = () => {
           <Grid item xs={12}>
             <BackButton />
           </Grid>
-          <Dialog open={errorDialogOpen} onClose={handleCloseErrorDialog}>
-            <DialogTitle>Error</DialogTitle>
-            <DialogContent>
-              <DialogContentText>{errorMessage}</DialogContentText>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleCloseErrorDialog}>Close</Button>
-            </DialogActions>
-          </Dialog>
         </>
       )}
     </Grid>

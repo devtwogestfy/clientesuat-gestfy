@@ -173,6 +173,7 @@
   "router.buttons.save": "Guardar",
   "router.buttons.qr24": "QR 2.4GHz",
   "router.buttons.qr5": "QR 5GHz",
+  "router.buttons.close": "Cerrar",
 
   "dialogs.dates": "Las fechas no puede tener mas de 3 meses entre si",
   "dialogs.qr.title5": "QR de red WiFi 5GHz",

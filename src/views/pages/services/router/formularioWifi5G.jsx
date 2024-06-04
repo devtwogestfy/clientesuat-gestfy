@@ -23,6 +23,7 @@ import QrCodeIcon from '@mui/icons-material/QrCode';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import QRCode from 'qrcode.react';
+import { FormattedMessage } from 'react-intl';
 
 function FormularioWifi5G({ wifi5Data, updateData }) {
   const [ssid, setSsid] = useState('');
@@ -39,7 +40,7 @@ function FormularioWifi5G({ wifi5Data, updateData }) {
 
   const validateSsid = (value) => {
     if (value.length < 8 || value.length > 25) {
-      setSsidError('SSID must be between 8 and 25 characters');
+      setSsidError(<FormattedMessage id="router.errors.valid_ssid" />);
     } else {
       setSsidError('');
     }
@@ -47,7 +48,7 @@ function FormularioWifi5G({ wifi5Data, updateData }) {
 
   const validatePassword = (value) => {
     if (value.length < 8 || value.length > 25) {
-      setPasswordError('Password must be between 8 and 25 characters');
+      setPasswordError(<FormattedMessage id="router.errors.valid_password" />);
     } else {
       setPasswordError('');
     }
@@ -71,20 +72,22 @@ function FormularioWifi5G({ wifi5Data, updateData }) {
     event.preventDefault();
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (event) => {
+    event.stopPropagation();
     validateSsid(ssid);
     validatePassword(password);
-
     if (!ssidError && !passwordError) {
       updateData('wifi5', { ssid, password });
     }
   };
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (event) => {
+    event.stopPropagation();
     setOpen(true);
   };
 
-  const handleClose = () => {
+  const handleClose = (event) => {
+    event.stopPropagation();
     setOpen(false);
   };
 
@@ -113,7 +116,9 @@ function FormularioWifi5G({ wifi5Data, updateData }) {
           {ssidError && <FormHelperText error>{ssidError}</FormHelperText>}
         </FormControl>
         <FormControl fullWidth sx={{ m: 1 }}>
-          <InputLabel htmlFor="password-5g">Contraseña</InputLabel>
+          <InputLabel htmlFor="password-5g">
+            <FormattedMessage id="router.cards.form.password" />
+          </InputLabel>
           <OutlinedInput
             id="password-5g"
             type={showPassword ? 'text' : 'password'}
@@ -138,20 +143,23 @@ function FormularioWifi5G({ wifi5Data, updateData }) {
           {passwordError && <FormHelperText error>{passwordError}</FormHelperText>}
         </FormControl>
 
-        <Stack sx={{ alignItems: 'center' }}>
+        <Stack sx={{ alignItems: 'center', marginTop: 2 }}>
           <Button variant="contained" endIcon={<QrCodeIcon />} onClick={handleClickOpen}>
-            Ver Qr
+            <FormattedMessage id="router.buttons.qr5" />
           </Button>
         </Stack>
       </CardContent>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>QR Code</DialogTitle>
+        <DialogTitle>
+          {' '}
+          <FormattedMessage id="router.buttons.qr5" />
+        </DialogTitle>
         <DialogContent>
           <QRCode value={`WIFI:T:WPA;S:${ssid};P:${password};;`} />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cerrar
+          <Button onClick={handleClose} color="error" variant="outlined">
+            <FormattedMessage id="router.buttons.close" />
           </Button>
         </DialogActions>
       </Dialog>

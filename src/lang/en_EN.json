@@ -173,6 +173,7 @@
   "router.buttons.save": "Save",
   "router.buttons.qr24": "QR 2.4GHz",
   "router.buttons.qr5": "QR 5GHz",
+  "router.buttons.close": "Close",
 
   "dialogs.dates": "The dates can't have more than 3 months in between",
   "dialogs.qr.title5": "WiFi 5GHz network QR",
