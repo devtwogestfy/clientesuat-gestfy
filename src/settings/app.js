@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { func } from 'prop-types';
+import React, { useState } from 'react';
+import { showMessageDialog } from '../utils/messageDialog';
 
 const config = {
   baseURL: `/api`
@@ -15,9 +17,13 @@ backendAPI.interceptors.response.use(
     return response;
   },
   function (error) {
+    console.log(error.response.status);
     if (error.response.status == 401) {
       eliminarCookies();
+      showMessageDialog('Error de autenticación', 'Su sesión ha expirado. Por favor, inicie sesión nuevamente.');
       window.location.href = 'login';
+    } else {
+      showMessageDialog('Error', 'Algo salió mal. Por favor, inténtelo de nuevo más tarde.');
     }
     return error;
   }
@@ -30,4 +36,5 @@ function eliminarCookies() {
     document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
   }
 }
+
 export { backendAPI };
