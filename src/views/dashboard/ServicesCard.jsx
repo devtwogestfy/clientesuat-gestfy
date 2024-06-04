@@ -96,8 +96,7 @@ const ServicesCard = ({ isLoading }) => {
       setFtth(ftthCount);
       setOthers(othersCount);
     } catch (error) {
-      removeCookie(getSessionId());
-      navigate('/login');
+      console.log(error);
     }
   };
   const openModal = () => {
