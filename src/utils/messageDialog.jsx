@@ -13,7 +13,7 @@ const MessageDialog = ({ open, handleClose, title, message }) => {
         <DialogContentText>{message}</DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} color="primary">
+        <Button onClick={handleClose} color="error" variant="outlined">
           Cerrar
         </Button>
       </DialogActions>
