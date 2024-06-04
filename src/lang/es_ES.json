@@ -261,5 +261,8 @@
   "password.isRequired": "Se requiere contraseña",
   "profile.section.settings": "Configuraciones de la Cuenta",
   "profile.section.social.profile": "Perfil social",
-  "profile.section.logout": "Cerrar sesión"
+  "profile.section.logout": "Cerrar sesión",
+  "profile.section.send.message": "Enviar mensaje",
+  "profile.section.send.message.description": "Por favor, ingresa tu mensaje en el siguiente campo de texto y luego presiona el botón 'Enviar'",
+  "profile.section.send.message.error": "El mensaje debe tener al menos 25 caracteres."
 }

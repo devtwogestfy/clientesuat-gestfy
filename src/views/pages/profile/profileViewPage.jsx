@@ -1,24 +1,5 @@
-import { useState, useEffect } from 'react';
-import {
-  Card,
-  CardActionArea,
-  CardContent,
-  CardMedia,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  Typography,
-  Avatar,
-  Box,
-  Stack,
-  Button,
-  Grid,
-  Tabs,
-  Tab,
-  TextField
-} from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { Card, CardActionArea, CardContent, CardMedia, Typography, Avatar, Box, Stack, Button, Grid, Tabs, Tab } from '@mui/material';
 import ProfileBackground from 'assets/images/banner.png';
 import ProfileImage from 'assets/images/users/user-round.svg';
 import MainCard from 'ui-component/cards/MainCard';
@@ -29,13 +10,14 @@ import InvoiceTabPanel from './InvoiceTabPanel';
 import IncidentTabPanel from './IncidentTabPanel';
 import ClientTabPanel from './ClientTabPanel';
 import SuccessDialog from './SuccessDialog';
+import MessageDialog from './MessageDialog';
 import GetInfoClient from 'settings/servicios/client';
 import { createIncident } from 'settings/servicios/incident';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import GetCustomization from 'services/customizeService';
 const customization = await GetCustomization();
-// eslint-disable-next-line react/prop-types
+
 function CustomTabPanel({ children, value, index }) {
   return (
     <div role="tabpanel" hidden={value !== index} id={`simple-tabpanel-${index}`} aria-labelledby={`simple-tab-${index}`}>
@@ -62,6 +44,7 @@ const ProfileViewPage = () => {
       console.error(error);
     }
   };
+
   useEffect(() => {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -83,7 +66,7 @@ const ProfileViewPage = () => {
 
   const handleSendMessage = () => {
     if (message.length < 25) {
-      setError('El mensaje debe tener al menos 25 caracteres.');
+      setError(<FormattedMessage id="profile.section.send.message.error" />);
     } else {
       let body = {
         texto: message
@@ -96,8 +79,7 @@ const ProfileViewPage = () => {
         })
         .catch((error) => {
           console.log(error);
-        })
-        .finally(() => {});
+        });
     }
   };
 
@@ -133,7 +115,7 @@ const ProfileViewPage = () => {
             <Grid container spacing={2}>
               <Grid item xs={12} sm={8} md={6}>
                 <Typography gutterBottom variant="h2" component="div">
-                  {clientInfo && clientInfo ? `${clientInfo.nombre} ${clientInfo.apellido}` : '-'}
+                  {clientInfo ? `${clientInfo.nombre} ${clientInfo.apellido}` : '-'}
                 </Typography>
               </Grid>
               <Grid item xs={12} sm={4} md={6} container justifyContent="flex-end">
@@ -167,42 +149,20 @@ const ProfileViewPage = () => {
         </CustomTabPanel>
         <CustomTabPanel value={value} index={2}>
           <InvoiceTabPanel />
-        </CustomTabPanel>{' '}
+        </CustomTabPanel>
         {customization.view_tickets === 1 && (
           <CustomTabPanel value={value} index={3}>
             <IncidentTabPanel />
           </CustomTabPanel>
         )}
-        <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-          <DialogTitle id="form-dialog-title">Enviar mensaje</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              Por favor, ingresa tu mensaje en el siguiente campo de texto y luego presiona el botón "Enviar".
-            </DialogContentText>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="message"
-              label="Mensaje"
-              fullWidth
-              multiline
-              rows={4}
-              variant="outlined"
-              value={message}
-              onChange={handleChangeMessage}
-              error={!!error}
-              helperText={error}
-            />
-          </DialogContent>
-          <DialogActions>
-            <Button variant="contained" onClick={handleSendMessage} color="success">
-              Enviar
-            </Button>
-            <Button variant="contained" onClick={handleClose} color="error">
-              Cancelar
-            </Button>
-          </DialogActions>
-        </Dialog>
+        <MessageDialog
+          open={open}
+          handleClose={handleClose}
+          handleSendMessage={handleSendMessage}
+          message={message}
+          handleChangeMessage={handleChangeMessage}
+          error={error}
+        />
         <SuccessDialog openSuccess={openSuccess} handleCloseSuccess={handleCloseSuccess} />
       </Box>
     </MainCard>
