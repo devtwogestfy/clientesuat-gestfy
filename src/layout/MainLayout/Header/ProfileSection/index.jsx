@@ -27,14 +27,12 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 import MainCard from 'ui-component/cards/MainCard';
 import Transitions from 'ui-component/extended/Transitions';
 import User1 from 'assets/images/users/user-round.svg';
-
-// assets
 import { IconLogout, IconSettings, IconUser } from '@tabler/icons-react';
 import { useCookies } from 'react-cookie';
 import GreetingComponent from './GreetingComponent';
 import GetInfoClient from 'settings/servicios/client';
 import { getSessionId } from 'utils/sessionId';
-// ==============================|| PROFILE MENU ||============================== //
+import { FormattedMessage } from 'react-intl';
 
 const ProfileSection = () => {
   const theme = useTheme();
@@ -199,17 +197,24 @@ const ProfileSection = () => {
                         <ListItemButton
                           sx={{ borderRadius: `${customization.borderRadius}px` }}
                           selected={selectedIndex === 0}
-                          onClick={(event) => handleListItemClick(event, 0, '#')}
+                          onClick={(event) => handleListItemClick(event, 0, 'profile')}
                         >
                           <ListItemIcon>
                             <IconSettings stroke={1.5} size="1.3rem" />
                           </ListItemIcon>
-                          <ListItemText primary={<Typography variant="body2">Account Settings</Typography>} />
+                          <ListItemText
+                            primary={
+                              <Typography variant="body2">
+                                {' '}
+                                <FormattedMessage id="profile.section.settings" />
+                              </Typography>
+                            }
+                          />
                         </ListItemButton>
                         <ListItemButton
                           sx={{ borderRadius: `${customization.borderRadius}px` }}
                           selected={selectedIndex === 1}
-                          onClick={(event) => handleListItemClick(event, 1, '#')}
+                          onClick={(event) => handleListItemClick(event, 1, 'profile')}
                         >
                           <ListItemIcon>
                             <IconUser stroke={1.5} size="1.3rem" />
@@ -218,17 +223,9 @@ const ProfileSection = () => {
                             primary={
                               <Grid container spacing={1} justifyContent="space-between">
                                 <Grid item>
-                                  <Typography variant="body2">Social Profile</Typography>
-                                </Grid>
-                                <Grid item>
-                                  <Chip
-                                    label="02"
-                                    size="small"
-                                    sx={{
-                                      bgcolor: theme.palette.warning.dark,
-                                      color: theme.palette.background.default
-                                    }}
-                                  />
+                                  <Typography variant="body2">
+                                    <FormattedMessage id="profile.section.social.profile" />
+                                  </Typography>
                                 </Grid>
                               </Grid>
                             }
@@ -242,7 +239,13 @@ const ProfileSection = () => {
                           <ListItemIcon>
                             <IconLogout stroke={1.5} size="1.3rem" />
                           </ListItemIcon>
-                          <ListItemText primary={<Typography variant="body2">Logout</Typography>} />
+                          <ListItemText
+                            primary={
+                              <Typography variant="body2">
+                                <FormattedMessage id="profile.section.logout" />
+                              </Typography>
+                            }
+                          />
                         </ListItemButton>
                       </List>
                     </Box>

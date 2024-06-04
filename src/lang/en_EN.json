@@ -256,5 +256,8 @@
   "errors.base": "An error has occurred, please consult technical support.",
   "table.empty": "There are no records",
   "email.isRequired": "Email is required",
-  "password.isRequired": "Password is required"
+  "password.isRequired": "Password is required",
+  "profile.section.settings": "Account Settings",
+  "profile.section.social.profile": "Social Profile",
+  "profile.section.logout": "Logout"
 }

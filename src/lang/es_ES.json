@@ -256,5 +256,8 @@
   "errors.base": "Se ha producido un error, consulte al servicio técnico.",
   "table.empty": "No hay registros",
   "email.isRequired": "Se requiere usuario",
-  "password.isRequired": "Se requiere contraseña"
+  "password.isRequired": "Se requiere contraseña",
+  "profile.section.settings": "Configuraciones de la Cuenta",
+  "profile.section.social.profile": "Perfil social",
+  "profile.section.logout": "Cerrar sesión"
 }
