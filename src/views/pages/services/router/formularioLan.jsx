@@ -7,7 +7,6 @@ import CardSecondaryAction from 'ui-component/cards/CardSecondaryAction';
 import SaveIcon from '@mui/icons-material/Save';
 import { FormattedMessage } from 'react-intl';
 
-// Función para validar direcciones IP
 const isValidIP = (ip) => {
   const ipRegex =
     /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
@@ -51,12 +50,11 @@ function FormularioLan({ lanData, updateData }) {
 
   const validate = () => {
     let temp = { ...errors };
-    temp.ip = isValidIP(ip) ? '' : 'Invalid IP address';
-    temp.mask = isValidIP(mask) ? '' : 'Invalid Mask address';
-    temp.dhcpStart = isValidIP(dhcpStart) ? '' : 'Invalid DHCP Start address';
-    temp.dhcpEnd = isValidIP(dhcpEnd) ? '' : 'Invalid DHCP End address';
+    temp.ip = isValidIP(ip) ? '' : <FormattedMessage id="router.errors.valid_ip" />;
+    temp.mask = isValidIP(mask) ? '' : <FormattedMessage id="router.errors.valid_mask" />;
+    temp.dhcpStart = isValidIP(dhcpStart) ? '' : <FormattedMessage id="router.errors.valid_dhcpStart" />;
+    temp.dhcpEnd = isValidIP(dhcpEnd) ? '' : <FormattedMessage id="router.errors.valid_dhcpEnd" />;
     setErrors(temp);
-    console.log(temp);
     return Object.values(temp).every((x) => x === '');
   };
 
@@ -81,7 +79,9 @@ function FormularioLan({ lanData, updateData }) {
         <Grid container spacing="2">
           <Grid item xs={6} sm={6} md={6} lg={6}>
             <FormControl fullWidth sx={{ mb: 3 }}>
-              <InputLabel htmlFor="ip">IP</InputLabel>
+              <InputLabel htmlFor="ip">
+                <FormattedMessage id="router.cards.form.ip" />
+              </InputLabel>
               <OutlinedInput
                 id="ip"
                 value={ip}
@@ -93,7 +93,9 @@ function FormularioLan({ lanData, updateData }) {
               {errors.ip && <p style={{ color: 'red' }}>{errors.ip}</p>}
             </FormControl>
             <FormControl fullWidth>
-              <InputLabel htmlFor="dhcp-desde">DHCP Desde</InputLabel>
+              <InputLabel htmlFor="dhcp-desde">
+                <FormattedMessage id="router.cards.form.dhcp_from" />
+              </InputLabel>
               <OutlinedInput
                 id="dhcp-desde"
                 value={dhcpStart}
@@ -107,7 +109,10 @@ function FormularioLan({ lanData, updateData }) {
           </Grid>
           <Grid item xs={6} sm={6} md={6} lg={6}>
             <FormControl fullWidth sx={{ mb: 3, ml: 3, pr: 3 }}>
-              <InputLabel htmlFor="mascara">Máscara</InputLabel>
+              <InputLabel htmlFor="mascara">
+                {' '}
+                <FormattedMessage id="router.cards.form.mask" />
+              </InputLabel>
               <OutlinedInput
                 id="mascara"
                 value={mask}
@@ -119,7 +124,10 @@ function FormularioLan({ lanData, updateData }) {
               {errors.mask && <p style={{ color: 'red' }}>{errors.mask}</p>}
             </FormControl>
             <FormControl fullWidth sx={{ ml: 3, pr: 3 }}>
-              <InputLabel htmlFor="dhcp-hasta">DHCP Hasta</InputLabel>
+              <InputLabel htmlFor="dhcp-hasta">
+                {' '}
+                <FormattedMessage id="router.cards.form.dhcp_to" />
+              </InputLabel>
               <OutlinedInput
                 id="dhcp-hasta"
                 value={dhcpEnd}
@@ -133,7 +141,7 @@ function FormularioLan({ lanData, updateData }) {
           </Grid>
         </Grid>
         <Alert sx={{ mt: 3 }} severity="warning" variant="filled">
-          Cambiar estos parámetros puede dejarle sin conectividad.
+          <FormattedMessage id="router.errors.warning_lan" />
         </Alert>
       </CardContent>
     </MainCard>
