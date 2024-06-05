@@ -8,6 +8,7 @@ import TotalServiceCard from './TotalServiceCard';
 import GetInfoService from 'settings/servicios/service';
 import ServicesDataGrid from './ServicesDataGrid';
 import CircularWithValueLabel from 'views/utilities/CircularProgressWithLabel';
+import { FormattedMessage } from 'react-intl';
 
 const ServicesPage = () => {
   const theme = useTheme();
@@ -79,7 +80,7 @@ const ServicesPage = () => {
           <Grid container spacing={gridSpacing}>
             <Grid item xs={12} sm={6} md={4} lg={3}>
               <TotalServiceCard
-                title="FTTH"
+                title={<FormattedMessage id="services.cards.ftth" />}
                 total={ftth}
                 colorCard={theme.palette.secondary.dark}
                 backgroundCard={theme.palette.secondary[800]}
@@ -89,7 +90,7 @@ const ServicesPage = () => {
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
               <TotalServiceCard
-                title="Fijos"
+                title={<FormattedMessage id="services.cards.phone" />}
                 total={phones}
                 colorCard={theme.palette.primary.dark}
                 backgroundCard={theme.palette.primary[800]}
@@ -99,7 +100,7 @@ const ServicesPage = () => {
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
               <TotalServiceCard
-                title="Móviles"
+                title={<FormattedMessage id="services.cards.mobile" />}
                 total={mobiles}
                 colorCard={theme.palette.success.dark}
                 backgroundCard={theme.palette.success.light}
@@ -109,7 +110,7 @@ const ServicesPage = () => {
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
               <TotalServiceCard
-                title="Otros"
+                title={<FormattedMessage id="services.cards.others" />}
                 total={others}
                 colorCard={theme.palette.error.dark}
                 backgroundCard={theme.palette.error.light}

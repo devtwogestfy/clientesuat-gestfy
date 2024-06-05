@@ -15,9 +15,8 @@ import GetInfoClient from 'settings/servicios/client';
 import { createIncident } from 'settings/servicios/incident';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-import GetCustomization from 'services/customizeService';
 import CircularWithValueLabel from 'views/utilities/CircularProgressWithLabel';
- 
+
 function CustomTabPanel({ children, value, index }) {
   return (
     <div role="tabpanel" hidden={value !== index} id={`simple-tabpanel-${index}`} aria-labelledby={`simple-tab-${index}`}>
@@ -119,19 +118,19 @@ const ProfileViewPage = () => {
                   />
                 </Box>
               </CardActionArea>
-              <CardContent>
-                
-              </CardContent>
+              <CardContent></CardContent>
             </Card>
           </Box>
           <Box sx={{ width: '100%' }}>
             <ClientTabPanel clientInfo={clientInfo} handleOpen={handleOpen} />
-           {/*  <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+            {/*  <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
               <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                <Tab label="Datos" id="simple-tab-0" aria-controls="simple-tabpanel-0" />
-                <Tab label="Servicios" id="simple-tab-1" aria-controls="simple-tabpanel-1" />
-                <Tab label="Facturas" id="simple-tab-2" aria-controls="simple-tabpanel-2" />
-                {customization.view_tickets === 1 && <Tab label="Incidencias" id="simple-tab-3" aria-controls="simple-tabpanel-3" />}
+                <Tab label={<FormattedMessage id="layout.menu_info" />} id="simple-tab-0" aria-controls="simple-tabpanel-0" />
+                <Tab label={<FormattedMessage id="layout.menu_services" />} id="simple-tab-1" aria-controls="simple-tabpanel-1" />
+                <Tab label={<FormattedMessage id="layout.menu_invoices" />} id="simple-tab-2" aria-controls="simple-tabpanel-2" />
+                {customization && customization.view_tickets === 1 && (
+                  <Tab label={<FormattedMessage id="layout.menu_incidents" />} id="simple-tab-3" aria-controls="simple-tabpanel-3" />
+                )}
               </Tabs>
             </Box>
             <CustomTabPanel value={value} index={0}>

@@ -60,11 +60,17 @@ const GetInfoClient = () => {
     return response.data;
   };
 
+  const getTermsConditions = async () => {
+    const response = await backendAPI.get('/portal/terms-conditions');
+    return response.data;
+  };
+
   return {
     getClient,
     getCliente,
     getBaseconfig,
-    getBeforeConfig
+    getBeforeConfig,
+    getTermsConditions
   };
 };
 
