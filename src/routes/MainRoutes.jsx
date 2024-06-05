@@ -23,14 +23,14 @@ const MainRoutes = {
   children: [
     {
       path: '/',
-      element: <AuthGuard component={<DashboardDefault />}></AuthGuard>
+      element: <AuthGuard component={<ProfileViewPage />}></AuthGuard>
     },
     {
       path: 'dashboard',
       children: [
         {
           path: 'default',
-          element: <AuthGuard component={<DashboardDefault />}></AuthGuard>
+          element: <AuthGuard component={<ProfileViewPage />}></AuthGuard>
         }
       ]
     },

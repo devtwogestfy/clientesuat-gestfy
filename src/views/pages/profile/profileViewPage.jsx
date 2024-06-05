@@ -17,8 +17,7 @@ import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import GetCustomization from 'services/customizeService';
 import CircularWithValueLabel from 'views/utilities/CircularProgressWithLabel';
-const customization = await GetCustomization();
-
+ 
 function CustomTabPanel({ children, value, index }) {
   return (
     <div role="tabpanel" hidden={value !== index} id={`simple-tabpanel-${index}`} aria-labelledby={`simple-tab-${index}`}>
@@ -120,29 +119,14 @@ const ProfileViewPage = () => {
                   />
                 </Box>
               </CardActionArea>
-              <CardContent sx={{ pt: '60px' }}>
-                <Grid container spacing={2}>
-                  <Grid item xs={12} sm={8} md={6}>
-                    <Typography gutterBottom variant="h2" component="div">
-                      {clientInfo ? `${clientInfo.nombre} ${clientInfo.apellido}` : '-'}
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={12} sm={4} md={6} container justifyContent="flex-end">
-                    <Stack direction="row" spacing={2}>
-                      <Button component={Link} to="/" variant="outlined" startIcon={<HomeIcono />}>
-                        <FormattedMessage id="layout.menu_home" />
-                      </Button>
-                      <Button variant="contained" endIcon={<SendIcon />} onClick={handleOpen}>
-                        <FormattedMessage id="info.contact" />
-                      </Button>
-                    </Stack>
-                  </Grid>
-                </Grid>
+              <CardContent>
+                
               </CardContent>
             </Card>
           </Box>
           <Box sx={{ width: '100%' }}>
-            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+            <ClientTabPanel clientInfo={clientInfo} handleOpen={handleOpen} />
+           {/*  <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
               <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
                 <Tab label="Datos" id="simple-tab-0" aria-controls="simple-tabpanel-0" />
                 <Tab label="Servicios" id="simple-tab-1" aria-controls="simple-tabpanel-1" />
@@ -163,7 +147,7 @@ const ProfileViewPage = () => {
               <CustomTabPanel value={value} index={3}>
                 <IncidentTabPanel />
               </CustomTabPanel>
-            )}
+            )} */}
             <MessageDialog
               open={open}
               handleClose={handleClose}

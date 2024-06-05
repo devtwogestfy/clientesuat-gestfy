@@ -7,8 +7,13 @@ import ApexCharts from 'apexcharts';
 import Chart from 'react-apexcharts';
 import { useTheme } from '@mui/material/styles';
 import GetInfoService from 'settings/servicios/service';
+import { FormattedMessage } from 'react-intl';
+import { useIntl } from 'react-intl';
 
 const BajajAreaChartCard = () => {
+  //instanciar paquete para traduccion
+  const intl = useIntl();
+
   const theme = useTheme();
   const orangeDark = theme.palette.secondary[800];
   const [data, setData] = useState([]);
@@ -50,34 +55,60 @@ const BajajAreaChartCard = () => {
     chart: {
       id: 'support-chart',
       sparkline: {
-        enabled: true
+        enabled: false // Desactivar el modo "sparkline" para más detalles
+      },
+      toolbar: {
+        show: true // Mostrar la barra de herramientas del gráfico
       }
     },
     dataLabels: {
-      enabled: false
+      enabled: true // Activar etiquetas de datos
     },
     stroke: {
       curve: 'smooth',
-      width: 1
+      width: 2 // Aumentar el ancho de la línea
+    },
+    fill: {
+      type: 'gradient',
+      gradient: {
+        shadeIntensity: 1,
+        opacityFrom: 0.7,
+        opacityTo: 0.9,
+        stops: [0, 90, 100]
+      }
     },
     xaxis: {
       categories: months
     },
     legend: {
-      horizontalAlign: 'left'
+      show: true,
+      position: 'top', // Posición de la leyenda
+      horizontalAlign: 'center', // Alineación horizontal
+      markers: {
+        width: 10,
+        height: 10,
+        radius: 12
+      }
     },
     tooltip: {
-      fixed: {
-        enabled: false
-      },
+      theme: 'dark',
       x: {
         show: true
       },
       y: {
-        title: {}
+        formatter: (val) => `$${val.toFixed(2)}`
       },
       marker: {
-        show: false
+        show: true
+      }
+    },
+    title: {
+      text:  intl.formatMessage({ id: 'dashboard.showcase_graph.title' }),
+      align: 'center',
+      style: {
+        fontSize: '20px',
+        fontWeight: 'bold',
+        color: theme.palette.text.primary
       }
     }
   };
@@ -96,7 +127,7 @@ const BajajAreaChartCard = () => {
           </Grid>
         </Grid>
       </Grid>
-      <Chart options={options} series={series} type="area" height={95} />
+      <Chart options={options} series={series} type="area" height={400} />
     </Card>
   );
 };
