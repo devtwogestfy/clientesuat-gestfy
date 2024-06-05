@@ -9,6 +9,7 @@ import NumberInvoicesCard from '../invoices/NumberInvoicesCard';
 import LastInvoiceCard from '../invoices/LastInvoiceCard';
 import TotalDebtCard from '../invoices/TotalDebtCard';
 import InvoicesDataGrid from '../invoices/InvoicesDataGrid';
+import { FormattedMessage } from 'react-intl';
 
 const InvoiceTabPanel = () => {
   const [ultimafactura, setUltimafactura] = useState(null);
@@ -83,13 +84,13 @@ const InvoiceTabPanel = () => {
         <Grid item xs={12} sm={3} md={3} lg={3}>
           <Grid container spacing={gridSpacing} direction="column">
             <Grid item xs={12}>
-              <NumberInvoicesCard title="Facturas" total={parseInt(numeroFacturas)} />
+              <NumberInvoicesCard title={<FormattedMessage id="invoices.cards.invoices" />} total={parseInt(numeroFacturas)} />
             </Grid>
             <Grid item xs={12}>
-              <LastInvoiceCard title="Última Factura" total={parseFloat(ultimafactura)} />
+              <LastInvoiceCard title={<FormattedMessage id="invoices.cards.last_invoice" />} total={parseFloat(ultimafactura)} />
             </Grid>
             <Grid item xs={12}>
-              <TotalDebtCard title="Deuda Total" total={parseFloat(pendiente)} />
+              <TotalDebtCard title={<FormattedMessage id="invoices.cards.total_debt" />} total={parseFloat(pendiente)} />
             </Grid>
           </Grid>
         </Grid>

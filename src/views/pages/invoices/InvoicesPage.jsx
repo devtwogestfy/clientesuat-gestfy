@@ -11,6 +11,7 @@ import TotalDebtCard from './TotalDebtCard';
 import InvoicesDataGrid from './InvoicesDataGrid';
 import { fetchSummaryData, fetchData, descargarFactura } from 'services/invoiceService';
 import CircularWithValueLabel from 'views/utilities/CircularProgressWithLabel';
+import { FormattedMessage } from 'react-intl';
 
 const InvoicesPage = () => {
   const [ultimafactura, setUltimafactura] = useState(null);
@@ -50,13 +51,25 @@ const InvoicesPage = () => {
         <Grid item xs={12}>
           <Grid container spacing={gridSpacing}>
             <Grid item xs={12} sm={6} md={4} lg={4}>
-              <NumberInvoicesCard isLoading={isLoading} title="Facturas" total={parseInt(numeroFacturas)} />
+              <NumberInvoicesCard
+                isLoading={isLoading}
+                title={<FormattedMessage id="invoices.cards.invoices" />}
+                total={parseInt(numeroFacturas)}
+              />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={4}>
-              <LastInvoiceCard isLoading={isLoading} title="Última Factura" total={parseFloat(ultimafactura)} />
+              <LastInvoiceCard
+                isLoading={isLoading}
+                title={<FormattedMessage id="invoices.cards.last_invoice" />}
+                total={parseFloat(ultimafactura)}
+              />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={4}>
-              <TotalDebtCard isLoading={isLoading} title="Deuda Total" total={parseFloat(pendiente)} />
+              <TotalDebtCard
+                isLoading={isLoading}
+                title={<FormattedMessage id="invoices.cards.total_debt" />}
+                total={parseFloat(pendiente)}
+              />
             </Grid>
           </Grid>
         </Grid>

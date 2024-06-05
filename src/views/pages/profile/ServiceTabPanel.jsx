@@ -6,6 +6,7 @@ import { gridSpacing } from 'store/constant';
 import TotalServiceCard from '../services/TotalServiceCard';
 import GetInfoService from 'settings/servicios/service';
 import ServicesDataGrid from '../services/ServicesDataGrid';
+import { FormattedMessage } from 'react-intl';
 
 const ServiceTabPanel = () => {
   const theme = useTheme();
@@ -75,7 +76,7 @@ const ServiceTabPanel = () => {
           <Grid container spacing={gridSpacing} direction="column">
             <Grid item xs={12}>
               <TotalServiceCard
-                title="FTTH"
+                title={<FormattedMessage id="services.cards.ftth" />}
                 total={ftth}
                 colorCard={theme.palette.secondary.dark}
                 backgroundCard={theme.palette.secondary[800]}
@@ -84,7 +85,7 @@ const ServiceTabPanel = () => {
             </Grid>
             <Grid item xs={12}>
               <TotalServiceCard
-                title="Fijos"
+                title={<FormattedMessage id="services.cards.phone" />}
                 total={phones}
                 colorCard={theme.palette.primary.dark}
                 backgroundCard={theme.palette.primary[800]}
@@ -93,7 +94,7 @@ const ServiceTabPanel = () => {
             </Grid>
             <Grid item xs={12}>
               <TotalServiceCard
-                title="Móviles"
+                title={<FormattedMessage id="services.cards.mobile" />}
                 total={mobiles}
                 colorCard={theme.palette.success.dark}
                 backgroundCard={theme.palette.success.light}
@@ -102,7 +103,7 @@ const ServiceTabPanel = () => {
             </Grid>
             <Grid item xs={12}>
               <TotalServiceCard
-                title="Otros"
+                title={<FormattedMessage id="services.cards.others" />}
                 total={others}
                 colorCard={theme.palette.error.dark}
                 backgroundCard={theme.palette.error.light}
