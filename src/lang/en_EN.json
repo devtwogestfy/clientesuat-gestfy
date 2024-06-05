@@ -171,6 +171,8 @@
   "router.table.ip": "IP",
   "router.table.ext_port": "Outer Port",
   "router.table.int_port": "Inside Port",
+  "router.table.type_ip": "Enter your IP",
+  "router.table.type_port": "Enter your Port",
   "router.table.protocol": "Protocol",
   "router.buttons.add": "Add",
   "router.buttons.delete": "Delete",

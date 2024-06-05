@@ -171,6 +171,8 @@
   "router.table.ip": "IP",
   "router.table.ext_port": "Puerto Externo",
   "router.table.int_port": "Puerto Interno",
+  "router.table.type_ip": "Ingrese su IP",
+  "router.table.type_port": "Ingrese su Puerto",
   "router.table.protocol": "Protocolo",
   "router.buttons.add": "Agregar",
   "router.buttons.delete": "Borrar",

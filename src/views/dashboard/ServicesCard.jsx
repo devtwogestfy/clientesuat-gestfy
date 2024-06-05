@@ -62,6 +62,10 @@ const ServicesCard = ({ isLoading }) => {
       setOthers(othersCount);
     } catch (error) {
       console.log(error);
+      if (error.response.status === 401) {
+        removeCookie(getSessionId());
+        navigate('/login');
+      }
     }
   };
   const openModal = () => {
