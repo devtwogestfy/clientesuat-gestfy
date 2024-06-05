@@ -143,7 +143,7 @@ function FormularioWifi5G({ wifi5Data, updateData }) {
           {passwordError && <FormHelperText error>{passwordError}</FormHelperText>}
         </FormControl>
 
-        <Stack sx={{ alignItems: 'center', marginTop: 2 }}>
+        <Stack sx={{ alignItems: 'center', mt: 6 }}>
           <Button variant="contained" endIcon={<QrCodeIcon />} onClick={handleClickOpen}>
             <FormattedMessage id="router.buttons.qr5" />
           </Button>

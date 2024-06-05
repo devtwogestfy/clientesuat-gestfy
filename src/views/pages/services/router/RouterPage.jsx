@@ -9,6 +9,7 @@ import GetInfoService from 'settings/servicios/service';
 import BackButton from 'views/utilities/BottonBack';
 import { useParams } from 'react-router-dom';
 import CircularWithValueLabel from 'views/utilities/CircularProgressWithLabel';
+import { Box } from '@mui/material';
 
 const RouterPage = () => {
   const params = useParams();
@@ -51,7 +52,6 @@ const RouterPage = () => {
           protocol: item.protocolo
         }));
         setPortsData(formattedPortsData);
-        //console.log(res);
         setTimeout(() => {
           setIsLoading(false);
         }, 2000);
@@ -107,28 +107,36 @@ const RouterPage = () => {
   };
 
   return (
-    <Grid container spacing={gridSpacing} justifyContent="center" alignItems="center" style={{ minHeight: '100vh' }}>
+    <Grid container spacing={gridSpacing} justifyContent="center" alignItems="stretch" style={{ minHeight: '100vh' }}>
       {isLoading ? (
         <CircularWithValueLabel color="secondary" />
       ) : (
         <>
           <Grid item xs={12} sm={3} md={3} lg={3}>
-            <Grid container spacing={gridSpacing}>
-              <Grid item xs={12} sm={12} md={12} lg={12}>
-                <FormularioWifi wifi24Data={wifi24Data} updateData={updateData}></FormularioWifi>
+            <Grid container spacing={gridSpacing} style={{ height: '100%' }}>
+              <Grid item xs={12} sm={12} md={12} lg={12} style={{ flex: 1 }}>
+                <Box style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+                  <FormularioWifi wifi24Data={wifi24Data} updateData={updateData} />
+                </Box>
               </Grid>
-              <Grid item xs={12} sm={12} md={12} lg={12}>
-                <FormularioWifi5G wifi5Data={wifi5Data} updateData={updateData}></FormularioWifi5G>
+              <Grid item xs={12} sm={12} md={12} lg={12} style={{ flex: 1 }}>
+                <Box style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+                  <FormularioWifi5G wifi5Data={wifi5Data} updateData={updateData} />
+                </Box>
               </Grid>
             </Grid>
           </Grid>
           <Grid item xs={12} sm={9} md={9} lg={9}>
-            <Grid container spacing={gridSpacing}>
-              <Grid item xs={12} sm={12} md={12} lg={12}>
-                <FormularioLan lanData={lanData} updateData={updateData}></FormularioLan>
+            <Grid container spacing={gridSpacing} style={{ height: '100%' }}>
+              <Grid item xs={12} sm={12} md={12} lg={12} style={{ flex: 1 }}>
+                <Box style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+                  <FormularioLan lanData={lanData} updateData={updateData} />
+                </Box>
               </Grid>
-              <Grid item xs={12} sm={12} md={12} lg={12}>
-                <FormularioPuertos portsData={portsData} funcionPuertos={updateData}></FormularioPuertos>
+              <Grid item xs={12} sm={12} md={12} lg={12} style={{ flex: 1 }}>
+                <Box style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+                  <FormularioPuertos portsData={portsData} funcionPuertos={updateData} />
+                </Box>
               </Grid>
             </Grid>
           </Grid>

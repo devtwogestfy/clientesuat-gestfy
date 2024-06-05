@@ -143,7 +143,7 @@ function FormularioWifi({ wifi24Data, updateData }) {
           />
           {passwordError && <FormHelperText error>{passwordError}</FormHelperText>}
         </FormControl>
-        <Stack sx={{ alignItems: 'center' }}>
+        <Stack sx={{ alignItems: 'center', mt: 4 }}>
           <Button variant="contained" endIcon={<QrCodeIcon />} onClick={handleClickOpen}>
             <FormattedMessage id="router.buttons.qr24" />
           </Button>
