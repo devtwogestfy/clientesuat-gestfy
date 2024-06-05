@@ -1,5 +1,4 @@
 import { IconHome, IconUser, IconReceipt, IconAlertTriangleFilled, IconSettings, IconFileFilled } from '@tabler/icons-react';
-import GetCustomization from 'services/customizeService';
 
 const icons = {
   IconHome,
@@ -10,7 +9,7 @@ const icons = {
   IconFileFilled
 };
 
-const customization = await GetCustomization();
+const customization = JSON.parse(localStorage.getItem('user'));
 
 const utilities = {
   id: 'utilities',

@@ -10,10 +10,8 @@ import LastestInvoicesCard from './LastestInvoicesCard';
 import PopularCard from './PopularCard';
 import ServicesCard from './ServicesCard';
 import { gridSpacing } from 'store/constant';
-import CircularWithValueLabel from 'views/utilities/CircularProgressWithLabel';
-import GetCustomization from 'services/customizeService';
 
-const customization = await GetCustomization();
+const customization = JSON.parse(localStorage.getItem('user'));
 
 const Dashboard = () => {
   const [isLoading, setLoading] = useState(true);

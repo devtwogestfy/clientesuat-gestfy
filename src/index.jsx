@@ -29,6 +29,7 @@ const store = configureStore({ reducer });
 const fetchCustomizationData = async () => {
   try {
     const customizationService = await GetCustomization();
+    localStorage.setItem('user', JSON.stringify(customizationService));
     return customizationService;
   } catch (error) {
     console.error('Error fetching customization data:', error);
@@ -46,7 +47,8 @@ const isValidLocale = (locale) => {
 };
 
 const renderApp = async () => {
-  const customization = await fetchCustomizationData();
+  await fetchCustomizationData();
+  const customization = JSON.parse(localStorage.getItem('user'));
   const locale = customization.language || navigator.language;
 
   const normalizedLocale = locale.replace('_', '-'); // Ensure locale format is like "en-US"

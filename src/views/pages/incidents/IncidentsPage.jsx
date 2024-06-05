@@ -10,7 +10,6 @@ import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
 import { useTheme } from '@mui/material/styles';
 import CreateIncidentDialog from './CreateIncidentDialog';
 import IncidentsDataGrid from './IncidentsDataGrid';
-import GetCustomization from 'services/customizeService';
 import CircularWithValueLabel from 'views/utilities/CircularProgressWithLabel';
 import useIncidentsData from 'hooks/useIncidentsData';
 import useServicesData from 'hooks/useServicesData';
@@ -30,19 +29,7 @@ const IncidentsPage = () => {
     setOpen(true);
   };
   const handleModalClose = () => setOpen(false);
-
-  useEffect(() => {
-    const fetchCustomization = async () => {
-      try {
-        const customization = await GetCustomization();
-        setNewTicket(customization.new_tickets);
-      } catch (error) {
-        console.error('Error fetching customization:', error);
-      }
-    };
-
-    fetchCustomization();
-  }, []);
+  const customization = JSON.parse(localStorage.getItem('user'));
 
   const validateAndCreateIncident = () => {
     const parameters = {
@@ -83,7 +70,7 @@ const IncidentsPage = () => {
             </Grid>
           </Grid>
         </Grid>
-        {newTicket === 1 && (
+        {customization && customization.new_tickets === 1 && (
           <Grid item xs={12}>
             <Grid container spacing={gridSpacing}>
               <Grid item xs={12} sm={6} md={4} lg={3}>

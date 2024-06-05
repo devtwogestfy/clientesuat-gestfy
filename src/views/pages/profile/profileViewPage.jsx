@@ -15,9 +15,8 @@ import GetInfoClient from 'settings/servicios/client';
 import { createIncident } from 'settings/servicios/incident';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-import GetCustomization from 'services/customizeService';
 import CircularWithValueLabel from 'views/utilities/CircularProgressWithLabel';
-const customization = await GetCustomization();
+const customization = JSON.parse(localStorage.getItem('user'));
 
 function CustomTabPanel({ children, value, index }) {
   return (
@@ -147,7 +146,7 @@ const ProfileViewPage = () => {
                 <Tab label={<FormattedMessage id="layout.menu_info" />} id="simple-tab-0" aria-controls="simple-tabpanel-0" />
                 <Tab label={<FormattedMessage id="layout.menu_services" />} id="simple-tab-1" aria-controls="simple-tabpanel-1" />
                 <Tab label={<FormattedMessage id="layout.menu_invoices" />} id="simple-tab-2" aria-controls="simple-tabpanel-2" />
-                {customization.view_tickets === 1 && (
+                {customization && customization.view_tickets === 1 && (
                   <Tab label={<FormattedMessage id="layout.menu_incidents" />} id="simple-tab-3" aria-controls="simple-tabpanel-3" />
                 )}
               </Tabs>

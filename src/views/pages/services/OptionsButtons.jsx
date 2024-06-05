@@ -28,6 +28,7 @@ import CancelPrepayDialog from './CancelPrepayDialog';
 import CancelPrepayPopper from './CancelPrepayPopper';
 import PayDialog from './../../utilities/dialogs/PayDialog';
 import { FormattedMessage } from 'react-intl';
+import CircularWithValueLabel from 'views/utilities/CircularProgressWithLabel';
 function OptionsButtons({ element, updateData }) {
   //console.log(element);
   const [open, setOpen] = useState(false);
@@ -41,6 +42,8 @@ function OptionsButtons({ element, updateData }) {
   const [months, setMonths] = useState(0);
   const [brutoEstimado, setBrutoEstimado] = useState(0);
   const [proformaId, setProformaId] = useState(0);
+  const [openOverlay, setOpenOverlay] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); // Estado para contro
   const infoService = GetInfoService();
 
   const handleFormalizePrepay = () => {
@@ -76,11 +79,21 @@ function OptionsButtons({ element, updateData }) {
 
   const handleClosePay = (type = 'bizum') => {
     setOpenPay(false);
-    const data = infoService.startPurchasePrepaid(element.id, location.href, type).then((response) => {
-      console.log(response);
-      return response;
-    });
-    console.log(data);
+    setOpenOverlay(true);
+    setIsLoading(true);
+
+    const data = infoService
+      .startPurchasePrepaid(element.id, location.href, type)
+      .then((response) => {
+        setOpenOverlay(false);
+        setIsLoading(false);
+        return response;
+      })
+      .catch((error) => {
+        console.error(error);
+        setIsLoading(false);
+        setOpenOverlay(false);
+      });
   };
 
   const handleCancelSendPrepay = () => {
@@ -259,6 +272,24 @@ function OptionsButtons({ element, updateData }) {
       <CancelPrepayDialog openCancel={openCancel} handleCloseCancel={handleCloseCancel} handleCancelSendPrepay={handleCancelSendPrepay} />
       <PayDialog openPay={openPay} handleClosePay={handleClosePay} />
       <CancelPrepayPopper openPopperCancel={openPopperCancel} contentModal={contentModal} />
+      {openPay && (
+        <div
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            zIndex: 9999
+          }}
+        >
+          {isLoading && <CircularWithValueLabel />} {/* Indicador de carga */}
+        </div>
+      )}
     </Box>
   );
 }

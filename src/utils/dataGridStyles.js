@@ -1,6 +1,5 @@
-import GetCustomization from 'services/customizeService';
+const customization = JSON.parse(localStorage.getItem('user'));
 
-const customization = await GetCustomization();
 let textColor = '#fff';
 if (customization.color === '#FFFF00') {
   textColor = '#000000';

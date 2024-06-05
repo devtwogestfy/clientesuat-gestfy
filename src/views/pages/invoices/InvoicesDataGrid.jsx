@@ -11,14 +11,12 @@ import { fDate } from 'utils/format-date';
 import dataGridStyles from 'utils/dataGridStyles';
 import PayDialog from './../../utilities/dialogs/PayDialog';
 import InfoInvoice from 'settings/servicios/invoice';
-import GetCustomization from 'services/customizeService';
 
 const InvoicesDataGrid = ({ rows, downloadInvoice }) => {
   const theme = useTheme();
   const styles = dataGridStyles(theme);
   const [openPay, setOpenPay] = useState(false);
   const [element, setElement] = useState([]);
-  const [onlinePaymentsProvider, setOnlinePaymentsProvider] = useState(null);
   const infoInvoice = InfoInvoice();
   const getRowClassName = (params) => {
     return params.indexRelativeToCurrentPage % 2 === 0 ? 'cebra-row' : '';
@@ -113,19 +111,8 @@ const InvoicesDataGrid = ({ rows, downloadInvoice }) => {
     setOpenPay(true);
     setElement(row);
   };
-
-  useEffect(() => {
-    const fetchCustomization = async () => {
-      try {
-        const customization = await GetCustomization();
-        setOnlinePaymentsProvider(customization.online_payments_provider);
-      } catch (error) {
-        console.error('Error fetching customization:', error);
-      }
-    };
-
-    fetchCustomization();
-  }, []);
+  const customization = JSON.parse(localStorage.getItem('user'));
+  const onlinePaymentsProvider = customization.online_payments_provider;
 
   const handleClosePay = (type = 'bizum') => {
     console.log(type);
