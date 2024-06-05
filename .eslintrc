@@ -38,7 +38,7 @@
     },
     "ecmaVersion": 12
   },
-  "plugins": ["prettier", "react", "react-hooks"],
+  "plugins": ["prettier", "react", "react-hooks","jsx"],
   "rules": {
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error",

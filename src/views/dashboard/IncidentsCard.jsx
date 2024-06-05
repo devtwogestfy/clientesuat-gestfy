@@ -55,7 +55,7 @@ const IncidentsCard = ({ isLoading }) => {
                   </Grid>
                 </Grid>
               </Grid>
-              <Grid item sx={{ mb: 0.75 }}>
+              <Grid item >
                 <Grid container alignItems="center">
                   <Grid item xs={12}>
                     <Grid container alignItems="center">

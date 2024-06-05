@@ -6,7 +6,7 @@ const BackButton = () => {
     const navigate = useNavigate();
 
     return (
-        <Button variant="contained" onClick={() => navigate(-1)} sx={{ mb: 2 }}>
+        <Button variant="contained" onClick={() => navigate(-1)} >
             Volver
         </Button>
     );

@@ -128,6 +128,7 @@ const InvoicesDataGrid = ({ rows, downloadInvoice }) => {
   }, []);
 
   const handleClosePay = (type = 'bizum') => {
+    console.log(type);
     if (type === 'cancel') {
       setOpenPay(false);
       return;
