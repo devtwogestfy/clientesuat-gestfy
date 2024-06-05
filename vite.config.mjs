@@ -7,42 +7,42 @@ import jsconfigPaths from 'vite-jsconfig-paths';
 // ----------------------------------------------------------------------
 
 export default defineConfig({
-    plugins: [react(), jsconfigPaths()],
-    // https://github.com/jpuri/react-draft-wysiwyg/issues/1317
-    base: '/free',
-    define: {
-        global: 'window'
+  plugins: [react(), jsconfigPaths()],
+  // https://github.com/jpuri/react-draft-wysiwyg/issues/1317
+  base: '/',
+  define: {
+    global: 'window'
+  },
+  resolve: {
+    // alias: [
+    //   {
+    //     find: /^~(.+)/,
+    //     replacement: path.join(process.cwd(), 'node_modules/$1')
+    //   },
+    //   {
+    //     find: /^src(.+)/,
+    //     replacement: path.join(process.cwd(), 'src/$1')
+    //   }
+    // ]
+  },
+  server: {
+    proxy: {
+      // con opciones
+      '/api': {
+        target: 'http://uat.gestfy.lan/app.php',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, '')
+      }
     },
-    resolve: {
-        // alias: [
-        //   {
-        //     find: /^~(.+)/,
-        //     replacement: path.join(process.cwd(), 'node_modules/$1')
-        //   },
-        //   {
-        //     find: /^src(.+)/,
-        //     replacement: path.join(process.cwd(), 'src/$1')
-        //   }
-        // ]
-    },
-    server: {
-        proxy: {
-            // con opciones
-            '/api': {
-                target: 'http://uat.gestfy.lan/app.php',
-                changeOrigin: true,
-                rewrite: (path) => path.replace(/^\/api/, '')
-            }
-        },
-        // this ensures that the browser opens upon server start
-        open: true,
-        // this sets a default port to 3000
-        port: 3000
-    },
-    preview: {
-        // this ensures that the browser opens upon preview start
-        open: true,
-        // this sets a default port to 3000
-        port: 3000
-    }
+    // this ensures that the browser opens upon server start
+    open: true,
+    // this sets a default port to 3000
+    port: 3000
+  },
+  preview: {
+    // this ensures that the browser opens upon preview start
+    open: true,
+    // this sets a default port to 3000
+    port: 3000
+  }
 });
