@@ -28,15 +28,13 @@ const CreateIncidentDialog = ({
 }) => {
   return (
     <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
-      <DialogTitle style={{ backgroundColor: '#4527a0' }}>
+      <DialogTitle>
         <IconButton onClick={handleClose} sx={{ position: 'absolute', top: 0, right: 0 }}>
           <CloseIcon />
         </IconButton>
         <Grid container alignItems="center" spacing={2}>
           <Grid item>
-            <Typography variant="h3" color={'#fff'}>
-              Nueva Incidencia
-            </Typography>
+            <Typography variant="h3">Nueva Incidencia</Typography>
           </Grid>
         </Grid>
       </DialogTitle>
