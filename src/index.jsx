@@ -1,58 +1,75 @@
 import { createRoot } from 'react-dom/client';
-
-// third party
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
-
-// project imports
 import App from './App';
 import reducer from './store/reducer';
-
-// google-fonts
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/700.css';
-
 import '@fontsource/inter/400.css';
 import '@fontsource/inter/500.css';
 import '@fontsource/inter/600.css';
 import '@fontsource/inter/700.css';
-
 import '@fontsource/poppins/400.css';
 import '@fontsource/poppins/500.css';
 import '@fontsource/poppins/600.css';
 import '@fontsource/poppins/700.css';
-
-// style + assets
 import 'assets/scss/style.scss';
 import reportWebVitals from 'reportWebVitals';
-import {IntlProvider} from 'react-intl';
+import { IntlProvider } from 'react-intl';
 import Spanish from './lang/es_ES.json';
 import English from './lang/en_EN.json';
+import GetCustomization from 'services/customizeService';
 
 const container = document.getElementById('root');
-const root = createRoot(container); // createRoot(container!) if you use TypeScript
+const root = createRoot(container);
 const store = configureStore({ reducer });
-const locale = navigator.language;
 
-let lang;
-if (locale==="en") {
-   lang = English;
-} else {
+const fetchCustomizationData = async () => {
+  try {
+    const customizationService = await GetCustomization();
+    return customizationService;
+  } catch (error) {
+    console.error('Error fetching customization data:', error);
+    return { language: navigator.language };
+  }
+};
+
+const isValidLocale = (locale) => {
+  try {
+    Intl.NumberFormat.supportedLocalesOf(locale);
+    return true;
+  } catch {
+    return false;
+  }
+};
+
+const renderApp = async () => {
+  const customization = await fetchCustomizationData();
+  const locale = customization.language || navigator.language;
+
+  const normalizedLocale = locale.replace('_', '-'); // Ensure locale format is like "en-US"
+  const finalLocale = isValidLocale(normalizedLocale) ? normalizedLocale : 'es-ES'; // Default to Spanish if invalid
+
+  let lang;
+  if (finalLocale.startsWith('en')) {
+    lang = English;
+  } else if (finalLocale.startsWith('es')) {
     lang = Spanish;
-}
-// ==============================|| REACT DOM RENDER  ||============================== //
+  } else {
+    lang = Spanish; // Default to Spanish if the locale is not explicitly handled
+  }
 
-root.render(
-  <Provider store={store}>
-    <IntlProvider locale ={locale} messages={Spanish}>
-      <App />
-    </IntlProvider>
-  </Provider>
-);
+  root.render(
+    <Provider store={store}>
+      <IntlProvider locale={finalLocale} messages={lang}>
+        <App />
+      </IntlProvider>
+    </Provider>
+  );
+};
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
+renderApp();
+
 reportWebVitals();
