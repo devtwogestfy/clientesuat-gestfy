@@ -74,7 +74,7 @@ const InvoicesDataGrid = ({ rows, downloadInvoice }) => {
       renderCell: (params) => {
         return (
           <Box sx={{ width: '100%', textAlign: 'center' }}>
-            <Badge badgeContent={`$ ${params.row.neto}`} color="success"></Badge>
+            <Badge badgeContent={`€ ${params.row.neto}`} color="success"></Badge>
           </Box>
         );
       }
@@ -89,7 +89,7 @@ const InvoicesDataGrid = ({ rows, downloadInvoice }) => {
       renderCell: (params) => {
         return (
           <Box sx={{ width: '100%', textAlign: 'center' }}>
-            <Badge badgeContent={`$ ${params.row.cobrado.toFixed(2)}`} color="error"></Badge>
+            <Badge badgeContent={`€ ${params.row.cobrado.toFixed(2)}`} color="error"></Badge>
           </Box>
         );
       }
@@ -134,7 +134,6 @@ const InvoicesDataGrid = ({ rows, downloadInvoice }) => {
   const callRedsys = (factId, type) => {
     setOpenSuccessPay(true);
     const data = infoInvoice.startPurchase(factId, location.href, type).then((response) => {
-      console.log(response);
       return response;
     });
     console.log(data);
@@ -143,7 +142,6 @@ const InvoicesDataGrid = ({ rows, downloadInvoice }) => {
   const callCecabank = (factId, type) => {
     setOpenSuccessPay(true);
     const data = infoInvoice.startPurchaseCeca(factId, location.href, type).then((response) => {
-      console.log(response);
       return response;
     });
     console.log(data);
