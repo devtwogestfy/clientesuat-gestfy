@@ -14,6 +14,8 @@ import {
   MenuItem
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+import { styles } from 'utils/stylesCustom';
+import { FormattedMessage } from 'react-intl';
 
 const CreateIncidentDialog = ({
   open,
@@ -66,7 +68,7 @@ const CreateIncidentDialog = ({
           </Grid>
           <Grid item xs={12}>
             <TextField
-              label="Descripción"
+              label={<FormattedMessage id="profile.section.send.message.description" />}
               variant="outlined"
               multiline
               rows={4}
@@ -85,11 +87,11 @@ const CreateIncidentDialog = ({
         </Grid>
       </DialogContent>
       <DialogActions>
-        <Button variant="contained" onClick={handleCreateIncident} color="success">
-          Enviar
+        <Button variant="contained" onClick={handleCreateIncident} style={styles.buttonPrimary}>
+          <FormattedMessage id="dialogs.buttons.send" />
         </Button>
-        <Button variant="contained" onClick={handleClose} color="error">
-          Cerrar
+        <Button variant="contained" onClick={handleClose} style={styles.buttonSecondary}>
+          <FormattedMessage id="dialogs.buttons.cancel" />
         </Button>
       </DialogActions>
     </Dialog>

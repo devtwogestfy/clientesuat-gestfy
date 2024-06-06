@@ -13,9 +13,11 @@ import IncidentsDataGrid from './IncidentsDataGrid';
 import CircularWithValueLabel from 'views/utilities/CircularProgressWithLabel';
 import useIncidentsData from 'hooks/useIncidentsData';
 import useServicesData from 'hooks/useServicesData';
+import { useIntl } from 'react-intl';
 
 const IncidentsPage = () => {
   const theme = useTheme();
+  const intl = useIntl();
   const { totalIncidents, totalOpen, totalClose, totalHours, incidents, isLoading, handleCreateIncident } = useIncidentsData();
   const { services } = useServicesData();
   const [open, setOpen] = useState(false);
@@ -57,16 +59,24 @@ const IncidentsPage = () => {
         <Grid item xs={12}>
           <Grid container spacing={gridSpacing}>
             <Grid item xs={12} sm={6} md={4} lg={3}>
-              <TotalIncidentsCard title="Incidencias" total={parseInt(totalIncidents)} isLoading={isLoading} />
+              <TotalIncidentsCard
+                title={intl.formatMessage({ id: 'incidents.cards.incidents' })}
+                total={parseInt(totalIncidents)}
+                isLoading={isLoading}
+              />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
-              <TotalOpenCard title="Abiertas" total={parseInt(totalOpen)} isLoading={isLoading} />
+              <TotalOpenCard title={intl.formatMessage({ id: 'incidents.cards.open' })} total={parseInt(totalOpen)} isLoading={isLoading} />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
-              <TotalCloseCard title="Cerradas" total={parseInt(totalClose)} isLoading={isLoading} />
+              <TotalCloseCard
+                title={intl.formatMessage({ id: 'incidents.cards.closed' })}
+                total={parseInt(totalClose)}
+                isLoading={isLoading}
+              />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
-              <TotalHoursCard title="Horas" total={totalHours} isLoading={isLoading} />
+              <TotalHoursCard title={intl.formatMessage({ id: 'incidents.table.hours' })} total={totalHours} isLoading={isLoading} />
             </Grid>
           </Grid>
         </Grid>
@@ -74,7 +84,7 @@ const IncidentsPage = () => {
           <Grid item xs={12}>
             <Grid container spacing={gridSpacing}>
               <Grid item xs={12} sm={6} md={4} lg={3}>
-                <IconButton title="Nueva Incidencia" onClick={openCreateModal}>
+                <IconButton title={intl.formatMessage({ id: 'incidents.buttons.new' })} onClick={openCreateModal}>
                   <AddCircleRoundedIcon sx={{ color: theme.palette.primary[800] }} />
                 </IconButton>
               </Grid>

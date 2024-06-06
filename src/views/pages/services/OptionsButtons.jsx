@@ -27,9 +27,11 @@ import CancelPrepayDialog from './CancelPrepayDialog';
 import CancelPrepayPopper from './CancelPrepayPopper';
 import PayDialog from './../../utilities/dialogs/PayDialog';
 import { FormattedMessage } from 'react-intl';
-import CircularWithValueLabel from 'views/utilities/CircularProgressWithLabel';
-
+import { useIntl } from 'react-intl';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 function OptionsButtons({ element, updateData }) {
+  const intl = useIntl();
   const [open, setOpen] = useState(false);
   const [openCancel, setOpenCancel] = useState(false);
   const [openPay, setOpenPay] = useState(false);
@@ -122,7 +124,7 @@ function OptionsButtons({ element, updateData }) {
     };
     infoService.createPrepay(parameters).then((response) => {
       setOpenPopperCancel(true);
-      setContentModal('Generado exitosamente');
+      setContentModal(intl.formatMessage({ id: 'dialogs.successfully' }));
       setProformaId(response.proformaId);
       updateData();
       setTimeout(() => {
@@ -204,7 +206,7 @@ function OptionsButtons({ element, updateData }) {
                   <DemoContainer components={['DatePicker']}>
                     <DatePicker
                       id="selectedDate"
-                      label="Fecha desde"
+                      label={<FormattedMessage id="phones.form.from_date" />}
                       value={selectedDate}
                       onChange={handleChange('selectedDate')}
                       format="DD/MM/YYYY"
@@ -251,7 +253,7 @@ function OptionsButtons({ element, updateData }) {
                     onChange={selectionChanged}
                     sx={{ width: '100%' }}
                     options={selectPrepays.map((option) => ({ id: option.bruto, label: option.nombre }))}
-                    renderInput={(params) => <TextField {...params} label="Elige una opción" />}
+                    renderInput={(params) => <TextField {...params} label={<FormattedMessage id="dialogs.choose_option" />} />}
                     renderOption={(props, option) => (
                       <MenuItem {...props} key={option.id} value={option.id}>
                         {option.label}
@@ -264,7 +266,9 @@ function OptionsButtons({ element, updateData }) {
           </Grid>
         </DialogContent>
         <DialogActions>
-          <p style={{ marginRight: 'auto', marginLeft: '20px' }}>Precio (Sin IVA): {brutoEstimado} €</p>
+          <p style={{ marginRight: 'auto', marginLeft: '20px' }}>
+            <FormattedMessage id="services.prepay.dialog.form.amount" /> {brutoEstimado} €
+          </p>
           <Button variant="contained" onClick={handleSavePrepaid} color="success">
             <FormattedMessage id="dialogs.buttons.accept" />
           </Button>
@@ -277,24 +281,9 @@ function OptionsButtons({ element, updateData }) {
       <CancelPrepayDialog openCancel={openCancel} handleCloseCancel={handleCloseCancel} handleCancelSendPrepay={handleCancelSendPrepay} />
       <PayDialog openPay={openPay} handleClosePay={handleClosePay} />
       <CancelPrepayPopper openPopperCancel={openPopperCancel} contentModal={contentModal} />
-      {openPay && (
-        <div
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            zIndex: 9999
-          }}
-        >
-          {isLoading && <CircularWithValueLabel />}
-        </div>
-      )}
+      <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={openOverlay}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </Box>
   );
 }

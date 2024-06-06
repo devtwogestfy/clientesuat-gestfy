@@ -11,11 +11,14 @@ import { fDate } from 'utils/format-date';
 import dataGridStyles from 'utils/dataGridStyles';
 import PayDialog from './../../utilities/dialogs/PayDialog';
 import InfoInvoice from 'settings/servicios/invoice';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const InvoicesDataGrid = ({ rows, downloadInvoice }) => {
   const theme = useTheme();
   const styles = dataGridStyles(theme);
   const [openPay, setOpenPay] = useState(false);
+  const [openSuccessPay, setOpenSuccessPay] = useState(false);
   const [element, setElement] = useState([]);
   const infoInvoice = InfoInvoice();
   const getRowClassName = (params) => {
@@ -129,6 +132,7 @@ const InvoicesDataGrid = ({ rows, downloadInvoice }) => {
   };
 
   const callRedsys = (factId, type) => {
+    setOpenSuccessPay(true);
     const data = infoInvoice.startPurchase(factId, location.href, type).then((response) => {
       console.log(response);
       return response;
@@ -137,6 +141,7 @@ const InvoicesDataGrid = ({ rows, downloadInvoice }) => {
   };
 
   const callCecabank = (factId, type) => {
+    setOpenSuccessPay(true);
     const data = infoInvoice.startPurchaseCeca(factId, location.href, type).then((response) => {
       console.log(response);
       return response;
@@ -162,6 +167,9 @@ const InvoicesDataGrid = ({ rows, downloadInvoice }) => {
         slots={{ noRowsOverlay: TableWithoutRecord }}
         sx={styles.dataGrid}
       />
+      <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={openSuccessPay}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <PayDialog openPay={openPay} handleClosePay={handleClosePay} />
     </Box>
   );
