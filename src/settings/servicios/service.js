@@ -174,6 +174,21 @@ const GetInfoService = () => {
     return data;
   };
 
+  const getPrepayConfig = async (servId = null, page = 1, limit = 25, sort = '') => {
+    const filter = `[{"property": "service", "value":"${servId}"}]`;
+    const sort = '[{"property": "id", "direction":"ASC"}]';
+    const params = {
+      page: page.toString(),
+      start: start.toString(),
+      limit: limit.toString(),
+      sort: sort,
+      filter: filter
+    };
+    const response = await backendAPI.get('/portal/prepay/config', { params });
+    const data = response.data;
+    return data;
+  };
+
   return {
     getPhoneRecord,
     getPrepayments,
@@ -186,7 +201,8 @@ const GetInfoService = () => {
     getPhones,
     getServices,
     getBilling,
-    getServicesList
+    getServicesList,
+    getPrepayConfig
   };
 };
 
