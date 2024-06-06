@@ -30,6 +30,7 @@ import { FormattedMessage } from 'react-intl';
 import { useIntl } from 'react-intl';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
+import { styles } from 'utils/stylesCustom';
 function OptionsButtons({ element, updateData }) {
   const intl = useIntl();
   const [open, setOpen] = useState(false);
@@ -269,10 +270,10 @@ function OptionsButtons({ element, updateData }) {
           <p style={{ marginRight: 'auto', marginLeft: '20px' }}>
             <FormattedMessage id="services.prepay.dialog.form.amount" /> {brutoEstimado} €
           </p>
-          <Button variant="contained" onClick={handleSavePrepaid} color="success">
+          <Button variant="contained" onClick={handleSavePrepaid} sx={styles.buttonPrimary}>
             <FormattedMessage id="dialogs.buttons.accept" />
           </Button>
-          <Button variant="contained" onClick={handleClose} color="error">
+          <Button variant="contained" onClick={handleClose} sx={styles.buttonSecondary}>
             <FormattedMessage id="dialogs.buttons.cancel" />
           </Button>
         </DialogActions>

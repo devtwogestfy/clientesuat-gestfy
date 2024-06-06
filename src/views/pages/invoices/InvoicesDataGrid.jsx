@@ -13,10 +13,11 @@ import PayDialog from './../../utilities/dialogs/PayDialog';
 import InfoInvoice from 'settings/servicios/invoice';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
+import { styles } from 'utils/stylesCustom';
 
 const InvoicesDataGrid = ({ rows, downloadInvoice }) => {
   const theme = useTheme();
-  const styles = dataGridStyles(theme);
+  const stylesTheme = dataGridStyles(theme);
   const [openPay, setOpenPay] = useState(false);
   const [openSuccessPay, setOpenSuccessPay] = useState(false);
   const [element, setElement] = useState([]);
@@ -102,7 +103,7 @@ const InvoicesDataGrid = ({ rows, downloadInvoice }) => {
       renderHeader: () => <FormattedMessage id="invoices.table.actions" />,
       renderCell: (params) => {
         return (
-          <Button variant="contained" color="primary" onClick={() => handleFormalizePrepay(params.row)}>
+          <Button variant="contained" sx={styles.buttonPrimary} onClick={() => handleFormalizePrepay(params.row)}>
             <FormattedMessage id="invoices.table.pay" />
           </Button>
         );
@@ -148,7 +149,7 @@ const InvoicesDataGrid = ({ rows, downloadInvoice }) => {
   };
 
   return (
-    <Box sx={styles.root}>
+    <Box sx={stylesTheme.root}>
       <DataGrid
         getRowClassName={getRowClassName} // Aplicar estilos de cebra a las filas
         rows={rows}
@@ -163,7 +164,7 @@ const InvoicesDataGrid = ({ rows, downloadInvoice }) => {
         pageSizeOptions={[5]}
         disableRowSelectionOnClick
         slots={{ noRowsOverlay: TableWithoutRecord }}
-        sx={styles.dataGrid}
+        sx={stylesTheme.dataGrid}
       />
       <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={openSuccessPay}>
         <CircularProgress color="inherit" />
