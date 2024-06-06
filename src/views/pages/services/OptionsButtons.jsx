@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Autocomplete,
   Box,
@@ -15,7 +15,6 @@ import {
   FormControl
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-// eslint-disable-next-line no-restricted-imports
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -29,8 +28,8 @@ import CancelPrepayPopper from './CancelPrepayPopper';
 import PayDialog from './../../utilities/dialogs/PayDialog';
 import { FormattedMessage } from 'react-intl';
 import CircularWithValueLabel from 'views/utilities/CircularProgressWithLabel';
+
 function OptionsButtons({ element, updateData }) {
-  //console.log(element);
   const [open, setOpen] = useState(false);
   const [openCancel, setOpenCancel] = useState(false);
   const [openPay, setOpenPay] = useState(false);
@@ -42,31 +41,33 @@ function OptionsButtons({ element, updateData }) {
   const [months, setMonths] = useState(0);
   const [brutoEstimado, setBrutoEstimado] = useState(0);
   const [proformaId, setProformaId] = useState(0);
+  const [selectPrepays, setSelectPrepays] = useState([]);
   const [openOverlay, setOpenOverlay] = useState(false);
-  const [isLoading, setIsLoading] = useState(false); // Estado para contro
+  const [isLoading, setIsLoading] = useState(false);
   const infoService = GetInfoService();
 
   const handleFormalizePrepay = () => {
     const id = element.id;
     infoService.validatePrepay(id).then((response) => {
-      console.log(response);
-      //setOpenPay(true);
       if (response === 'ko') {
-        //setAlertMessage('services.prepay.dialog.outdated');
         setOpenAlertDialog(true);
       } else {
-        //setAlertMessage('dialogs.online_payments.redirection');
         setOpenPay(true);
       }
     });
   };
 
   const handleOpenCreatePrepaid = () => {
-    setOpen(true);
+    const intservicio_id = element.intservicio_id;
+    infoService.getPrepayConfig(intservicio_id, 1, 25, 0).then((response) => {
+      setSelectPrepays(response);
+      setOpen(true);
+    });
   };
 
   const handleClose = () => {
     setOpen(false);
+    setBrutoEstimado(0);
   };
 
   const handleCancelPrepay = () => {
@@ -82,7 +83,7 @@ function OptionsButtons({ element, updateData }) {
     setOpenOverlay(true);
     setIsLoading(true);
 
-    const data = infoService
+    infoService
       .startPurchasePrepaid(element.id, location.href, type)
       .then((response) => {
         setOpenOverlay(false);
@@ -109,6 +110,7 @@ function OptionsButtons({ element, updateData }) {
       setOpenCancel(false);
     });
   };
+
   const handleSavePrepaid = () => {
     const parameters = {
       dias: days,
@@ -122,8 +124,6 @@ function OptionsButtons({ element, updateData }) {
       setOpenPopperCancel(true);
       setContentModal('Generado exitosamente');
       setProformaId(response.proformaId);
-      console.log(response.proformaId);
-      console.log(proformaId);
       updateData();
       setTimeout(() => {
         setOpenPopperCancel(false);
@@ -152,6 +152,9 @@ function OptionsButtons({ element, updateData }) {
     }
     calculatePrice();
   };
+  const selectionChanged = (event) => {
+    setBrutoEstimado(event.target.value);
+  };
 
   const calculatePrice = () => {
     let brutoDia = element.brutoDia ? parseFloat(element.brutoDia) : 1;
@@ -160,8 +163,6 @@ function OptionsButtons({ element, updateData }) {
     let calculation = (days || 0) * brutoDia + (weeks || 0) * brutoSemana + (months || 0) * brutoMes;
     setBrutoEstimado(Math.round((calculation + Number.EPSILON) * 100) / 100);
   };
-
-  const optionsServices = [{ value: 30, nombre: 'Quince días' }];
 
   return (
     <Box sx={{ width: '100%', textAlign: 'center' }}>
@@ -216,46 +217,50 @@ function OptionsButtons({ element, updateData }) {
             </Grid>
           </Grid>
           <Grid item xs={12} sx={{ marginTop: '20px' }}>
-            {(element.tecnologia === 0 && (
+            {selectPrepays.length < 1 && (
               <Grid container spacing={3}>
-                <Grid item xs={12} sm={4} md={4} lg={4}>
-                  <FormControl fullWidth>
-                    <NumberInputBasic label="Días" id="days" value={days} onChange={handleChange('days')} />
-                  </FormControl>
-                </Grid>
-                <Grid item xs={12} sm={4} md={4} lg={4}>
-                  <FormControl fullWidth>
-                    <NumberInputBasic label="Semanas" id="weeks" value={weeks} onChange={handleChange('weeks')} />
-                  </FormControl>
-                </Grid>
-                <Grid item xs={12} sm={4} md={4} lg={4}>
-                  <FormControl fullWidth>
-                    <NumberInputBasic label="Meses" id="months" value={months} onChange={handleChange('months')} />
-                  </FormControl>
-                </Grid>
+                {element.brutoDia && element.brutoDia != 0 && (
+                  <Grid item xs={12} sm={4} md={4} lg={4}>
+                    <FormControl fullWidth>
+                      <NumberInputBasic label="Días" id="days" value={days} onChange={handleChange('days')} />
+                    </FormControl>
+                  </Grid>
+                )}
+                {element.brutoSemana && element.brutoSemana != 0 && (
+                  <Grid item xs={12} sm={4} md={4} lg={4}>
+                    <FormControl fullWidth>
+                      <NumberInputBasic label="Semanas" id="weeks" value={weeks} onChange={handleChange('weeks')} />
+                    </FormControl>
+                  </Grid>
+                )}
+                {element.brutoMes && element.brutoMes != 0 && (
+                  <Grid item xs={12} sm={4} md={4} lg={4}>
+                    <FormControl fullWidth>
+                      <NumberInputBasic label="Meses" id="months" value={months} onChange={handleChange('months')} />
+                    </FormControl>
+                  </Grid>
+                )}
               </Grid>
-            )) ||
-              (element.tecnologia === 1 && (
-                <Grid item xs={12} sm={12} md={12} lg={12}>
-                  <FormControl fullWidth>
-                    <Autocomplete
-                      disablePortal
-                      id="combo-box-demo"
-                      onChange={handleChange('days')}
-                      sx={{ width: '100%' }}
-                      options={optionsServices.map((option) => ({ id: option.value, label: option.nombre }))}
-                      renderInput={(params) => <TextField {...params} label="Elige una opción" />}
-                      renderOption={(props, option) => {
-                        return (
-                          <MenuItem {...props} key={option.id} value={option.id}>
-                            {option.label}
-                          </MenuItem>
-                        );
-                      }}
-                    />
-                  </FormControl>
-                </Grid>
-              ))}
+            )}
+            {selectPrepays && selectPrepays.length > 0 && (
+              <Grid item xs={12} sm={12} md={12} lg={12}>
+                <FormControl fullWidth>
+                  <Autocomplete
+                    disablePortal
+                    id="combo-box-demo"
+                    onChange={selectionChanged}
+                    sx={{ width: '100%' }}
+                    options={selectPrepays.map((option) => ({ id: option.bruto, label: option.nombre }))}
+                    renderInput={(params) => <TextField {...params} label="Elige una opción" />}
+                    renderOption={(props, option) => (
+                      <MenuItem {...props} key={option.id} value={option.id}>
+                        {option.label}
+                      </MenuItem>
+                    )}
+                  />
+                </FormControl>
+              </Grid>
+            )}
           </Grid>
         </DialogContent>
         <DialogActions>
@@ -287,7 +292,7 @@ function OptionsButtons({ element, updateData }) {
             zIndex: 9999
           }}
         >
-          {isLoading && <CircularWithValueLabel />} {/* Indicador de carga */}
+          {isLoading && <CircularWithValueLabel />}
         </div>
       )}
     </Box>
