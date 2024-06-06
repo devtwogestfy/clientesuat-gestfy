@@ -69,6 +69,8 @@
   "invoices.table.actions": "Acciones",
   "invoices.table.paid": "Pagado",
   "invoices.table.pay": "Pagar",
+  "invoices.total": "Total",
+  "invoices.media": "Media Facturación",
 
   "services.title": "Servicios",
   "services.cards.mobile": "Móviles",

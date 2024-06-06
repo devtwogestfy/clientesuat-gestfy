@@ -18,6 +18,7 @@ const BajajAreaChartCard = () => {
   const orangeDark = theme.palette.secondary[800];
   const [data, setData] = useState([]);
   const [totalSum, setTotalSum] = useState(0); // Initialize totalSum state
+  const [average, setAverage] = useState(0); // Initialize average state
   const customization = useSelector((state) => state.customization);
   const { navType } = customization;
 
@@ -38,6 +39,10 @@ const BajajAreaChartCard = () => {
       // Calculate the total sum
       const total = billing.reduce((sum, item) => sum + parseFloat(item.suma), 0);
       setTotalSum(total);
+      
+      // Calculate the average
+      const avg = total / billing.length;
+      setAverage(avg);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -46,7 +51,7 @@ const BajajAreaChartCard = () => {
   const months = data.map((item) => item.mes);
   const series = [
     {
-      name: 'Suma',
+      name: intl.formatMessage({ id: 'invoices.total' }),
       data: data.map((item) => parseFloat(item.suma))
     }
   ];
@@ -110,23 +115,27 @@ const BajajAreaChartCard = () => {
         fontWeight: 'bold',
         color: theme.palette.text.primary
       }
+    },
+    annotations: {
+      yaxis: [
+        {
+          y: average,
+          borderColor: 'red',
+          label: {
+            borderColor: 'red',
+            style: {
+              color: '#fff',
+              background: 'red'
+            },
+            text: `${intl.formatMessage({ id: 'invoices.media' })}: ${average.toFixed(2)}`
+          }
+        }
+      ]
     }
   };
 
   return (
     <Card sx={{ bgcolor: 'secondary.light' }}>
-      <Grid container sx={{ p: 2, pb: 0, color: '#fff' }}>
-        <Grid item xs={12}>
-          <Grid container alignItems="center" justifyContent="space-between">
-            <Grid item></Grid>
-            <Grid item>
-              <Typography variant="h4" sx={{ color: 'grey.800' }}>
-                ${totalSum.toFixed(2)} {/* Display the total sum */}
-              </Typography>
-            </Grid>
-          </Grid>
-        </Grid>
-      </Grid>
       <Chart options={options} series={series} type="area" height={400} />
     </Card>
   );
