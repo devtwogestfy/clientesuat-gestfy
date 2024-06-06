@@ -27,8 +27,9 @@ import CancelPrepayDialog from './CancelPrepayDialog';
 import CancelPrepayPopper from './CancelPrepayPopper';
 import PayDialog from './../../utilities/dialogs/PayDialog';
 import { FormattedMessage } from 'react-intl';
-import CircularWithValueLabel from 'views/utilities/CircularProgressWithLabel';
 import { useIntl } from 'react-intl';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 function OptionsButtons({ element, updateData }) {
   const intl = useIntl();
   const [open, setOpen] = useState(false);
@@ -280,24 +281,9 @@ function OptionsButtons({ element, updateData }) {
       <CancelPrepayDialog openCancel={openCancel} handleCloseCancel={handleCloseCancel} handleCancelSendPrepay={handleCancelSendPrepay} />
       <PayDialog openPay={openPay} handleClosePay={handleClosePay} />
       <CancelPrepayPopper openPopperCancel={openPopperCancel} contentModal={contentModal} />
-      {openPay && (
-        <div
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            zIndex: 9999
-          }}
-        >
-          {isLoading && <CircularWithValueLabel />}
-        </div>
-      )}
+      <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={openOverlay}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </Box>
   );
 }
