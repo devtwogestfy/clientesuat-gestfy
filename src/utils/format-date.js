@@ -1,5 +1,10 @@
-import { format } from 'date-fns';
+import { format, isValid } from 'date-fns';
 
 export function fDate(value) {
-    return format(new Date(value), 'dd/MM/yyyy');
+    const date = new Date(value);
+    if (!isValid(date)) {
+        return value;
+    }
+    return format(date, 'dd/MM/yyyy');
+
 }

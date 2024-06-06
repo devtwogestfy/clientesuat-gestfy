@@ -31,7 +31,7 @@ const DocumentsDataGrid = ({ rows, downloadInvoice }) => {
             headerClassName: 'MuiDataGrid-columnHeaders',
             flex: 1,
             renderHeader: () => <FormattedMessage id="documents.table.name" />,
-            valueGetter: (value, row) => `${fDate(row.fechafactura) || ''}`
+            valueGetter: (value, row) => row.nombre
         },
         {
             field: 'age',
