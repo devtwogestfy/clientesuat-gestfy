@@ -7,7 +7,7 @@ import colors from 'assets/scss/_themes-vars.module.scss';
 import componentStyleOverrides from './compStyleOverride';
 import themePalette from './palette';
 import themeTypography from './typography';
-
+import { styles } from 'utils/stylesCustom';
 /**
  * Represent theme style and structure as per Material-UI
  * @param {JsonObject} customization customization parameter object
@@ -16,7 +16,7 @@ import themeTypography from './typography';
 export const theme = (customization) => {
   const color = colors;
 
-   const themeOption = {
+  const themeOption = {
     colors: color,
     heading: color.grey900,
     paper: color.paper,
@@ -30,14 +30,14 @@ export const theme = (customization) => {
     divider: color.grey200,
     customization
   };
- 
- 
+
   const themeOptions = {
     direction: 'ltr',
     palette: themePalette(themeOption),
     mixins: {
       toolbar: {
         minHeight: '48px',
+        backgroundColor: styles.headerSystem.backgroundColor,
         padding: '16px',
         '@media (min-width: 600px)': {
           minHeight: '48px'
