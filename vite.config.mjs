@@ -28,10 +28,10 @@ export default defineConfig({
   server: {
     proxy: {
       // con opciones
-      '/api': {
+      '/app.php': {
         target: 'http://uat.gestfy.lan/app.php',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, '')
+        rewrite: (path) => path.replace(/^\/app.php/, '')
       }
     },
     // this ensures that the browser opens upon server start
