@@ -174,9 +174,9 @@ const GetInfoService = () => {
     return data;
   };
 
-  const getPrepayConfig = async (servId = null, page = 1, limit = 25, sort = '') => {
-    const filter = `[{"property": "service", "value":"${servId}"}]`;
-    sort = '[{"property": "id", "direction":"ASC"}]';
+  const getPrepayConfig = async (servId = null, page = 1, limit = 25, start = 0) => {
+    const filter = JSON.stringify([{ property: 'service', value: servId }]);
+    const sort = JSON.stringify([{ property: 'id', direction: 'ASC' }]);
     const params = {
       page: page.toString(),
       start: start.toString(),

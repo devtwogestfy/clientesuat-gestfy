@@ -17,7 +17,6 @@ const ServicesDataGrid = ({ rows, updateData }) => {
   const getRowClassName = (params) => {
     return params.indexRelativeToCurrentPage % 2 === 0 ? 'cebra-row' : '';
   };
-  console.log(rows);
   const columns = [
     {
       field: 'detalle',
