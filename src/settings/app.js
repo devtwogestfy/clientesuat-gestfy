@@ -2,7 +2,7 @@ import axios from 'axios';
 import { showMessageDialog } from '../utils/messageDialog';
 
 const config = {
-  baseURL: '/api'
+  baseURL: '/app.php'
 };
 
 // Create an instance of axios with a base URL
