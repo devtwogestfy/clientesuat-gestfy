@@ -142,6 +142,9 @@
   "incidents.cards.incidents": "Tickets",
   "incidents.cards.sat": "Hours (Month)",
   "incidents.buttons.new": "New Ticket",
+  "incidents.status.open": "Open",
+  "incidents.status.wait": "On hold",
+  "incidents.status.close": "Closed",
 
   "router.title": "Router",
   "router.cards.title.wifi24": "WiFi 2.4GHz",
@@ -238,6 +241,8 @@
   "dialogs.call_customer_service": "Would you like to call for service?",
   "dialogs.drag_update": "Drag to update",
   "dialogs.updating": "Updating...",
+  "dialogs.choose_option": "Choose an option",
+  "dialogs.successfully": "Successfully generated",
 
   "documents.title": "Documents",
   "documents.table.date": "Date",
@@ -270,5 +275,9 @@
   "profile.section.logout": "Logout",
   "profile.section.send.message": "Send Message",
   "profile.section.send.message.description": "Please enter your message in the following text field and then press the 'Send' button.",
-  "profile.section.send.message.error": "The message must be at least 25 characters."
+  "profile.section.send.message.error": "The message must be at least 25 characters.",
+
+  "gretting.morning": "Good morning",
+  "gretting.afternoon": "Good afternoon",
+  "gretting.night": "Good night"
 }
