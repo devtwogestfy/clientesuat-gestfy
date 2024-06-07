@@ -137,7 +137,6 @@ const InvoicesDataGrid = ({ rows, downloadInvoice }) => {
     const data = infoInvoice.startPurchase(factId, location.href, type).then((response) => {
       return response;
     });
-    console.log(data);
   };
 
   const callCecabank = (factId, type) => {
@@ -145,7 +144,6 @@ const InvoicesDataGrid = ({ rows, downloadInvoice }) => {
     const data = infoInvoice.startPurchaseCeca(factId, location.href, type).then((response) => {
       return response;
     });
-    console.log(data);
   };
 
   return (
