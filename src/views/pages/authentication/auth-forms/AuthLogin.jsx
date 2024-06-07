@@ -1,62 +1,14 @@
-import { useState } from 'react';
-
-// material-ui
-import { useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import FormControl from '@mui/material/FormControl';
-import FormHelperText from '@mui/material/FormHelperText';
-import IconButton from '@mui/material/IconButton';
-import InputAdornment from '@mui/material/InputAdornment';
-import InputLabel from '@mui/material/InputLabel';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import * as Yup from 'yup';
+import React from 'react';
+import { Box, Button, FormControl, FormHelperText, IconButton, InputAdornment, InputLabel, OutlinedInput } from '@mui/material';
 import { Formik } from 'formik';
 import AnimateButton from 'ui-component/extended/AnimateButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-
-import apiLogin from 'settings/servicios/login';
-import { useCookies } from 'react-cookie';
 import { FormattedMessage } from 'react-intl';
-import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
-import { createSessionId, getSessionId } from 'utils/sessionId';
-import { v4 as uuidv4 } from 'uuid';
+import { useAuthHelpers } from 'hooks/useAuthHelpers';
 
 const AuthLogin = ({ ...others }) => {
-  const theme = useTheme();
-  const [userEmail, setUserEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [cookies, setCookie] = useCookies([getSessionId()]);
-
-  const handleCloseAlert = () => {
-    setOpenAlert(false);
-  };
-
-  const [showPassword, setShowPassword] = useState(false);
-  const handleClickShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
-
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
-
-  async function iniciarSeccion(e) {
-    e.preventDefault();
-
-    const instanciaLogin = new apiLogin();
-
-    instanciaLogin
-      .iniciarSesion(userEmail, password)
-      .then((response) => {
-        setCookie(createSessionId(), uuidv4());
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-
+  const { theme, showPassword, handleClickShowPassword, handleMouseDownPassword, iniciarSeccion, validationSchema } = useAuthHelpers();
   return (
     <>
       <Formik
@@ -65,32 +17,28 @@ const AuthLogin = ({ ...others }) => {
           password: '',
           submit: null
         }}
-        validationSchema={Yup.object().shape({
-          userEmail: Yup.string().max(255).required('Email is required'),
-          password: Yup.string()
-            .max(255)
-            .required(<FormattedMessage id="password.isRequired" />)
-        })}
+        validationSchema={validationSchema}
+        onSubmit={iniciarSeccion}
       >
-        {({ errors, handleBlur, isSubmitting, touched }) => (
-          <form noValidate onSubmit={iniciarSeccion} {...others}>
-            <FormControl fullWidth error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
+        {({ values, errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched }) => (
+          <form noValidate onSubmit={handleSubmit} {...others}>
+            <FormControl fullWidth error={Boolean(touched.userEmail && errors.userEmail)} sx={{ ...theme.typography.customInput }}>
               <InputLabel htmlFor="outlined-adornment-email-login">
                 <FormattedMessage id="login.username_input" />
               </InputLabel>
               <OutlinedInput
                 id="outlined-adornment-email-login"
                 type="text"
-                value={userEmail}
+                value={values.userEmail}
                 name="userEmail"
                 onBlur={handleBlur}
-                onChange={(e) => setUserEmail(e.target.value)}
+                onChange={handleChange}
                 label={<FormattedMessage id="login.username_input" />}
                 inputProps={{}}
               />
-              {touched.email && errors.email && (
+              {touched.userEmail && errors.userEmail && (
                 <FormHelperText error id="standard-weight-helper-text-email-login">
-                  {errors.email}
+                  {errors.userEmail}
                 </FormHelperText>
               )}
             </FormControl>
@@ -102,10 +50,10 @@ const AuthLogin = ({ ...others }) => {
               <OutlinedInput
                 id="outlined-adornment-password-login"
                 type={showPassword ? 'text' : 'password'}
-                value={password}
+                value={values.password}
                 name="password"
                 onBlur={handleBlur}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={handleChange}
                 endAdornment={
                   <InputAdornment position="end">
                     <IconButton
