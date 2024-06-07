@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import Card from '@mui/material/Card';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
 import ApexCharts from 'apexcharts';
 import Chart from 'react-apexcharts';
 import { useTheme } from '@mui/material/styles';
 import GetInfoService from 'settings/servicios/service';
-import { FormattedMessage } from 'react-intl';
 import { useIntl } from 'react-intl';
 
 const BajajAreaChartCard = () => {
@@ -39,7 +36,7 @@ const BajajAreaChartCard = () => {
       // Calculate the total sum
       const total = billing.reduce((sum, item) => sum + parseFloat(item.suma), 0);
       setTotalSum(total);
-      
+
       // Calculate the average
       const avg = total / billing.length;
       setAverage(avg);
@@ -48,7 +45,14 @@ const BajajAreaChartCard = () => {
     }
   };
 
-  const months = data.map((item) => item.mes);
+  const translateMonth = (monthYear) => {
+    const [month, year] = monthYear.split(' ');
+    const monthKey = `months.${month.toLowerCase()}`;
+    const translatedMonth = intl.formatMessage({ id: monthKey });
+    return `${translatedMonth} ${year}`;
+  };
+
+  const months = data.map((item) => translateMonth(item.mes));
   const series = [
     {
       name: intl.formatMessage({ id: 'invoices.total' }),
@@ -108,7 +112,7 @@ const BajajAreaChartCard = () => {
       }
     },
     title: {
-      text:  intl.formatMessage({ id: 'dashboard.showcase_graph.title' }),
+      text: intl.formatMessage({ id: 'dashboard.showcase_graph.title' }),
       align: 'center',
       style: {
         fontSize: '20px',

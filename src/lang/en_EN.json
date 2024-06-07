@@ -281,5 +281,18 @@
 
   "gretting.morning": "Good morning",
   "gretting.afternoon": "Good afternoon",
-  "gretting.night": "Good night"
+  "gretting.night": "Good night",
+
+  "months.enero": "January",
+  "months.febrero": "February",
+  "months.marzo": "March",
+  "months.abril": "April",
+  "months.mayo": "May",
+  "months.junio": "June",
+  "months.julio": "July",
+  "months.agosto": "August",
+  "months.septiembre": "September",
+  "months.octubre": "October",
+  "months.noviembre": "November",
+  "months.diciembre": "December"
 }
