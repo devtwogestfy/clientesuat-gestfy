@@ -26,9 +26,6 @@ const IncidentTabPanel = () => {
   const [isAlertSuccess, setIsAlertSuccess] = useState(false);
   const [errors, setErrors] = useState({});
 
-  const openCreateModal = () => {
-    setOpen(true);
-  };
   const handleModalClose = () => setOpen(false);
 
   useEffect(() => {

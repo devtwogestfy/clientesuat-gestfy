@@ -1,8 +1,7 @@
 import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
-import { styled, useTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
 import { Avatar, Box, Grid, Typography } from '@mui/material';
-import MainCard from 'ui-component/cards/MainCard';
 import SkeletonEarningCard from 'ui-component/cards/Skeleton/EarningCard';
 import { IconUser } from '@tabler/icons-react';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
