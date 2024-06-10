@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useTheme } from '@mui/material/styles';
 import Divider from '@mui/material/Divider';
 import List from '@mui/material/List';
-import { Button, Modal, Box, Typography } from '@mui/material';
+import { Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions,Grid, Typography } from '@mui/material';
 
 // project imports
 import NavItem from '../NavItem';
@@ -18,15 +18,16 @@ const NavGroup = ({ item }) => {
   const [openModal, setOpenModal] = useState(false);
   const [termsConditions, setTermsConditions] = useState(null);
   const customization = JSON.parse(localStorage.getItem('user'));
+  
   const fetchTermsData = async () => {
     try {
-      infoClient.getTermsConditions().then((client) => {
-        setTermsConditions(client.data);
-      });
+      const client = await infoClient.getTermsConditions();
+      setTermsConditions(client.data);
     } catch (error) {
       console.error(error);
     }
   };
+
   useEffect(() => {
     fetchTermsData();
   }, []);
@@ -54,6 +55,7 @@ const NavGroup = ({ item }) => {
           );
       }
     }
+    return null; // Add this return statement to ensure the map function always returns a value
   });
 
   return (
@@ -88,37 +90,30 @@ const NavGroup = ({ item }) => {
           </Typography>
         </List>
       </div>
-      <Modal open={openModal} onClose={handleCloseModal} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
-        <Box
-          sx={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            width: 400,
-            bgcolor: 'background.paper',
-            boxShadow: 24,
-            p: 4
-          }}
-        >
-          <Typography id="modal-modal-title" variant="h3" component="h2">
-            <FormattedMessage id="dialogs.title.terms_conditions" />
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+
+      <Dialog open={openModal} onClose={handleCloseModal} aria-labelledby="dialog-title" aria-describedby="dialog-description" maxWidth="md" fullWidth>
+        <DialogTitle id="dialog-title">
+        <Grid item>
+            <Typography variant="h3"><FormattedMessage id="dialogs.title.terms_conditions" /></Typography>
+          </Grid>
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="dialog-description">
             {termsConditions}
-          </Typography>
-          <Button onClick={handleCloseModal}>
-            {' '}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseModal} color="primary">
             <FormattedMessage id="router.buttons.close" />
           </Button>
-        </Box>
-      </Modal>
+        </DialogActions>
+      </Dialog>
     </>
   );
 };
 
 NavGroup.propTypes = {
-  item: PropTypes.object
+  item: PropTypes.object.isRequired
 };
 
 export default NavGroup;
