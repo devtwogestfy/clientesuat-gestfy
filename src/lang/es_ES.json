@@ -146,6 +146,7 @@
   "incidents.buttons.new": "Nueva Incidencia",
   "incidents.status.wait": "En espera",
   "incidents.status.close": "Cerrada",
+  "incidents.status.open": "Abierta",
 
   "router.title": "Router",
   "router.cards.title.wifi24": "WiFi 2.4GHz",
