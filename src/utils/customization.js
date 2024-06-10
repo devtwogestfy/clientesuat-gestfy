@@ -8,7 +8,7 @@ const getCustomization = () => {
     } else {
       // Handle the case where the data doesn't exist
       customization = { terms_conditions: false };
-      customization = { img_login: 'https://mdbootstrap.com/img/new/ecommerce/vertical/004.jpg' };
+      customization = { img_login: 'https://mdbootstrap.com/img/new/ecommerce/vertical/004.jpg', };
     }
   } catch (error) {
     console.error('Error parsing customization data from localStorage:', error);

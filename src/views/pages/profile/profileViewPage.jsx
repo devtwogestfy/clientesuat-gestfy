@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, CardActionArea, CardContent, CardMedia, Typography, Avatar, Box, Stack, Button, Grid, Tabs, Tab } from '@mui/material';
-import ProfileBackground from 'assets/images/banner.png';
-import ProfileImage from 'assets/images/users/user-round.svg';
+import { Card, CardActionArea, CardContent, CardMedia, Avatar, Box, Stack, Button, Grid, Tabs, Tab } from '@mui/material';
 import MainCard from 'ui-component/cards/MainCard';
 import ClientTabPanel from './ClientTabPanel';
 import SuccessDialog from './SuccessDialog';
@@ -10,6 +8,13 @@ import GetInfoClient from 'settings/servicios/client';
 import { createIncident } from 'settings/servicios/incident';
 import { FormattedMessage } from 'react-intl';
 import CircularWithValueLabel from 'views/utilities/CircularProgressWithLabel';
+import getCustomization from 'utils/customization';
+
+import LocalProfileBackground from 'assets/images/banner.png';
+const customization = getCustomization();
+const ExternalProfileBackground = customization && customization.img_banner ? customization.img_banner : '';
+const ProfileImage = 'https://example.com/path/to/user-round.svg';
+const ProfileBackground = ExternalProfileBackground || LocalProfileBackground;
 
 function CustomTabPanel({ children, value, index }) {
   return (
@@ -117,30 +122,6 @@ const ProfileViewPage = () => {
           </Box>
           <Box sx={{ width: '100%' }}>
             <ClientTabPanel clientInfo={clientInfo} handleOpen={handleOpen} />
-            {/*  <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-              <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                <Tab label={<FormattedMessage id="layout.menu_info" />} id="simple-tab-0" aria-controls="simple-tabpanel-0" />
-                <Tab label={<FormattedMessage id="layout.menu_services" />} id="simple-tab-1" aria-controls="simple-tabpanel-1" />
-                <Tab label={<FormattedMessage id="layout.menu_invoices" />} id="simple-tab-2" aria-controls="simple-tabpanel-2" />
-                {customization && customization.view_tickets === 1 && (
-                  <Tab label={<FormattedMessage id="layout.menu_incidents" />} id="simple-tab-3" aria-controls="simple-tabpanel-3" />
-                )}
-              </Tabs>
-            </Box>
-            <CustomTabPanel value={value} index={0}>
-              <ClientTabPanel clientInfo={clientInfo} />
-            </CustomTabPanel>
-            <CustomTabPanel value={value} index={1}>
-              <ServiceTabPanel />
-            </CustomTabPanel>
-            <CustomTabPanel value={value} index={2}>
-              <InvoiceTabPanel />
-            </CustomTabPanel>
-            {customization.view_tickets === 1 && (
-              <CustomTabPanel value={value} index={3}>
-                <IncidentTabPanel />
-              </CustomTabPanel>
-            )} */}
             <MessageDialog
               open={open}
               handleClose={handleClose}
