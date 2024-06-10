@@ -3,17 +3,11 @@ import { Card, CardActionArea, CardContent, CardMedia, Typography, Avatar, Box, 
 import ProfileBackground from 'assets/images/banner.png';
 import ProfileImage from 'assets/images/users/user-round.svg';
 import MainCard from 'ui-component/cards/MainCard';
-import HomeIcono from '@mui/icons-material/Home';
-import SendIcon from '@mui/icons-material/Send';
-import ServiceTabPanel from './ServiceTabPanel';
-import InvoiceTabPanel from './InvoiceTabPanel';
-import IncidentTabPanel from './IncidentTabPanel';
 import ClientTabPanel from './ClientTabPanel';
 import SuccessDialog from './SuccessDialog';
 import MessageDialog from './MessageDialog';
 import GetInfoClient from 'settings/servicios/client';
 import { createIncident } from 'settings/servicios/incident';
-import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import CircularWithValueLabel from 'views/utilities/CircularProgressWithLabel';
 
