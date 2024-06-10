@@ -7,6 +7,7 @@ import AuthWrapper1 from '../AuthWrapper1';
 import AuthCardWrapper from '../AuthCardWrapper';
 import AuthLogin from '../authentication/auth-forms/AuthLogin';
 import Logo from 'ui-component/Logo';
+import getCustomization from 'utils/customization';
 
 const useStyles = makeStyles((theme) => ({
   img: {
@@ -28,7 +29,8 @@ const useStyles = makeStyles((theme) => ({
 
 const Login = () => {
   const classes = useStyles();
-
+  const customization = getCustomization();
+  
   return (
     <AuthWrapper1>
       <Grid container spacing={2}>
@@ -51,7 +53,7 @@ const Login = () => {
           </Grid>
         </Grid>
         <Grid item xs={6}>
-          <img src="https://mdbootstrap.com/img/new/ecommerce/vertical/004.jpg" className={classes.img} alt="" />
+          <img src={ customization && customization.img_login ? customization.img_login : 'https://mdbootstrap.com/img/new/ecommerce/vertical/004.jpg' }  className={classes.img} alt="" />
         </Grid>
       </Grid>
     </AuthWrapper1>
