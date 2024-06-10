@@ -36,7 +36,7 @@ const CreateIncidentDialog = ({
         </IconButton>
         <Grid container alignItems="center" spacing={2}>
           <Grid item>
-            <Typography variant="h3">Nueva Incidencia</Typography>
+            <Typography variant="h3"><FormattedMessage id="dialogs.new_incident.title" /></Typography>
           </Grid>
         </Grid>
       </DialogTitle>
@@ -55,7 +55,7 @@ const CreateIncidentDialog = ({
               sx={{ width: '100%' }}
               options={services.map((option) => ({ id: option.id, label: option.nombre }))}
               renderInput={(params) => (
-                <TextField {...params} label="Servicio" {...(errors.service && { error: errors.service })} helperText={errors.service} />
+                <TextField {...params} label={<FormattedMessage id="services.table.service" />} {...(errors.service && { error: errors.service })} helperText={errors.service} />
               )}
               renderOption={(props, option) => {
                 return (
