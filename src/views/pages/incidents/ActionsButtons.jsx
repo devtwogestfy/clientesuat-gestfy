@@ -7,8 +7,9 @@ import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, Typography } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import ColorsTimeline from './ColorsTimeline';
-
+import { useIntl } from 'react-intl';
 function ActionsButtons({ notas }) {
+    const intl = useIntl();
     const [open, setOpen] = useState(false);
 
     const openModal = () => {
@@ -41,7 +42,7 @@ function ActionsButtons({ notas }) {
                     </IconButton>
                     <Grid container alignItems="center" spacing={2}>
                         <Grid item>
-                            <Typography variant="h3">Notas</Typography>
+                            <Typography variant="h3">{intl.formatMessage({ id: 'dialogs.notes' })}</Typography>
                         </Grid>
                     </Grid>
                 </DialogTitle>
@@ -50,7 +51,7 @@ function ActionsButtons({ notas }) {
                 </DialogContent>
                 <DialogActions>
                     <Button variant="outlined" onClick={handleClose} color="error">
-                        Cerrar
+                    {intl.formatMessage({ id: 'router.buttons.close' })}
                     </Button>
                 </DialogActions>
             </Dialog>

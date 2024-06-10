@@ -134,7 +134,7 @@
   "incidents.table.title": "Tickets",
   "incidents.table.number": "Number",
   "incidents.table.date": "Date",
-  "incidents.table.description": "Descirption",
+  "incidents.table.description": "Description",
   "incidents.table.service": "Service",
   "incidents.table.hours": "Hours",
   "incidents.table.status": "Status",
@@ -245,6 +245,7 @@
   "dialogs.updating": "Updating...",
   "dialogs.choose_option": "Choose an option",
   "dialogs.successfully": "Successfully generated",
+  "dialogs.notes": "Notes",
 
   "documents.title": "Documents",
   "documents.table.date": "Date",
