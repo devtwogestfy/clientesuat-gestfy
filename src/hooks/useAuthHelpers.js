@@ -27,6 +27,7 @@ export const useAuthHelpers = () => {
       await instanciaLogin.iniciarSesion(values.userEmail, values.password);
       setCookie(createSessionId(), uuidv4());
       setSubmitting(false);
+      window.location.reload();
     } catch (error) {
       setErrors({ submit: intl.formatMessage({ id: 'login.errors.title' }) });
       setSubmitting(false);
